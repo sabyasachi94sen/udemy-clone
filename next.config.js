@@ -1,10 +1,16 @@
+// ref: https://github.com/cyrilwanner/next-compose-plugins/issues/59#issuecomment-1230325393
+const plugins = [];
+
+if (process.env.ANALYZE === "true") {
+  // only load dependency if env `ANALYZE` was set
+  const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: true,
+  });
+
+  plugins.push(withBundleAnalyzer);
+}
+
 /** @type {import('next').NextConfig} */
-const withPlugins = require("next-compose-plugins");
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-
 const nextConfig = {
   // i18n,
   experimental: { esmExternals: true, scrollRestoration: true },
@@ -22,6 +28,4 @@ const nextConfig = {
   generateBuildId: () => "build",
 };
 
-const plugins = [withBundleAnalyzer];
-
-module.exports = withPlugins([...plugins], nextConfig);
+module.exports = () => plugins.reduce((acc, next) => next(acc), nextConfig);
