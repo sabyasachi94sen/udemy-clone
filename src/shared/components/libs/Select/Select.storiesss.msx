@@ -1,0 +1,23 @@
+import { Meta, Story } from "@storybook/react";
+
+import Select, { SelectProps } from "./Select";
+
+export default {
+  title: "Libs/Select",
+  component: Select,
+  argTypes: {
+    variant: { control: "select" },
+  },
+} as Meta;
+
+export const Default: Story<SelectProps> = (args) => (
+  <Select
+    {...args}
+    placeholder="select value"
+    options={[
+      { value: "shovan", label: "shovan" },
+      { value: "coder", label: "coder" },
+    ]}
+  />
+);
+Default.args = {};
