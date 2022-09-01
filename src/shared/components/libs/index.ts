@@ -1,3 +1,4 @@
+
 /**
  * Reusable components project wide, which can be a npm package
  */
@@ -19,3 +20,4 @@ export { Popover } from "./Popover/Popover";
 export { Button } from "./Button/Button";
 export { Table } from "./Table";
 export { FullPageLoader } from "./FullPageLoader/FullPageLoader";
+export { DropdownMenu } from  "./DropdownMenu/DropdownMenu"
