@@ -7,6 +7,7 @@ import { TWResponsiveIndicator } from "@/shared/components/libs";
 import { AppProviders } from "@/shared/stores/app-providers";
 import { AuthProvider, AuthGuard } from "@/shared/stores/auth.context";
 
+
 // Pages are by default, checked for protected
 // Ones with publicRoute true are public pages
 export type NextApplicationPage = NextPage & {

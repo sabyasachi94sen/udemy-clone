@@ -17,7 +17,7 @@ export function LoginForm(){
    
    return <form>
         
-     <div className="bg-white w-96 h-auto p-6 rounded-lg shadow-lg relative left-40 z-10 mt-20">
+     <div className="bg-white w-96 h-auto p-6 rounded-lg shadow-lg relative left-[70px] z-10 mt-28">
        <h1 className="text-center text-[#0ea5e9] text-4xl font-bold mb-4">PIPPAMS</h1>
        <h1 className="text-center text-2xl font-bold mb-6">Login</h1>
        <label className="text-lg font-medium text-gray-900 dark:text-gray-300">Email</label>
@@ -37,8 +37,8 @@ export function LoginForm(){
           
        </div>
                                 
-       <div className="mx-auto mb-28 flex justify-center">
-         <Button className="bg-[#0ea5e9] text-white font-bold py-2 rounded w-[80%]">Next</Button>
+       <div className="mx-auto mb-[100px] flex justify-center">
+         <Button className="text-white bg-cyan-400 font-bold py-2 rounded w-[80%]">Login</Button>
        </div>
      </div>
 
