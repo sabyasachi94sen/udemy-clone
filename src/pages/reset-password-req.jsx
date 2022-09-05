@@ -8,8 +8,8 @@ function ResetPasswordReq(){
    <div className="absolute top-0 left-0">
      <Image height={80} src="/images/bottomwave.png"  width={400}  />
    </div>
-   <div className="relative right-[30px]">
-     <Image height={600} src="/images/ESSAI.png" width={150} />
+   <div className="relative ml-[2.6vw]">
+     <Image height={500} src="/images/ESSAI.png" width={100} />
    </div>
    <ResetPasswordReqForm />
    <div className="absolute bottom-0 rotate-180 left-0">

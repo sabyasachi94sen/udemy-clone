@@ -1,6 +1,6 @@
 
 
-import { admininfo ,MenuBar,Navbar,CreateSuperAdminRole,EditSuperAdminRole,DeleteSuperAdminRole,AdminTable } from "@/features/home"
+import { admininfo ,MenuBar,Navbar,CreateSuperAdminRole,EditAdminRole,DeleteSuperAdminRole,AccountManagerTable } from "@/features/home"
 
 import { Button } from "@/shared/components"
 import { useState } from "react";
@@ -78,22 +78,23 @@ const setDataOnChange=(e)=>{
         <Navbar />
         <div className="flex items-center z-0">
           <MenuBar />
-          <AdminTable onClick1={addAdminBackBlur} onClick2={editAdminBackBlur} onClick3={deleteAdminBackBlur} adminData={adminData} name="Essai Super Admin Roaster" />
+          <AccountManagerTable onClick1={addAdminBackBlur} onClick2={editAdminBackBlur} onClick3={deleteAdminBackBlur} adminData={adminData} name="Essai Account Manager Roaster" />
      
         </div>
        
       </div> 
       {backgroundBlurAddAdmin?
              
-             <CreateSuperAdminRole onClick1={addAdminBackBlur} onClick2={submitAdminData} onClick3={setDataOnChange} title="Create Super Admin role"/>
+             <CreateSuperAdminRole onClick1={addAdminBackBlur} onClick2={submitAdminData} onClick3={setDataOnChange} title="Create an Account Manager Role"/>
             : ""}
 
             {backgroundBlurEditAdmin?
              
-        <EditSuperAdminRole onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange} title="Edit an Super Admin role" />: ""}
+        <EditAdminRole onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange} title="Edit an Account Manager role"/>: ""}
 
         {backgroundBlurDeleteAdmin?
-             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title1="Delete Super Admin" title2="This will permanently delete the super admin from the" />: ""}
+             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title1="Delete Account Manager"  title2="This will permanently delete the Manager from the"/>: ""}
+             
       </>
 
    

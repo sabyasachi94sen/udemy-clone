@@ -82,14 +82,14 @@ const setDataOnChange=(e)=>{
       </div> 
       {backgroundBlurAddStudent?
              
-    <AddStudent onClick1={addStudentBackBlur}/>            : ""}
+    <AddStudent onClick1={addStudentBackBlur} title="Add a student to the roaster" />: ""}
 
             {backgroundBlurEditStudent?
              
-          <AddStudent onClick1={editStudentBackBlur} /> : ""}
+          <AddStudent onClick1={editStudentBackBlur}  title="Update a student to the roaster"/> : ""}
           
         {backgroundBlurDeleteStudent?
-             <DeleteSuperAdminRole onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}/>: ""} 
+             <DeleteSuperAdminRole onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""} 
              {/* <AddStudent /> */}
      
 

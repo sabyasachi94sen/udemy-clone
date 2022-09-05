@@ -77,7 +77,7 @@ function HomePage(){
          <Navbar />
          <div className="flex items-center">
            <MenuBar />
-           <div className="w-[90%] h-screen rounded-md bg-white flex flex-wrap items-center justify-center">
+           <div className="w-[90%] -mt-48 h-screen rounded-md bg-white flex flex-wrap items-center justify-center">
              {activity.map((item)=><HomeItems key={item.id} {...item} />)}
            </div>
          </div>

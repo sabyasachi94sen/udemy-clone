@@ -85,15 +85,15 @@ const setDataOnChange=(e)=>{
       </div> 
       {backgroundBlurAddAdmin?
              
-             <CreateSuperAdminRole onClick1={addAdminBackBlur} onClick2={submitAdminData} onClick3={setDataOnChange}/>
+             <CreateSuperAdminRole onClick1={addAdminBackBlur} onClick2={submitAdminData} onClick3={setDataOnChange} title="Create an Admin Role"/>
             : ""}
 
             {backgroundBlurEditAdmin?
              
-        <EditAdminRole onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange}/>: ""}
+        <EditAdminRole onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange} title="Edit an Admin role"/>: ""}
 
         {backgroundBlurDeleteAdmin?
-             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData}/>: ""}
+             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title1="Delete Admin" title2="This will permanently delete the admin from the"/>: ""}
              
       </>
 

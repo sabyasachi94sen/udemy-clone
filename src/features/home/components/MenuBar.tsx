@@ -37,7 +37,7 @@
             name: "Account Manager Roaster",
             image:"/images/group.png",
             imageType: "grorup-icon",
-            url: "/manager-roaster",
+            url: "/account-manager",
             id: 5,
         },
         {
@@ -88,10 +88,10 @@
     ]
 
     return (
-      <div className="w-[25%] h-[110vh] bg-gray-100 relative">
+      <div className="w-[25%] h-[140vh] bg-gray-100 relative">
         {MenuItems.map((item)=><Link href={item.url}><div key={item.id} className="w-full text-gray-400 h-16 flex items-center pl-5 cursor-pointer hover:bg-gray hover:border-r-2 hover:border-r-cyan-400 hover:text-black">
           <img alt={item.imageType} className="w-6 h-6" src={item.image} />
-          <div className="ml-4 font-medium text-xl">
+          <div className="ml-4 font-medium text-lg">
             <p>{item.name}</p>
           </div>
         </div>
