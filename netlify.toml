@@ -3,13 +3,13 @@
 # other context depends on the branch name: testing, staging etc.
 [build]
   command = "npm run build"
-  publish = "out"
-  environment = { NODE_VERSION =  "14", NPM_VERSION = "7", NPM_FLAGS = "--legacy-peer-deps"}
+  publish = ".next"
+  environment = { NODE_VERSION =  "16", NPM_VERSION = "7", NPM_FLAGS = "--legacy-peer-deps"}
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[context.new]
+[context.dev]
   [context.testing.environment]
     APP_API_ENDPOINT= ""
 
