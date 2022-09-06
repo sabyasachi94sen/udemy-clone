@@ -27,7 +27,7 @@ export function AccountManagerTable({onClick1,onClick2,onClick3,adminData,name}:
                 <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
                
               </div>
-              <Button className="bg-cyan-500 rounder-md w-[7%] h-[6vh] text-[18px]" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </Button>
+              <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] text-[18px] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>
             </div>
 
             <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
