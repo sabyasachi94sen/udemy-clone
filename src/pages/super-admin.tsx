@@ -6,7 +6,7 @@ import { Button } from "@/shared/components"
 import { useState } from "react";
 
 
-function AccountManager(){
+function SuperAdmin(){
 
 const [backgroundBlurAddAdmin,setBackGroundBlurAddAdmin]=useState(false)
 const [backgroundBlurEditAdmin,setBackGroundBlurEditAdmin]=useState(false)
@@ -93,7 +93,7 @@ const setDataOnChange=(e)=>{
         <EditSuperAdminRole onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange} title="Edit an Super Admin role" />: ""}
 
         {backgroundBlurDeleteAdmin?
-             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title1="Delete Super Admin" title2="This will permanently delete the super admin from the" />: ""}
+             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title="Delete Super Admin" />: ""}
       </>
 
    
@@ -104,5 +104,5 @@ const setDataOnChange=(e)=>{
 }
 
 
-export default AccountManager;
-AccountManager.isPublicRoute=true
+export default SuperAdmin;
+SuperAdmin.isPublicRoute=true

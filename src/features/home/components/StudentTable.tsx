@@ -30,7 +30,7 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
               <Button className="bg-cyan-500 rounder-md w-[8.1%] h-[6vh] text-[18px]" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </Button>
             </div>
 
-            <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[20px] flex justify-around items-center">
+            <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
               <p>Name</p>
               <p>Date of Birth</p>
               <p>Country of Residence</p>

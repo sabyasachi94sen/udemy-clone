@@ -38,7 +38,7 @@ export function LoginForm(){
        </div>
                                 
        <div className="mx-auto mb-[5vh] flex justify-center">
-         <Button className="text-white bg-cyan-400 font-bold py-2 rounded w-[80%]">Login</Button>
+         <Link href="/home"><Button className="text-white bg-cyan-400 font-bold py-2 rounded w-[80%]">Login</Button></Link>
        </div>
      </div>
 

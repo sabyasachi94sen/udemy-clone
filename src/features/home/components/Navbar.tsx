@@ -1,6 +1,10 @@
+import Link from "next/link"
 
 
-export function Navbar(){
+
+
+    
+    export function Navbar(){
 
     return (
       <div className="h-[12vh] w-full bg-cyan-500 flex items-center" >
@@ -26,10 +30,13 @@ export function Navbar(){
             <h1 className="font-medium">Welcome, Morgan</h1>
             <h4 className="text-[0.9rem]">have a great day</h4>
           </div>
+          <Link href="/setting">
           <div className="w-10 h-[5vh] rounded-md border-2 bg-cyan-400 border-cyan-400 flex items-center justify-center cursor-pointer">
             <img alt="setting-bar-icon" src="/images/settingBars.png" />
           </div>
-        </div> 
+          </Link> 
+        </div>
+       
          
       </div>
     )
