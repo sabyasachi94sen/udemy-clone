@@ -24,9 +24,9 @@ interface DeleteSuperAdminRoleProps{
           
            <div className="flex justify-around items-center mt-10 w-[60%] mb-10 mx-auto">
  
-          <Button  className="w-[40%] h-[5.7vh] bg-cyan-500" onClick={onClick2}>Delete</Button>
+          <button  className="w-[40%] h-[5.7vh] bg-cyan-500 text-center rounded-md hover:bg-blue-500" onClick={onClick2}>Delete</button>
           <div className="w-[40%] h-[5.7vh] border-2 border-[#ADA7A7] rounded-md box-border">
-          <Button  className="w-[100%] h-[5vh] rounded-md bg-[#FFFFFF] text-[#ADA7A7] hover:bg-slate-100" onClick={onClick1}>Cancel</Button>
+          <button  className="w-[100%] h-[5vh] rounded-md bg-[#FFFFFF] text-[#ADA7A7] text-center hover:bg-slate-100" onClick={onClick1}>Cancel</button>
           </div>
            </div>
         
