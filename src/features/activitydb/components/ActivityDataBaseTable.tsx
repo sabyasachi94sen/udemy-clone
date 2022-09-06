@@ -27,7 +27,7 @@ export function ActivityDataBaseTable({activityData,onClick}: ActivityDataBaseTa
                 <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
                
               </div>
-              <Button className="bg-cyan-500 rounder-md w-[8.1%] h-[6vh] text-[18px]">Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </Button>
+              <Button className="bg-cyan-500 rounder-md w-[7%] h-[6vh] text-[18px]">Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </Button>
             </div>
 
             <div className="bg-[#3AB0FB52] h-[6vh] w-[93%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
