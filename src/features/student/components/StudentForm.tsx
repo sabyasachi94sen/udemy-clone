@@ -1,12 +1,12 @@
 import { Button } from "@/shared/components"
 
-interface AddStudentProps{
+interface StudentFormProps{
     onClick1: ()=>void;
     title: string
 }
 
 
-export function AddStudent({onClick1,title}){
+export function StudentForm({onClick1,title}){
 
     return (
         <div className="w-[90%] mx-auto h-auto bg-[#FDFEFF] z-10 relative -mt-[150vh] border-2 rounded-xl">

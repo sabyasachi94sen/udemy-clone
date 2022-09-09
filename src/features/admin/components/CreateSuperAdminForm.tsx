@@ -1,7 +1,7 @@
  import { Button } from "@/shared/components"
  
 
- interface CreateSuperAdminRoleProps{
+ interface CreateSuperAdminFormProps{
     onClick1: ()=>void;
     onClick2: ()=>void;
     onClick3: ()=>void;
@@ -9,7 +9,7 @@
  }
  
  
- export  function CreateSuperAdminRole({ onClick1,onClick2 ,onClick3,title}: CreateSuperAdminRoleProps){
+ export  function CreateSuperAdminForm({ onClick1,onClick2 ,onClick3,title}: CreateSuperAdminFormProps){
 
     return (
       <div className="w-[40%] h-auto rounded-xl bg-[#FDFEFF] border-2 top-[5vh] right-[10vw] mx-auto -mt-[140vh] left-[2vw] relative z-10">

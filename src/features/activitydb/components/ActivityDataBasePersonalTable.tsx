@@ -3,10 +3,11 @@ import { Button } from "@/shared/components"
 interface ActivityDataBasePersonalTableProps{
     activityData : {}[];
     onClick1: ()=>void;
-    onClick2: ()=>void
+    onClick2: ()=>void;
+    onClick3: ()=>void
 }
 
-export function ActivityDataBasePersonalTable({activityData,onClick1,onClick2}: ActivityDataBasePersonalTableProps){
+export function ActivityDataBasePersonalTable({activityData,onClick1,onClick2,onClick3}: ActivityDataBasePersonalTableProps){
 
     return (
         <div className="w-[90%] h-screen rounded-md bg-white -mt-44">
@@ -48,7 +49,7 @@ export function ActivityDataBasePersonalTable({activityData,onClick1,onClick2}: 
                   <td className="w-[14%] h-[7vh] pl-6">{val.requirement}</td>
                  <td className="w-[9%] h-[7vh] pl-8">{val.url}</td>
                  <td className="w-[9%] h-[7vh]">{val.status}</td>
-                 <td className="w-[9%] h-[7vh]"><Button className="w-[90%] h-[6vh] rounded-md" >See action maps</Button></td>
+                 <td className="w-[9%] h-[7vh]"><Button className="w-[90%] h-[6vh] rounded-md" onClick={onClick3}>See action maps</Button></td>
                  <td className="w-[8%] h-[7vh] cursor-pointer pl-9"><img alt="edit-icon" src="/images/edit.png"  onClick={onClick2}/></td>
                     <td className="w-[14%] h-[7vh] cursor-pointer"><img alt="delete-icon" src="/images/delete.png"/></td>
 

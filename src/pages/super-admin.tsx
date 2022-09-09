@@ -1,9 +1,12 @@
 
 
-import { admininfo ,MenuBar,Navbar,CreateSuperAdminRole,EditSuperAdminRole,DeleteSuperAdminRole,AdminTable } from "@/features/home"
+import { MenuBar,Navbar } from "@/features/home";
+import {admininfo,AdminTable,CreateSuperAdminForm,DeleteSuperAdminForm,EditSuperAdminForm} from "@/features/admin"
 
 import { Button } from "@/shared/components"
 import { useState } from "react";
+import { PersonalTable,personaldata} from "@/features/ui"
+
 
 
 function SuperAdmin(){
@@ -11,7 +14,8 @@ function SuperAdmin(){
 const [backgroundBlurAddAdmin,setBackGroundBlurAddAdmin]=useState(false)
 const [backgroundBlurEditAdmin,setBackGroundBlurEditAdmin]=useState(false)
 const [backgroundBlurDeleteAdmin,setBackGroundBlurDeleteAdmin]=useState(false)
-const [adminData,setAdminData]=useState(admininfo)
+
+const [isTable,setIsTable]=useState(false)
 const [adminDataId,setAdminDataId]=useState("")
 const [adminDataOnChange,setAdminDataOnChange]=useState({name: "",email: "",update: "02/11/2022",status: "Inactive",student: 90,performance: "Metrics", })
 
@@ -25,6 +29,7 @@ const editAdminBackBlur=(id)=>{
 
   setAdminDataId(id)
 }
+
 
 
 const deleteAdminBackBlur=(id)=>{
@@ -42,6 +47,10 @@ const submitAdminData=()=>{
   setAdminData(tempArr)
        
   
+}
+
+const isTableCheck=()=>{
+  setIsTable(isTable=>!isTable)
 }
 
 
@@ -78,22 +87,27 @@ const setDataOnChange=(e)=>{
         <Navbar />
         <div className="flex items-center z-0">
           <MenuBar />
-          <AdminTable onClick1={addAdminBackBlur} onClick2={editAdminBackBlur} onClick3={deleteAdminBackBlur} adminData={adminData} name="Essai Super Admin Roaster" />
-     
+          
+          <AdminTable onClick1={addAdminBackBlur} onClick2={editAdminBackBlur} onClick3={deleteAdminBackBlur} onClick4={isTableCheck} adminData={admininfo} name="Essai Super Admin Roaster" />
+          
         </div>
        
       </div> 
       {backgroundBlurAddAdmin?
              
-             <CreateSuperAdminRole onClick1={addAdminBackBlur} onClick2={submitAdminData} onClick3={setDataOnChange} title="Create Super Admin role"/>
+             <CreateSuperAdminForm onClick1={addAdminBackBlur} onClick2={submitAdminData} onClick3={setDataOnChange} title="Create Super Admin role"/>
             : ""}
 
             {backgroundBlurEditAdmin?
              
-        <EditSuperAdminRole onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange} title="Edit an Super Admin role" />: ""}
+        <EditSuperAdminForm onClick1={editAdminBackBlur} onClick2={submitEditData} onClick3={setDataOnChange} title="Edit an Super Admin role" header="Are you sure you want to make this Super admin inactive?"/>: ""}
 
         {backgroundBlurDeleteAdmin?
-             <DeleteSuperAdminRole onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title1="Delete Super Admin" title2="This will permanently delete the super admin from the" />: ""}
+             <DeleteSuperAdminForm onClick1={deleteAdminBackBlur} onClick2={submitDeleteData} title1="Delete Super Admin" title2="This will permanently delete the super admin from the" />: ""}
+    
+
+
+      
       </>
 
    

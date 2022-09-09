@@ -15,7 +15,7 @@ export function ResetPasswordReqForm(){
 
 
 
-    return <div className="bg-white w-[21%] h-auto p-6 rounded-lg shadow-lg relative  ml-[2vw] right-[0.8vw] z-10">
+    return <div className="bg-white w-[21%] h-auto p-6 rounded-lg shadow-lg relative  ml-[2vw] 2xl:left-[11%] z-10">
       <h1 className="text-center text-[#0ea5e9] text-3xl font-bold mb-4">PIPPAMS</h1>
       <h1 className="text-center text-xl font-bold mb-6">Password Reset</h1>
  
@@ -29,7 +29,7 @@ export function ResetPasswordReqForm(){
         
       <div className="mx-auto mb-16 flex justify-center">
         <Link href="/reset-password-success">
-          <Button className="bg-cyan-400 text-white font-bold py-2 rounded w-[80%]">Submit</Button>
+          <Button className="bg-cyan-400 text-white font-bold py-2 rounded w-[80%] 2xl:mb-16">Submit</Button>
         </Link>
       </div>
     

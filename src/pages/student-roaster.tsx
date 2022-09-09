@@ -1,5 +1,7 @@
 
-import { studentinfo ,MenuBar,Navbar,CreateSuperAdminRole,EditAdminRole,DeleteSuperAdminRole,StudentTable,AddStudent } from "@/features/home"
+import {MenuBar,Navbar } from "@/features/home"
+import {studentinfo,StudentForm,StudentTable} from "@/features/student"
+import {DeleteSuperAdminForm} from "@/features/admin"
 import { Button } from "@/shared/components"
 import { useState } from "react";
 
@@ -82,14 +84,14 @@ const setDataOnChange=(e)=>{
       </div> 
       {backgroundBlurAddStudent?
              
-    <AddStudent onClick1={addStudentBackBlur} title="Add a student to the roaster" />: ""}
+    <StudentForm onClick1={addStudentBackBlur} title="Add a student to the roaster" />: ""}
 
             {backgroundBlurEditStudent?
              
-          <AddStudent onClick1={editStudentBackBlur}  title="Update a student to the roaster"/> : ""}
+          <StudentForm onClick1={editStudentBackBlur}  title="Update a student to the roaster"/> : ""}
           
         {backgroundBlurDeleteStudent?
-             <DeleteSuperAdminRole onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""} 
+             <DeleteSuperAdminForm onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""} 
              {/* <AddStudent /> */}
      
 

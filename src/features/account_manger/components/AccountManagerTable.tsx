@@ -4,12 +4,13 @@ interface AccountManagerTableProps{
     onClick1: ()=>void;
     onClick2: ()=>void;
     onClick3: ()=>void;
+    onClick4: ()=>void;
     adminData: {}[];
     name: string
   }
   
 
-export function AccountManagerTable({onClick1,onClick2,onClick3,adminData,name}: AccountManagerTableProps){
+export function AccountManagerTable({onClick1,onClick2,onClick3,onClick4,adminData,name}: AccountManagerTableProps){
 
 
     
@@ -48,7 +49,7 @@ export function AccountManagerTable({onClick1,onClick2,onClick3,adminData,name}:
           
                 <tbody className="overflow">
                   {adminData.map((val,index)=><tr className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
-                    <td className="w-[13%] h-[7vh] pl-6">{val.name}</td>
+                    <td className="w-[13%] h-[7vh] pl-6 cursor-pointer hover:underline" onClick={onClick4}>{val.name}</td>
                    
                     <td className="w-[13%] h-[7vh] pl-6">{val.update}</td>
                     {val.status=="Active"?<td className="w-[13%] h-[7vh] text-[#20A464] pl-20">{val.status}</td>:<td className="w-[13%] h-[7vh] pl-20">{val.status}</td>}

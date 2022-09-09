@@ -10,7 +10,7 @@ interface ActivityDataBaseFormProps{
     return(
 
         <>
-        <div className="w-[80%] h-auto -mt-[150vh] mx-auto bg-[#FDFEFF] border-2 rounded-lg z-10 relative">
+        <div className="w-[80%] h-[100vh] -mt-[150vh] mx-auto bg-[#FDFEFF] border-2 rounded-lg z-10 relative overflow-y-scroll">
         <div className="w-[60%] h-[10vh] ml-7 flex justify-around items-center">
           <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer" onClick={onClick1}>
             <img alt="back-icon" src="/images/backArrow.png" />
@@ -121,8 +121,10 @@ interface ActivityDataBaseFormProps{
                     </div>
              
              </div>
-
+ 
              </div>
+             <button className="bg-cyan-500 rounded-md w-[15%] mx-auto mt-10 mb-10 h-[5vh] text-[18px] text-center flex justify-center items-center text-white hover:bg-blue-600">Save </button>
+
     </div>
     </>
     )

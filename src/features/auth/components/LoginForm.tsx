@@ -17,9 +17,9 @@ export function LoginForm(){
    
    return <form>
         
-     <div className="bg-white w-[60%] h-auto p-6 rounded-lg shadow-lg relative left-[16vw] z-10">
-       <h1 className="text-center text-[#0ea5e9] text-3xl font-bold mb-4">PIPPAMS</h1>
-       <h1 className="text-center text-xl font-bold mb-6">Login</h1>
+     <div className="bg-white w-[60%] h-auto p-6 rounded-lg shadow-lg relative lg:left-[35%] xl:left-[45%]  2xl:left-[60%] z-10">
+       <h1 className="text-center text-[#0ea5e9] lg: text-3xl xl:text-3xl  2xl:text-3xl font-bold mb-4">PIPPAMS</h1>
+       <h1 className="text-center text-xl font-bold mb-6 ">Login</h1>
        <label className="text-md font-medium text-gray-900 dark:text-gray-300">Email</label>
        <input className="w-full py-2 bg-gray-200 text-gray-500 px-1 rounded outline-none mb-4"  name="email" placeholder="Email" type="email" onChange={storeFormData} />
         
@@ -37,7 +37,7 @@ export function LoginForm(){
           
        </div>
                                 
-       <div className="mx-auto mb-[5vh] flex justify-center">
+       <div className="mx-auto lg:mb-[8vh] xl:mb-[18vh] 2xl:mb-[16vh] flex justify-center">
          <Link href="/home"><Button className="text-white bg-cyan-400 font-bold py-2 rounded w-[80%]">Login</Button></Link>
        </div>
      </div>

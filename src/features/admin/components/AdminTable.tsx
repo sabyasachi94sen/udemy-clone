@@ -4,12 +4,13 @@ interface AdminTableProps{
     onClick1: ()=>void;
     onClick2: ()=>void;
     onClick3: ()=>void;
+    onClick4: ()=>void;
     adminData: {}[];
     name: string
   }
   
 
-export function AdminTable({onClick1,onClick2,onClick3,adminData,name}: AdminTableProps){
+export function AdminTable({onClick1,onClick2,onClick3,onClick4,adminData,name}: AdminTableProps){
 
 
     
@@ -48,7 +49,7 @@ export function AdminTable({onClick1,onClick2,onClick3,adminData,name}: AdminTab
           
                 <tbody className="overflow">
                   {adminData.map((val,index)=><tr className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
-                    <td className="w-[13%] h-[7vh] pl-6">{val.name}</td>
+                    <td className="w-[13%] h-[7vh] pl-6 hover:underline cursor-pointer" onClick={onClick4}>{val.name}</td>
                     <td className="w-[13%] h-[7vh]">{val.email}</td>
                     <td className="w-[13%] h-[7vh] pl-2">{val.update}</td>
                     {val.status=="Active"?<td className="w-[13%] h-[7vh] text-[#20A464] pl-7">{val.status}</td>:<td className="w-[13%] h-[7vh] pl-7">{val.status}</td>}

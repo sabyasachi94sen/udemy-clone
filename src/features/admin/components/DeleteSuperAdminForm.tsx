@@ -1,7 +1,7 @@
 import { Button } from "@/shared/components"
 
 
-interface DeleteSuperAdminRoleProps{
+interface DeleteSuperAdminFormProps{
  
     onClick1: ()=>void;
     onClick2: ()=>void;
@@ -10,7 +10,7 @@ interface DeleteSuperAdminRoleProps{
 
 
 }
- export function DeleteSuperAdminRole({onClick1,onClick2,title1,title2}: DeleteSuperAdminRoleProps){
+ export function DeleteSuperAdminForm({onClick1,onClick2,title1,title2}: DeleteSuperAdminFormProps){
 
     return (
         <div className="w-[32%] h-auto rounded-2xl border-2 mx-auto bg-[#FDFEFF] -mt-[130vh] z-10 relative">

@@ -1,17 +1,34 @@
 import { Button, Select } from "@/shared/components"
+import {ActiveStatus} from "@/features/ui"
+import {useState} from "react"
 
 
-interface EditAdminRoleProps{
+interface EditAdminFormProps{
   onClick1: ()=>void;
   onClick2: ()=>void;
   onClick3: ()=>void;
-  title: string
+  title: string;
+  header: string
 }
 
-export function EditAdminRole({onClick1,onClick2,onClick3,title}: EditAdminRoleProps){
+export function EditAdminForm({onClick1,onClick2,onClick3,title,header}: EditAdminFormProps){
+
+ 
+  const [isStatus,setIsStatus]=useState(false)
+
+  const checkStatus=(e)=>{
+    if(e.target.value=="Yes")
+    setIsStatus(isStatus=>!isStatus)
+  }
+
+  const confirmStatus=()=>{
+    setIsStatus(isStatus=>!isStatus)
+  }
 
     return (
-    <div className="w-[40%] h-auto rounded-xl bg-[#FDFEFF] border-2 relative z-10 -mt-[140vh] mx-auto">
+      <>
+      <div className={`w-full h-[180vh] z-10 ${!isStatus? ``: `opacity-[0.4]`} relative -mt-[180vh] pt-[40vh]`}>
+    <div className={`w-[40%] h-auto rounded-xl bg-[#FDFEFF] border-2 relative z-20 mx-auto`}>
         <div className="w-[100%] h-[10vh] mx-auto flex justify-around items-center ml-4">
           <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] ml-3 flex items-center justify-center cursor-pointer" onClick={onClick1} >
             <img alt="back-icon" src="/images/backArrow.png"/>
@@ -31,10 +48,10 @@ export function EditAdminRole({onClick1,onClick2,onClick3,title}: EditAdminRoleP
 
           <div className="mt-16">
             <span>Active Status</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative left-3 outline-none" onChange={onClick3} name="status">
+             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative left-3 outline-none" onChange={checkStatus} name="status">
                 <option> Select Status</option>
-                <option>Inactive</option>
-                <option>Active</option>
+                <option>Yes</option>
+                <option>No</option>
              </select>
           </div>
 
@@ -52,5 +69,10 @@ export function EditAdminRole({onClick1,onClick2,onClick3,title}: EditAdminRoleP
         </div>
 
       </div>
+      </div>
+      {isStatus?
+      
+      <ActiveStatus onClick1={confirmStatus} header={header} /> : ""}
+      </>
     )
 }
