@@ -19,7 +19,7 @@ export function HomeItems({ activityname,activitystatus ,image }:  HomeItemsProp
         <div className="w-[60%] h-[20vh]" >
           <h1 className="text-black  font-extrabold font-sans text-lg">{activityname}</h1>
           <h4 className="text-black font-medium font-sans mt-1">{activitystatus}</h4>
-           <Button className="w-[50%] h-[5vh] text-cyan-400 bg-yellow-100 rounded-lg mt-5 cursor-pointer">Know more</Button>
+           <button className="w-[50%] h-[5vh] text-cyan-400 bg-white rounded-lg mt-5 cursor-pointer">Know more</button>
         </div>
         <div className="h-[24vh] w-[30%]  mt-6">
         <Image src={image} />
