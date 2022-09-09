@@ -54,7 +54,7 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
                     
                     {val.status=="Active"?<td className="w-[14%] h-[7vh] text-[#20A464] pl-24">{val.status}</td>:<td className="w-[14%] h-[7vh] pl-32">{val.status}</td>}
                 
-                    <td className="w-[13%] h-[7vh] cursor-pointer pl-24"><img alt="edit-icon" src="/images/edit.png" onClick={()=>onClick2(index)} /></td>
+                    <td className="w-[13%] h-[7vh] cursor-pointer pl-20"><img alt="edit-icon" src="/images/edit.png" onClick={()=>onClick2(index)} /></td>
                     <td className="w-[13%] h-[7vh] cursor-pointer pl-10"><img alt="delete-icon" src="/images/delete.png" onClick={()=>onClick3(index)}/></td>
 
                   </tr>)}
