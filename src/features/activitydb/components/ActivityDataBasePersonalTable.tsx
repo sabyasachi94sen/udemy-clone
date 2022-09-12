@@ -13,8 +13,8 @@ export function ActivityDataBasePersonalTable({activityData,onClick1,onClick2,on
         <div className="w-[90%] h-screen rounded-md bg-white -mt-44">
        
         <div>
-         <h1 className="text-black font-bold text-4xl font-sans ml-24 relative right-12 z-0">Essai Activity Database</h1>
-         <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0">
+         <h1 className="text-black font-bold text-4xl font-sans ml-[3%] z-0">Essai Activity Database</h1>
+         <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0 relative right-[1.3%]">
            <div className="w-[76%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
              <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
             

@@ -20,8 +20,8 @@ export function AccountManagerTable({onClick1,onClick2,onClick3,onClick4,adminDa
         <div className="w-[90%] h-screen rounded-md bg-white -mt-44 relative">
        
            <div>
-            <h1 className="text-black font-bold text-4xl font-sans ml-24 z-0 relative right-4">{name}</h1>
-            <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0">
+            <h1 className="text-black font-bold text-4xl font-sans ml-[6.5%] z-0">{name}</h1>
+            <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0 relative right-[0.5%]">
               <div className="w-[65%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
                 <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
                
