@@ -22,14 +22,14 @@ function HomePage(){
   const activity=[
     {
       activityname: "Super Admin Roster",
-      activitystatus: "View and update list of Super Admins",
+      activitystatus: "View and update roster of super admin",
       image: superAdmin,
       url: "/super-admin",
       id:1,
     },
     {
       activityname: "Admin Roaster",
-      activitystatus: "View and update list of Admins",
+      activitystatus: "View and update roster of admins",
       url: "/admin",
       image: admin,
       
