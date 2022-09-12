@@ -58,7 +58,7 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
                    <td className="rounded-br-lg rounded-tr-lg">Delete</td>
                  
                </tr>
-               <tr className="bg-white h-[4vh]">
+               <tr className="bg-white h-[4vh] sticky top-[7vh]">
                    <td ></td>
                    <td></td>
                    <td></td>

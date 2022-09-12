@@ -46,7 +46,7 @@ interface AcademicTableProps{
                    
                  
                </tr>
-               <tr className="bg-white h-[3vh]">
+               <tr className="bg-white h-[3vh] sticky top-[7vh]">
                    <td ></td>
                    <td></td>
                    <td></td>

@@ -68,7 +68,7 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
                    
                  
                </tr>
-                <tr className="bg-white h-[3vh]">
+                <tr className="bg-white h-[3vh] sticky top-[7vh]">
                    <td ></td>
                    <td></td>
                    <td></td>

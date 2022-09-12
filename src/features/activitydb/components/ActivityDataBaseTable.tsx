@@ -59,7 +59,7 @@ export function ActivityDataBaseTable({activityData,onClick}: ActivityDataBaseTa
                    <td className="rounded-br-lg rounded-tr-lg">Activity End Date</td>
                  
                </tr>
-               <tr className="bg-white h-[4vh]">
+               <tr className="bg-white h-[4vh] sticky top-[7vh]">
                    <td ></td>
                    <td></td>
                    <td></td>
