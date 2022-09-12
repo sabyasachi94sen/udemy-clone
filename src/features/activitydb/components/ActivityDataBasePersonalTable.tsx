@@ -24,7 +24,7 @@ export function ActivityDataBasePersonalTable({activityData,onClick1,onClick2,on
            <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] text-[18px] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>
          </div>
 
-         <div className="bg-[#3AB0FB52] h-[6vh] w-[93%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
+         {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[93%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
            <p>Application Deadline</p>
            <p>Activity Start Date</p>
            <p>Activity End Date</p>
@@ -35,23 +35,49 @@ export function ActivityDataBasePersonalTable({activityData,onClick1,onClick2,on
            <p>Edit</p>
            <p>Delete</p>
              
-         </div>
+         </div> */}
 
          
-         <div className={`${activityData.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-4`}>
-           <table className="border-solid w-[95%] mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
+         <div className={`${activityData.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
+           <table className="border-solid w-[95%] text-center mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
        
-             <tbody className="overflow">
+           <tbody className="overflow">
+              <tr className="text-center w-full font-bold  xl:text-[0.65rem]  2xl:text-[0.8rem] mx-auto h-[7vh]  bg-blue-200 opacity-[1] sticky top-0">
+                   
+                   <td className="rounded-bl-lg rounded-tl-lg">Application Deadline</td>
+                   <td className="">Activity Start Date</td>
+                   <td className="">Activity End Date</td>
+                   <td className="">Application requirements</td>
+                   <td className="">URL</td>
+                   <td className="">Active Status</td>
+                   <td className="">See action map</td>
+                   <td className="">Edit</td>
+                   <td className="rounded-br-lg rounded-tr-lg">Delete</td>
+                 
+               </tr>
+               <tr className="bg-white h-[4vh]">
+                   <td ></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                </tr>
+               
+            
                {activityData.map((val,index)=><tr className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
-               <td className="w-[17%] h-[7vh] pl-12">{val.deadline}</td>
-                 <td className="w-[15%] h-[7vh] pl-6">{val.start_date}</td>
-               <td className="w-[14%] h-[7vh]">{val.end_date}</td>
-                  <td className="w-[14%] h-[7vh] pl-6">{val.requirement}</td>
-                 <td className="w-[9%] h-[7vh] pl-8">{val.url}</td>
-                 <td className="w-[9%] h-[7vh]">{val.status}</td>
-                 <td className="w-[9%] h-[7vh]"><Button className="w-[90%] h-[6vh] rounded-md" onClick={onClick3}>See action maps</Button></td>
-                 <td className="w-[8%] h-[7vh] cursor-pointer pl-9"><img alt="edit-icon" src="/images/edit.png"  onClick={onClick2}/></td>
-                    <td className="w-[14%] h-[7vh] cursor-pointer"><img alt="delete-icon" src="/images/delete.png"/></td>
+               <td className="h-[7vh]">{val.deadline}</td>
+                 <td className="h-[7vh]">{val.start_date}</td>
+               <td className="h-[7vh]">{val.end_date}</td>
+                  <td className="h-[7vh]">{val.requirement}</td>
+                 <td className="h-[7vh]">{val.url}</td>
+                 <td className="h-[7vh]">{val.status}</td>
+                 <td className="h-[7vh]"><Button className="w-[90%] h-[6vh] rounded-md 2xl:text-[0.8rem] xl:text-[0.6rem]" onClick={onClick3}>See action maps</Button></td>
+                 <td className="h-[7vh] cursor-pointer"><img className="mx-auto" alt="edit-icon" src="/images/edit.png"  onClick={onClick2}/></td>
+                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto" alt="delete-icon" src="/images/delete.png"/></td>
 
                </tr>)}
              </tbody>

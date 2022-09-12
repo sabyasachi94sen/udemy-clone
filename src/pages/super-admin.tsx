@@ -88,7 +88,7 @@ const setDataOnChange=(e)=>{
         <div className="flex items-center z-0">
           <MenuBar />
           
-          <AdminTable onClick1={addAdminBackBlur} onClick2={editAdminBackBlur} onClick3={deleteAdminBackBlur} onClick4={isTableCheck} adminData={admininfo} name="Essai Super Admin Roaster" />
+          <AdminTable onClick1={addAdminBackBlur} onClick2={editAdminBackBlur} onClick3={deleteAdminBackBlur} onClick4={isTableCheck} adminData={admininfo} name="Essai Super Admin Roster" />
           
         </div>
        

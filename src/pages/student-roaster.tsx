@@ -77,18 +77,18 @@ const setDataOnChange=(e)=>{
         <Navbar />
         <div className="flex items-center z-0">
           <MenuBar />
-          <StudentTable onClick1={addStudentBackBlur} onClick2={editStudentBackBlur} onClick3={deleteStudentBackBlur} studentData={studentData} name="Essai Student Roaster" />
+          <StudentTable onClick1={addStudentBackBlur} onClick2={editStudentBackBlur} onClick3={deleteStudentBackBlur} studentData={studentData} name="Essai Student Roster" />
      
         </div>
        
       </div> 
       {backgroundBlurAddStudent?
              
-    <StudentForm onClick1={addStudentBackBlur} title="Add a student to the roaster" />: ""}
+    <StudentForm onClick1={addStudentBackBlur} title="Add a student to the roster" />: ""}
 
             {backgroundBlurEditStudent?
              
-          <StudentForm onClick1={editStudentBackBlur}  title="Update a student to the roaster"/> : ""}
+          <StudentForm onClick1={editStudentBackBlur}  title="Update a student to the roster"/> : ""}
           
         {backgroundBlurDeleteStudent?
              <DeleteSuperAdminForm onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""} 

@@ -38,7 +38,7 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
                 <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" onClick={onClick1}>Update academic enrichment plan</button>
              </div>
         </div>
-        <div className="bg-[#3AB0FB52] h-[6vh] w-[95%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
+        {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[95%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
           <p>Activity name</p>
           <p>Type</p>
           <p>Subject</p>
@@ -48,32 +48,57 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
           <p>Activity start date</p>
           <p>Complete</p>
           <p>Delete</p>
-          </div>
+          </div> */}
 
         
-        <div className={`h-[60vh] overflow-y-scroll mt-4`}>
-          <table className="border-solid w-[95%] mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
+        <div className={`h-[60vh] overflow-y-scroll mt-8`}>
+          <table className="border-solid w-[96%] text-center bg-white mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1 text-[#344054] break-all">
           <tbody className="overflow">
-          </tbody>
+            <tr className="text-center w-full font-medium text-[0.9rem] mx-auto h-[7vh] mb-1  bg-blue-200 sticky top-0">
+          <td className="rounded-bl-md rounded-tl-md">Activity name</td>
+                   <td className="">Type</td>
+                   <td className="">Subject</td>
+                   <td className="">Country of Activity</td>
+                   <td className="">Applicatio  of requirements</td>
+                   <td className="">Application deadline</td>
+                   <td className="">Activity start date</td>
+                   <td className="">Complete</td>
+                   <td className="rounded-br-md rounded-tr-md">Delete</td>
+                  
+                   
+                 
+               </tr>
+                <tr className="bg-white h-[3vh]">
+                   <td ></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   
+                </tr> 
           {activityData.map((item,index)=>{
-            return <tr key={index} className="h-[6vh]">
-              <td className="w-[10%]">{item.subject} exam</td>
-              <td className="w-[6%] text-center">{item.type}</td>
-              <td className="w-[10%] pl-2">{item.subject}</td>
-              <td className="w-[16%]">New Delhi</td>
-              <td className="w-[16%]">Essay,Fee</td>
-              <td className="w-[13%] text-center">21/08/2022</td>
-              <td className="w-[15%] text-center">21/09/2022</td>
-              <td className="w-[10%]">
-                <label className="block text-gray-500 font-bold text w-[100%] pl-8 mt-2" >
+            return <tr key={index} className="h-[6vh] bg-gray-50">
+              <td className="">{item.subject} exam</td>
+              <td className="">{item.type}</td>
+              <td className="">{item.subject}</td>
+              <td className="">New Delhi</td>
+              <td className="">Essay,Fee</td>
+              <td className="">21/08/2022</td>
+              <td className="">21/09/2022</td>
+              <td className="">
+                <label className="block text-gray-500 font-bold text w-[100%] mt-2" >
              <input className="leading-tight h-[5vh] w-[50%] relative top-[2px] relative" id="complete-task" name="complete" type="checkbox" />
   
            </label></td>
-           <td className="w-[10%] h-[5vh] cursor-pointer"><img alt="delete-icon" onClick={()=>onClick2(activityData,index)} src="/images/delete.png" className="block mx-auto"/></td>
+           <td className="cursor-pointer"><img alt="delete-icon" onClick={()=>onClick2(activityData,index)} src="/images/delete.png" className="block mx-auto"/></td>
             </tr>
           })}
             
-          
+            </tbody>
         
           </table>
           </div>

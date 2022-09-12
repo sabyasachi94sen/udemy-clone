@@ -30,24 +30,46 @@ return (
 
         <h1 className="text-[#5F5F5F] font-bold text-xl mt-8 ml-20 ">{title2} : Rajiv</h1>
 
-        <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
+        {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
           <p>Student name</p>
           <p>Activities in AEP</p>
           <p>Last update</p>
           <p>Completion status</p>
             
-        </div>
+        </div> */}
 
         
-        <div className={`${adminData.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-4`}>
-          <table className="border-solid w-[88%] mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
+        <div className={`${adminData.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
+          <table className="border-solid w-[88%] mx-auto relative left-2 text-center font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
       
-            <tbody className="overflow">
+          <tbody className="overflow">
+              <tr className="text-center w-full font-medium text-[1rem] mx-auto h-[7vh]  bg-blue-200 opacity-[1] sticky top-0">
+                   
+                   <td className="rounded-bl-lg rounded-tl-lg">Student name</td>
+                   <td className="">Activities in AEP</td>
+                   <td className="">Last Update</td>
+                
+                   <td className="rounded-br-lg rounded-tr-lg">Completion status</td>
+                 
+                  
+                 
+               </tr>
+               <tr className="bg-white h-[4vh] sticky top-[7vh]">
+                   <td ></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   
+                   
+                </tr>
+
+                
+            
               {adminData.map((val,index)=><tr className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
-                <td className="w-[25%] h-[6vh] text-center">{val.name}</td>
-                <td className="w-[25%] h-[6vh] text-center">{val.aep}</td>
-                <td className="w-[25%] h-[6vh] text-center">{val.last_update}</td>
-                <td className="w-[25%] h-[6vh] text-center">
+                <td className="w-[25%] h-[6vh]">{val.name}</td>
+                <td className="w-[25%] h-[6vh]">{val.aep}</td>
+                <td className="w-[25%] h-[6vh]">{val.last_update}</td>
+                <td className="w-[25%] h-[6vh]">
                 <div className="flex justify-center items-center text-[#3AB0FB]">
                 <span>45%</span>
               <div className="w-[35%] h-[2vh] bg-gray-200 rounded-full dark:bg-gray-700 ml-3">

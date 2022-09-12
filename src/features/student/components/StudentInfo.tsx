@@ -79,4 +79,22 @@ export const studentinfo=[{
 
 
    },
+   {
+    name: "Rocky",
+    dob: "11/12/2022",
+    country: "New Delhi,India",
+    manager: "Ricky Ponty",
+    status: "Active",
+
+
+   },
+   {
+    name: "Rocky",
+    dob: "11/12/2022",
+    country: "New Delhi,India",
+    manager: "Ricky Ponty",
+    status: "Active",
+
+
+   },
  ]
