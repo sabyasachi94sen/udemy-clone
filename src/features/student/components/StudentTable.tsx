@@ -46,7 +46,7 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
               <table className="border-solid w-[90%] text-center mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
           
               <tbody className="overflow">
-              <tr className="text-center w-full font-medium xl:text-[0.8rem] xl:font-bold 2xl:text-[1rem] mx-auto h-[7vh]  bg-blue-200 opacity-[1] sticky top-0">
+              <tr className="text-center w-full font-medium xl:text-[0.8rem] 2xl:text-[1rem] mx-auto h-[7vh]  bg-blue-200 opacity-[1] sticky top-0">
                    
                    <td className="rounded-bl-lg rounded-tl-lg"> Name</td>
                    <td className="">Date of Birth</td>
