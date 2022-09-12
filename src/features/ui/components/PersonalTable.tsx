@@ -12,20 +12,21 @@ return (
    <div className="w-[90%] h-screen rounded-md bg-white -mt-44">
        
        <div>
-       <div className="w-[45%] h-[10vh] flex justify-around items-center ml-20">
+       <div className={`w-[45%] h-[10vh] flex justify-around items-center ${title1==`Essai Admin Details`?`ml-[3%]`: `ml-[6%]`}`}>
           <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer" onClick={onClick1}>
             <img alt="back-icon" src="/images/backArrow.png"/>
           </div>
           <h1 className="text-3xl font-bold ml-3">{title1}</h1>
           </div>
-        <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0">
+        <div className={`w-[100%] h-[6vh] flex items-center  ${title1!=`Essai Admin Details`?`justify-around`: `pl-[7%]`} mt-6 z-0`}>
           <div className="w-[65%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
             <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
            
             <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
            
           </div>
-          <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] text-[18px] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>
+          {title1!="Essai Admin Details"?
+          <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] text-[18px] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>: ""}
         </div>
 
         <h1 className="text-[#5F5F5F] font-bold text-xl mt-8 ml-20 ">{title2} : Rajiv</h1>
