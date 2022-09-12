@@ -26,20 +26,21 @@
             id: 3,
         },
         {
-            name: "Student Roaster",
+          name: "Account Manager Roster",
+          image:"/images/group.png",
+          imageType: "grorup-icon",
+          url: "/account-manager",
+          id: 4,
+      },
+        {
+            name: "Student Roster",
             image:"/images/hat.png",
             imageType: "hat-icon",
             url: "/student-roaster",
-            id: 4,
-        },
-     
-        {
-            name: "Account Manager Roaster",
-            image:"/images/group.png",
-            imageType: "grorup-icon",
-            url: "/account-manager",
             id: 5,
         },
+     
+       
         {
             name: "Activity Database",
             image:"/images/furniture.png",
@@ -48,32 +49,32 @@
             id: 6,
         },
         {
-            name: "Academic Enrichment List",
+            name: "Academic Enrichment Plans (AEPs)",
             image:"/images/list.png",
             imageType: "list-icon",
             url: "/academic-list",
             id: 7,
         },
-        {
-            name: "Plans (AEPs)",
-            image:"/images/pen.png",
-            imageType: "pen-icon",
-            url: "/plans-aep",
-            id: 8,
-        },
+        // {
+        //     name: "Plans (AEPs)",
+        //     image:"/images/pen.png",
+        //     imageType: "pen-icon",
+        //     url: "/plans-aep",
+        //     id: 8,
+        // },
         {
             name: "AEP Status Tracker",
             image:"/images/bars.png",
             imageType: "bars-icon",
             url: "/aep-status",
-            id: 9,
+            id: 8,
         },
         {
             name: "Analytics",
             image:"/images/analysisGraph.png",
             imageType: "analysisGraph-icon",
             url: "/analytics",
-            id: 10,
+            id: 9,
         },
      
 
@@ -83,7 +84,7 @@
             image: "/images/setting.png",
             imageType: "settings-icon",
             url: "/setting",
-            id:11,
+            id:10,
         },
     ]
 
