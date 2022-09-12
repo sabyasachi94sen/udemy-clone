@@ -20,10 +20,10 @@ export function AdminTable({onClick1,onClick2,onClick3,onClick4,adminData,name}:
         <div className="w-[90%] h-screen rounded-md bg-white -mt-44">
        
            <div>
-            <h1 className="text-black font-bold text-4xl font-sans ml-24 relative right-4 z-0">{name}</h1>
+            <h1 className="text-black font-bold text-4xl font-sans ml-[7.8%] relative right-4 z-0">{name}</h1>
             <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0">
-              <div className="w-[65%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
-                <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
+              <div className="w-[65%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50 relative right-[0.5%]">
+                <input className="w-[90%] h-[6vh] bg-gray-50  placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
                
                 <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
                
