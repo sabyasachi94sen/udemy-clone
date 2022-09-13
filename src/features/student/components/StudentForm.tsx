@@ -6,7 +6,7 @@ interface StudentFormProps{
 }
 
 
-export function StudentForm({onClick1,title}){
+export function StudentForm({onClick1,title}:StudentFormProps){
 
     return (
         <div className="w-[90%] mx-auto h-auto bg-[#FDFEFF] z-10 relative -mt-[150vh] border-2 rounded-xl">
@@ -79,9 +79,9 @@ export function StudentForm({onClick1,title}){
                         </select>
                     </div>
 
-                    <div className="w-[42%] h-[15vh] flex flex-col items-start font-bold text-[1.1rem] ml-28 relative">
+                    <div className="w-[42%] h-[24vh] flex flex-col items-start font-bold text-[1.1rem] ml-28 relative">
                         <p className="ml-2">If attends boarding school in a country other than permanent residence</p>
-                        <select name="country" className="bg-[#EEEE] mt-4 rounded-md w-[90%] h-[5vh] relative left-3 text-small font-medium pl-3">
+                        <select name="country" className="bg-[#EEEE] mt-4 rounded-md w-[90%] h-[5vh] relative left-3 text-[0.9rem] font-medium pl-3">
                             <option>Select Country of Boarding School</option>
                         </select>
                     </div>
