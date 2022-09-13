@@ -48,7 +48,7 @@ export function StudentForm({onClick1,title}){
                         </select>
                     </div>
                     <div className="w-[30%] flex flex-col items-start font-bold text-lg">
-                        <p className="ml-8">City of Permanent Residance</p>
+                        <p className="ml-8">City of Permanent Residence</p>
                         <input type="text" name="city" className="bg-[#EEEE] mt-4 font-bold text-xl rounded-md w-[90%] h-[5vh] relative left-8 text-small font-medium pl-3"/>
 
                     </div>
@@ -80,9 +80,9 @@ export function StudentForm({onClick1,title}){
                     </div>
 
                     <div className="w-[42%] h-[15vh] flex flex-col items-start font-bold text-[1.1rem] ml-28 relative">
-                        <p className="ml-2">Attends boarding school in another country</p>
+                        <p className="ml-2">If attends boarding school in a country other than permanent residence</p>
                         <select name="country" className="bg-[#EEEE] mt-4 rounded-md w-[90%] h-[5vh] relative left-3 text-small font-medium pl-3">
-                            <option>Select Country of Onboarding School</option>
+                            <option>Select Country of Boarding School</option>
                         </select>
                     </div>
                 </div>

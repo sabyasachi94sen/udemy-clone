@@ -34,8 +34,8 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
              <p className="text-xl font-bold">Student name: <span className="text-xl font-medium">Rishav</span></p>
              <div className="w-[60%] h-[7vh] flex justify-around ml-2 text-white
              ">
-                <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md">View implementation status</button>
-                <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" onClick={onClick1}>Update academic enrichment plan</button>
+                <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md">View AEP Status Tracker (student)</button>
+                <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" onClick={onClick1}>Update AEP</button>
              </div>
         </div>
         {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[95%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
