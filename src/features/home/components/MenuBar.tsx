@@ -66,7 +66,7 @@
             name: "AEP Status Tracker",
             image:"/images/bars.png",
             imageType: "bars-icon",
-            url: "/aep-status",
+            url: "/aep-tracker",
             id: 8,
         },
         {
