@@ -50,7 +50,7 @@ export function StatusTableForm({statusData,onClick,name}: StatusTableFormProps)
              <input className="leading-tight h-[5vh] w-[50%] block mx-auto" id="complete-task" name="complete" type="checkbox" />
   
            </label></td>
-                    <td className="w-[5%] text-center"><input type="text" name="remarks" className="w-[80%] h-[4vh] text-white hover:bg-blue-500 bg-[#3AB0FB] rounded-lg" /></td>
+                    <td className="w-[5%] text-center"><input type="text" name="remarks" className="w-[80%] h-[4vh] text-white hover:bg-blue-500 bg-blue-300 rounded-lg" /></td>
                 </tr>
             })}
           </tbody>
