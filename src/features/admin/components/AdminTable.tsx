@@ -115,3 +115,4 @@ export function AdminTable({onClick1,onClick2,onClick3,onClick4,adminData,name}:
 
 
 //comment
+//comment
