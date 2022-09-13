@@ -9,7 +9,7 @@ import Link from "next/link"
     return (
       <div className="h-[12vh] w-full bg-cyan-500 flex items-center" >
         <div className="flex h-[12vh] w-[65%] justify-around items-center">
-          <h1 className="text-white font-bold text-2xl">PIPPAMS</h1>
+          <h1 className="text-white font-bold text-[2rem]">PIPPAMS</h1>
           <div className="w-[70%] h-[6vh] flex items-center justify-around">
             <div className="w-[80%] h-[6vh] flex items-center rounded-md pl-4 bg-white">
               <input className="w-[90%] h-[6vh] pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="search"  type="text"/>
