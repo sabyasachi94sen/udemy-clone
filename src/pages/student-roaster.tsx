@@ -1,9 +1,9 @@
 
-import {MenuBar,Navbar } from "@/features/home"
-import {studentinfo,StudentForm,StudentTable} from "@/features/student"
-import {DeleteSuperAdminForm} from "@/features/admin"
-import { Button } from "@/shared/components"
 import { useState } from "react";
+
+import { MenuBar,Navbar } from "@/features/home"
+import { StudentForm,studentinfo,StudentTable } from "@/features/student"
+import  { ActiveStatus } from "@/features/ui"
 
 function StudentRoaster(){
    
@@ -12,7 +12,7 @@ const [backgroundBlurEditStudent,setBackGroundBlurEditStudent]=useState(false)
 const [backgroundBlurDeleteStudent,setBackGroundBlurDeleteStudent]=useState(false)
 const [studentData,setStudentData]=useState(studentinfo)
 const [studentDataId,setStudentDataId]=useState("")
-const [studentDataOnChange,setStudentDataOnChange]=useState({name: "",email: "",update: "02/11/2022",status: "Inactive",student: 90,performance: "Metrics", })
+const [studentDataOnChange,setStudentDataOnChange]=useState({ name: "",email: "",update: "02/11/2022",status: "Inactive",student: 90,performance: "Metrics", })
 
 const addStudentBackBlur=()=>{
     
@@ -37,6 +37,7 @@ const submitStudentData=()=>{
 
   setBackGroundBlurAddStudent(backgroundBlurAddStudent=>!backgroundBlurAddStudent)
   const tempArr=studentData;
+
   tempArr.push(studentDataOnChange)
   setStudentData(tempArr)
        
@@ -47,6 +48,7 @@ const submitStudentData=()=>{
 const submitEditData=()=>{
   setBackGroundBlurEditStudent(backgroundBlurEditStudent=>!backgroundBlurEditStudent)
   const tempArr=studentData;
+
   tempArr[studentDataId]=studentDataOnChange;
 }
 
@@ -54,6 +56,7 @@ const submitDeleteData=()=>{
 
   setBackGroundBlurDeleteStudent(backgroundBlurDeleteStudent=>!backgroundBlurDeleteStudent)
   const tempArr=studentData;
+
   tempArr.splice(studentDataId,1)
   setStudentData(tempArr)
 
@@ -61,41 +64,42 @@ const submitDeleteData=()=>{
 
 const setDataOnChange=(e)=>{
   if(backgroundBlurAddStudent)
-   setStudentOnChange({...studentDataOnChange, status: "Inactive" ,id: studentData[studentData.length-1].id+1,[e.target.name]: e.target.value})
+   setStudentOnChange({ ...studentDataOnChange, status: "Inactive" ,id: studentData[studentData.length-1].id+1,[e.target.name]: e.target.value })
    else if(backgroundBlurEditStudent)
-   setStudentDataOnChange({...studentDataOnChange,id: studentDataId,[e.target.name]: e.target.value})
+   setStudentDataOnChange({ ...studentDataOnChange,id: studentDataId,[e.target.name]: e.target.value })
 
 }
   
 
 
     return (
-     <>
+      <>
        
-     <div className={(!backgroundBlurAddStudent && !backgroundBlurEditStudent && !backgroundBlurDeleteStudent)? `bg-white` : `opacity-[0.2]`}>
+        <div className={(!backgroundBlurAddStudent && !backgroundBlurEditStudent && !backgroundBlurDeleteStudent)? `bg-white` : `opacity-[0.2]`}>
         
-        <Navbar />
-        <div className="flex items-center z-0">
-          <MenuBar />
-          <StudentTable onClick1={addStudentBackBlur} onClick2={editStudentBackBlur} onClick3={deleteStudentBackBlur} studentData={studentData} name="Essai Student Roster" />
+          <Navbar />
+          <div className="flex items-center z-0">
+            <MenuBar />
+            <StudentTable name="Essai Student Roster" studentData={studentData} onClick1={addStudentBackBlur} onClick2={editStudentBackBlur} onClick3={deleteStudentBackBlur} />
      
-        </div>
+          </div>
        
-      </div> 
-      {backgroundBlurAddStudent?
+        </div> 
+        {backgroundBlurAddStudent?
              
-    <StudentForm onClick1={addStudentBackBlur} title="Add a student to the roster" />: ""}
+          <StudentForm title="Add a student to the roster" onClick1={addStudentBackBlur} />: null}
 
-            {backgroundBlurEditStudent?
+        {backgroundBlurEditStudent?
              
-          <StudentForm onClick1={editStudentBackBlur}  title="Update a student to the roster"/> : ""}
+          <StudentForm title="Update a student to the roster"  onClick1={editStudentBackBlur}/> : null}
           
         {backgroundBlurDeleteStudent?
-             <DeleteSuperAdminForm onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""} 
-             {/* <AddStudent /> */}
+            //  <DeleteSuperAdminForm onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""} 
+             
+          <ActiveStatus header="Are you sure you want to delete activity" onClick1={deleteStudentBackBlur}/>:  null}
      
 
-        </>
+      </>
     )
 }
 

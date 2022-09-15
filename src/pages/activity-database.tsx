@@ -1,11 +1,10 @@
 
 
-import {MenuBar,Navbar} from "@/features/home"
-import {ActionMapForm,ActionMapStepForm,activityinfo,activitypersonalinfo,ActivityDataBaseTable,ActivityDataBaseForm,ActivityDataBasePersonalTable} from "@/features/activitydb"
-
-import { Button } from "@/shared/components"
 import { useState } from "react";
 
+import { ActionMapForm,ActivityDataBaseForm,ActivityDataBasePersonalTable,ActivityDataBaseTable,activityinfo,activitypersonalinfo } from "@/features/activitydb"
+import { MenuBar,Navbar } from "@/features/home"
+import { ActiveStatus } from "@/features/ui"
 
 
 function Activity(){
@@ -15,6 +14,7 @@ const [isTable,setIsTable]=useState(false)
 const [isMap,setIsMap]=useState(false)
 const [addBackBlur,setAddBackBlur]=useState(false)
 const [editBackBlur,setEditBackBlur]=useState(false)
+const [deleteBackBlur,setDeleteBackBlur]=useState(false)
 
 
 
@@ -40,6 +40,11 @@ const setBackgroundBlurOnEdit=()=>{
 }
 
 
+const setBackgroundBlurOnDelete=()=>{
+  setDeleteBackBlur(deleteBackBlur=>!deleteBackBlur)
+}
+
+
 
 
 
@@ -47,27 +52,33 @@ const setBackgroundBlurOnEdit=()=>{
 
 
     return (
-     <>
+      <>
        
-      <div className={(!addBackBlur && !editBackBlur && !isMap)? `bg-white` : `opacity-[0.2]`}>
+        <div className={(!addBackBlur && !editBackBlur && !isMap && !deleteBackBlur)? `bg-white` : `opacity-[0.2]`}>
         
-        <Navbar />
-        <div className="flex items-center z-0">
-          <MenuBar />
-          {!isTable?<ActivityDataBaseTable activityData={activityinfo} onClick={isActivityTable} />   
-         : <ActivityDataBasePersonalTable activityData={activitypersonalinfo} onClick1={setBackgroundBlurOnAdd} onClick2={setBackgroundBlurOnEdit} onClick3={setBackgroundBlurOnMap} />}  
-        </div>
+          <Navbar />
+          <div className="flex items-center z-0">
+            <MenuBar />
+            {!isTable?<ActivityDataBaseTable activityData={activityinfo} onClick={isActivityTable} />   
+         : <ActivityDataBasePersonalTable activityData={activitypersonalinfo} onClick1={setBackgroundBlurOnAdd} onClick2={setBackgroundBlurOnEdit} onClick3={setBackgroundBlurOnMap} onClick4={setBackgroundBlurOnDelete} />}  
+          </div>
        
-      </div> 
+        </div> 
 
-      {addBackBlur?
-      <ActivityDataBaseForm onClick1={setBackgroundBlurOnAdd} name="Add an activity to the database" />: ""}
+        {addBackBlur?
+          <ActivityDataBaseForm name="Add an activity to the database" onClick1={setBackgroundBlurOnAdd} />: null}
 
-     {editBackBlur?
-      <ActivityDataBaseForm onClick1={setBackgroundBlurOnEdit}  name="Edit an activity to the database" />: ""}
+        {editBackBlur?
+          <ActivityDataBaseForm name="Edit an activity to the database"  onClick1={setBackgroundBlurOnEdit} />: null}
     
-     {isMap?
- <ActionMapForm onClick1={setBackgroundBlurOnMap}/> : ""}
+        {isMap?
+          <ActionMapForm onClick1={setBackgroundBlurOnMap}/> : null}
+
+        {deleteBackBlur?
+          <ActiveStatus header="Are you sure you want to delete activity" onClick1={setBackgroundBlurOnDelete}/>:  null}
+          
+
+
 
 
 

@@ -5,6 +5,7 @@ interface ActivityDataBasePersonalTableProps {
   onClick1: () => void;
   onClick2: () => void;
   onClick3: () => void;
+  onClick4: ()=> void
 }
 
 export function ActivityDataBasePersonalTable({
@@ -12,6 +13,7 @@ export function ActivityDataBasePersonalTable({
   onClick1,
   onClick2,
   onClick3,
+  onClick4,
 }: ActivityDataBasePersonalTableProps) {
   return (
     <div className="-mt-44 h-screen w-[90%] rounded-md bg-white">
@@ -76,15 +78,15 @@ export function ActivityDataBasePersonalTable({
                 <td className="rounded-br-lg rounded-tr-lg">Delete</td>
               </tr>
               <tr className="sticky top-[7vh] h-[4vh] bg-white">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
               </tr>
 
               {activityData.map((val, index) => (
@@ -105,17 +107,18 @@ export function ActivityDataBasePersonalTable({
                   </td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
-                      className="mx-auto"
                       alt="edit-icon"
+                      className="mx-auto"
                       src="/images/edit.png"
                       onClick={onClick2}
                     />
                   </td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
-                      className="mx-auto"
                       alt="delete-icon"
+                      className="mx-auto"
                       src="/images/delete.png"
+                      onClick={onClick4}
                     />
                   </td>
                 </tr>
