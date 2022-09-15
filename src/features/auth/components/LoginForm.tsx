@@ -1,50 +1,129 @@
-import Link from "next/link"
-import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 
+import { loginObj } from "@/features/api";
+import { SetAuthToken } from "@/features/helpers";
 import { Button } from "@/shared/components";
 
-export function LoginForm(){
-   
+import "react-toastify/dist/ReactToastify.css";
 
-  const [formData,setFormData]=useState({ email: "",password: "" })
-     
-
-  const storeFormData=(e)=>{
-      setFormData({ ...formData,[e.target.name]: e.target.value })
-
-   
-  }
-   
-   return <form>
-        
-     <div className="bg-white w-[60%] h-auto p-6 rounded-lg shadow-lg relative lg:left-[35%] xl:left-[45%]  2xl:left-[60%] z-10">
-       <h1 className="text-center text-[#0ea5e9] lg: text-3xl xl:text-3xl  2xl:text-3xl font-bold mb-4">PIPPAMS</h1>
-       <h1 className="text-center text-xl font-bold mb-6 ">Login</h1>
-       <label className="text-md font-medium text-gray-900 dark:text-gray-300">Email</label>
-       <input className="w-full py-2 bg-gray-200 text-gray-500 px-1 rounded outline-none mb-4"  name="email" placeholder="Email" type="email" onChange={storeFormData} />
-        
-       <label className="text-md font-medium text-gray-900 dark:text-gray-300" >Password</label>
-       <input className="w-full py-2 bg-gray-200 text-gray-500 px-1 rounded outline-none mb-4"  name="password" placeholder="•••••••••" type="password" onChange={storeFormData} />
-    
-       <div className="mb-6 flex justify-between h-7">
-         <div>
-           <label className="block text-gray-500 font-bold text" >
-             <input className="ml-2 leading-tight h-4 w-4 top-[2px] relative" id="remember" name="remember" type="checkbox" />
-             <span className="text-sm ml-2">Remember me</span>
-           </label>
-         </div>
-         <Link href="/reset-password"><p className="text-[#0ea5e9] font-sans cursor-pointer text-sm">Forgot password?</p></Link>
-          
-       </div>
-                                
-       <div className="mx-auto lg:mb-[8vh] xl:mb-[18vh] 2xl:mb-[16vh] flex justify-center">
-         <Link href="/home"><Button className="text-white bg-cyan-400 font-bold py-2 rounded w-[80%]">Login</Button></Link>
-       </div>
-     </div>
-
-   </form>
+interface FormValues {
+  email: string;
+  password: string;
 }
 
+export function LoginForm() {
+  const router = useRouter();
+  const { register, handleSubmit } = useForm<FormValues>();
 
+  const handleLogin = (loginCreds: object) => {
+    const response = loginObj.login(loginCreds);
 
+    response
+      .then((res) => {
+        if (res.status === 200) {
+          SetAuthToken(res.data.token);
+          toast.success(
+            "Login Successful",
+            {
+              position: toast.POSITION.TOP_CENTER,
+            },
+          
+          );
+          setTimeout(() => {
+            router.push("/home");
+          }, 1000);
+        }
+      })
+      .catch((err) => {
+        toast.error(
+          err.response.data.errorMessage,
+          {
+            position: toast.POSITION.TOP_CENTER,
+          },
+          
+        );
+        toast.error(
+          err.response.data.errorType,
+          {
+            position: toast.POSITION.TOP_CENTER,
+          },
+          
+        );
+      });
+  };
 
+  return (
+    <form>
+      <div className="relative z-10 h-auto w-[60%] rounded-lg bg-white p-6 shadow-lg lg:left-[35%]  xl:left-[45%] 2xl:left-[60%]">
+        <h1 className="lg: mb-4 text-center text-3xl font-bold  text-[#0ea5e9] xl:text-3xl 2xl:text-3xl">
+          PIPPAMS
+        </h1>
+        <h1 className="mb-6 text-center text-xl font-bold ">Login</h1>
+        <label
+          className="text-md font-medium text-gray-900 dark:text-gray-300"
+          htmlFor="email"
+        >
+          Email
+          <input
+            className="mb-4 w-full rounded bg-gray-200 py-2 px-1 text-gray-500 outline-none"
+            id="email"
+            placeholder="Email"
+            type="email"
+            {...register("email")}
+          />
+        </label>
+
+        <label
+          className="text-md font-medium text-gray-900 dark:text-gray-300"
+          htmlFor="password"
+        >
+          Password
+          <input
+            className="mb-4 w-full rounded bg-gray-200 py-2 px-1 text-gray-500 outline-none"
+            id="password"
+            placeholder="•••••••••"
+            type="password"
+            {...register("password")}
+          />
+        </label>
+
+        <div className="mb-6 flex h-7 justify-between">
+          <div>
+            <label
+              className="text block font-bold text-gray-500"
+              htmlFor="remember"
+            >
+              <input
+                className="relative top-[2px] ml-2 h-4 w-4 leading-tight"
+                id="remember"
+                name="remember"
+                type="checkbox"
+              />
+              <span className="ml-2 text-sm">Remember me</span>
+            </label>
+          </div>
+          <Link href="/reset-password">
+            <p className="cursor-pointer font-sans text-sm text-[#0ea5e9]">
+              Forgot password?
+            </p>
+          </Link>
+        </div>
+
+        <div className="mx-auto flex justify-center lg:mb-[8vh] xl:mb-[18vh] 2xl:mb-[16vh]">
+          <Button
+            className="w-[80%] rounded bg-cyan-400 py-2 font-bold text-white"
+            onClick={handleSubmit(handleLogin)}
+          >
+            Login
+          </Button>
+        </div>
+        <ToastContainer
+          autoClose={2000}
+        />
+      </div>
+    </form>
+  );
+}
