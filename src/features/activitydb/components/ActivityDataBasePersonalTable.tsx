@@ -5,7 +5,8 @@ interface ActivityDataBasePersonalTableProps {
   onClick1: () => void;
   onClick2: () => void;
   onClick3: () => void;
-  onClick4: ()=> void
+  onClick4: ()=> void;
+  onClick5: ()=>void;
 }
 
 export function ActivityDataBasePersonalTable({
@@ -14,13 +15,20 @@ export function ActivityDataBasePersonalTable({
   onClick2,
   onClick3,
   onClick4,
+  onClick5,
 }: ActivityDataBasePersonalTableProps) {
   return (
     <div className="-mt-44 h-screen w-[90%] rounded-md bg-white">
       <div>
-        <h1 className="z-0 ml-[3%] font-sans text-4xl font-bold text-black">
-          Essai Activity Database
-        </h1>
+        <div className={`w-[45%] h-[10vh] flex justify-around items-center`}>
+          <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer" onClick={onClick5}>
+            <img alt="back-icon" src="/images/backArrow.png"/>
+          </div>
+          <h1 className="text-3xl font-bold ml-3">Essai Activity Database</h1>
+        </div>
+       
+     
+        
         <div className="relative right-[1.3%] z-0 mt-6 flex h-[6vh] w-[100%] items-center justify-around">
           <div className="flex h-[6vh] w-[76%] items-center rounded-md bg-gray-50 pl-4">
             <input

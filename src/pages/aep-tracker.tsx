@@ -30,7 +30,7 @@ import { useState } from "react";
 <div className="w-full h-[170vh] -mt-[155vh] flex justify-center relative z-10">
 <StatusTableForm statusData={statusinfo} onClick={openStatusTable} name={studentName}/>
 </div>
-: ""}
+: null}
     
         
         </>

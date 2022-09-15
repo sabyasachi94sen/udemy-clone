@@ -1,5 +1,3 @@
-
-
 interface ActivityDataBaseTableProps {
   activityData: {}[];
   onClick: () => void;
@@ -78,8 +76,14 @@ export function ActivityDataBaseTable({
               </tr>
 
               {activityData.map((val, index) => (
-                <tr key={index} className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
-                  <td className="h-[7vh] cursor-pointer" onClick={onClick}>
+                <tr
+                  key={index}
+                  className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]"
+                >
+                  <td
+                    className="h-[7vh] cursor-pointer hover:underline"
+                    onClick={onClick}
+                  >
                     {val.name}
                   </td>
                   <td className="h-[7vh]">{val.type}</td>

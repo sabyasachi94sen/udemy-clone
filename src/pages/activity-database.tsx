@@ -60,7 +60,7 @@ const setBackgroundBlurOnDelete=()=>{
           <div className="flex items-center z-0">
             <MenuBar />
             {!isTable?<ActivityDataBaseTable activityData={activityinfo} onClick={isActivityTable} />   
-         : <ActivityDataBasePersonalTable activityData={activitypersonalinfo} onClick1={setBackgroundBlurOnAdd} onClick2={setBackgroundBlurOnEdit} onClick3={setBackgroundBlurOnMap} onClick4={setBackgroundBlurOnDelete} />}  
+         : <ActivityDataBasePersonalTable activityData={activitypersonalinfo} onClick1={setBackgroundBlurOnAdd} onClick2={setBackgroundBlurOnEdit} onClick3={setBackgroundBlurOnMap} onClick4={setBackgroundBlurOnDelete} onClick5={isActivityTable} />}  
           </div>
        
         </div> 
