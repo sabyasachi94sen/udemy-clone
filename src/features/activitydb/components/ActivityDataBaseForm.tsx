@@ -168,7 +168,7 @@ export function ActivityDataBaseForm({
                 onChange={handleGradeVal}
               />
             </div>
-            <span className="">{gradeVal}</span>
+            <span className="w-[2px]">{gradeVal}</span>
           </div>
 
           <div className="mt-4 flex w-full items-center justify-between">
@@ -190,7 +190,7 @@ export function ActivityDataBaseForm({
                 onChange={handleAgeVal}
               />
             </div>
-            <span>{ageVal}</span>
+            <span className="w-[2px]">{ageVal}</span>
           </div>
           <div className="text-md mt-5 flex w-[60%] flex-col">
             <p className="text-md font-bold font-bold ">
