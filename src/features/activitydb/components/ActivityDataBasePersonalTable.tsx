@@ -104,7 +104,7 @@ export function ActivityDataBasePersonalTable({
                   <td className="h-[7vh]">{val.end_date}</td>
                   <td className="h-[7vh]">{val.requirement}</td>
                   <td className="h-[7vh]">{val.url}</td>
-                  <td className="h-[7vh]">{val.status}</td>
+                  <td className={`h-[7vh] ${val.status===`Active`?`text-green-500`: `text-black`}`}>{val.status}</td>
                   <td className="h-[7vh]">
                     <Button
                       className="h-[6vh] w-[90%] rounded-md xl:text-[0.6rem] 2xl:text-[0.8rem]"
