@@ -51,7 +51,7 @@ export function EditSuperAdminForm({onClick1,onClick2,onClick3,header}: EditSupe
 
           <div className="mt-16">
             <span>Active Status</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative left-3 outline-none" onChange={checkStatus} name="status">
+             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] text-gray-400 text-small font-medium relative left-3 outline-none" onChange={checkStatus} name="status">
                 <option> Select Status</option>
                 <option>Yes</option>
                 <option>No</option>

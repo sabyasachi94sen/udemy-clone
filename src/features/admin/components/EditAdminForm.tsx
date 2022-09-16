@@ -35,20 +35,20 @@ export function EditAdminForm({onClick1,onClick2,onClick3,title,header}: EditAdm
           </div>
           <h1 className="text-3xl text-[#3AB0FB] font-bold mr-16">{title}</h1>
         </div>
-        <div className="w-[82%] h-[20vh] p-2 mx-auto leading-7 font-bold  text-[1rem] font-sans text-[#344054]">
+        <div className="w-[82%] h-[20vh] p-2 mx-auto leading-7 font-bold font-sans">
           <div className="mt-2 flex">
-            <span>Name</span>
+            <span className="text-[#344054]">Name</span>
             <input className="bg-[#EEEE] rounded-md w-[90%] h-[5vh] relative left-8 text-small font-medium pl-3" name="name" type="text" placeholder="Morgan Henderson" onChange={onClick3}/><br />
           </div>
 
           <div className="mt-16 flex">
-            <span>Email</span>
+            <span className="text-[#344054]">Email</span>
             <input className="bg-[#EEEE] rounded-md w-[90%] h-[5vh] relative left-9 text-small font-medium pl-3" name="email" type="email" placeholder="morgan@essai.com" onChange={onClick3} /><br />
           </div>
 
           <div className="mt-16">
-            <span>Active Status</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative left-3 outline-none" onChange={checkStatus} name="status">
+            <span className="text-[#344054]">Active Status</span>
+             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh]  text-gray-400 text-small font-medium relative left-3 outline-none" onChange={checkStatus} name="status">
                 <option> Select Status</option>
                 <option>Yes</option>
                 <option>No</option>
@@ -56,9 +56,9 @@ export function EditAdminForm({onClick1,onClick2,onClick3,title,header}: EditAdm
           </div>
 
           <div className="mt-16">
-            <span>Change Role</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative left-3 outline-none" onChange={onClick3} name="status">
-                <option> Change Role</option>
+            <span className="text-[#344054]">Change Role</span>
+             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] text-gray-400 text-small font-medium relative left-3 outline-none font-small" onChange={onClick3} name="status">
+                <option>Change Role</option>
                
              </select>
           </div>
@@ -73,7 +73,7 @@ export function EditAdminForm({onClick1,onClick2,onClick3,title,header}: EditAdm
       </div>
       {isStatus?
       
-      <ActiveStatus onClick1={confirmStatus} header={header} /> : ""}
+      <ActiveStatus onClick1={confirmStatus} header={header} /> : null}
       </>
     )
 }
