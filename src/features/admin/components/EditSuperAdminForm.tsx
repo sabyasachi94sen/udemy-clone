@@ -60,7 +60,8 @@ export function EditSuperAdminForm({onClick1,onClick2,onClick3,header}: EditSupe
 
         </div>
         <div className="mx-auto w-28 mt-36">
-          <Button className="w-28 h-12 bg-[#3AB0FB" onClick={onClick2}>Save</Button>
+      
+          <button className="w-28 h-12 bg-[#3AB0FB] rounded-lg text-white hover:bg-blue-500" onClick={onClick2}>Save</button>
         </div>
 
       </div>
