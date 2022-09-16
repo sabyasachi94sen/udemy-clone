@@ -5,7 +5,6 @@ import { toast, ToastContainer } from "react-toastify";
 
 import { loginObj } from "@/features/api";
 import { SetAuthToken } from "@/features/helpers";
-import { Button } from "@/shared/components";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -56,7 +55,7 @@ export function LoginForm() {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(handleLogin)}>
       <div className="relative z-10 h-auto w-[60%] rounded-lg bg-white p-6 shadow-lg lg:left-[35%]  xl:left-[45%] 2xl:left-[60%]">
         <h1 className="lg: mb-4 text-center text-3xl font-bold  text-[#0ea5e9] xl:text-3xl 2xl:text-3xl">
           PIPPAMS
@@ -68,6 +67,7 @@ export function LoginForm() {
         >
           Email
           <input
+            required
             className="mb-4 w-full rounded bg-gray-200 py-2 px-1 text-gray-500 outline-none"
             id="email"
             placeholder="Email"
@@ -82,6 +82,7 @@ export function LoginForm() {
         >
           Password
           <input
+            required
             className="mb-4 w-full rounded bg-gray-200 py-2 px-1 text-gray-500 outline-none"
             id="password"
             placeholder="•••••••••"
@@ -113,16 +114,13 @@ export function LoginForm() {
         </div>
 
         <div className="mx-auto flex justify-center lg:mb-[8vh] xl:mb-[18vh] 2xl:mb-[16vh]">
-          <Button
-            className="w-[80%] rounded bg-cyan-400 py-2 font-bold text-white"
-            onClick={handleSubmit(handleLogin)}
-          >
-            Login
-          </Button>
+          <input
+            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500"
+            type="submit"
+            value="Login"
+          />
         </div>
-        <ToastContainer
-          autoClose={2000}
-        />
+        <ToastContainer autoClose={2000} />
       </div>
     </form>
   );

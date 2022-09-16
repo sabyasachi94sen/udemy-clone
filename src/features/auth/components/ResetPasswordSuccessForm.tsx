@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { Button } from "@/shared/components";
-
 export function ResetPasswordSuccessForm() {
   return (
     <div className="relative z-10 ml-[19vw] h-auto w-[21%] rounded-lg bg-white p-6 shadow-lg  2xl:left-[6%]">
@@ -17,9 +15,12 @@ export function ResetPasswordSuccessForm() {
       </div>
       <div className="mx-auto mb-[8vh] flex justify-center">
         <Link href="/">
-          <Button className="w-[80%] rounded bg-cyan-400 py-2 font-bold text-white 2xl:mb-14">
+          <button
+            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500 2xl:mb-14"
+            type="button"
+          >
             Back to login page
-          </Button>
+          </button>
         </Link>
       </div>
     </div>
