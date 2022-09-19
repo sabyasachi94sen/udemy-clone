@@ -1,79 +1,131 @@
-import { Button, Select } from "@/shared/components"
-import {ActiveStatus} from "@/features/ui"
-import {useState} from "react"
+import { Button, Select } from "@/shared/components";
+import { ActiveStatus } from "@/features/ui";
+import { useState } from "react";
+import {AdminResObj} from "@/features/api"
+import {useForm} from "react-hook-form"
 
-
-interface EditAdminFormProps{
-  onClick1: ()=>void;
-  onClick2: ()=>void;
-  onClick3: ()=>void;
+interface EditAdminFormProps {
+  handleEditBlur: () => void;
+  handleEditSubmit: () => void;
+  handleOnChange: () => void;
   title: string;
-  header: string
+  header: string;
+  adminId: number
 }
 
-export function EditAdminForm({onClick1,onClick2,onClick3,title,header}: EditAdminFormProps){
+interface FormValues{
+  name: string;
+  email: string;
+}
 
- 
-  const [isStatus,setIsStatus]=useState(false)
+export function EditAdminForm({
+  handleEditBlur,
+  handleEditSubmit,
+  handleOnChange,
+  title,
+  header,
+  adminId
+}: EditAdminFormProps) {
+  const [isStatus, setIsStatus] = useState(false);
 
-  const checkStatus=(e)=>{
-    if(e.target.value=="Yes")
-    setIsStatus(isStatus=>!isStatus)
-  }
+  const checkStatus = (e) => {
+    if (e.target.value == "Yes") setIsStatus((isStatus) => !isStatus);
+  };
 
-  const confirmStatus=()=>{
-    setIsStatus(isStatus=>!isStatus)
-  }
+  const confirmStatus = () => {
+    setIsStatus((isStatus) => !isStatus);
+  };
 
-    return (
-      <>
-      <div className={`w-full h-[180vh] z-10 ${!isStatus? ``: `opacity-[0.4]`} relative -mt-[180vh] pt-[40vh]`}>
-    <div className={`w-[40%] h-auto rounded-xl bg-[#FDFEFF] border-2 relative z-20 mx-auto`}>
-        <div className="w-[100%] h-[10vh] mx-auto flex justify-around items-center ml-4">
-          <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] ml-3 flex items-center justify-center cursor-pointer" onClick={onClick1} >
-            <img alt="back-icon" src="/images/backArrow.png"/>
+
+  const {handleSubmit,register}=useForm<FormValues>()
+
+
+
+
+  return (
+    <>
+      <div
+        className={`z-10 h-[180vh] w-full ${
+          !isStatus ? `` : `opacity-[0.4]`
+        } relative -mt-[180vh] pt-[40vh]`}
+      >
+        <div
+          className={`relative z-20 mx-auto h-auto w-[40%] rounded-xl border-2 bg-[#FDFEFF]`}
+        >
+          <div className="mx-auto ml-4 flex h-[10vh] w-[100%] items-center justify-around">
+            <div
+              className="rounded-l-2 ml-3 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
+              onClick={handleEditBlur}
+            >
+              <img alt="back-icon" src="/images/backArrow.png" />
+            </div>
+            <h1 className="mr-16 text-3xl font-bold text-[#3AB0FB]">{title}</h1>
           </div>
-          <h1 className="text-3xl text-[#3AB0FB] font-bold mr-16">{title}</h1>
-        </div>
-        <div className="w-[82%] h-[20vh] p-2 mx-auto leading-7 font-bold font-sans">
-          <div className="mt-2 flex">
-            <span className="text-[#344054]">Name</span>
-            <input className="bg-[#EEEE] rounded-md w-[90%] h-[5vh] relative left-8 text-small font-medium pl-3" name="name" type="text" placeholder="Morgan Henderson" onChange={onClick3}/><br />
-          </div>
+          <div className="mx-auto h-[20vh] w-[82%] p-2 font-sans font-bold leading-7">
+            <div className="mt-2 flex">
+              <span className="text-[#344054]">Name</span>
+              <input
+                className="text-small relative left-8 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+               
+                type="text"
+                placeholder="Morgan Henderson"
+                {...register("name")}
+              />
+              <br />
+            </div>
 
-          <div className="mt-16 flex">
-            <span className="text-[#344054]">Email</span>
-            <input className="bg-[#EEEE] rounded-md w-[90%] h-[5vh] relative left-9 text-small font-medium pl-3" name="email" type="email" placeholder="morgan@essai.com" onChange={onClick3} /><br />
-          </div>
+            <div className="mt-16 flex">
+              <span className="text-[#344054]">Email</span>
+              <input
+                className="text-small relative left-9 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                name="email"
+                type="email"
+                placeholder="morgan@essai.com"
+                {...register("email")}
+              />
+              <br />
+            </div>
 
-          <div className="mt-16">
-            <span className="text-[#344054]">Active Status</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh]  text-gray-400 text-small font-medium relative left-3 outline-none" onChange={checkStatus} name="status">
+            <div className="mt-16">
+              <span className="text-[#344054]">Active Status</span>
+              <select
+                className="text-small relative left-3 h-[5vh]  w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
+                onChange={checkStatus}
+                name="status"
+              >
                 <option> Select Status</option>
                 <option>Yes</option>
                 <option>No</option>
-             </select>
-          </div>
+              </select>
+            </div>
 
-          <div className="mt-16">
-            <span className="text-[#344054]">Change Role</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] text-gray-400 text-small font-medium relative left-3 outline-none font-small" onChange={onClick3} name="status">
+            <div className="mt-16">
+              <span className="text-[#344054]">Change Role</span>
+              <select
+                className="text-small font-small relative left-3 h-[5vh] w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
+                {...register("role")}
+           
+              >
                 <option>Change Role</option>
-               
-             </select>
+                <option>Admin</option>
+                <option>Super Admin</option>
+                <option>Account Manager</option>
+              </select>
+            </div>
           </div>
-
+          <div className="mx-auto mt-64 mb-10 w-28">
+            <button
+              className="h-12 w-28 rounded-lg bg-[#3AB0FB] text-white hover:bg-blue-500"
+              onClick={handleSubmit(handleEditSubmit)}
+            >
+              Save
+            </button>
+          </div>
         </div>
-        <div className="mx-auto w-28 mt-64 mb-10">
-
-          <button className="w-28 h-12 bg-[#3AB0FB] rounded-lg text-white hover:bg-blue-500" onClick={onClick2}>Save</button>
-        </div>
-
       </div>
-      </div>
-      {isStatus?
-      
-      <ActiveStatus onClick1={confirmStatus} header={header} /> : null}
-      </>
-    )
+      {isStatus ? (
+        <ActiveStatus onClick1={confirmStatus} header={header} />
+      ) : null}
+    </>
+  );
 }

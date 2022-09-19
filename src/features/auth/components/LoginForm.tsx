@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
 import { loginObj } from "@/features/api";
-import { SetAuthToken } from "@/features/helpers";
+import { SetAuthToken, SetUserType } from "@/features/helpers";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -24,6 +24,7 @@ export function LoginForm() {
       .then((res) => {
         if (res.status === 200) {
           SetAuthToken(res.data.token);
+          SetUserType(res.data.user_type)
           toast.success(
             "Login Successful",
             {

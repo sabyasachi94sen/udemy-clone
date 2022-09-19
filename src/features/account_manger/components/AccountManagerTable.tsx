@@ -1,37 +1,52 @@
-import { Button } from "@/shared/components"
+import { Button } from "@/shared/components";
 
-interface AccountManagerTableProps{
-    onClick1: ()=>void;
-    onClick2: ()=>void;
-    onClick3: ()=>void;
-    onClick4: ()=>void;
-    adminData: {}[];
-    name: string
-  }
-  
+interface AccountManagerTableProps {
+  handleAddBlur: () => void;
+  handleEditBlur: () => void;
+  handleDeleteBlur: () => void;
+  tableCheck: () => void;
+  adminData: {}[];
+  name: string;
+}
 
-export function AccountManagerTable({onClick1,onClick2,onClick3,onClick4,adminData,name}: AccountManagerTableProps){
+export function AccountManagerTable({
+  handleAddBlur,
+  handleEditBlur,
+  handleDeleteBlur,
+  tableCheck,
+  adminData,
+  name,
+}: AccountManagerTableProps) {
+  return (
+    <div className="relative -mt-44 h-screen w-[90%] rounded-md bg-white">
+      <div>
+        <h1 className="z-0 ml-[6.5%] font-sans text-4xl font-bold text-black">
+          {name}
+        </h1>
+        <div className="relative right-[0.5%] z-0 mt-6 flex h-[6vh] w-[100%] items-center justify-around">
+          <div className="flex h-[6vh] w-[65%] items-center rounded-md bg-gray-50 pl-4">
+            <input
+              className="h-[6vh] w-[90%] bg-gray-50 bg-white pl-7 placeholder-gray-600 outline-none"
+              name="search"
+              placeholder="Search the staff member here"
+              type="text"
+            />
 
+            <img
+              alt="search-icon"
+              className="ml-8 h-[3.5vh] w-[1.5vw]"
+              src="/images/searchBlue.png"
+            />
+          </div>
+          <button
+            className="flex h-[6vh] w-[7%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+            onClick={handleAddBlur}
+          >
+            Add&nbsp; <img alt="plus-icon" src="/images/plus.png" />{" "}
+          </button>
+        </div>
 
-    
-
-    return (
-           
-        <div className="w-[90%] h-screen rounded-md bg-white -mt-44 relative">
-       
-           <div>
-            <h1 className="text-black font-bold text-4xl font-sans ml-[6.5%] z-0">{name}</h1>
-            <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 z-0 relative right-[0.5%]">
-              <div className="w-[65%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
-                <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
-               
-                <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
-               
-              </div>
-              <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] text-[18px] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>
-            </div>
-
-            {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
+        {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
               <p>Name</p>
               
               <p>Last Update</p>
@@ -43,60 +58,72 @@ export function AccountManagerTable({onClick1,onClick2,onClick3,onClick4,adminDa
                 
             </div> */}
 
-            
-            <div className={`${adminData.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
-              <table className="border-solid w-[88%] text-center mx-auto relative  text-[0.9rem] left-2 font-sans font-bold -mt-1  bg-gray-50 text-[#344054] break-all">
-              
-              
-              <tbody className="overflow">
-              <tr className="text-center w-full font-medium text-[1rem] mx-auto h-[7vh]  bg-blue-200 opacity-[1] sticky top-0">
-                   
-                   <td className="rounded-bl-lg rounded-tl-lg"> Name</td>
-                   <td className="">Last Update</td>
-                   <td className="">Active Status</td>
-                   <td className="">Students</td>
-                   <td className="">Performance</td>
-                 
-                   <td className="">Edit</td>
-                   <td className="rounded-br-lg rounded-tr-lg">Delete</td>
-                 
-               </tr>
-               <tr className="bg-white h-[4vh] sticky top-[7vh]">
-                   <td ></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   
+        <div
+          className={`${
+            adminData.length > 10 ? `h-[60vh]` : `h-auto`
+          } mt-8 overflow-y-scroll`}
+        >
+          <table className="relative left-2 mx-auto -mt-1 w-[88%]  break-all border-solid bg-gray-50 text-center font-sans  text-[0.9rem] font-bold text-[#344054]">
+            <tbody className="overflow">
+              <tr className="sticky top-0 mx-auto h-[7vh] w-full bg-blue-200  text-center text-[1rem] font-medium opacity-[1]">
+                <td className="rounded-bl-lg rounded-tl-lg"> Name</td>
+                <td className="">Last Update</td>
+                <td className="">Active Status</td>
+                <td className="">Students</td>
+                <td className="">Performance</td>
+
+                <td className="">Edit</td>
+                <td className="rounded-br-lg rounded-tr-lg">Delete</td>
+              </tr>
+              <tr className="sticky top-[7vh] h-[4vh] bg-white">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              {adminData.map((val, index) => (
+                <tr className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
+                  <td
+                    className="h-[7vh]  cursor-pointer hover:underline"
+                    onClick={tableCheck}
+                  >
+                    {val.name}
+                  </td>
+
+                  <td className="h-[7vh]">{val.update}</td>
+                  {val.status == "Active" ? (
+                    <td className="h-[7vh] text-[#20A464]">{val.status}</td>
+                  ) : (
+                    <td className="h-[7vh]">{val.status}</td>
+                  )}
+                  <td className="h-[7vh]">{val.student}</td>
+                  <td className="h-[7vh]">{val.performance}</td>
+                  <td className="h-[7vh] cursor-pointer">
+                    <img
+                      className="mx-auto block"
+                      alt="edit-icon"
+                      src="/images/edit.png"
+                      onClick={() => handleEditBlur(index)}
+                    />
+                  </td>
+                  <td className="h-[7vh] cursor-pointer">
+                    <img
+                      className="mx-auto block"
+                      alt="delete-icon"
+                      src="/images/delete.png"
+                      onClick={() => handleDeleteBlur(index)}
+                    />
+                  </td>
                 </tr>
-
-
-
-             
-                  {adminData.map((val,index)=><tr className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
-                    <td className="h-[7vh]  cursor-pointer hover:underline" onClick={onClick4}>{val.name}</td>
-                   
-                    <td className="h-[7vh]">{val.update}</td>
-                    {val.status=="Active"?<td className="h-[7vh] text-[#20A464]">{val.status}</td>:<td className="h-[7vh]">{val.status}</td>}
-                    <td className="h-[7vh]">{val.student}</td>
-                    <td className="h-[7vh]">{val.performance}</td>
-                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto block" alt="edit-icon" src="/images/edit.png" onClick={()=>onClick2(index)} /></td>
-                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto block" alt="delete-icon" src="/images/delete.png" onClick={()=>onClick3(index)}/></td>
-
-                  </tr>)}
-                </tbody>
-              
-                
-              
-            
-              </table>
-              </div>
-            
-            </div>
-            </div>
-            
-            
-    )
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 }

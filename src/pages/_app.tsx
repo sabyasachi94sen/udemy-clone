@@ -1,12 +1,13 @@
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import NextNprogress from "nextjs-progressbar";
+import React from "react";
 
 import "@/shared/styles/globals.css";
 import { TWResponsiveIndicator } from "@/shared/components/libs";
 import { AppProviders } from "@/shared/stores/app-providers";
 import { AuthProvider, AuthGuard } from "@/shared/stores/auth.context";
-
+import {Hydrate,QueryClient,QueryClientProvider} from "react-query"
 
 // Pages are by default, checked for protected
 // Ones with publicRoute true are public pages
@@ -20,8 +21,12 @@ export default function MyApp(props: AppProps): JSX.Element {
     pageProps,
   }: { Component: NextApplicationPage; pageProps: unknown } = props;
 
+  const queryClient=React.useRef(new QueryClient())
+
   return (
     <>
+    <QueryClientProvider client={queryClient.current}>
+      <Hydrate state={pageProps.dehydrateState}>
       <NextNprogress
         showOnShallow
         color="#29D"
@@ -44,6 +49,8 @@ export default function MyApp(props: AppProps): JSX.Element {
           )}
         </AuthProvider>
       </AppProviders>
+      </Hydrate>
+      </QueryClientProvider>
     </>
   );
 }
