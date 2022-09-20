@@ -10,14 +10,14 @@ interface FormValues{
 interface CreateSuperAdminFormProps {
   handleAddBlur: () => void;
   handleAddSubmit: () => void;
-  handleOnChange: () => void;
+
   title: string;
 }
 
 export function CreateSuperAdminForm({
   handleAddBlur,
   handleAddSubmit,
-  handleOnChange,
+ 
   title,
 }: CreateSuperAdminFormProps) {
 

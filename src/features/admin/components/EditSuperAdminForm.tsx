@@ -1,72 +1,128 @@
-import { Button, Select } from "@/shared/components"
-import {ActiveStatus} from "@/features/ui"
-import {useState} from "react"
+import { Button, Select } from "@/shared/components";
+import { ActiveStatus } from "@/features/ui";
+import { useState } from "react";
+import {useForm} from "react-hook-form"
 
-interface EditSuperAdminFormProps{
-  handleEditBlur: ()=>void;
-  handleEditSubmit: ()=>void;
-  handleOnChange: ()=>void;
+interface EditSuperAdminFormProps {
+  handleEditBlur: () => void;
+  handleEditSubmit: () => void;
+
   header: string;
 }
 
-export function EditSuperAdminForm({handleEditBlur,handleEditSubmit,handleOnChange,header}: EditSuperAdminFormProps){
+interface FormValues{
+  name: string,
+  email: string,
+  status: string
+}
 
-
+const selectOptions = [
+  {
+    option: "Select Status",
+   
+  },
+  {
+    option: "Yes",
   
-  const [isStatus,setIsStatus]=useState(false)
+  },
+  {
+    option: "No",
+ 
+  },
+];
 
-  const checkStatus=(e)=>{
-    if(e.target.value=="Yes")
-    setIsStatus(isStatus=>!isStatus)
-  }
+export function EditSuperAdminForm({
+  handleEditBlur,
+  handleEditSubmit,
+ 
+  header,
+}: EditSuperAdminFormProps) {
+  const [isStatus, setIsStatus] = useState(false);
 
-  const confirmStatus=()=>{
-    setIsStatus(isStatus=>!isStatus)
-  }
+  const checkStatus = (e) => {
+    if (e.target.value == "Yes") setIsStatus((isStatus) => !isStatus);
+  };
+
+  const confirmStatus = () => {
+    setIsStatus((isStatus) => !isStatus);
+  };
 
 
+  const {handleSubmit,register}=useForm<FormValues>()
 
-    return (
-
-      <>
-      <div className={`w-full h-[180vh] z-10 ${!isStatus? ``: `opacity-[0.4]`} relative -mt-[180vh] pt-[40vh]`}>
-    <div className="w-[34%] h-[60vh] rounded-xl bg-[#FDFEFF] border-2 relative z-20  mx-auto">
-        <div className="w-[100%] h-[10vh] mx-auto flex justify-around items-center ml-8">
-          <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] ml-3 flex items-center justify-center cursor-pointer" onClick={handleEditBlur} >
-            <img alt="back-icon" src="/images/backArrow.png"/>
+  return (
+    <>
+      <div
+        className={`z-10 h-[180vh] w-full ${
+          !isStatus ? `` : `opacity-[0.4]`
+        } relative -mt-[180vh] pt-[40vh]`}
+      >
+        <div className="relative z-20 mx-auto h-[60vh] w-[34%] rounded-xl border-2  bg-[#FDFEFF]">
+          <div className="mx-auto ml-8 flex h-[10vh] w-[100%] items-center justify-around">
+            <div
+              className="rounded-l-2 ml-3 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
+              onClick={handleEditBlur}
+            >
+              <img alt="back-icon" src="/images/backArrow.png" />
+            </div>
+            <h1 className="mr-16 text-3xl font-bold text-[#3AB0FB]">
+              Edit an Super Admin role
+            </h1>
           </div>
-          <h1 className="text-3xl text-[#3AB0FB] font-bold mr-16">Edit an Super Admin role</h1>
+          <div className="mx-auto h-[20vh] w-[82%] p-2 font-sans text-[0.9rem]  font-bold leading-7 text-[#344054]">
+            <div className="mt-2">
+              <span>Name</span>
+              <input
+                className="text-small relative left-8 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                
+                type="text"
+                placeholder="Morgan Henderson"
+                {...register("username")}
+                
+              />
+              <br />
+            </div>
+
+            <div className="mt-16">
+              <span>Email</span>
+              <input
+                className="text-small relative left-9 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+               
+                type="email"
+                placeholder="morgan@essai.com"
+                {...register("email")}
+              />
+              <br />
+            </div>
+
+            <div className="mt-16">
+              <span>Active Status</span>
+              <select
+                className="text-small relative left-3 h-[5vh] w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
+                 {...register("status")}
+               
+              >
+                {selectOptions.map((item, i) => {
+                  return <option key={i}>{item.option}</option>;
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="mx-auto mt-36 w-28">
+            <button
+              className="h-12 w-28 rounded-lg bg-[#3AB0FB] text-white hover:bg-blue-500"
+              onClick={handleSubmit(handleEditSubmit)}
+            >
+              Save
+            </button>
+          </div>
         </div>
-        <div className="w-[82%] h-[20vh] p-2 mx-auto leading-7 font-bold  text-[0.9rem] font-sans text-[#344054]">
-          <div className="mt-2">
-            <span>Name</span>
-            <input className="bg-[#EEEE] rounded-md w-[90%] h-[5vh] relative left-8 text-small font-medium pl-3" name="name" type="text" placeholder="Morgan Henderson" onChange={handleOnChange}/><br />
-          </div>
-
-          <div className="mt-16">
-            <span>Email</span>
-            <input className="bg-[#EEEE] rounded-md w-[90%] h-[5vh] relative left-9 text-small font-medium pl-3" name="email" type="email" placeholder="morgan@essai.com" onChange={handleOnChange} /><br />
-          </div>
-
-          <div className="mt-16">
-            <span>Active Status</span>
-             <select className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] text-gray-400 text-small font-medium relative left-3 outline-none" onChange={checkStatus} name="status">
-                <option> Select Status</option>
-                <option>Yes</option>
-                <option>No</option>
-             </select>
-          </div>
-
-        </div>
-        <div className="mx-auto w-28 mt-36">
-      
-          <button className="w-28 h-12 bg-[#3AB0FB] rounded-lg text-white hover:bg-blue-500" onClick={handleEditSubmit}>Save</button>
-        </div>
-
       </div>
-      </div>
-      {isStatus?
-      <ActiveStatus onClick1={confirmStatus} header={header} />: ""}
-      </>
-    )
+      {isStatus ? (
+        <ActiveStatus onClick1={confirmStatus} header={header} />
+      ) : (
+        ""
+      )}
+    </>
+  );
 }

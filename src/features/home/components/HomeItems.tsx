@@ -5,7 +5,7 @@ import { Button } from "@/shared/components";
 interface HomeItemsProps {
   [key: string]: any;
   activityname: string;
-  activitystatus: status;
+  activitystatus: string;
   image: any;
   url: string;
 }

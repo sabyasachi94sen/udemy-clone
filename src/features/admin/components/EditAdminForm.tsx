@@ -69,7 +69,7 @@ export function EditAdminForm({
                
                 type="text"
                 placeholder="Morgan Henderson"
-                {...register("name")}
+                {...register("username")}
               />
               <br />
             </div>
@@ -78,7 +78,7 @@ export function EditAdminForm({
               <span className="text-[#344054]">Email</span>
               <input
                 className="text-small relative left-9 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
-                name="email"
+                
                 type="email"
                 placeholder="morgan@essai.com"
                 {...register("email")}
@@ -90,8 +90,8 @@ export function EditAdminForm({
               <span className="text-[#344054]">Active Status</span>
               <select
                 className="text-small relative left-3 h-[5vh]  w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
-                onChange={checkStatus}
-                name="status"
+                {...register("status")}
+                
               >
                 <option> Select Status</option>
                 <option>Yes</option>
@@ -107,9 +107,9 @@ export function EditAdminForm({
            
               >
                 <option>Change Role</option>
-                <option>Admin</option>
-                <option>Super Admin</option>
-                <option>Account Manager</option>
+                <option value="admin">Admin</option>
+                <option value="superadmin">Super Admin</option>
+                <option value="accountmanager">Account Manager</option>
               </select>
             </div>
           </div>
@@ -123,9 +123,9 @@ export function EditAdminForm({
           </div>
         </div>
       </div>
-      {isStatus ? (
+      {/* {isStatus ? (
         <ActiveStatus onClick1={confirmStatus} header={header} />
-      ) : null}
+      ) : null} */}
     </>
   );
 }

@@ -13,11 +13,41 @@ import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus, personaldata, PersonalTable } from "@/features/ui";
 
 function Admin() {
+  const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
+  const [backgroundBlurEditAdmin, setBackGroundBlurEditAdmin] = useState(false);
+  const [backgroundBlurDeleteAdmin, setBackGroundBlurDeleteAdmin] =
+    useState(false);
+  const [isTable, setIsTable] = useState(false);
+  const [adminData, setAdminData] = useState(admininfo);
+  const [adminId,setAdminId]=useState(null)
+  const [mutateParams,setMutateParams]=useState({mutateFunc:AdminResObj.admin_info_submit,action: "create_user" })
+
+
+
+
+
   const queryClient = useQueryClient();
-  const { mutate } = useMutation(AdminResObj.admin_info_submit, {
+  const { mutate } = useMutation(mutateParams.mutateFunc, {
     onSuccess: () => {
-      queryClient.invalidateQueries("admin-list");
-      setBackGroundBlurAddAdmin(!backgroundBlurAddAdmin);
+        
+      if(mutateParams.action==="create_user")
+      setBackGroundBlurAddAdmin(
+        (!backgroundBlurAddAdmin)
+      );
+      else if(mutateParams.action==="edit_user"){
+        setBackGroundBlurEditAdmin(
+          (!backgroundBlurEditAdmin)
+        )
+    
+
+      }
+      else if(mutateParams.action==="delete_user"){
+        setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin)
+      }
+
+      setTimeout(()=>{
+        queryClient.invalidateQueries("admin-list");
+      },1000)
     },
     onError: ()=>{
       toast.error("This Email Already Exist", {
@@ -32,13 +62,7 @@ function Admin() {
 
   
 
-  const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
-  const [backgroundBlurEditAdmin, setBackGroundBlurEditAdmin] = useState(false);
-  const [backgroundBlurDeleteAdmin, setBackGroundBlurDeleteAdmin] =
-    useState(false);
-  const [isTable, setIsTable] = useState(false);
-  const [adminData, setAdminData] = useState(admininfo);
-  const [adminId,setAdminId]=useState(null)
+
 
   const handleAddBlur = () => {
     setBackGroundBlurAddAdmin(!backgroundBlurAddAdmin);
@@ -46,6 +70,7 @@ function Admin() {
 
   const handleEditBlur = (id) => {
     setBackGroundBlurEditAdmin(!backgroundBlurEditAdmin);
+  
     setAdminId(id)
 
   };
@@ -55,26 +80,47 @@ function Admin() {
 
   const handleDeleteBlur = (id) => {
     setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
+    setAdminId(id)
 
    
   };
 
   const handleAddSubmit = (postData: object) => {
+    setMutateParams({mutateFunc: AdminResObj.admin_info_submit,action: "create_user"})
+    setTimeout(()=>{
+      mutate(postData);
+    },1000)
  
-    mutate(postData);
+
   };
 
   const handleEditSubmit = (putData: object) => {
-    setBackGroundBlurEditAdmin(!backgroundBlurEditAdmin);
-     AdminResObj.admininfo_edit(adminId,putData)
+    const putDataObj={
+      data: putData,
+      id: adminId
+    }
+    setMutateParams({mutateFunc: AdminResObj.admin_info_edit,action: "edit_user"})
+
+    setTimeout(()=>{
+      mutate(putDataObj)
+    },1000)
 
   };
 
-  const handleDeleteSubmit = () => {
-    setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
+  const handleDeleteSubmit = (confirmStatus) => {
+    if(confirmStatus){
+      console.log(adminId)
+      setMutateParams({mutateFunc: AdminResObj.admin_info_delete,action: "delete_user"})
+      setTimeout(()=>{
+       mutate(adminId)
+      },1000)
+    }
+    else{
+      setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin)
+    }
   };
 
-  const handleOnChange = (val) => {};
+  
 
   return (
     <>
@@ -113,7 +159,7 @@ function Admin() {
         <CreateSuperAdminForm
           handleAddBlur={handleAddBlur}
           handleAddSubmit={handleAddSubmit}
-          handleOnChange={handleOnChange}
+         
           title="Create an Admin Role"
         />
       ) : null}
@@ -122,7 +168,7 @@ function Admin() {
         <EditAdminForm
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
-          handleOnChange={handleOnChange}
+         
           header="Are you sure you want to make this admin inactive?"
           title="Edit an Admin role"
           adminId={adminId}
@@ -132,7 +178,7 @@ function Admin() {
       {backgroundBlurDeleteAdmin ? (
         <ActiveStatus
           header="Are you sure you want to delete activity"
-          onClick1={handleDeleteSubmit}
+          handleDeleteSubmit={handleDeleteSubmit}
         />
       ) : null}
               <ToastContainer autoClose={2000} />

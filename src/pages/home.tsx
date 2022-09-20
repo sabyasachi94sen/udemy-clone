@@ -35,7 +35,7 @@ function HomePage() {
       <Navbar />
       <div className="flex items-center">
         <MenuBar />
-        <div className="-mt-48 flex h-screen w-[90%] flex-wrap items-center justify-center rounded-md bg-white">
+        <div className="-mt-48 flex h-screen w-[90%] flex-wrap justify-center rounded-md bg-white">
           {homeItems.map((item) => (
             <HomeItems key={item.id} {...item} />
           ))}

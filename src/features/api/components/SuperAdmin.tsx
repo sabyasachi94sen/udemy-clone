@@ -46,19 +46,46 @@ const token=GetAuthToken()
 }
 
 
-const SuperAdminInfoEdit=(id:number,putData)=>{
+const SuperAdminInfoEdit=(putDataObj)=>{
 
-    console.log(putData)
+   const userId=putDataObj.id;
+   const jsonObj=JSON.stringify({
+    ...putDataObj.data,
+    is_active: putDataObj.data.status==="Yes"?true: false,
+    role: "superadmin"
+     
+   })
+    
 
     const token=GetAuthToken()
 
     const config={
         method: "put",
-        url: "https://pippams-dev.eoraa.com/api/admin/"+id,
+        url: "https://pippams-dev.eoraa.com/api/super_admin/"+userId+"/",
         headers: {
             "Content-Type": "application/json",
              "Authorization": token,
           },
+          
+          data: jsonObj
+    }
+
+    axios(config)
+}
+
+
+const SuperAdminInfoDelete=(userId)=>{
+    const token=GetAuthToken()
+
+    const config={
+        method: "delete",
+        url: "https://pippams-dev.eoraa.com/api/super_admin/"+userId+"/",
+        headers: {
+            "Content-Type": "application/json",
+             "Authorization": token,
+          },
+          
+         
     }
 
     axios(config)
@@ -72,4 +99,5 @@ export const SuperAdminResObj={
     super_admin_info_list :SuperAdminInfoList,
     super_admin_info_submit: SuperAdminInfoSubmit,
     super_admin_info_edit: SuperAdminInfoEdit,
+    super_admin_info_delete: SuperAdminInfoDelete
 }

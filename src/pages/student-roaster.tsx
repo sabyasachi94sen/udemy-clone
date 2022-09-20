@@ -131,7 +131,7 @@ function StudentRoaster() {
 
         <ActiveStatus
           header="Are you sure you want to delete activity"
-          onClick1={deleteStudentBackBlur}
+          handleDeleteSubmit={deleteStudentBackBlur}
         />
       ) : null}
     </>

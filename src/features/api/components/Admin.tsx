@@ -46,19 +46,48 @@ const token=GetAuthToken()
 }
 
 
-const AdminInfoEdit=(id:number,putData)=>{
+const AdminInfoEdit=(putDataObj)=>{
+  
+   
+    const userId=putDataObj.id;
+    const jsonObj=JSON.stringify({
+     ...putDataObj.data,
+     is_active: putDataObj.data.status==="Yes"?true: false,
+     
+     
+      
+    })
+     
+ 
+     const token=GetAuthToken()
+ 
+     const config={
+         method: "put",
+         url: "https://pippams-dev.eoraa.com/api/admin/"+userId+"/",
+         headers: {
+             "Content-Type": "application/json",
+              "Authorization": token,
+           },
+           
+           data: jsonObj
+     }
+ 
+     axios(config)
+}
 
-    console.log(putData)
 
+const AdminInfoDelete=(userId)=>{
     const token=GetAuthToken()
 
     const config={
-        method: "put",
-        url: "https://pippams-dev.eoraa.com/api/admin/"+id,
+        method: "delete",
+        url: "https://pippams-dev.eoraa.com/api/admin/"+userId+"/",
         headers: {
             "Content-Type": "application/json",
              "Authorization": token,
           },
+          
+         
     }
 
     axios(config)
@@ -71,5 +100,6 @@ const AdminInfoEdit=(id:number,putData)=>{
 export const AdminResObj={
     admin_info_list :AdminInfoList,
     admin_info_submit: AdminInfoSubmit,
-    admininfo_edit: AdminInfoEdit,
+    admin_info_edit: AdminInfoEdit,
+    admin_info_delete: AdminInfoDelete
 }
