@@ -113,11 +113,11 @@ export function AdminTable({
                       } `}
                       onClick={tableCheck}
                     >
-                      {val.username}
+                      {val && val?.username}
                     </td>
-                    <td className="h-[7vh]">{val.email}</td>
+                    <td className="h-[7vh]">{val && val?.email}</td>
                     <td className="h-[7vh]">02/04/2022</td>
-                    {val.is_active ? (
+                    {val && val?.is_active ? (
                       <td className="h-[7vh] text-[#20A464]">Active</td>
                     ) : (
                       <td className="h-[7vh]">Inactive</td>
@@ -136,7 +136,7 @@ export function AdminTable({
                       <img
                         alt="edit-icon"
                         src="/images/edit.png"
-                        onClick={() => handleEditBlur(val.id)}
+                        onClick={() => handleEditBlur(val && val?.id)}
                         className="mx-auto block"
                       />
                     </td>
@@ -144,7 +144,7 @@ export function AdminTable({
                       <img
                         alt="delete-icon"
                         src="/images/delete.png"
-                        onClick={() => handleDeleteBlur(val.id)}
+                        onClick={() => handleDeleteBlur(val && val?.id)}
                         className="mx-auto block"
                       />
                     </td>

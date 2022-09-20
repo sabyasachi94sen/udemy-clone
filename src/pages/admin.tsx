@@ -29,6 +29,9 @@ function Admin() {
     AdminResObj.admin_info_list(),
   );
 
+
+  
+
   const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
   const [backgroundBlurEditAdmin, setBackGroundBlurEditAdmin] = useState(false);
   const [backgroundBlurDeleteAdmin, setBackGroundBlurDeleteAdmin] =
@@ -89,7 +92,7 @@ function Admin() {
           <MenuBar />
           {!isTable ? (
             <AdminTable
-              adminData={data && data?.data}
+              adminData={data && data?.data && data.data?.results}
               handleAddBlur={handleAddBlur}
               handleDeleteBlur={handleDeleteBlur}
               handleEditBlur={handleEditBlur}

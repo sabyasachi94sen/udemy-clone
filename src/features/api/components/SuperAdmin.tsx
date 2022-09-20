@@ -11,7 +11,7 @@ const token=GetAuthToken()
 
     const config={
         method:"get",
-        url: "https://pippams-dev.eoraa.com/api/super_admin/list/",
+        url: "https://pippams-dev.eoraa.com/api/super_admin/",
     
             headers: {
               "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const token=GetAuthToken()
    
     const config={
         method: "post",
-        url: "https://pippams-dev.eoraa.com/api/super_admin/create/",
+        url: "https://pippams-dev.eoraa.com/api/super_admin/",
         headers: {
             "Content-Type": "application/json",
              "Authorization": token,

@@ -114,7 +114,7 @@ function SuperAdmin() {
           <MenuBar />
 
           <AdminTable
-            adminData={data && data?.data}
+            adminData={data && data?.data && data.data?.results}
             handleAddBlur={handleAddBlur}
             handleDeleteBlur={handleDeleteBlur}
             handleEditBlur={handleEditBlur}
