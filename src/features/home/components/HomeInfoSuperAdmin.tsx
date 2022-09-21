@@ -11,13 +11,13 @@ import superAdmin from "public/images/superadmin.png";
 export const homeInfoSuperAdmin = [
     {
       activityname: "Super Admin Roster",
-      activitystatus: "View and update roster of super admin",
+      activitystatus: "View and update roster of super admins",
       image: superAdmin,
       url: "/super-admin",
       id: 1,
     },
     {
-      activityname: "Admin Roaster",
+      activityname: "Admin Roster",
       activitystatus: "View and update roster of admins",
       url: "/admin",
       image: admin,
@@ -25,7 +25,7 @@ export const homeInfoSuperAdmin = [
     },
     {
       activityname: "Account Manager Roster",
-      activitystatus: "View and update roster of Account Managers",
+      activitystatus: "View and update roster of account managers",
       image: manager,
       url: "/account-manager",
       id: 3,

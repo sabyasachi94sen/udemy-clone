@@ -7,14 +7,14 @@ export const MenuInfoSuperAdmin = [
       id: 1,
     },
     {
-      name: "Super Admin List",
+      name: "Super Admin Roster",
       image: "/images/person.png",
       imageType: "person-icon",
       url: "/super-admin",
       id: 2,
     },
     {
-      name: "Admin List",
+      name: "Admin Roster",
       image: "/images/person.png",
       imageType: "person-icon",
       url: "/admin",

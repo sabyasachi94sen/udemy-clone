@@ -30,7 +30,7 @@
                 <button className={!isStatus?`w-[50%] text-[#344054] bg-white`: `w-[50%] bg-[#3AB0FB] text-white`} onClick={()=>checkIsStatus("No")}>No</button>
            
             </div>
-            <h4 className="text-center font-bold text-xl mt-6 mb-4">Reason for becoming inactive</h4>
+            <h4 className="text-center font-bold text-xl mt-6 mb-4">Reason for deleting</h4>
             <textarea name="status" className="block w-[50%] h-[20vh] mx-auto bg-[#EEEEEE]" ></textarea>
             <div>
 

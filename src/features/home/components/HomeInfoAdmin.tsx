@@ -11,7 +11,7 @@ export const homeInfoAdmin = [
  
     {
       activityname: "Account Manager Roster",
-      activitystatus: "View and update roster of Account Managers",
+      activitystatus: "View and update roster of account managers",
       image: manager,
       url: "/account-manager",
       id: 1,

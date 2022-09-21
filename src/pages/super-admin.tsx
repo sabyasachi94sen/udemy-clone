@@ -187,7 +187,7 @@ function SuperAdmin() {
 
       {backgroundBlurDeleteAdmin ? (
         <ActiveStatus
-          header="Are you sure you want to delete activity"
+          header="Are you sure you want to delete this Super Admin?"
           handleDeleteSubmit={handleDeleteSubmit}
         />
       ) : null}
