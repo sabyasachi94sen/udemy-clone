@@ -86,7 +86,7 @@ function Activity() {
 
       {deleteBackBlur ? (
         <ActiveStatus
-          header="Are you sure you want to delete activity"
+          header="Are you sure you want to delete this Activity?"
           handleDeleteSubmit={setBackgroundBlurOnDelete}
         />
       ) : null}

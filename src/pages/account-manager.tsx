@@ -165,7 +165,7 @@ function AccountManager() {
       {backgroundBlurDeleteManager ? (
         <ActiveStatus
           handleDeleteSubmit={handleDeleteSubmit}
-          header="Are you sure you want to delete activity"
+          header="Are you sure you want to delete this Account Manager?"
         />
       ) : null}
 

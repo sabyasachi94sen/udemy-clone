@@ -177,7 +177,7 @@ function Admin() {
 
       {backgroundBlurDeleteAdmin ? (
         <ActiveStatus
-          header="Are you sure you want to delete activity"
+          header="Are you sure you want to delete this Admin?"
           handleDeleteSubmit={handleDeleteSubmit}
         />
       ) : null}
