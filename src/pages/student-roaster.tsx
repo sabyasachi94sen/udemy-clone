@@ -1,8 +1,11 @@
 import { useState } from "react";
-
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { MenuBar, Navbar } from "@/features/home";
 import { StudentForm, studentinfo, StudentTable } from "@/features/student";
 import { ActiveStatus } from "@/features/ui";
+import {StudentResObj} from "@/features/api"
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function StudentRoaster() {
   const [backgroundBlurAddStudent, setBackGroundBlurAddStudent] =
@@ -13,22 +16,57 @@ function StudentRoaster() {
     useState(false);
   const [studentData, setStudentData] = useState(studentinfo);
   const [studentDataId, setStudentDataId] = useState("");
-  const [studentDataOnChange, setStudentDataOnChange] = useState({
-    name: "",
-    email: "",
-    update: "02/11/2022",
-    status: "Inactive",
-    student: 90,
-    performance: "Metrics",
+  const [mutateParams,setMutateParams]=useState({mutateFunc:StudentResObj.student_info_list,action: "create_user" })
+
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(mutateParams.mutateFunc, {
+    onSuccess: () => {
+        
+      if(mutateParams.action==="create_user")
+      setBackGroundBlurAddStudent(
+        (!backgroundBlurAddStudent)
+      );
+      else if(mutateParams.action==="edit_user"){
+        setBackGroundBlurEditStudent(
+          (!backgroundBlurEditStudent)
+        )
+    
+
+      }
+      else if(mutateParams.action==="delete_user"){
+        setBackGroundBlurDeleteStudent(!backgroundBlurDeleteStudent)
+      }
+
+      setTimeout(()=>{
+        queryClient.invalidateQueries("student-list");
+      },1000)
+    },
+    onError: ()=>{
+      toast.error("This Email Already Exist", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   });
+  const {data} = useQuery(["student-list"], () =>
+    StudentResObj.student_info_list(),
+  );
 
-  const addStudentBackBlur = () => {
+
+
+
+
+
+
+
+
+  const handleAddBackBlur = () => {
     setBackGroundBlurAddStudent(
       (backgroundBlurAddStudent) => !backgroundBlurAddStudent,
     );
   };
 
-  const editStudentBackBlur = (id) => {
+  const handleEditBackBlur = (id) => {
     setBackGroundBlurEditStudent(
       (backgroundBlurEditStudent) => !backgroundBlurEditStudent,
     );
@@ -36,58 +74,57 @@ function StudentRoaster() {
     setStudentDataId(id);
   };
 
-  const deleteStudentBackBlur = (id) => {
+  const handleDeleteBackBlur = (id) => {
     setBackGroundBlurDeleteStudent(
       (backgroundBlurDeleteStudent) => !backgroundBlurDeleteStudent,
     );
+
+    console.log(id)
 
     setStudentDataId(id);
   };
 
-  const submitStudentData = () => {
-    setBackGroundBlurAddStudent(
-      (backgroundBlurAddStudent) => !backgroundBlurAddStudent,
-    );
-    const tempArr = studentData;
-
-    tempArr.push(studentDataOnChange);
-    setStudentData(tempArr);
+  const handleAddSubmit = (postData: object) => {
+   
+     
+    setMutateParams({mutateFunc:StudentResObj.student_info_add,action:"create_user"})
+    
+  setTimeout(()=>{
+   mutate(postData)
+  },1000)
+   
   };
 
-  const submitEditData = () => {
-    setBackGroundBlurEditStudent(
-      (backgroundBlurEditStudent) => !backgroundBlurEditStudent,
-    );
-    const tempArr = studentData;
+  const handleEditSubmit = (putData:object) => {
+    setMutateParams({mutateFunc:StudentResObj.student_info_edit,action:"edit_user"})
 
-    tempArr[studentDataId] = studentDataOnChange;
+    const putDataObj={
+      data: putData,
+      id: studentDataId,
+    }
+
+    setTimeout(()=>{
+         mutate(putDataObj)
+    },1000)
+      
   };
 
-  const submitDeleteData = () => {
-    setBackGroundBlurDeleteStudent(
-      (backgroundBlurDeleteStudent) => !backgroundBlurDeleteStudent,
-    );
-    const tempArr = studentData;
 
-    tempArr.splice(studentDataId, 1);
-    setStudentData(tempArr);
+  const handleDeleteSubmit= (confirmStatus) => {
+
+    if(confirmStatus){
+    setMutateParams({mutateFunc:StudentResObj.student_info_delete,action:"delete_user"})
+    setTimeout(()=>{
+     mutate(studentDataId)
+    },1000)
+  }
+  else{
+    setBackGroundBlurDeleteStudent(!backgroundBlurDeleteStudent)
+  }
   };
 
-  const setDataOnChange = (e) => {
-    if (backgroundBlurAddStudent)
-      setStudentOnChange({
-        ...studentDataOnChange,
-        status: "Inactive",
-        id: studentData[studentData.length - 1].id + 1,
-        [e.target.name]: e.target.value,
-      });
-    else if (backgroundBlurEditStudent)
-      setStudentDataOnChange({
-        ...studentDataOnChange,
-        id: studentDataId,
-        [e.target.name]: e.target.value,
-      });
-  };
+
+
 
   return (
     <>
@@ -105,35 +142,38 @@ function StudentRoaster() {
           <MenuBar />
           <StudentTable
             name="Essai Student Roster"
-            studentData={studentData}
-            onClick1={addStudentBackBlur}
-            onClick2={editStudentBackBlur}
-            onClick3={deleteStudentBackBlur}
+            studentData={data && data?.data}
+            handleAddBackBlur={handleAddBackBlur}
+            handleEditBackBlur={handleEditBackBlur}
+            handleDeleteBackBlur={handleDeleteBackBlur}
           />
         </div>
       </div>
       {backgroundBlurAddStudent ? (
         <StudentForm
           title="Add a student to the roster"
-          onClick1={addStudentBackBlur}
+         handleBackBlur={handleAddBackBlur}
+         handleForm={handleAddSubmit}
+    
         />
       ) : null}
 
       {backgroundBlurEditStudent ? (
         <StudentForm
           title="Update a student to the roster"
-          onClick1={editStudentBackBlur}
+           handleBackBlur={handleEditBackBlur}
+           handleForm={handleEditSubmit}
         />
       ) : null}
 
       {backgroundBlurDeleteStudent ? (
-        //  <DeleteSuperAdminForm onClick1={deleteStudentBackBlur} onClick2={submitDeleteData}  title1="Delete Student" title2="This will permanently delete the student from the" />: ""}
-
+     
         <ActiveStatus
           header="Are you sure you want to delete activity"
-          handleDeleteSubmit={deleteStudentBackBlur}
+          handleDeleteSubmit={handleDeleteSubmit}
         />
       ) : null}
+       <ToastContainer autoClose={2000} />
     </>
   );
 }

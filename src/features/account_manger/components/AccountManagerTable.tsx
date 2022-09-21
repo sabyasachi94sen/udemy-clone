@@ -1,22 +1,28 @@
-import { Button } from "@/shared/components";
+import moment from "moment" ;
+
 
 interface AccountManagerTableProps {
   handleAddBlur: () => void;
   handleEditBlur: () => void;
   handleDeleteBlur: () => void;
   tableCheck: () => void;
-  adminData: {}[];
+  managerData: {}[];
   name: string;
 }
+
 
 export function AccountManagerTable({
   handleAddBlur,
   handleEditBlur,
   handleDeleteBlur,
   tableCheck,
-  adminData,
+  managerData,
   name,
 }: AccountManagerTableProps) {
+
+
+
+
   return (
     <div className="relative -mt-44 h-screen w-[90%] rounded-md bg-white">
       <div>
@@ -60,7 +66,7 @@ export function AccountManagerTable({
 
         <div
           className={`${
-            adminData.length > 10 ? `h-[60vh]` : `h-auto`
+           managerData &&  managerData?.length > 10 ? `h-[60vh]` : `h-auto`
           } mt-8 overflow-y-scroll`}
         >
           <table className="relative left-2 mx-auto -mt-1 w-[88%]  break-all border-solid bg-gray-50 text-center font-sans  text-[0.9rem] font-bold text-[#344054]">
@@ -76,46 +82,46 @@ export function AccountManagerTable({
                 <td className="rounded-br-lg rounded-tr-lg">Delete</td>
               </tr>
               <tr className="sticky top-[7vh] h-[4vh] bg-white">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
               </tr>
 
-              {adminData.map((val, index) => (
-                <tr className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
+              {managerData && managerData.map((val, index) => (
+                <tr key={index} className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
                   <td
                     className="h-[7vh]  cursor-pointer hover:underline"
                     onClick={tableCheck}
                   >
-                    {val.name}
+                    {val && val?.manager_name}
                   </td>
 
-                  <td className="h-[7vh]">{val.update}</td>
-                  {val.status == "Active" ? (
-                    <td className="h-[7vh] text-[#20A464]">{val.status}</td>
+                  <td className="h-[7vh]">{moment(val && val?.last_update).format("YYYY-MM-DD")}</td>
+                  {val && val?.is_active ? (
+                    <td className="h-[7vh] text-[#20A464]">Active</td>
                   ) : (
-                    <td className="h-[7vh]">{val.status}</td>
+                    <td className="h-[7vh]">Inactive</td>
                   )}
-                  <td className="h-[7vh]">{val.student}</td>
-                  <td className="h-[7vh]">{val.performance}</td>
+                  <td className="h-[7vh]">{val && val?.student_count}</td>
+                  <td className="h-[7vh]">Metrics</td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
-                      className="mx-auto block"
                       alt="edit-icon"
+                      className="mx-auto block"
                       src="/images/edit.png"
-                      onClick={() => handleEditBlur(index)}
+                      onClick={() => handleEditBlur(val && val?.id)}
                     />
                   </td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
-                      className="mx-auto block"
                       alt="delete-icon"
+                      className="mx-auto block"
                       src="/images/delete.png"
-                      onClick={() => handleDeleteBlur(index)}
+                      onClick={() => handleDeleteBlur(val && val?.id)}
                     />
                   </td>
                 </tr>

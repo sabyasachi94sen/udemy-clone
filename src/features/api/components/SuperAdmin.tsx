@@ -42,7 +42,7 @@ const token=GetAuthToken()
   
 
     }
-    return axios(config)
+    axios(config)
 }
 
 
@@ -74,6 +74,7 @@ const SuperAdminInfoEdit=(putDataObj)=>{
 }
 
 
+
 const SuperAdminInfoDelete=(userId)=>{
     const token=GetAuthToken()
 
@@ -99,5 +100,6 @@ export const SuperAdminResObj={
     super_admin_info_list :SuperAdminInfoList,
     super_admin_info_submit: SuperAdminInfoSubmit,
     super_admin_info_edit: SuperAdminInfoEdit,
-    super_admin_info_delete: SuperAdminInfoDelete
+    super_admin_info_delete: SuperAdminInfoDelete,
+
 }

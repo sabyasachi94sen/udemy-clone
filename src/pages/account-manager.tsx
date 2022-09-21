@@ -1,108 +1,124 @@
 import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { toast, ToastContainer } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import { AccountManagerTable } from "@/features/account_manger";
 import {
   admininfo,
   CreateSuperAdminForm,
   EditAdminForm,
 } from "@/features/admin";
+import { AccountManagerResObj } from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus, personaldata, PersonalTable } from "@/features/ui";
 
 function AccountManager() {
-  const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
-  const [backgroundBlurEditAdmin, setBackGroundBlurEditAdmin] = useState(false);
+  const [backgroundBlurAddManager, setBackGroundBlurAddManager] = useState(false);
+  const [backgroundBlurEditManager, setBackGroundBlurEditManager] = useState(false);
   const [isTable, setIsTable] = useState(false);
-  const [backgroundBlurDeleteAdmin, setBackGroundBlurDeleteAdmin] =
+  const [backgroundBlurDeleteManager, setBackGroundBlurDeleteManager] =
     useState(false);
-  const [adminData, setAdminData] = useState(admininfo);
-  const [adminDataId, setAdminDataId] = useState("");
-  const [adminDataOnChange, setAdminDataOnChange] = useState({
-    name: "",
-    email: "",
-    update: "02/11/2022",
-    status: "Inactive",
-    student: 90,
-    performance: "Metrics",
+  const [managerData, setManagerData] = useState(admininfo);
+  const [managerDataId, setManagerDataId] = useState("");
+  const [mutateParams, setMutateParams] = useState({
+    mutateFunc: AccountManagerResObj.account_manager_info_add,
+    action: "create_user",
   });
 
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(mutateParams.mutateFunc, {
+    onSuccess: () => {
+
+      console.log("success")
+      if (mutateParams.action === "create_user")
+      setBackGroundBlurAddManager(!backgroundBlurAddManager);
+      else if (mutateParams.action === "edit_user") {
+        setBackGroundBlurEditManager(!backgroundBlurEditManager);
+      } else if (mutateParams.action === "delete_user") {
+        setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
+      }
+
+      setTimeout(() => {
+        queryClient.invalidateQueries("account-manager-list");
+      }, 1000);
+    },
+    onError: () => {
+      toast.error("This Email Already Exist", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    },
+  });
+
+  const { data } = useQuery(["account-manager-list"], () =>
+    AccountManagerResObj.account_manager_list(),
+  );
+
   const handleAddBlur = () => {
-    setBackGroundBlurAddAdmin(
-      (!backgroundBlurAddAdmin),
-    );
+    setBackGroundBlurAddManager(!backgroundBlurAddManager);
   };
 
   const handleEditBlur = (id) => {
-    setBackGroundBlurEditAdmin(
-      (!backgroundBlurEditAdmin),
-    );
+    setBackGroundBlurEditManager(!backgroundBlurEditManager);
 
-    setAdminDataId(id);
+    setManagerDataId(id);
   };
 
   const handleDeleteBlur = (id) => {
-    setBackGroundBlurDeleteAdmin(
-      (!backgroundBlurDeleteAdmin)
-    );
+    setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
 
-    setAdminDataId(id);
+    setManagerDataId(id);
   };
 
-  const handleAddSubmit = () => {
-    setBackGroundBlurAddAdmin(
-      (!backgroundBlurAddAdmin)
-    );
-    const tempArr = adminData;
+  const handleAddSubmit = (postData: object) => {
+    setMutateParams({
+      mutateFunc: AccountManagerResObj.account_manager_info_add,
+      action: "create_user",
+    });
 
-    tempArr.push(adminDataOnChange);
-    setAdminData(tempArr);
+    setTimeout(() => {
+      mutate(postData);
+    }, 1000);
   };
 
-  const handleEditSubmit = () => {
-    setBackGroundBlurEditAdmin(
-      (!backgroundBlurEditAdmin)
-    );
-    const tempArr = adminData;
+  const handleEditSubmit = (putData: object) => {
 
-    tempArr[adminDataId] = adminDataOnChange;
+    const putDataObj={
+      data: putData,
+      id: managerDataId
+    }
+    setMutateParams({mutateFunc: AccountManagerResObj.account_manager_info_edit,action: "edit_user"})
+
+    setTimeout(()=>{
+      mutate(putDataObj)
+    },1000)
   };
 
-  const handleDeleteSubmit = () => {
-    setBackGroundBlurDeleteAdmin(
-      (!backgroundBlurDeleteAdmin)
-    );
-    const tempArr = adminData;
-
-    tempArr.splice(adminDataId, 1);
-    setAdminData(tempArr);
+  const handleDeleteSubmit = (confirmStatus: string) => {
+    if(confirmStatus){
+      
+      setMutateParams({mutateFunc: AccountManagerResObj.account_manager_info_delete,action: "delete_user"})
+      setTimeout(()=>{
+       mutate(managerDataId)
+      },1000)
+    }
+    else{
+      setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
+    }
   };
 
-  const handleOnChange = (e) => {
-    if (backgroundBlurAddAdmin)
-      setAdminDataOnChange({
-        ...adminDataOnChange,
-        status: "Inactive",
-        id: adminData[adminData.length - 1].id + 1,
-        [e.target.name]: e.target.value,
-      });
-    else if (backgroundBlurEditAdmin)
-      setAdminDataOnChange({
-        ...adminDataOnChange,
-        id: adminDataId,
-        [e.target.name]: e.target.value,
-      });
-  };
   const isTableCheck = () => {
-    setIsTable((!isTable));
+    setIsTable(!isTable);
   };
 
   return (
     <>
       <div
         className={
-          !backgroundBlurAddAdmin &&
-          !backgroundBlurEditAdmin &&
-          !backgroundBlurDeleteAdmin
+          !backgroundBlurAddManager &&
+          !backgroundBlurEditManager &&
+          !backgroundBlurDeleteManager
             ? `bg-white`
             : `opacity-[0.2]`
         }
@@ -112,48 +128,48 @@ function AccountManager() {
           <MenuBar />
           {!isTable ? (
             <AccountManagerTable
-              adminData={adminData}
-              name="Essai Account Manager Roaster"
               handleAddBlur={handleAddBlur}
-              handleEditBlur={handleEditBlur}
               handleDeleteBlur={handleDeleteBlur}
+              handleEditBlur={handleEditBlur}
+              managerData={data && data?.data}
+              name="Essai Account Manager Roaster"
               tableCheck={isTableCheck}
             />
           ) : (
             <PersonalTable
               adminData={personaldata}
+              tableCheck={isTableCheck}
               title1="Essai Account Manager Details"
               title2="Account Manager"
-              tableCheck={isTableCheck}
             />
           )}
         </div>
       </div>
-      {backgroundBlurAddAdmin ? (
+      {backgroundBlurAddManager ? (
         <CreateSuperAdminForm
-          title="Create an Account Manager Role"
           handleAddBlur={handleAddBlur}
           handleAddSubmit={handleAddSubmit}
-          handleOnChange={handleOnChange}
+          title="Create an Account Manager Role"
         />
       ) : null}
 
-      {backgroundBlurEditAdmin ? (
+      {backgroundBlurEditManager ? (
         <EditAdminForm
-          header="Are you sure you want to make this account manager  inactive?"
-          title="Edit an Account Manager role"
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
-          handleOnChange={handleOnChange}
+          header="Are you sure you want to make this account manager  inactive?"
+          title="Edit an Account Manager role"
         />
       ) : null}
 
-      {backgroundBlurDeleteAdmin ? (
+      {backgroundBlurDeleteManager ? (
         <ActiveStatus
-          header="Are you sure you want to delete activity"
           handleDeleteSubmit={handleDeleteSubmit}
+          header="Are you sure you want to delete activity"
         />
       ) : null}
+
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

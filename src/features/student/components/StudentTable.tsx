@@ -1,15 +1,15 @@
 import { Button } from "@/shared/components"
 
 interface StudentTableProps{
-    onClick1: ()=>void;
-    onClick2: ()=>void;
-    onClick3: ()=>void;
+    handleAddBackBlur: ()=>void;
+    handleEditBackBlur: ()=>void;
+    handleDeleteBackBlur: ()=>void;
     studentData: {}[];
     name: string
   }
   
 
-export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: StudentTableProps){
+export function StudentTable({handleAddBackBlur,handleEditBackBlur,handleDeleteBackBlur,studentData,name}: StudentTableProps){
 
 
     
@@ -27,7 +27,7 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
                 <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
                
               </div>
-              <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] xl:text-[0.8rem] 2xl:text-[1rem] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={onClick1}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>
+              <button className="bg-cyan-500 rounded-md w-[7%] h-[6vh] xl:text-[0.8rem] 2xl:text-[1rem] text-center flex justify-center items-center text-white hover:bg-blue-600" onClick={handleAddBackBlur}>Add&nbsp; <img alt="plus-icon" src="/images/plus.png" /> </button>
             </div>
 
             {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
@@ -42,7 +42,7 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
             </div> */}
 
             
-            <div className={`${studentData.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
+            <div className={`${studentData && studentData?.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
               <table className="border-solid w-[90%] text-center mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
           
               <tbody className="overflow">
@@ -70,16 +70,16 @@ export function StudentTable({onClick1,onClick2,onClick3,studentData,name}: Stud
                 </tr>
                
               
-                  {studentData.map((val,index)=><tr className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
-                    <td className="h-[7vh]">{val.name}</td>
-                    <td className="h-[7vh] ">{val.dob}</td>
-                    <td className="h-[7vh]">{val.country}</td>
-                    <td className="h-[7vh]">{val.manager}</td>
+                  {studentData && studentData.map((val,index)=><tr key={index} className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
+                    <td className="h-[7vh]">{val && val?.student_name}</td>
+                    <td className="h-[7vh] ">{val && val?.date_of_birth}</td>
+                    <td className="h-[7vh]">{val && val?.country_of_citizenship}</td>
+                    <td className="h-[7vh]">{val && val?.student_assignment[0] && val.student_assignment[0]?.account_manager && val.student_assignment[0].account_manager?.username}</td>
                     
-                    {val.status=="Active"?<td className="h-[7vh] text-[#20A464]">{val.status}</td>:<td className="h-[7vh]">{val.status}</td>}
+                    {val?.is_active?<td className="h-[7vh] text-[#20A464]">Active</td>:<td className="h-[7vh]">Inactive</td>}
                 
-                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto block" alt="edit-icon" src="/images/edit.png" onClick={()=>onClick2(index)} /></td>
-                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto block" alt="delete-icon" src="/images/delete.png" onClick={()=>onClick3(index)}/></td>
+                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto block" alt="edit-icon" src="/images/edit.png" onClick={()=>handleEditBackBlur(val && val?.id)} /></td>
+                    <td className="h-[7vh] cursor-pointer"><img className="mx-auto block" alt="delete-icon" src="/images/delete.png" onClick={()=>handleDeleteBackBlur(val && val?.id)}/></td>
 
                   </tr>)}
                 </tbody>

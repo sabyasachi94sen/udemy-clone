@@ -96,3 +96,4 @@ function Activity() {
 
 export default Activity;
 Activity.isPublicRoute = true;
+

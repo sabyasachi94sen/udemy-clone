@@ -42,7 +42,7 @@ const token=GetAuthToken()
   
 
     }
-    return axios(config)
+    axios(config)
 }
 
 
