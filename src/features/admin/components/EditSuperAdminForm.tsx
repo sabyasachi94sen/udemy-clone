@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form"
 interface EditSuperAdminFormProps {
   handleEditBlur: () => void;
   handleEditSubmit: () => void;
-
+  title:string;
   header: string;
 }
 
@@ -34,7 +34,7 @@ const selectOptions = [
 export function EditSuperAdminForm({
   handleEditBlur,
   handleEditSubmit,
- 
+  title,
   header,
 }: EditSuperAdminFormProps) {
   const [isStatus, setIsStatus] = useState(false);
@@ -66,7 +66,7 @@ export function EditSuperAdminForm({
               <img alt="back-icon" src="/images/backArrow.png" />
             </div>
             <h1 className="mr-16 text-3xl font-bold text-[#3AB0FB]">
-              Edit an Super Admin role
+              {title}
             </h1>
           </div>
           <div className="mx-auto h-[20vh] w-[82%] p-2 font-sans text-[0.9rem]  font-bold leading-7 text-[#344054]">
