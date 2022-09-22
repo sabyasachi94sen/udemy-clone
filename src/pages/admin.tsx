@@ -74,8 +74,9 @@ function Admin() {
     setAdminId(id)
 
   };
-  const isTableCheck = () => {
+  const isTableCheck = (id: string) => {
     setIsTable(!isTable);
+    setAdminId(id)
   };
 
   const handleDeleteBlur = (id) => {
@@ -151,6 +152,7 @@ function Admin() {
               tableCheck={isTableCheck}
               title1="Essai Admin Details"
               title2="Admin"
+              admin_id={adminId}
             />
           )}
         </div>

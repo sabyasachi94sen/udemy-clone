@@ -111,7 +111,7 @@ export function AdminTable({
                           ? ``
                           : `cursor-pointer hover:underline`
                       } `}
-                      onClick={tableCheck}
+                      onClick={()=>tableCheck(val && val?.id)}
                     >
                       {val && val?.username}
                     </td>

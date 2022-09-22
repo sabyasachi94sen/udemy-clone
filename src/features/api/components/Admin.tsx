@@ -94,6 +94,11 @@ const AdminInfoDelete=(userId)=>{
 }
 
 
+const AdminActivities=()=>{
+    
+}
+
+
 
 
 

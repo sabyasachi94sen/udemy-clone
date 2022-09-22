@@ -181,7 +181,7 @@ function SuperAdmin() {
           handleEditSubmit={handleEditSubmit}
           
           header="Are you sure you want to make this Super admin inactive?"
-          title="Edit an Super Admin role"
+          title="Edit a Super Admin role"
         />
       ) : null}
 
