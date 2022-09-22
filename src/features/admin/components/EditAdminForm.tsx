@@ -7,7 +7,8 @@ import {useForm} from "react-hook-form"
 interface EditAdminFormProps {
   handleEditBlur: () => void;
   handleEditSubmit: () => void;
-  handleOnChange: () => void;
+
+  specificData: object;
   title: string;
   header: string;
   adminId: number
@@ -21,7 +22,7 @@ interface FormValues{
 export function EditAdminForm({
   handleEditBlur,
   handleEditSubmit,
-  handleOnChange,
+  specificData,
   title,
   header,
   adminId
@@ -35,6 +36,32 @@ export function EditAdminForm({
   const confirmStatus = () => {
     setIsStatus((isStatus) => !isStatus);
   };
+
+  const selectOptionsStatus = [
+    {
+      option: "Select Status",
+     
+    },
+    {
+      option: "Yes",
+    
+    },
+    {
+      option: "No",
+   
+    },
+  ];
+
+  const selectOptionRole=[{
+    option: "Admin",
+    value: "admin"
+  },{
+    option: "Super Admin",
+    value: "superadmin"
+  },{
+    option: "Account Manager",
+    value: "accountmanager"
+  }]
 
 
   const {handleSubmit,register}=useForm<FormValues>()
@@ -66,7 +93,7 @@ export function EditAdminForm({
               <span className="text-[#344054]">Name</span>
               <input
                 className="text-small relative left-8 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
-               
+               defaultValue={specificData.username}
                 type="text"
                 placeholder="Morgan Henderson"
                 {...register("username")}
@@ -78,7 +105,7 @@ export function EditAdminForm({
               <span className="text-[#344054]">Email</span>
               <input
                 className="text-small relative left-9 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
-                
+                defaultValue={specificData.email}
                 type="email"
                 placeholder="morgan@essai.com"
                 {...register("email")}
@@ -92,10 +119,12 @@ export function EditAdminForm({
                 className="text-small relative left-3 h-[5vh]  w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
                 {...register("status")}
                 
+                
               >
                 <option> Select Status</option>
-                <option>Yes</option>
-                <option>No</option>
+                {selectOptionsStatus.map((item,index)=>{
+                  return <option key={index} selected={specificData.is_active && item.option=="Yes" || !specificData.is_active && item.option=="No" ?true : false}>{item.option}</option>
+                })}
               </select>
             </div>
 
@@ -106,10 +135,10 @@ export function EditAdminForm({
                 {...register("role")}
            
               >
-                <option>Change Role</option>
-                <option value="admin">Admin</option>
-                <option value="superadmin">Super Admin</option>
-                <option value="accountmanager">Account Manager</option>
+                <option>Select Role</option>
+                {selectOptionRole.map((item,index)=>{
+                  return <option key={index} value={item.value} selected={specificData.is_admin && item.option=="Admin" || specificData.is_super_admin && item.option=="Super Admin" || specificData.is_account_manager && item.option=="Account Manager"?true: false}>{item.option}</option>
+                })}
               </select>
             </div>
           </div>

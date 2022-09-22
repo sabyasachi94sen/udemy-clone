@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form"
 interface EditSuperAdminFormProps {
   handleEditBlur: () => void;
   handleEditSubmit: () => void;
+  specificData: object;
   title:string;
   header: string;
 }
@@ -34,6 +35,7 @@ const selectOptions = [
 export function EditSuperAdminForm({
   handleEditBlur,
   handleEditSubmit,
+  specificData,
   title,
   header,
 }: EditSuperAdminFormProps) {
@@ -78,6 +80,7 @@ export function EditSuperAdminForm({
                 type="text"
                 placeholder="Morgan Henderson"
                 {...register("username")}
+                defaultValue={specificData.username}
                 
               />
               <br />
@@ -91,6 +94,7 @@ export function EditSuperAdminForm({
                 type="email"
                 placeholder="morgan@essai.com"
                 {...register("email")}
+                defaultValue={specificData.email}
               />
               <br />
             </div>
@@ -103,7 +107,7 @@ export function EditSuperAdminForm({
                
               >
                 {selectOptions.map((item, i) => {
-                  return <option key={i}>{item.option}</option>;
+                  return <option key={i} selected={specificData.is_active && item.option=="Yes" || !specificData.is_active && item.option=="No" ?true : false}>{item.option}</option>;
                 })}
               </select>
             </div>

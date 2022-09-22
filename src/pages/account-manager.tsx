@@ -14,26 +14,27 @@ import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus, personaldata, PersonalTable } from "@/features/ui";
 
 function AccountManager() {
-  const [backgroundBlurAddManager, setBackGroundBlurAddManager] = useState(false);
-  const [backgroundBlurEditManager, setBackGroundBlurEditManager] = useState(false);
+  const [backgroundBlurAddManager, setBackGroundBlurAddManager] =
+    useState(false);
+  const [backgroundBlurEditManager, setBackGroundBlurEditManager] =
+    useState(false);
   const [isTable, setIsTable] = useState(false);
   const [backgroundBlurDeleteManager, setBackGroundBlurDeleteManager] =
     useState(false);
   const [managerData, setManagerData] = useState(admininfo);
+  const [managerActivity, setManagerActivity] = useState([]);
   const [managerDataId, setManagerDataId] = useState("");
   const [mutateParams, setMutateParams] = useState({
     mutateFunc: AccountManagerResObj.account_manager_info_add,
     action: "create_user",
   });
 
-
   const queryClient = useQueryClient();
   const { mutate } = useMutation(mutateParams.mutateFunc, {
     onSuccess: () => {
-
-      console.log("success")
+      console.log("success");
       if (mutateParams.action === "create_user")
-      setBackGroundBlurAddManager(!backgroundBlurAddManager);
+        setBackGroundBlurAddManager(!backgroundBlurAddManager);
       else if (mutateParams.action === "edit_user") {
         setBackGroundBlurEditManager(!backgroundBlurEditManager);
       } else if (mutateParams.action === "delete_user") {
@@ -83,33 +84,38 @@ function AccountManager() {
   };
 
   const handleEditSubmit = (putData: object) => {
-
-    const putDataObj={
+    const putDataObj = {
       data: putData,
-      id: managerDataId
-    }
-    setMutateParams({mutateFunc: AccountManagerResObj.account_manager_info_edit,action: "edit_user"})
+      id: managerDataId,
+    };
+    setMutateParams({
+      mutateFunc: AccountManagerResObj.account_manager_info_edit,
+      action: "edit_user",
+    });
 
-    setTimeout(()=>{
-      mutate(putDataObj)
-    },1000)
+    setTimeout(() => {
+      mutate(putDataObj);
+    }, 1000);
   };
 
   const handleDeleteSubmit = (confirmStatus: string) => {
-    if(confirmStatus){
-      
-      setMutateParams({mutateFunc: AccountManagerResObj.account_manager_info_delete,action: "delete_user"})
-      setTimeout(()=>{
-       mutate(managerDataId)
-      },1000)
-    }
-    else{
+    if (confirmStatus) {
+      setMutateParams({
+        mutateFunc: AccountManagerResObj.account_manager_info_delete,
+        action: "delete_user",
+      });
+      setTimeout(() => {
+        mutate(managerDataId);
+      }, 1000);
+    } else {
       setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
     }
   };
 
-  const isTableCheck = () => {
+  const isTableCheck = (id: any) => {
     setIsTable(!isTable);
+
+    setManagerActivity([]);
   };
 
   return (
@@ -141,6 +147,7 @@ function AccountManager() {
               tableCheck={isTableCheck}
               title1="Essai Account Manager Details"
               title2="Account Manager"
+              activityData={managerActivity}
             />
           )}
         </div>

@@ -21,7 +21,7 @@ function SuperAdmin() {
     useState(false);
 
   const [isTable, setIsTable] = useState(false);
-  const [superAdminData,setSuperAdminData]=useState(admininfo)
+  const [specificSuperAdminData,setSpecificSuperAdminData]=useState({})
   const [superAdminId, setSuperAdminId] = useState(null);
   const [mutateParams,setMutateParams]=useState({mutateFunc: SuperAdminResObj.super_admin_info_submit,action: "create_user" })
 
@@ -72,12 +72,13 @@ function SuperAdmin() {
     );
   };
 
-  const handleEditBlur = (id) => {
+  const handleEditBlur = (id:string,superAdminData: object) => {
     setBackGroundBlurEditAdmin(
       (!backgroundBlurEditAdmin)
     );
 
     setSuperAdminId(id);
+    setSpecificSuperAdminData(superAdminData)
   };
 
   const handleDeleteBlur = (id) => {
@@ -179,7 +180,7 @@ function SuperAdmin() {
         <EditSuperAdminForm
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
-          
+          specificData={specificSuperAdminData}
           header="Are you sure you want to make this Super admin inactive?"
           title="Edit a Super Admin role"
         />

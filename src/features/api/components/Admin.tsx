@@ -94,8 +94,25 @@ const AdminInfoDelete=(userId)=>{
 }
 
 
-const AdminActivities=()=>{
+
+
+
+const AdminActivity=async (adminId:string)=>{
+
+    const token=GetAuthToken()
     
+    const config={
+        method: "get",
+        url: "https://pippams-dev.eoraa.com/api/admin_list/?id="+adminId,
+        headers: {
+            "Content-Type": "application/json",
+             "Authorization": token,
+          },
+          
+         
+    }
+
+    return await axios(config)
 }
 
 
@@ -106,5 +123,6 @@ export const AdminResObj={
     admin_info_list :AdminInfoList,
     admin_info_submit: AdminInfoSubmit,
     admin_info_edit: AdminInfoEdit,
-    admin_info_delete: AdminInfoDelete
+    admin_info_delete: AdminInfoDelete,
+    admin_activity:AdminActivity
 }

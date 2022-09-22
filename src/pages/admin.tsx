@@ -18,7 +18,8 @@ function Admin() {
   const [backgroundBlurDeleteAdmin, setBackGroundBlurDeleteAdmin] =
     useState(false);
   const [isTable, setIsTable] = useState(false);
-  const [adminData, setAdminData] = useState(admininfo);
+  const [specificAdminData, setSpecificAdminData] = useState({});
+  const [adminActivity,setAdminActivity]=useState([])
   const [adminId,setAdminId]=useState(null)
   const [mutateParams,setMutateParams]=useState({mutateFunc:AdminResObj.admin_info_submit,action: "create_user" })
 
@@ -68,15 +69,27 @@ function Admin() {
     setBackGroundBlurAddAdmin(!backgroundBlurAddAdmin);
   };
 
-  const handleEditBlur = (id) => {
+  const handleEditBlur = (id:string,specificAdminData:object) => {
     setBackGroundBlurEditAdmin(!backgroundBlurEditAdmin);
   
     setAdminId(id)
+    setSpecificAdminData(specificAdminData)
 
   };
-  const isTableCheck = (id: string) => {
+  const isTableCheck = (id: any) => {
     setIsTable(!isTable);
-    setAdminId(id)
+
+    if(id!=null){
+    const response=AdminResObj.admin_activity(id)
+    response.then((res)=>{
+
+       
+      setAdminActivity([res.data])
+      
+    }).catch((err)=>{
+      setAdminActivity([])
+    })
+  }
   };
 
   const handleDeleteBlur = (id) => {
@@ -110,7 +123,7 @@ function Admin() {
 
   const handleDeleteSubmit = (confirmStatus) => {
     if(confirmStatus){
-      console.log(adminId)
+     
       setMutateParams({mutateFunc: AdminResObj.admin_info_delete,action: "delete_user"})
       setTimeout(()=>{
        mutate(adminId)
@@ -152,7 +165,7 @@ function Admin() {
               tableCheck={isTableCheck}
               title1="Essai Admin Details"
               title2="Admin"
-              admin_id={adminId}
+              activityData={adminActivity}
             />
           )}
         </div>
@@ -170,7 +183,7 @@ function Admin() {
         <EditAdminForm
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
-         
+          specificData={specificAdminData}
           header="Are you sure you want to make this admin inactive?"
           title="Edit an Admin role"
           adminId={adminId}

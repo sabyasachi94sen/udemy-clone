@@ -136,7 +136,7 @@ export function AdminTable({
                       <img
                         alt="edit-icon"
                         src="/images/edit.png"
-                        onClick={() => handleEditBlur(val && val?.id)}
+                        onClick={() => handleEditBlur(val && val?.id,val)}
                         className="mx-auto block"
                       />
                     </td>
