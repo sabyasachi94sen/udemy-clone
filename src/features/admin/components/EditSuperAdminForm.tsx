@@ -17,7 +17,7 @@ interface FormValues{
   status: string
 }
 
-const selectOptions = [
+const selectOptionsStatus = [
   {
     option: "Select Status",
    
@@ -106,7 +106,7 @@ export function EditSuperAdminForm({
                  {...register("status")}
                
               >
-                {selectOptions.map((item, i) => {
+                {selectOptionsStatus.map((item, i) => {
                   return <option key={i} selected={specificData.is_active && item.option=="Yes" || !specificData.is_active && item.option=="No" ?true : false}>{item.option}</option>;
                 })}
               </select>
