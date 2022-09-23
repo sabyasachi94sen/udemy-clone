@@ -118,6 +118,12 @@ function AccountManager() {
     setManagerActivity([]);
   };
 
+
+  const deleteStatus=(e,flag)=>{
+    if(flag==1)
+    setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
+  }
+
   return (
     <>
       <div
@@ -173,6 +179,7 @@ function AccountManager() {
         <ActiveStatus
           handleDeleteSubmit={handleDeleteSubmit}
           header="Are you sure you want to delete this Account Manager?"
+          confirm={deleteStatus}
         />
       ) : null}
 

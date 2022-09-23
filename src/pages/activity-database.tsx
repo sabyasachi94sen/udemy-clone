@@ -38,6 +38,11 @@ function Activity() {
     setDeleteBackBlur((deleteBackBlur) => !deleteBackBlur);
   };
 
+  const deleteStatus=(e,flag)=>{
+    if(flag==1)
+    setDeleteBackBlur((deleteBackBlur) => !deleteBackBlur);
+  }
+
   return (
     <>
       <div
@@ -88,6 +93,7 @@ function Activity() {
         <ActiveStatus
           header="Are you sure you want to delete this Activity?"
           handleDeleteSubmit={setBackgroundBlurOnDelete}
+          confirm={deleteStatus}
         />
       ) : null}
     </>

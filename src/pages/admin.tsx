@@ -99,6 +99,12 @@ function Admin() {
    
   };
 
+
+  const deleteStatus=(e,flag)=>{
+    if(flag==1)
+    setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
+  }
+
   const handleAddSubmit = (postData: object) => {
     setMutateParams({mutateFunc: AdminResObj.admin_info_submit,action: "create_user"})
     setTimeout(()=>{
@@ -184,7 +190,7 @@ function Admin() {
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
           specificData={specificAdminData}
-          header="Are you sure you want to make this admin inactive?"
+          header="Are you sure you want to make this Admin inactive?"
           title="Edit an Admin role"
           adminId={adminId}
         />
@@ -194,6 +200,7 @@ function Admin() {
         <ActiveStatus
           header="Are you sure you want to delete this Admin?"
           handleDeleteSubmit={handleDeleteSubmit}
+          confirm={deleteStatus}
         />
       ) : null}
               <ToastContainer autoClose={2000} />

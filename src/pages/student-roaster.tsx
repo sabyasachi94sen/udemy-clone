@@ -110,6 +110,15 @@ function StudentRoaster() {
   };
 
 
+  const deleteStatus=(e,flag)=>{
+   if(flag==1)
+   setBackGroundBlurDeleteStudent(
+    (backgroundBlurDeleteStudent) => !backgroundBlurDeleteStudent,
+  );
+
+  }
+
+
   const handleDeleteSubmit= (confirmStatus) => {
 
     if(confirmStatus){
@@ -171,6 +180,7 @@ function StudentRoaster() {
         <ActiveStatus
           header="Are you sure you want to delete this Student?"
           handleDeleteSubmit={handleDeleteSubmit}
+          confirm={deleteStatus}
         />
       ) : null}
        <ToastContainer autoClose={2000} />

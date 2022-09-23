@@ -28,13 +28,28 @@ export function EditAdminForm({
   adminId
 }: EditAdminFormProps) {
   const [isStatus, setIsStatus] = useState(false);
+  const [activeVal,setActiveVal]=useState(null)
 
-  const checkStatus = (e) => {
-    if (e.target.value == "Yes") setIsStatus((isStatus) => !isStatus);
+  const checkStatus = (e,flag) => {
+
+    if (e.target.value == "No" || flag==1) {
+    setIsStatus((isStatus) => !isStatus);
+    }
+    if(flag==1){
+       setActiveVal("No")
+     
+    }else{
+      setActiveVal("Yes")
+    }
   };
 
-  const confirmStatus = () => {
+  const confirmStatus = (isActive: boolean) => {
+       
     setIsStatus((isStatus) => !isStatus);
+    
+    
+    
+
   };
 
   const selectOptionsStatus = [
@@ -51,6 +66,8 @@ export function EditAdminForm({
    
     },
   ];
+
+ 
 
   const selectOptionRole=[{
     option: "Admin",
@@ -118,12 +135,12 @@ export function EditAdminForm({
               <select
                 className="text-small relative left-3 h-[5vh]  w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
                 {...register("status")}
-                
+                onChange={()=>checkStatus(event,0)}
                 
               >
-                <option> Select Status</option>
+                
                 {selectOptionsStatus.map((item,index)=>{
-                  return <option key={index} selected={specificData.is_active && item.option=="Yes" || !specificData.is_active && item.option=="No" ?true : false}>{item.option}</option>
+                  return <option key={index} selected={(activeVal=="No" && item.option=="Yes") || (specificData.is_active && item.option=="Yes" && activeVal==null  || !specificData.is_active && item.option=="No" && activeVal==null)?true : false}>{item.option}</option>
                 })}
               </select>
             </div>
@@ -133,6 +150,7 @@ export function EditAdminForm({
               <select
                 className="text-small font-small relative left-3 h-[5vh] w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
                 {...register("role")}
+                
            
               >
                 <option>Select Role</option>
@@ -152,9 +170,9 @@ export function EditAdminForm({
           </div>
         </div>
       </div>
-      {/* {isStatus ? (
-        <ActiveStatus onClick1={confirmStatus} header={header} />
-      ) : null} */}
+      {isStatus ? (
+        <ActiveStatus handleDeleteSubmit={confirmStatus} confirm={checkStatus} header={header} />
+      ) : null}
     </>
   );
 }

@@ -133,6 +133,11 @@ function SuperAdmin() {
 
 
 
+
+  const deleteStatus=(e,flag)=>{
+    if(flag==1)
+    setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
+  }
  
 
 
@@ -181,7 +186,7 @@ function SuperAdmin() {
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
           specificData={specificSuperAdminData}
-          header="Are you sure you want to make this Super admin inactive?"
+          header="Are you sure you want to make this Super Admin inactive?"
           title="Edit a Super Admin role"
         />
       ) : null}
@@ -190,6 +195,7 @@ function SuperAdmin() {
         <ActiveStatus
           header="Are you sure you want to delete this Super Admin?"
           handleDeleteSubmit={handleDeleteSubmit}
+          confirm={deleteStatus}
         />
       ) : null}
        <ToastContainer autoClose={2000} />

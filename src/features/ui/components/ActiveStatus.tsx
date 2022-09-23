@@ -3,10 +3,11 @@
 
  interface ActiveStatusProps{
    handleDeleteSubmit: ()=>void;
+   confirm: ()=>void;
     header: string
  }
  
- export function ActiveStatus({handleDeleteSubmit,header}: ActiveStatusProps){
+ export function ActiveStatus({handleDeleteSubmit,confirm,header}: ActiveStatusProps){
 
 
     const [isStatus,setIsStatus]=useState(false)
@@ -16,8 +17,10 @@
         setIsStatus(isStatus=>!isStatus)
         if(selectedVal==="Yes")
         setIsDelete(true)
-        else 
+        else {
         setIsDelete(false)
+        confirm(event,1)
+        }
 
     }
 
