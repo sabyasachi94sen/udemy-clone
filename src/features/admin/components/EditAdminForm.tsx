@@ -32,7 +32,7 @@ export function EditAdminForm({
 
   const checkStatus = (e,flag) => {
 
-    if (e.target.value == "No" || flag==1) {
+    if (e.target.value == "Inactive" || flag==1) {
     setIsStatus((isStatus) => !isStatus);
     }
     if(flag==1){
@@ -58,11 +58,11 @@ export function EditAdminForm({
      
     },
     {
-      option: "Yes",
+      option: "Active",
     
     },
     {
-      option: "No",
+      option: "Inactive",
    
     },
   ];
@@ -96,14 +96,14 @@ export function EditAdminForm({
         <div
           className={`relative z-20 mx-auto h-auto w-[40%] rounded-xl border-2 bg-[#FDFEFF]`}
         >
-          <div className="mx-auto ml-4 flex h-[10vh] w-[100%] items-center justify-around">
+          <div className={`mx-auto relative lg:right-[2%] ${title!="Edit an Account Manager role"?`2xl:right-[9%]`:`2xl:right-[1%]`} flex h-[10vh] w-[100%] items-center justify-around`}>
             <div
-              className="rounded-l-2 ml-3 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
+              className="rounded-l-2 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
               onClick={handleEditBlur}
             >
               <img alt="back-icon" src="/images/backArrow.png" />
             </div>
-            <h1 className="mr-16 text-3xl font-bold text-[#3AB0FB]">{title}</h1>
+            <h1 className={`2xl:text-3xl 2xl:mr-0 relative  ${title=="Edit an Account Manager role"?`lg:text-[1.7rem] lg:mr-2 2xl:right-[2%]`: `lg:text-3xl lg:right-[2%] mr-14 2xl:right-[8.5%]`} font-bold text-[#3AB0FB]`}>{title}</h1>
           </div>
           <div className="mx-auto h-[20vh] w-[82%] p-2 font-sans font-bold leading-7">
             <div className="mt-2 flex">
@@ -140,7 +140,7 @@ export function EditAdminForm({
               >
                 
                 {selectOptionsStatus.map((item,index)=>{
-                  return <option key={index} selected={(activeVal=="No" && item.option=="Yes") || (specificData.is_active && item.option=="Yes" && activeVal==null  || !specificData.is_active && item.option=="No" && activeVal==null)?true : false}>{item.option}</option>
+                  return <option key={index} selected={(activeVal=="No" && item.option=="Active") || (specificData.is_active && item.option=="Active" && activeVal==null  || !specificData.is_active && item.option=="Inactive" && activeVal==null)?true : false}>{item.option}</option>
                 })}
               </select>
             </div>

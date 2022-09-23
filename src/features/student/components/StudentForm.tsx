@@ -38,7 +38,7 @@ export function StudentForm({
   return (
     <div className="relative z-10 mx-auto -mt-[150vh] h-auto w-[90%] rounded-xl border-2 bg-[#FDFEFF]">
       <div
-        className="relative top-6 left-8 flex w-[45%] justify-between"
+        className="relative top-6 left-8 flex w-[61%] justify-between"
         onClick={handleBackBlur}
       >
         <div className="rounded-l-2 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg">

@@ -26,14 +26,14 @@ const { register, handleSubmit } = useForm<FormValues>();
 
   return (
     <div className="relative top-[5vh] right-[10vw] left-[2vw] z-10 mx-auto -mt-[140vh] h-auto w-[40%] rounded-xl border-2 bg-[#FDFEFF]">
-      <div className="mx-auto flex h-[10vh] lg:w-[85%] xl:w-[90%] 2xl:w-[95%] items-center justify-around">
+      <div className="mx-auto flex h-[10vh] lg:w-[85%] xl:w-full 2xl:w-[95%] items-center justify-around">
         <div
-          className="rounded-l-2 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
+          className={`rounded-l-2 relative ${title!="Create an Account Manager Role"?`lg:right-[2%]`:`lg:right-0`} 2xl:right-[3%] flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg`}
           onClick={handleAddBlur}
         >
           <img alt="back-icon" src="/images/backArrow.png" />
         </div>
-        <h1 className="2xl:text-[1rem] lg:text-[1.5rem] mr-[8%] 2xl:text-[1.8rem] font-bold text-[#3AB0FB]">{title}</h1>
+        <h1 className={`2xl:text-[2rem] lg:text-[1.6rem] ${title!="Create an Account Manager Role"?`mr-[8%]`: `mr-0`} font-bold text-[#3AB0FB]`}>{title}</h1>
       </div>
       <div className="mx-auto ml-10 h-[20vh] w-[90%] p-2 font-sans  font-bold leading-7 text-[#344054]">
         <div className="mt-2 flex">
