@@ -21,7 +21,7 @@ function AccountManager() {
   const [isTable, setIsTable] = useState(false);
   const [backgroundBlurDeleteManager, setBackGroundBlurDeleteManager] =
     useState(false);
-  const [managerData, setManagerData] = useState(admininfo);
+  const [managerSpecificData, setManagerSpecificData] = useState({username: "",emai:""});
   const [managerActivity, setManagerActivity] = useState([]);
   const [managerDataId, setManagerDataId] = useState("");
   const [mutateParams, setMutateParams] = useState({
@@ -170,6 +170,7 @@ function AccountManager() {
         <EditAdminForm
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
+          specificData={managerSpecificData}
           header="Are you sure you want to make this account manager  inactive?"
           title="Edit an Account Manager role"
         />
