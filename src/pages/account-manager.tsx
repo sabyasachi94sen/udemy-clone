@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toast, ToastContainer } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 import { AccountManagerTable } from "@/features/account_manger";
-import {
-  admininfo,
-  CreateSuperAdminForm,
-  EditAdminForm,
-} from "@/features/admin";
+import { CreateSuperAdminForm, EditAdminForm } from "@/features/admin";
 import { AccountManagerResObj } from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus, personaldata, PersonalTable } from "@/features/ui";
@@ -21,7 +15,10 @@ function AccountManager() {
   const [isTable, setIsTable] = useState(false);
   const [backgroundBlurDeleteManager, setBackGroundBlurDeleteManager] =
     useState(false);
-  const [managerSpecificData, setManagerSpecificData] = useState({username: "",emai:""});
+  const [managerSpecificData, setManagerSpecificData] = useState({
+    username: "",
+    emai: "",
+  });
   const [managerActivity, setManagerActivity] = useState([]);
   const [managerDataId, setManagerDataId] = useState("");
   const [mutateParams, setMutateParams] = useState({
@@ -88,6 +85,7 @@ function AccountManager() {
       data: putData,
       id: managerDataId,
     };
+
     setMutateParams({
       mutateFunc: AccountManagerResObj.account_manager_info_edit,
       action: "edit_user",
@@ -118,11 +116,9 @@ function AccountManager() {
     setManagerActivity([]);
   };
 
-
-  const deleteStatus=(e,flag)=>{
-    if(flag==1)
-    setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
-  }
+  const deleteStatus = (e, flag) => {
+    if (flag == 1) setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
+  };
 
   return (
     <>
@@ -149,11 +145,11 @@ function AccountManager() {
             />
           ) : (
             <PersonalTable
+              activityData={managerActivity}
               adminData={personaldata}
               tableCheck={isTableCheck}
               title1="Essai Account Manager Details"
               title2="Account Manager"
-              activityData={managerActivity}
             />
           )}
         </div>
@@ -170,17 +166,17 @@ function AccountManager() {
         <EditAdminForm
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
-          specificData={managerSpecificData}
           header="Are you sure you want to make this account manager  inactive?"
+          specificData={managerSpecificData}
           title="Edit an Account Manager role"
         />
       ) : null}
 
       {backgroundBlurDeleteManager ? (
         <ActiveStatus
+          confirm={deleteStatus}
           handleDeleteSubmit={handleDeleteSubmit}
           header="Are you sure you want to delete this Account Manager?"
-          confirm={deleteStatus}
         />
       ) : null}
 

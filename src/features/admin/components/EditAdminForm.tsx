@@ -1,8 +1,7 @@
-import { Button, Select } from "@/shared/components";
-import { ActiveStatus } from "@/features/ui";
 import { useState } from "react";
-import {AdminResObj} from "@/features/api"
-import {useForm} from "react-hook-form"
+import { useForm } from "react-hook-form";
+
+import { ActiveStatus } from "@/features/ui";
 
 interface EditAdminFormProps {
   handleEditBlur: () => void;
@@ -11,10 +10,10 @@ interface EditAdminFormProps {
   specificData: object;
   title: string;
   header: string;
-  adminId: number
+  adminId: number;
 }
 
-interface FormValues{
+interface FormValues {
   name: string;
   email: string;
 }
@@ -25,66 +24,54 @@ export function EditAdminForm({
   specificData,
   title,
   header,
-  adminId
+  adminId,
 }: EditAdminFormProps) {
   const [isStatus, setIsStatus] = useState(false);
-  const [activeVal,setActiveVal]=useState(null)
+  const [activeVal, setActiveVal] = useState(null);
 
-  const checkStatus = (e,flag) => {
-
-    if (e.target.value == "Inactive" || flag==1) {
-    setIsStatus((isStatus) => !isStatus);
+  const checkStatus = (e, flag) => {
+    if (e.target.value == "Inactive" || flag == 1) {
+      setIsStatus((isStatus) => !isStatus);
     }
-    if(flag==1){
-       setActiveVal("No")
-     
-    }else{
-      setActiveVal("Yes")
+    if (flag == 1) {
+      setActiveVal("No");
+    } else {
+      setActiveVal("Yes");
     }
   };
 
   const confirmStatus = (isActive: boolean) => {
-       
     setIsStatus((isStatus) => !isStatus);
-    
-    
-    
-
   };
 
   const selectOptionsStatus = [
     {
       option: "Select Status",
-     
     },
     {
       option: "Active",
-    
     },
     {
       option: "Inactive",
-   
     },
   ];
 
- 
+  const selectOptionRole = [
+    {
+      option: "Admin",
+      value: "admin",
+    },
+    {
+      option: "Super Admin",
+      value: "superadmin",
+    },
+    {
+      option: "Account Manager",
+      value: "accountmanager",
+    },
+  ];
 
-  const selectOptionRole=[{
-    option: "Admin",
-    value: "admin"
-  },{
-    option: "Super Admin",
-    value: "superadmin"
-  },{
-    option: "Account Manager",
-    value: "accountmanager"
-  }]
-
-
-  const {handleSubmit,register}=useForm<FormValues>()
-
-
-
+  const { handleSubmit, register } = useForm<FormValues>();
 
   return (
     <>
@@ -93,26 +80,38 @@ export function EditAdminForm({
           !isStatus ? `` : `opacity-[0.4]`
         } relative -mt-[180vh] pt-[40vh]`}
       >
-        <div
-          className={`relative z-20 mx-auto h-auto w-[40%] rounded-xl border-2 bg-[#FDFEFF]`}
-        >
-          <div className={`mx-auto relative lg:right-[2%] ${title!="Edit an Account Manager role"?`2xl:right-[9%]`:`2xl:right-[1%]`} flex h-[10vh] w-[100%] items-center justify-around`}>
+        <div className="relative z-20 mx-auto h-auto w-[40%] rounded-xl border-2 bg-[#FDFEFF]">
+          <div
+            className={`relative mx-auto lg:right-[2%] ${
+              title != "Edit an Account Manager role"
+                ? `2xl:right-[9%]`
+                : `2xl:right-[1%]`
+            } flex h-[10vh] w-[100%] items-center justify-around`}
+          >
             <div
               className="rounded-l-2 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
               onClick={handleEditBlur}
             >
               <img alt="back-icon" src="/images/backArrow.png" />
             </div>
-            <h1 className={`2xl:text-3xl 2xl:mr-0 relative  ${title=="Edit an Account Manager role"?`lg:text-[1.7rem] lg:mr-2 2xl:right-[2%]`: `lg:text-3xl lg:right-[2%] mr-14 2xl:right-[8.5%]`} font-bold text-[#3AB0FB]`}>{title}</h1>
+            <h1
+              className={`relative 2xl:mr-0 2xl:text-3xl  ${
+                title == "Edit an Account Manager role"
+                  ? `lg:mr-2 lg:text-[1.7rem] 2xl:right-[2%]`
+                  : `mr-14 lg:right-[2%] lg:text-3xl 2xl:right-[8.5%]`
+              } font-bold text-[#3AB0FB]`}
+            >
+              {title}
+            </h1>
           </div>
           <div className="mx-auto h-[20vh] w-[82%] p-2 font-sans font-bold leading-7">
             <div className="mt-2 flex">
               <span className="text-[#344054]">Name</span>
               <input
                 className="text-small relative left-8 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
-               defaultValue={specificData.username}
-                type="text"
+                defaultValue={specificData.username}
                 placeholder="Morgan Henderson"
+                type="text"
                 {...register("username")}
               />
               <br />
@@ -123,8 +122,8 @@ export function EditAdminForm({
               <input
                 className="text-small relative left-9 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                 defaultValue={specificData.email}
-                type="email"
                 placeholder="morgan@essai.com"
+                type="email"
                 {...register("email")}
               />
               <br />
@@ -135,13 +134,26 @@ export function EditAdminForm({
               <select
                 className="text-small relative left-3 h-[5vh]  w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
                 {...register("status")}
-                onChange={()=>checkStatus(event,0)}
-                
+                onChange={() => checkStatus(event, 0)}
               >
-                
-                {selectOptionsStatus.map((item,index)=>{
-                  return <option key={index} selected={(activeVal=="No" && item.option=="Active") || (specificData.is_active && item.option=="Active" && activeVal==null  || !specificData.is_active && item.option=="Inactive" && activeVal==null)?true : false}>{item.option}</option>
-                })}
+                {selectOptionsStatus.map((item, index) => (
+                  <option
+                    key={index}
+                    selected={
+                      !!(
+                        (activeVal == "No" && item.option == "Active") ||
+                        (specificData.is_active &&
+                          item.option == "Active" &&
+                          activeVal == null) ||
+                        (!specificData.is_active &&
+                          item.option == "Inactive" &&
+                          activeVal == null)
+                      )
+                    }
+                  >
+                    {item.option}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -150,13 +162,25 @@ export function EditAdminForm({
               <select
                 className="text-small font-small relative left-3 h-[5vh] w-[35%] rounded-md bg-[#EEEE] font-medium text-gray-400 outline-none"
                 {...register("role")}
-                
-           
               >
                 <option>Select Role</option>
-                {selectOptionRole.map((item,index)=>{
-                  return <option key={index} value={item.value} selected={specificData.is_admin && item.option=="Admin" || specificData.is_super_admin && item.option=="Super Admin" || specificData.is_account_manager && item.option=="Account Manager"?true: false}>{item.option}</option>
-                })}
+                {selectOptionRole.map((item, index) => (
+                  <option
+                    key={index}
+                    selected={
+                      !!(
+                        (specificData.is_admin && item.option == "Admin") ||
+                        (specificData.is_super_admin &&
+                          item.option == "Super Admin") ||
+                        (specificData.is_account_manager &&
+                          item.option == "Account Manager")
+                      )
+                    }
+                    value={item.value}
+                  >
+                    {item.option}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -171,7 +195,11 @@ export function EditAdminForm({
         </div>
       </div>
       {isStatus ? (
-        <ActiveStatus handleDeleteSubmit={confirmStatus} confirm={checkStatus} header={header} />
+        <ActiveStatus
+          confirm={checkStatus}
+          handleDeleteSubmit={confirmStatus}
+          header={header}
+        />
       ) : null}
     </>
   );

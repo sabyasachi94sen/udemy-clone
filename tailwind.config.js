@@ -8,12 +8,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["InterVariable", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: colors.blue,
+        primary: "#0ea5e9",
         secondary: colors.red,
-        neutral: colors.gray,
+        // neutral: colors.gray,
+        neutral: "#222",
       },
     },
   },

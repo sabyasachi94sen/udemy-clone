@@ -1,18 +1,14 @@
-import { useState,useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+
 import {
-  admininfo,
   AdminTable,
   CreateSuperAdminForm,
   EditSuperAdminForm,
 } from "@/features/admin";
+import { SuperAdminResObj } from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus } from "@/features/ui";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import  {SuperAdminResObj} from "@/features/api"
-import { toast, ToastContainer } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
 
 function SuperAdmin() {
   const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
@@ -21,131 +17,103 @@ function SuperAdmin() {
     useState(false);
 
   const [isTable, setIsTable] = useState(false);
-  const [specificSuperAdminData,setSpecificSuperAdminData]=useState({})
+  const [specificSuperAdminData, setSpecificSuperAdminData] = useState({});
   const [superAdminId, setSuperAdminId] = useState(null);
-  const [mutateParams,setMutateParams]=useState({mutateFunc: SuperAdminResObj.super_admin_info_submit,action: "create_user" })
+  const [mutateParams, setMutateParams] = useState({
+    mutateFunc: SuperAdminResObj.super_admin_info_submit,
+    action: "create_user",
+  });
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation(mutateParams.mutateFunc, {
     onSuccess: () => {
-
-      
-    
-      
-      if(mutateParams.action==="create_user")
-      setBackGroundBlurAddAdmin(
-        (!backgroundBlurAddAdmin)
-      );
-      else if(mutateParams.action==="edit_user"){
-        setBackGroundBlurEditAdmin(
-          (!backgroundBlurEditAdmin)
-        )
-    
-
-      }
-      else if(mutateParams.action==="delete_user"){
-        setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin)
+      if (mutateParams.action === "create_user")
+        setBackGroundBlurAddAdmin(!backgroundBlurAddAdmin);
+      else if (mutateParams.action === "edit_user") {
+        setBackGroundBlurEditAdmin(!backgroundBlurEditAdmin);
+      } else if (mutateParams.action === "delete_user") {
+        setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
       }
 
-      setTimeout(()=>{
+      setTimeout(() => {
         queryClient.invalidateQueries("super-admin-list");
-      },1000)
-
-      
+      }, 1000);
     },
-    onError: ()=>{
+    onError: () => {
       toast.error("This Email Already Exist", {
         position: toast.POSITION.TOP_CENTER,
       });
-    }
+    },
   });
 
   const { data } = useQuery(["super-admin-list"], () =>
     SuperAdminResObj.super_admin_info_list(),
   );
 
-
-
   const handleAddBlur = () => {
-    setBackGroundBlurAddAdmin(
-      (!backgroundBlurAddAdmin)
-    );
+    setBackGroundBlurAddAdmin(!backgroundBlurAddAdmin);
   };
 
-  const handleEditBlur = (id:string,superAdminData: object) => {
-    setBackGroundBlurEditAdmin(
-      (!backgroundBlurEditAdmin)
-    );
+  const handleEditBlur = (id: string, superAdminData: object) => {
+    setBackGroundBlurEditAdmin(!backgroundBlurEditAdmin);
 
     setSuperAdminId(id);
-    setSpecificSuperAdminData(superAdminData)
+    setSpecificSuperAdminData(superAdminData);
   };
 
   const handleDeleteBlur = (id) => {
-    setBackGroundBlurDeleteAdmin(
-      (!backgroundBlurDeleteAdmin)
-    );
+    setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
 
     setSuperAdminId(id);
   };
 
   const handleAddSubmit = (postData: object) => {
-    setMutateParams({mutateFunc: SuperAdminResObj.super_admin_info_submit,action: "create_user"})
-    setTimeout(()=>{
-      mutate(postData)
-    },1000)
-     
+    setMutateParams({
+      mutateFunc: SuperAdminResObj.super_admin_info_submit,
+      action: "create_user",
+    });
+    setTimeout(() => {
+      mutate(postData);
+    }, 1000);
   };
 
   const isTableCheck = () => {
-    setIsTable((!isTable));
+    setIsTable(!isTable);
   };
 
   const handleEditSubmit = (putData: object) => {
-  
-    const putDataObj={
+    const putDataObj = {
       data: putData,
-      id: superAdminId
-    }
-    setMutateParams({mutateFunc: SuperAdminResObj.super_admin_info_edit,action: "edit_user"})
+      id: superAdminId,
+    };
 
-    setTimeout(()=>{
-      mutate(putDataObj)
-    },1000)
-    
-  
-   
+    setMutateParams({
+      mutateFunc: SuperAdminResObj.super_admin_info_edit,
+      action: "edit_user",
+    });
+
+    setTimeout(() => {
+      mutate(putDataObj);
+    }, 1000);
   };
 
   const handleDeleteSubmit = (confirmStatus) => {
-  
-    if(confirmStatus){
-    setMutateParams({mutateFunc: SuperAdminResObj.super_admin_info_delete,action: "delete_user"})
-    setTimeout(()=>{
-     mutate(superAdminId)
-    },1000)
-  }
-  else{
-    setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin)
-  }
-
+    if (confirmStatus) {
+      setMutateParams({
+        mutateFunc: SuperAdminResObj.super_admin_info_delete,
+        action: "delete_user",
+      });
+      setTimeout(() => {
+        mutate(superAdminId);
+      }, 1000);
+    } else {
+      setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
+    }
   };
 
-
-
-
-  const deleteStatus=(e,flag)=>{
-    if(flag==1)
-    setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
-  }
- 
-
-
-  
-
-  
-
-
+  const deleteStatus = (e, flag) => {
+    if (flag == 1) setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
+  };
 
   return (
     <>
@@ -176,7 +144,6 @@ function SuperAdmin() {
         <CreateSuperAdminForm
           handleAddBlur={handleAddBlur}
           handleAddSubmit={handleAddSubmit}
-        
           title="Create Super Admin role"
         />
       ) : null}
@@ -185,20 +152,20 @@ function SuperAdmin() {
         <EditSuperAdminForm
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
-          specificData={specificSuperAdminData}
           header="Are you sure you want to make this Super Admin inactive?"
+          specificData={specificSuperAdminData}
           title="Edit a Super Admin role"
         />
       ) : null}
 
       {backgroundBlurDeleteAdmin ? (
         <ActiveStatus
-          header="Are you sure you want to delete this Super Admin?"
-          handleDeleteSubmit={handleDeleteSubmit}
           confirm={deleteStatus}
+          handleDeleteSubmit={handleDeleteSubmit}
+          header="Are you sure you want to delete this Super Admin?"
         />
       ) : null}
-       <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

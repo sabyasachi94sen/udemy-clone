@@ -1,6 +1,6 @@
-import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 import { AuthProvider } from "./auth.context";
 
@@ -38,12 +38,10 @@ function Providers({ children }: AppProvidersProps): JSX.Element {
 
 function AppProviders({ children }: AppProvidersProps): JSX.Element {
   return (
-    <>
-      <ReactQueryClientProvider>
-        <Providers>{children}</Providers>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </ReactQueryClientProvider>
-    </>
+    <ReactQueryClientProvider>
+      <Providers>{children}</Providers>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </ReactQueryClientProvider>
   );
 }
 

@@ -1,12 +1,13 @@
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
 
 import { loginObj } from "@/features/api";
 import { SetAuthToken, SetUserType } from "@/features/helpers";
-
-import "react-toastify/dist/ReactToastify.css";
+import { Button, Checkbox, Input } from "@/shared/components";
+import { useBackendErrors } from "@/shared/hooks/use-backend-errors";
+import { setToken } from "@/shared/utils";
 
 interface FormValues {
   email: string;
@@ -15,54 +16,74 @@ interface FormValues {
 
 export function LoginForm() {
   const router = useRouter();
+  const { displayErrorMessages } = useBackendErrors();
   const { register, handleSubmit } = useForm<FormValues>();
 
-  const handleLogin = (loginCreds: object) => {
-    const response = loginObj.login(loginCreds);
+  // TODO: add types
+  const loginMutation = useMutation(loginObj.login, {
+    onSuccess: (data) => {
+      setToken("auth", res.data.token);
+      setToken("userType", res.data.user_type);
 
-    response
-      .then((res) => {
-        if (res.status === 200) {
-          SetAuthToken(res.data.token);
-          SetUserType(res.data.user_type)
-          toast.success(
-            "Login Successful",
-            {
-              position: toast.POSITION.TOP_CENTER,
-            },
-          
-          );
-          setTimeout(() => {
-            router.push("/home");
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        toast.error(
-          err.response.data.errorMessage,
-          {
-            position: toast.POSITION.TOP_CENTER,
-          },
-          
-        );
-        toast.error(
-          err.response.data.errorType,
-          {
-            position: toast.POSITION.TOP_CENTER,
-          },
-          
-        );
-      });
+      // todo: to be removed
+      SetAuthToken(res.data.token);
+      SetUserType(res.data.user_type);
+
+      router.push({ pathname: "/home" });
+    },
+
+    onError: (error) => {
+      displayErrorMessages(error);
+    },
+  });
+
+  // const handleLogin = (loginCreds: object) => {
+  //   const response = loginObj.login(loginCreds);
+
+  //   response
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         SetAuthToken(res.data.token);
+  //         SetUserType(res.data.user_type);
+  //         toast.success("Login Successful", {
+  //           position: toast.POSITION.TOP_CENTER,
+  //         });
+  //         setTimeout(() => {}, 1000);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.response.data.errorMessage, {
+  //         position: toast.POSITION.TOP_CENTER,
+  //       });
+  //       toast.error(err.response.data.errorType, {
+  //         position: toast.POSITION.TOP_CENTER,
+  //       });
+  //     });
+  // };
+
+  const onSubmit = (data) => {
+    loginMutation.mutate(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
-      <div className="relative z-10 h-auto w-[60%] rounded-lg bg-white p-6 shadow-lg lg:left-[35%]  xl:left-[45%] 2xl:left-[60%]">
-        <h1 className="lg: mb-4 text-center text-3xl font-bold  text-[#0ea5e9] xl:text-3xl 2xl:text-3xl">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className=" relative z-10 h-auto w-[24rem] rounded-lg bg-white p-6 py-12  shadow-lg lg:left-[35%] xl:left-[45%] 2xl:left-[60%]">
+        <h1 className="mb-4 text-center text-3xl font-bold  tracking-wide text-primary xl:text-3xl 2xl:text-3xl">
           PIPPAMS
         </h1>
-        <h1 className="mb-6 text-center text-xl font-bold ">Login</h1>
-        <label
+        <h1 className="mb-6 text-center text-xl font-bold">Login</h1>
+        <div className="space-y-3">
+          <Input
+            label="Email"
+            {...register("email")}
+            // TODO: to be used with form vadlidation library
+            // isInvalid
+            // showErrorIcon
+            // invalidText="Invalid email"
+          />
+          <Input label="Password" {...register("password")} type="password" />
+        </div>
+        {/* <label
           className="text-md font-medium text-gray-900 dark:text-gray-300"
           htmlFor="email"
         >
@@ -75,9 +96,9 @@ export function LoginForm() {
             type="email"
             {...register("email")}
           />
-        </label>
+        </label> */}
 
-        <label
+        {/* <label
           className="text-md font-medium text-gray-900 dark:text-gray-300"
           htmlFor="password"
         >
@@ -90,12 +111,13 @@ export function LoginForm() {
             type="password"
             {...register("password")}
           />
-        </label>
+        </label> */}
 
-        <div className="mb-6 flex h-7 justify-between">
+        <div className="my-6 flex items-center justify-between">
           <div>
-            <label
-              className="text block font-bold text-gray-500"
+            <Checkbox label="Remember me" />
+            {/* <label
+              className="text block font-bold text-neutral"
               htmlFor="remember"
             >
               <input
@@ -105,23 +127,25 @@ export function LoginForm() {
                 type="checkbox"
               />
               <span className="ml-2 text-sm">Remember me</span>
-            </label>
+            </label> */}
           </div>
-          <Link href="/reset-password">
-            <p className="cursor-pointer font-sans text-sm text-[#0ea5e9]">
+          <Link href={{ pathname: "/reset-password" }}>
+            <p className="cursor-pointer font-sans text-sm text-primary">
               Forgot password?
             </p>
           </Link>
         </div>
 
-        <div className="mx-auto flex justify-center lg:mb-[8vh] xl:mb-[18vh] 2xl:mb-[16vh]">
-          <input
-            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500"
+        <div className="mx-auto flex justify-center">
+          <Button isLoading={loginMutation.isLoading} type="submit">
+            Login
+          </Button>
+          {/* <input
+            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9 py-2 font-bold text-white hover:bg-blue-500"
             type="submit"
             value="Login"
-          />
+          /> */}
         </div>
-        <ToastContainer autoClose={2000} />
       </div>
     </form>
   );

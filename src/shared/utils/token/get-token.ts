@@ -1,9 +1,8 @@
-
 import cookie from "js-cookie";
 
 import { AUTH_TOKEN_COOKIE } from "../constants";
 
-type TokenType = "auth";
+type TokenType = "auth" | "userType";
 
 export const getToken = (tokenType: TokenType): string | undefined => {
   if (tokenType === "auth") {

@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import toast from "react-hot-toast";
 
-import "react-toastify/dist/ReactToastify.css";
 import { PasswordResetObj } from "@/features/api";
 
 interface FormValues {
@@ -19,9 +18,7 @@ export function ResetPasswordOTPForm() {
 
     response
       .then((res) => {
-        toast.success(res.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        toast.success(res.data.message);
         setTimeout(() => {
           router.push({
             pathname: "/reset-password-req",
@@ -32,9 +29,7 @@ export function ResetPasswordOTPForm() {
         }, 1000);
       })
       .catch((err) => {
-        toast.error(err.response.data.Otp, {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        toast.error(err.response.data.Otp);
       });
   };
 
@@ -64,7 +59,6 @@ export function ResetPasswordOTPForm() {
             value="Next"
           />
         </div>
-        <ToastContainer autoClose={2000} />
       </form>
     </div>
   );
