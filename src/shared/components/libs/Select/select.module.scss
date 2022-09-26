@@ -1,6 +1,6 @@
 .select {
-  @apply mx-8 mt-8;
+  // @apply mx-8 mt-8;
   [class$="-control"] {
-    @apply rounded-md border-2 border-gray-300 shadow-sm hover:border-primary focus:border-primary;
+    @apply rounded-md border-2 border-gray-300 text-sm shadow-sm hover:border-primary focus:border-primary;
   }
 }

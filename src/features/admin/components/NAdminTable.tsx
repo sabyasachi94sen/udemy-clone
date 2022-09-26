@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 
-import { BaseTable } from "@/shared/components/libs/Table/BaseTable";
+import { BaseTable } from "@/shared/components/libs/BaseTable/BaseTable";
 
 interface NAdminTableProps {}
 

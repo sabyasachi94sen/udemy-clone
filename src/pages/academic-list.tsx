@@ -1,13 +1,19 @@
 import { useState } from "react";
 
-import { AcademicPersonalTable, AcademicTable } from "@/features/academic_plan";
+import {
+  AcademicPersonalTable,
+  AcademicTable,
+  AddActivityModal,
+} from "@/features/academic_plan";
 import { studentinfo } from "@/features/student";
+import { useModal } from "@/shared/stores/modal.store";
 
-function AcademicPlan() {
+export default function AcademicPlan() {
   const [isTable, setIsTable] = useState(false);
   const [addActivity, setAddActivity] = useState(false);
   const [storeActivityData, setStoreActivityData] = useState([]);
   const [count, setCount] = useState(0);
+  const { currModalKey, onModalOpen } = useModal();
 
   const addDataInTable = (data, index) => {
     setAddActivity((addActivity) => !addActivity);
@@ -46,24 +52,17 @@ function AcademicPlan() {
           )}
         </div>
       </div>
-      {/* <div className={!addActivity ? `bg-white` : `opacity-[0.3]`}>
+      {/* <Button onClick={() => onModalOpen("addActivity")}>OPEN MODAL</Button> */}
 
-      </div>
-
-      {addActivity ? (
-        <div className="relative z-10 -mt-[155vh] flex h-[170vh] w-full justify-center">
-          <AddActivityForm
+      {currModalKey === "addActivity" && (
+        <div className="relative z-10 flex h-[170vh] w-full justify-center">
+          <AddActivityModal
             activeData={storeActivityData}
             onClick1={addDataInTable}
             onClick2={isAddActive}
           />
         </div>
-      ) : (
-        ""
-      )} */}
+      )}
     </>
   );
 }
-
-export default AcademicPlan;
-AcademicPlan.isPublicRoute = true;

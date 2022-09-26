@@ -1,4 +1,3 @@
-
 /**
  * Reusable components project wide, which can be a npm package
  */
@@ -18,6 +17,7 @@ export { Toast } from "./Toast/Toast";
 export { Toggle } from "./Toggle/Toggle";
 export { Popover } from "./Popover/Popover";
 export { Button } from "./Button/Button";
-export { Table } from "./Table";
+export { BaseTable } from "./BaseTable/BaseTable";
 export { FullPageLoader } from "./FullPageLoader/FullPageLoader";
-export { DropdownMenu } from  "./DropdownMenu/DropdownMenu"
+export { DropdownMenu } from "./DropdownMenu/DropdownMenu";
+export { BaseModal } from "./BaseModal/BaseModal";

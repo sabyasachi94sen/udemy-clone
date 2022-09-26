@@ -17,7 +17,7 @@ interface HomeItemsVal {
   id: number;
 }
 
-function HomePage() {
+export default function HomePage() {
   const [homeItems, setHomeItems] = useState<HomeItemsVal[]>([]);
 
   useEffect(() => {
@@ -57,8 +57,3 @@ function HomePage() {
     // </div>
   );
 }
-
-export default HomePage;
-HomePage.isPublicRoute = true;
-
-// update comment

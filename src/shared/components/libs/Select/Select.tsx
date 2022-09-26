@@ -1,5 +1,8 @@
 import cx from "clsx";
-import ReactSelect, { components } from "react-select";
+import ReactSelect, {
+  GroupBase,
+  Props as ReactSelectProps,
+} from "react-select";
 // import { SelectorIcon } from "@heroicons/react/solid";
 
 import styles from "./select.module.scss";
@@ -19,7 +22,24 @@ const customStyles = {
   }),
 };
 
-export type SelectProps = {
+const WIDTH_MAPS = {
+  full: "w-full",
+  maxContent: "w-max",
+  "8": "w-8",
+  "16": "w-16",
+  "28": "w-28",
+  "32": "w-32",
+  "40": "w-40",
+  "64": "w-64",
+  "80": "w-80",
+  "96": "w-96",
+};
+
+export type SelectProps<
+  Option,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option> = GroupBase<Option>,
+> = {
   isRequired?: boolean;
   isDisabled?: boolean;
   isInvalid?: boolean;
@@ -35,37 +55,43 @@ export type SelectProps = {
   placeholder?: string;
   value?: string;
   onChange?: () => void;
-  width?: string;
-};
+  overrideStyles?: string;
+  width?: keyof typeof WIDTH_MAPS;
+  cornerText?: string;
+} & ReactSelectProps<Option, IsMulti, Group>;
 
-export function Select({
-  isRequired,
-  isDisabled,
-  isInvalid,
-  options,
-  isClearable = false,
-  cornerText,
-  optionalText,
-  label,
-  invalidText,
-  name,
-  isMultiSelect,
-  maxSelectableOptions = 3,
-  placeholder = null,
-  value,
-  onChange,
-  width = "w-full",
-
-  ...props
-}: SelectProps): JSX.Element {
+export function Select<
+  Option,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option> = GroupBase<Option>,
+>(props: SelectProps<Option, IsMulti, Group>): JSX.Element {
   // TODO : Write docs
+
+  const {
+    isClearable,
+    label,
+    isInvalid,
+    invalidText,
+    maxSelectableOptions = 3,
+    width = "full",
+    cornerText,
+    name,
+    value,
+    options,
+    isDisabled,
+    onChange,
+    isMulti,
+    defaultValue,
+    overrideStyles,
+    ...rest
+  } = props;
 
   return (
     <div className={cx(width)}>
       {label && (
-        <div className="flex justify-between mb-1">
+        <div className="mb-1 flex justify-between">
           <label
-            className={cx("text-neutral block text-sm font-medium", {
+            className={cx("block text-sm font-medium text-neutral", {
               "opacity-30": isDisabled,
               "!text-red-500": isInvalid,
             })}
@@ -75,25 +101,34 @@ export function Select({
           </label>
 
           {cornerText && (
-            <span className="text-gray-500 text-sm">{cornerText}</span>
+            <span className="text-sm text-gray-500">{cornerText}</span>
           )}
         </div>
       )}
       <ReactSelect
         className={styles.select}
-        components={{ DropdownIndicator }}
+        classNamePrefix="react-select"
+        components={{}}
+        defaultValue={defaultValue}
         isClearable={isClearable}
         isDisabled={isDisabled}
-        isMulti={isMultiSelect}
-        options={value?.length === maxSelectableOptions ? [] : options}
-        placeholder={placeholder}
-        styles={customStyles}
+        // menuPortalTarget={document.body}
+        noOptionsMessage={() => ""}
+        options={options}
+        styles={{ ...customStyles, ...overrideStyles }}
+        value={
+          isMulti
+            ? options.filter((c) => value.includes(c.value))
+            : options.find((c) => c.value === value)
+        }
+        onChange={(val) =>
+          isMulti ? onChange?.(val.map((c) => c.value)) : onChange?.(val.value)
+        }
         // menuIsOpen={false}
-        // styles={customStyles}
-        {...props}
+        {...rest}
       />
       {isInvalid && invalidText && (
-        <p className="mt-2 text-red-600 text-sm" id={`${name}-error`}>
+        <p className="mt-2 text-sm text-red-600" id={`${name}-error`}>
           {invalidText}
         </p>
       )}

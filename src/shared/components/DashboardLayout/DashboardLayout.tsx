@@ -1,4 +1,6 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
+import clsx from "clsx";
+import Link from "next/link";
 import { Fragment, useState } from "react";
 import { BiStats } from "react-icons/bi";
 import { FaClipboardList } from "react-icons/fa";
@@ -12,25 +14,21 @@ import {
 } from "react-icons/hi";
 
 const navigation = [
-  { name: "Home", href: "#", icon: HiHome, current: true },
+  { name: "Home", href: "/home", icon: HiHome, current: true },
   {
     name: "Academic Enrichment Plans (AEPs)",
-    href: "#",
+    href: "/home",
     icon: FaClipboardList,
     current: false,
   },
-  { name: "AEP Status Tracker", href: "#", icon: BiStats, current: false },
-  { name: "Settings", href: "#", icon: HiCog, current: false },
+  { name: "AEP Status Tracker", href: "/home", icon: BiStats, current: false },
+  { name: "Settings", href: "/home", icon: HiCog, current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "#" },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -94,36 +92,34 @@ export function DashboardLayout({ children }) {
                   </div>
                 </Transition.Child>
                 <div className="flex flex-shrink-0 items-center px-4">
-                  <img
-                    alt="Workflow"
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                  />
+                  <h1 className="text-2xl font-bold tracking-wide text-white">
+                    PIPPAMS
+                  </h1>
                 </div>
                 <div className="mt-5 h-0 flex-1 overflow-y-auto">
                   <nav className="space-y-1 px-2">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "group flex items-center rounded-md px-2 py-2 text-base font-medium",
-                        )}
-                        href={item.href}
-                      >
-                        <item.icon
-                          aria-hidden="true"
-                          className={classNames(
+                      <Link key={item.name} href={{ pathname: item.href }}>
+                        <div
+                          className={clsx(
                             item.current
-                              ? "text-gray-300"
-                              : "text-gray-400 group-hover:text-gray-300",
-                            "mr-4 h-6 w-6 flex-shrink-0",
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "group flex cursor-pointer items-center rounded-md px-2 py-2 text-base font-medium",
                           )}
-                        />
-                        {item.name}
-                      </a>
+                        >
+                          <item.icon
+                            aria-hidden="true"
+                            className={clsx(
+                              item.current
+                                ? "text-gray-300"
+                                : "text-gray-400 group-hover:text-gray-300",
+                              "mr-4 h-6 w-6 flex-shrink-0",
+                            )}
+                          />
+                          {item.name}
+                        </div>
+                      </Link>
                     ))}
                   </nav>
                 </div>
@@ -146,27 +142,27 @@ export function DashboardLayout({ children }) {
             <div className="flex flex-1 flex-col overflow-y-auto">
               <nav className="flex-1 space-y-1 px-2 py-4">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "group flex items-center rounded-md px-2 py-2 text-sm font-medium",
-                    )}
-                    href={item.href}
-                  >
-                    <item.icon
-                      aria-hidden="true"
-                      className={classNames(
+                  <Link key={item.name} href={{ pathname: item.href }}>
+                    <div
+                      className={clsx(
                         item.current
-                          ? "text-gray-300"
-                          : "text-gray-400 group-hover:text-gray-300",
-                        "mr-3 h-6 w-6 flex-shrink-0",
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "group flex cursor-pointer items-center rounded-md px-2 py-2 text-sm font-medium",
                       )}
-                    />
-                    {item.name}
-                  </a>
+                    >
+                      <item.icon
+                        aria-hidden="true"
+                        className={clsx(
+                          "mr-3 h-6 w-6 flex-shrink-0",
+                          item.current
+                            ? "text-gray-300"
+                            : "text-gray-400 group-hover:text-gray-300",
+                        )}
+                      />
+                      {item.name}
+                    </div>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -237,7 +233,7 @@ export function DashboardLayout({ children }) {
                         <Menu.Item key={item.name}>
                           {({ active }) => (
                             <a
-                              className={classNames(
+                              className={clsx(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700",
                               )}

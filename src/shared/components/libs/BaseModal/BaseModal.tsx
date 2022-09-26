@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, ReactNode } from "react";
+import { Fragment } from "react";
 import { RiCloseLine } from "react-icons/ri";
 
 export type BaseModalProps = React.PropsWithChildren<{
@@ -10,7 +10,7 @@ export type BaseModalProps = React.PropsWithChildren<{
   hasFooter?: boolean;
   hasHeader?: boolean;
   showHeaderCloseButton?: boolean;
-  isClosable: () => void;
+  isClosable?: () => void;
 }>;
 
 export function BaseModal({
@@ -33,26 +33,27 @@ export function BaseModal({
       <Transition appear as={Fragment} show={!!isOpen}>
         <Dialog
           as="div"
-          className="fixed z-10 inset-0 overflow-y-auto"
+          className="fixed inset-0 z-10 overflow-y-auto"
           onClose={isClosable && onRequestClose}
         >
-          <div className="px-4 min-h-screen text-center">
+          <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-200"
               enterFrom="opacity-0"
               enterTo="opacity-100"
               leave="ease-in duration-200"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
+              {/* <Dialog.Overlay className="fixed inset-0 " /> */}
               <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-30 backdrop-blur-lg backdrop-filter" />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
             <span
               aria-hidden="true"
-              className="inline-block align-middle h-screen"
+              className="inline-block h-screen align-middle"
             >
               &#8203;
             </span>
@@ -65,11 +66,11 @@ export function BaseModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block align-middle my-8 w-full max-w-md text-left bg-white rounded-md shadow-xl overflow-hidden transform transition-all">
+              <div className="my-8 inline-block transform overflow-hidden rounded-md bg-white text-left align-middle shadow-xl transition-all">
                 {hasHeader && (
                   <Dialog.Title
-                    as="h3"
-                    className="flex items-start justify-between px-6 py-4 text-gray-900 text-lg font-medium leading-6 bg-gray-50"
+                    as="h1"
+                    className="flex items-start justify-between bg-gray-50 px-6 py-4 text-lg font-bold"
                   >
                     {title}
 
@@ -78,7 +79,7 @@ export function BaseModal({
                         type="button"
                         onClick={isClosable && onRequestClose}
                       >
-                        <RiCloseLine className="text-2xl focus:outline-none opacity-75 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" />
+                        <RiCloseLine className="text-2xl opacity-75 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" />
                       </button>
                     )}
                   </Dialog.Title>
@@ -89,9 +90,9 @@ export function BaseModal({
                 {/*  */}
 
                 {hasFooter && (
-                  <div className="mt-4 px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:px-6">
+                  <div className="mt-4 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                     <button
-                      className="text-primary-900 bg-primary-100 hover:bg-primary-200 focus-visible:ring-primary-500 inline-flex justify-center px-4 py-2 text-sm font-medium border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-primary hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                       type="button"
                       onClick={isClosable && onRequestClose}
                     >
