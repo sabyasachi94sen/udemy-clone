@@ -1,10 +1,12 @@
+import { ParsedUrlQuery } from "querystring";
+
 import { SortingState } from "@tanstack/react-table";
 
 type UpdaterFn<T> = (previousState: T) => T;
 
 export const updateSortingState = (
   updater: UpdaterFn<SortingState>,
-  searchParams: URLSearchParams,
+  searchParams: ParsedUrlQuery,
 ) => {
   const previousState: SortingState = [
     {

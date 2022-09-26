@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 import {
   ColumnDef,
   flexRender,
@@ -121,7 +123,7 @@ export function BaseTable<T>({
   //   debugTable: true,
   // });
   const router = useRouter();
-  const getPaginationFromSearchParams = (searchParams) => {
+  const getPaginationFromSearchParams = (searchParams: ParsedUrlQuery) => {
     const { page, perPage } = searchParams;
     const pageIndex = page ? Number(page) - 1 : 0;
 
@@ -131,7 +133,7 @@ export function BaseTable<T>({
     };
   };
 
-  const getSortingFromSearchParams = (searchParams) => {
+  const getSortingFromSearchParams = (searchParams: ParsedUrlQuery) => {
     const { sortBy, sortDirection } = searchParams;
 
     if (!sortBy) return [];

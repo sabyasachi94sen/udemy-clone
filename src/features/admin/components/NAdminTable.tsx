@@ -1,6 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useMemo, useState } from "react";
 
 import { BaseTable } from "@/shared/components/libs/Table/BaseTable";
 
@@ -25,41 +27,33 @@ export function NAdminTable({}: NAdminTableProps): JSX.Element {
     ],
     [],
   );
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+
   const [pageCount, setPageCount] = useState(0);
-  const fetchData = useCallback(async ({ pageSize, pageIndex }) => {
-    // This will get called when the table needs new data
-    // You could fetch your data from literally anywhere,
-    // even a server. But for this example, we'll just fake it.
 
-    // Give this fetch an ID
+  const router = useRouter();
 
-    // Set the loading state
-    setLoading(true);
-
-    const d = await axios.get(
+  const { pageIndex, pageSize } = router;
+  const tableResult = useQuery(["key"], async () =>
+    axios.get(
       `https://jsonplaceholder.typicode.com/posts?_page=${pageIndex}&_limit=${pageSize}`,
-    );
+    ),
+  );
 
-    setData(d.data);
-
-    // Your server could send back total page count.
-    // For now we'll just fake it, too
-    setPageCount(50);
-
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchData({ pageSize: 10, pageIndex: 0 });
-  }, []);
+  console.log(
+    "file: NAdminTable.tsx ~ line 38 ~ NAdminTable ~ tableResult",
+    tableResult?.data,
+  );
+  // useEffect(() => {
+  //   fetchData({ pageSize: 50 || 10, pageIndex: pageIndex || 0 }).then(() => {
+  //     console.log(data);
+  //   });
+  // }, [pageSize, pageIndex]);
 
   return (
     <BaseTable
       {...{
-        data,
-        pageCount: 100,
+        data: tableResult?.data,
+        pageCount,
         columns,
       }}
     />

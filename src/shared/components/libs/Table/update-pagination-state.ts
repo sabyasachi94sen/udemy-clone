@@ -35,5 +35,5 @@ export const updatePaginationState = (
   // searchParams.set("page", String(newState.pageIndex + 1));
   // searchParams.set("perPage", newState.pageSize.toString());
 
-  return previousState;
+  return newState;
 };
