@@ -7,8 +7,6 @@ import {
   homeInfoAdmin,
   homeInfoSuperAdmin,
   HomeItems,
-  MenuBar,
-  Navbar,
 } from "@/features/home";
 
 interface HomeItemsVal {
@@ -27,21 +25,36 @@ function HomePage() {
 
     if (userType === "admin") setHomeItems(homeInfoAdmin);
     else if (userType === "super_admin") setHomeItems(homeInfoSuperAdmin);
-    else setHomeItems(homeInfoAccountManager)
+    else setHomeItems(homeInfoAccountManager);
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <div className="flex items-center">
-        <MenuBar />
-        <div className="-mt-48 flex h-screen w-[90%] flex-wrap justify-center rounded-md bg-white">
+    <div className="py-6">
+      {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+        <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+      </div> */}
+      <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-12 gap-6 rounded-md bg-white ">
           {homeItems.map((item) => (
             <HomeItems key={item.id} {...item} />
           ))}
         </div>
       </div>
     </div>
+    // <div>
+    //   <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+    //     <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+    //   </div>
+    //   {/* <Navbar /> */}
+    //   <div className="flex items-center">
+    //     {/* <MenuBar /> */}
+    //     <div className="flex h-screen w-[90%] flex-wrap justify-center rounded-md bg-white">
+    //       {homeItems.map((item) => (
+    //         <HomeItems key={item.id} {...item} />
+    //       ))}
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
