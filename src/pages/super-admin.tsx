@@ -2,11 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import {
-  AdminTable,
-  CreateSuperAdminForm,
-  EditSuperAdminForm,
-} from "@/features/admin";
+import { CreateSuperAdminForm, EditSuperAdminForm } from "@/features/admin";
 import { NAdminTable } from "@/features/admin/components/NAdminTable";
 import { SuperAdminResObj } from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
@@ -131,14 +127,14 @@ function SuperAdmin() {
           <MenuBar />
           <NAdminTable />
 
-          <AdminTable
+          {/* <AdminTable
             adminData={data && data?.data && data.data?.results}
             handleAddBlur={handleAddBlur}
             handleDeleteBlur={handleDeleteBlur}
             handleEditBlur={handleEditBlur}
             name="Essai Super Admin Roster"
             tableCheck={isTableCheck}
-          />
+          /> */}
         </div>
       </div>
       {backgroundBlurAddAdmin ? (
