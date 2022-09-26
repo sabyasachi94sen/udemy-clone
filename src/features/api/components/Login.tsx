@@ -1,20 +1,11 @@
-import axios from "axios";
+import { handleMutation } from "@/shared/services/api-client";
 
-const Login = async (loginCreds: object) => {
 
-  const config = {
-    method: "post",
-    url: "https://pippams-dev.eoraa.com/api/login/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(loginCreds),
-  };
-
-  const res = await axios(config);
-
-  return res;
-};
+const Login = (loginCreds: object) => handleMutation({
+    resourceUrl: "login",
+    method: "POST",
+    reqBody: loginCreds,
+  });
 
 export const loginObj = {
   login: Login,

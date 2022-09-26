@@ -1,27 +1,24 @@
+import { Slider } from "@material-ui/core";
 import { useState } from "react";
 
 interface ActivityDataBaseFormProps {
-  onClick1: () => void;
+  handleBackgroundBlur: () => void;
   name: string;
 }
 
 export function ActivityDataBaseForm({
-  onClick1,
+  handleBackgroundBlur,
   name,
 }: ActivityDataBaseFormProps) {
-  const [gradeVal, setGradeVal] = useState(0);
-  const [ageVal, setAgeVal] = useState(0);
+  const [gradeVal, setGradeVal] = useState([0, 100]);
+  const [ageVal, setAgeVal] = useState([0, 100]);
 
-  const handleGradeVal = (e) => {
-    const val = e.target.value;
-
-    setGradeVal(val);
+  const handleGradeVal = (e, data) => {
+    setGradeVal(data);
   };
 
-  const handleAgeVal = (e) => {
-    const val = e.target.value;
-
-    setAgeVal(val);
+  const handleAgeVal = (e, data) => {
+    setAgeVal(data);
   };
 
   return (
@@ -29,7 +26,7 @@ export function ActivityDataBaseForm({
       <div className="ml-7 flex h-[10vh] w-[60%] items-center justify-around">
         <div
           className="rounded-l-2 flex h-[5vh] w-[50px] cursor-pointer items-center justify-center shadow-lg"
-          onClick={onClick1}
+          onClick={handleBackgroundBlur}
         >
           <img alt="back-icon" src="/images/backArrow.png" />
         </div>
@@ -134,6 +131,26 @@ export function ActivityDataBaseForm({
             />
             <br />
           </div>
+
+          <div className="mt-4 mb-10 flex items-center">
+            <span className="text-md font-bold">Activity Start</span>
+            <input
+              className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+              name="name"
+              type="date"
+            />
+            <br />
+          </div>
+
+          <div className="mt-4 mb-10 flex items-center">
+            <span className="text-md font-bold">Activity End</span>
+            <input
+              className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+              name="name"
+              type="date"
+            />
+            <br />
+          </div>
         </div>
         <div className="h-auto w-[45%] border-l-2 border-l-cyan-400 pl-12">
           <h1 className="mb-6 text-lg font-bold text-[#6F6F6F]">
@@ -149,7 +166,7 @@ export function ActivityDataBaseForm({
             </select>
           </div>
 
-          <div className="mt-4 flex w-full items-center justify-between">
+          <div className="mt-4 flex w-[90%] items-center justify-between">
             <span className="text-md font-bold">Grade Range</span>
             {/* <div className="flex justify-around items-center w-[40%] ml-14">
                <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative" name="name" type="text"/><br />
@@ -157,21 +174,15 @@ export function ActivityDataBaseForm({
                  <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative ml-3" name="name" type="text"/><br />
 
                </div> */}
-            <div className="w-[60%]">
-              <input
-                className="h-2 w-full appearance-none bg-blue-100"
-                defaultValue={0}
-                max={100}
-                min={0}
-                name="range"
-                type="range"
-                onChange={handleGradeVal}
-              />
+            <span className="w-[2px]">{gradeVal[0]}</span>
+            <div className="w-[50%]">
+              <Slider value={gradeVal} onChange={handleGradeVal} />
             </div>
-            <span className="w-[2px]">{gradeVal}</span>
+
+            <span className="w-[2px]">{gradeVal[1]}</span>
           </div>
 
-          <div className="mt-4 flex w-full items-center justify-between">
+          <div className="mt-4 flex w-[90%] items-center justify-between">
             <span className="text-md font-bold">Age Range</span>
             {/* <div className="flex justify-around items-center w-[40%] ml-[4.6vw]">
                 <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative" name="name" type="text"/><br />
@@ -179,18 +190,14 @@ export function ActivityDataBaseForm({
                 <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative ml-3" name="name" type="text"/><br />
 
               </div> */}
-            <div className="ml-[4%] w-[60%]">
-              <input
-                className="h-2 w-full appearance-none bg-blue-100"
-                defaultValue={0}
-                max={100}
-                min={0}
-                name="range"
-                type="range"
-                onChange={handleAgeVal}
-              />
+
+            <span className="w-[2px] ml-4">{ageVal[0]}</span>
+
+            <div className="w-[50%]">
+              <Slider value={ageVal} onChange={handleAgeVal} />
             </div>
-            <span className="w-[2px]">{ageVal}</span>
+
+            <span className="w-[2px]">{ageVal[1]}</span>
           </div>
           <div className="text-md mt-5 flex w-[60%] flex-col">
             <p className="text-md font-bold font-bold ">
@@ -218,11 +225,22 @@ export function ActivityDataBaseForm({
             <h1 className="text-lg font-bold text-[#6F6F6F]">Remarks</h1>
             <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" />
           </div>
+
+          <div className="mt-10 mb-10 flex items-center">
+            <span className="text-md font-bold">Last Update Date</span>
+            <input
+              className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+              name="name"
+              type="date"
+            />
+            <br />
+          </div>
         </div>
       </div>
+      {name!=="View an activity to the database"?
       <button className="mx-auto mt-10 mb-10 flex h-[5vh] w-[15%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600">
-        Save{" "}
-      </button>
+        Save
+      </button>:  null}
     </div>
   );
 }

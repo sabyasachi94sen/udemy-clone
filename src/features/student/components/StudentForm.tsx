@@ -125,7 +125,7 @@ export function StudentForm({
               {...register("account_manager")}
             >
               <option>Select account manager</option>
-              {data && data?.data.map((item,index)=><option key={index} value={item.id}>{item && item?.username}</option>)}
+              {data && data.map((item,index)=><option key={index} value={item.id}>{item && item?.username}</option>)}
             </select>
           </div>
           <div className="flex w-[37%] flex-col items-start text-lg font-bold">
@@ -160,12 +160,13 @@ export function StudentForm({
         <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" />
       </div>
       <div className="mx-auto mt-8 mb-10 w-[8%] font-bold">
+        {title!=="View a student to the roster"?
         <Button
           className="h-[6vh] w-[100%] rounded-md"
           onClick={handleSubmit(handleForm)}
         >
           Save
-        </Button>
+        </Button>: null}
       </div>
     </div>
   );

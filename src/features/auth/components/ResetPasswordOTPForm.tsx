@@ -1,41 +1,72 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query"
 import { toast, ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { PasswordResetObj } from "@/features/api";
 
+
 interface FormValues {
-  otp: number;
+  otp: string;
+}
+
+interface mutateVal{
+
+  email: string,
+  otp: string | undefined,
+  
+}
+
+interface ResponseVal{
+  message: string
+}
+
+
+interface ErrorVal{
+  data: {
+    Otp: string
+  }
 }
 
 export function ResetPasswordOTPForm() {
   const { register, handleSubmit } = useForm<FormValues>();
   const router = useRouter();
 
-  const handleOTP = (otp: object) => {
-    const { email } = router.query;
-    const response = PasswordResetObj.verify_otp(email as string, otp);
-
-    response
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-        setTimeout(() => {
-          router.push({
-            pathname: "/reset-password-req",
-            query: {
-              email,
-            },
-          });
-        }, 1000);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.Otp, {
-          position: toast.POSITION.TOP_CENTER,
-        });
+  const { mutate } =useMutation(PasswordResetObj.verify_otp,{
+    onSuccess: (res:ResponseVal,mutateObj: mutateVal)=>{
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_CENTER,
       });
+      setTimeout(() => {
+        router.push({
+          pathname: "/reset-password-req",
+          query: {
+            email: mutateObj.email
+          },
+        });
+      }, 1000);
+    },
+
+    onError: (err:ErrorVal)=>{
+      toast.error(err.data.Otp, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  })
+  const handleOTP = (otp: FormValues) => {
+    const { email } = router.query;
+
+
+
+    const mutateObj={
+      email,
+      ...otp,
+    }
+    
+   
+    mutate(mutateObj)
+
   };
 
   return (

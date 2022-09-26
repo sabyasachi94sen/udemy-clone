@@ -1,13 +1,13 @@
 import { useState } from "react"
 
 interface AddActivityFormProps{
-  onClick1: ()=>void;
-  onClick2: ()=>void;
+  addDataInTable: ()=>void;
+  isAddActive: ()=>void;
   activeData: {}[]
 }
    
 
-export function AddActivityForm({onClick1,onClick2,activeData}: AddActivityFormProps){
+export function AddActivityForm({addDataInTable,isAddActive,activeData}: AddActivityFormProps){
 
     const [storeActivityData,setStoreActivityData]=useState({type: "", subject: ""})
     const [activityTableData,setActivityTableData]=useState([])
@@ -35,7 +35,7 @@ export function AddActivityForm({onClick1,onClick2,activeData}: AddActivityFormP
         <>
           <div className="w-[70%] h-[90vh] bg-white border-2 rounded-lg mt-10 pb-10">
              <div className="w-[80%] h-[10vh] flex justify-around items-center ml-20">
-                 <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer" onClick={onClick2}>
+                 <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer" onClick={isAddActive}>
                  <img alt="back-icon" src="/images/backArrow.png"/>
                 </div>
               <h1 className="text-3xl font-bold ml-3 text-cyan-500">Add activity to Academic Enrichment Plan (Student)</h1>
@@ -91,7 +91,7 @@ export function AddActivityForm({onClick1,onClick2,activeData}: AddActivityFormP
                     <td className="w-[7%] text-center">21/02/2022</td>
                     <td className="w-[5%] pl-1"><input type="text" name="remarks" className="w-full h-[4vh] break-all mx-auto rounded-md bg-cyan-300">
                         </input></td>
-                    <td className="w-[5%] text-center"><button onClick={()=>onClick1(activityTableData,index)} className="w-[80%] h-[4vh] text-white hover:bg-blue-500 bg-[#3AB0FB] rounded-lg">Add</button></td>
+                    <td className="w-[5%] text-center"><button onClick={()=>addDataInTable(activityTableData,index)} className="w-[80%] h-[4vh] text-white hover:bg-blue-500 bg-[#3AB0FB] rounded-lg">Add</button></td>
                 </tr>
             })}
           </tbody>

@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 import {
   ActionMapForm,
   ActivityDataBaseForm,
   ActivityDataBasePersonalTable,
-  ActivityDataBaseTable,
-  activityinfo,
-  activitypersonalinfo,
+  activityinfo
 } from "@/features/activitydb";
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus } from "@/features/ui";
@@ -16,38 +14,44 @@ function Activity() {
   const [isMap, setIsMap] = useState(false);
   const [addBackBlur, setAddBackBlur] = useState(false);
   const [editBackBlur, setEditBackBlur] = useState(false);
+  const [viewBackBlur,setViewBackBlur]=useState(false)
   const [deleteBackBlur, setDeleteBackBlur] = useState(false);
 
   const isActivityTable = () => {
-    setIsTable((isTable) => !isTable);
+    setIsTable(!isTable);
   };
 
-  const setBackgroundBlurOnMap = () => {
-    setIsMap((isMap) => !isMap);
+  const handleBackgroundBlurOnMap = () => {
+    setIsMap(!isMap);
   };
 
-  const setBackgroundBlurOnAdd = () => {
-    setAddBackBlur((addBackBlur) => !addBackBlur);
+  const handleBackgroundBlurOnAdd = () => {
+    setAddBackBlur(!addBackBlur);
   };
 
-  const setBackgroundBlurOnEdit = () => {
-    setEditBackBlur((editBackBlur) => !editBackBlur);
+  const handleBackgroundBlurOnEdit = () => {
+    setEditBackBlur(!editBackBlur);
   };
 
-  const setBackgroundBlurOnDelete = () => {
-    setDeleteBackBlur((deleteBackBlur) => !deleteBackBlur);
+
+  const handleBackgroundBlurOnView=()=>{
+    setViewBackBlur(!viewBackBlur)
+  }
+
+  const handleBackgroundBlurOnDelete = () => {
+    setDeleteBackBlur(!deleteBackBlur);
   };
 
-  const deleteStatus=(e,flag)=>{
-    if(flag==1)
-    setDeleteBackBlur((deleteBackBlur) => !deleteBackBlur);
+  const deleteStatus=(e: SyntheticEvent,flag:number)=>{
+    if(flag===1)
+    setDeleteBackBlur(!deleteBackBlur);
   }
 
   return (
     <>
       <div
         className={
-          !addBackBlur && !editBackBlur && !isMap && !deleteBackBlur
+          !addBackBlur && !editBackBlur && !viewBackBlur && !isMap && !deleteBackBlur
             ? `bg-white`
             : `opacity-[0.2]`
         }
@@ -55,45 +59,51 @@ function Activity() {
         <Navbar />
         <div className="z-0 flex items-center">
           <MenuBar />
-          {!isTable ? (
-            <ActivityDataBaseTable
-              activityData={activityinfo}
-              onClick={isActivityTable}
+         
+          <ActivityDataBasePersonalTable
+            activityData={activityinfo}
+            handleBackgroundBlurOnAdd={handleBackgroundBlurOnAdd}
+            handleBackgroundBlurOnEdit={handleBackgroundBlurOnEdit}
+            handleBackgroundBlurOnMap={handleBackgroundBlurOnMap}
+            handleBackgroundBlurOnView={handleBackgroundBlurOnView}
+            handleBackgroundBlurOnDelete={handleBackgroundBlurOnDelete}
+            isActivityTable={isActivityTable}
             />
-          ) : (
-            <ActivityDataBasePersonalTable
-              activityData={activitypersonalinfo}
-              onClick1={setBackgroundBlurOnAdd}
-              onClick2={setBackgroundBlurOnEdit}
-              onClick3={setBackgroundBlurOnMap}
-              onClick4={setBackgroundBlurOnDelete}
-              onClick5={isActivityTable}
-            />
-          )}
+          
         </div>
       </div>
 
       {addBackBlur ? (
         <ActivityDataBaseForm
           name="Add an activity to the database"
-          onClick1={setBackgroundBlurOnAdd}
+          handleBackgroundBlur={handleBackgroundBlurOnAdd}
         />
       ) : null}
 
       {editBackBlur ? (
         <ActivityDataBaseForm
           name="Edit an activity to the database"
-          onClick1={setBackgroundBlurOnEdit}
+          handleBackgroundBlur={handleBackgroundBlurOnEdit}
         />
       ) : null}
 
-      {isMap ? <ActionMapForm onClick1={setBackgroundBlurOnMap} /> : null}
+      {viewBackBlur ? (
+        <ActivityDataBaseForm
+          name="View an activity to the database"
+          handleBackgroundBlur={handleBackgroundBlurOnView}
+        />
+      ) : null}
+
+
+
+
+      {isMap ? <ActionMapForm handleBackgroundBlurOnMap={handleBackgroundBlurOnMap} /> : null}
 
       {deleteBackBlur ? (
         <ActiveStatus
-          header="Are you sure you want to delete this Activity?"
-          handleDeleteSubmit={setBackgroundBlurOnDelete}
           confirm={deleteStatus}
+          handleDeleteSubmit={handleBackgroundBlurOnDelete}
+          header="Are you sure you want to delete this Activity?"
         />
       ) : null}
     </>

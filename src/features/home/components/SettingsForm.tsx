@@ -1,8 +1,28 @@
 import Link from "next/link";
+import { useEffect,useState } from "react"
 
+import { GetLoginCreds } from "@/features/helpers";
 import { Button } from "@/shared/components";
 
+
+
+
 export function SettingsForm() {
+  
+  const [loginData,setLoginData]=useState({})
+
+  useEffect(()=>{
+    const login_creds=GetLoginCreds()
+    const userName=login_creds && login_creds?.email.split("@")[0]
+    const loginObj={
+      name: userName,
+      email: login_creds.email,
+    }
+
+    setLoginData(loginObj)
+ 
+  },[])
+
   return (
     <div className="-mt-24 h-auto w-[40%] rounded-lg bg-white bg-cyan-100 pt-6 pl-24 pr-24 shadow-lg">
       <div className="mb-12">
@@ -18,6 +38,7 @@ export function SettingsForm() {
         <input
           disabled
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
+          defaultValue={loginData && loginData?.name}
           name="name"
           type="text"
         />
@@ -28,6 +49,7 @@ export function SettingsForm() {
         <input
           disabled
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
+          defaultValue={loginData && loginData?.email}
           name="email"
           type="email"
         />

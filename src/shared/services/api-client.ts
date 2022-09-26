@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosInstance, AxiosError } from "axios";
 
 import { APP_API_ENDPOINT } from "@/config";
 import { getToken } from "@/shared/utils";
+import { GetAuthToken } from "@/features/helpers";
 
 // https://typescript.tv/best-practices/error-ts1196-catch-clause-variable-type-annotation/#Type-Guards
 // Type guard with "type predicate"
@@ -10,6 +11,8 @@ function isAxiosError(candidate: {
 }): candidate is AxiosError {
   return candidate.isAxiosError === true;
 }
+
+
 
 // Axios instance
 const api: AxiosInstance = axios.create({
@@ -41,6 +44,9 @@ export const handleQuery = async <TResponse, TQuery>(config: {
       method: "GET",
       url: `${APP_API_ENDPOINT}${config.resourceUrl}`,
       ...(config.queryParams && { params: { ...config.queryParams } }), // Pass params if there's query object passed
+      headers:{
+        Authorization : GetAuthToken()
+      },
     });
 
     return await Promise.resolve(response.data);
@@ -66,11 +72,16 @@ export const handleMutation = async <TResponse, TBody>(config: {
     return Promise.reject(new Error("Pass a valid method"));
   }
 
+  console.log(APP_API_ENDPOINT)
+
   try {
     const response = await api.request({
       method: `${config.method}`,
       url: `${APP_API_ENDPOINT}${config.resourceUrl}/`,
       ...(config.reqBody && { data: config.reqBody }),
+      headers: {
+        Authorization: GetAuthToken()
+      }
     });
 
     return await Promise.resolve(response.data);

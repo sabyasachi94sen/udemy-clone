@@ -6,6 +6,8 @@ import {
 } from "@/features/academic_plan";
 import { Navbar, MenuBar } from "@/features/home";
 import { useState } from "react";
+import {AepResObj} from "@/features/api"
+import {useQuery,useMutation,useQueryClient} from "react-query"
 
 function AcademicPlan() {
   const [isTable, setIsTable] = useState(false);
@@ -34,6 +36,10 @@ function AcademicPlan() {
     setAddActivity((addActivity) => !addActivity);
   };
 
+
+  const {data}=useQuery(["aep-list"],()=> AepResObj.aep_list())
+  console.log(data)
+
   return (
     <>
       <div className={!addActivity ? `bg-white` : `opacity-[0.3]`}>
@@ -41,11 +47,12 @@ function AcademicPlan() {
         <div className="z-0 flex items-center">
           <MenuBar />
           {!isTable ? (
-            <AcademicTable academicData={studentinfo} onClick1={setTable} />
+            <AcademicTable academicData={data && data?.data} setTable={setTable} />
           ) : (
             <AcademicPersonalTable
-              onClick1={isAddActive}
-              onClick2={deleteDataInTable}
+              isAddActive={isAddActive}
+              deleteDataInTable={deleteDataInTable}
+              setTable={setTable}
               activityData={storeActivityData}
             />
           )}
@@ -55,8 +62,8 @@ function AcademicPlan() {
       {addActivity ? (
         <div className="relative z-10 -mt-[155vh] flex h-[170vh] w-full justify-center">
           <AddActivityForm
-            onClick1={addDataInTable}
-            onClick2={isAddActive}
+            addDataInTable={addDataInTable}
+            isAddActive={isAddActive}
             activeData={storeActivityData}
           />
         </div>

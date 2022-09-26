@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query"
 import { toast, ToastContainer } from "react-toastify";
 
 import { PasswordResetObj } from "@/features/api";
@@ -11,33 +12,54 @@ interface FormValues {
   confirm_password: string;
 }
 
+
+
+interface ResponseVal{
+  password: string
+}
+
+
+interface ErrorVal{
+  data: {
+    password: string
+  }
+}
+
 export function ResetPasswordReqForm() {
   const { register, handleSubmit } = useForm<FormValues>();
-
   const router = useRouter();
   const { email } = router.query;
-  const handleConfirmPassword = (password: object) => {
-    const response = PasswordResetObj.confirm_password(
-      email as string,
-      password,
-    );
 
-    response
-      .then((res) => {
-        toast.success(res.data.password, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-        setTimeout(() => {
-          router.push({
-            pathname: "/reset-password-success",
-          });
-        }, 1000);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.password, {
-          position: toast.POSITION.TOP_CENTER,
-        });
+  const { mutate } =useMutation(PasswordResetObj.confirm_password,{
+    onSuccess: (res: ResponseVal)=>{
+      toast.success(res.password, {
+        position: toast.POSITION.TOP_CENTER,
       });
+      setTimeout(() => {
+        router.push({
+          pathname: "/reset-password-success",
+        });
+      }, 1000);
+    },
+
+    onError:(err: ErrorVal)=>{
+      toast.error(err.data.password, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  })
+
+ 
+  const handleConfirmPassword = (password: FormValues) => {
+   
+  const mutateObj={
+    email,
+    ...password
+  }
+  
+
+  mutate(mutateObj)
+
   };
 
   return (

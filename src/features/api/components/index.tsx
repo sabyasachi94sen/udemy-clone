@@ -1,6 +1,8 @@
 export { loginObj } from "./Login"
 export { PasswordResetObj } from "./PasswordReset";
-export { AdminResObj } from "./Admin"
-export { SuperAdminResObj } from "./SuperAdmin";
-export { StudentResObj } from "./Students"
-export { AccountManagerResObj } from "./AccountManager"
+export { AdminResObj ,AdminPutDataObjVal,AdminPostDataObjVal } from "./Admin"
+export { SuperAdminResObj,SuperAdminPutDataObjVal ,SuperAdminPostDataObjVal} from "./SuperAdmin";
+export { StudentResObj ,StudentPostDataObjVal,StudentPutDataObjVal} from "./Students"
+export { AccountManagerResObj,ManagerPostDataObjVal,ManagerPutDataObjVal
+} from "./AccountManager"
+export { AepResObj } from "./AEP"

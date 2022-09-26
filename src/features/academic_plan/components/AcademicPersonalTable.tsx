@@ -2,12 +2,13 @@ import {AddActivityForm} from "@/features/academic_plan"
 import { useState } from "react"
 
 interface AcademicPersonalTableProps{
-  onClick1: ()=>void;
-  onClick2: ()=>void
+  isAddActive: ()=>void;
+  deleteDataInTable: ()=>void;
+  setTable: ()=>void;
   activityData: {}[]
 }
 
-export function AcademicPersonalTable({onClick1,onClick2,activityData}: AcademicPersonalTableProps){
+export function AcademicPersonalTable({isAddActive,deleteDataInTable,setTable,activityData}: AcademicPersonalTableProps){
 
  
 
@@ -17,7 +18,7 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
       <div className="w-[90%] h-screen rounded-md -mt-44 z-0 relative">
         <div>
           <div className="w-[55%] h-[10vh] flex justify-around items-center ml-16">
-             <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer">
+             <div className="w-[50px] shadow-lg rounded-l-2 h-[5vh] flex items-center justify-center cursor-pointer" onClick={setTable}>
                <img alt="back-icon" src="/images/backArrow.png"/>
              </div>
           <h1 className="text-3xl font-bold ml-3">Academic Enrichment Plan (student)</h1>
@@ -35,7 +36,7 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
              <div className="w-[60%] h-[7vh] flex justify-around ml-2 text-white
              ">
                 <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md">View AEP Status Tracker (student)</button>
-                <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" onClick={onClick1}>Update AEP</button>
+                <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" onClick={isAddActive}>Update AEP</button>
              </div>
         </div>
         {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[95%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
@@ -59,7 +60,7 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
                    <td className="">Type</td>
                    <td className="">Subject</td>
                    <td className="">Country of Activity</td>
-                   <td className="">Applicatio  of requirements</td>
+                   <td className="">Application of requirements</td>
                    <td className="">Application deadline</td>
                    <td className="">Activity start date</td>
                    <td className="">Complete</td>
@@ -94,7 +95,7 @@ export function AcademicPersonalTable({onClick1,onClick2,activityData}: Academic
              <input className="leading-tight h-[5vh] w-[50%] relative top-[2px] relative" id="complete-task" name="complete" type="checkbox" />
   
            </label></td>
-           <td className="cursor-pointer"><img alt="delete-icon" onClick={()=>onClick2(activityData,index)} src="/images/delete.png" className="block mx-auto"/></td>
+           <td className="cursor-pointer"><img alt="delete-icon" onClick={()=>deleteDataInTable(activityData,index)} src="/images/delete.png" className="block mx-auto"/></td>
             </tr>
           })}
             

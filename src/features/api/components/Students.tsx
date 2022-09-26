@@ -1,31 +1,44 @@
-import axios from "axios";
 
-import { GetAuthToken } from "@/features/helpers"
+import { handleMutation ,handleQuery } from "@/shared/services/api-client"
 
-
-
-
-const StudentInfoList=()=>{
-    const token=GetAuthToken()
-
-    const config={
-        method: "get",
-        url: "https://pippams-dev.eoraa.com/api/student/list/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    return axios(config);
+export interface StudentPostDataObjVal {
+    student_name:               string;
+    date_of_birth:              Date;
+    current_grade:              string;
+    country_of_residence:       string;
+    city_of_residence:          string;
+    country_of_citizenship:     string;
+    account_manager:            string;
+    is_active:                  string;
+    country_of_boarding_school: string;
 }
 
 
-const StudentInfoAdd=(postData: object)=>{
-   
+export interface StudentPutDataObjVal {
+    data: StudentPayloadData;
+    id:   number;
+}
 
+export interface StudentPayloadData {
+    student_name:               string;
+    date_of_birth:              Date;
+    current_grade:              string;
+    country_of_residence:       string;
+    city_of_residence:          string;
+    country_of_citizenship:     string;
+    account_manager:            string;
+    is_active:                  string;
+    country_of_boarding_school: string;
+}
+
+
+
+const StudentInfoList=()=>handleQuery({ resourceUrl: "student/list" })
+
+
+const StudentInfoAdd=(postData: StudentPostDataObjVal)=>{
+
+   
 
      const randNum=Math.floor(Math.random()*10000000)
     
@@ -39,7 +52,7 @@ const StudentInfoAdd=(postData: object)=>{
             current_grade :postData.current_grade,
             country_of_boarding_school :postData.country_of_boarding_school,
             country_of_citizenship :postData.country_of_citizenship,
-            is_active :postData.is_active==="active"?true:false,
+            is_active :postData.is_active==="active",
             residence : {
             city_of_residence :postData.city_of_residence,
             country_of_residence :postData.country_of_residence,
@@ -53,28 +66,21 @@ const StudentInfoAdd=(postData: object)=>{
     })
      
  
-     const token=GetAuthToken()
- 
-     const config={
-         method: "post",
-         url: "https://pippams-dev.eoraa.com/api/student/register/",
-         headers: {
-             "Content-Type": "application/json",
-              "Authorization": token,
-           },
-           
-           data: jsonObj
-     }
- 
-     axios(config)
+   
+
+     
+  handleMutation({
+    resourceUrl: "student/register",
+    method: "POST",
+    reqBody: jsonObj,
+  })
  }
 
 
-const StudentInfoEdit=(putDataObj:object)=>{
+const StudentInfoEdit=(putDataObj:StudentPutDataObjVal)=>{
 
     
- 
-     const token=GetAuthToken()
+
      const userId=putDataObj.id;
      const studentDetails={
         ...putDataObj.data
@@ -90,7 +96,7 @@ const StudentInfoEdit=(putDataObj:object)=>{
             current_grade :studentDetails.current_grade,
             country_of_boarding_school :studentDetails.country_of_boarding_school,
             country_of_citizenship :studentDetails.country_of_citizenship,
-            is_active :studentDetails.is_active==="active"?true:false,
+            is_active :studentDetails.is_active==="active",
             residence : {
             city_of_residence :studentDetails.city_of_residence,
             country_of_residence :studentDetails.country_of_residence,
@@ -103,58 +109,31 @@ const StudentInfoEdit=(putDataObj:object)=>{
       
     })
  
-     const config={
-         method: "put",
-         url: "https://pippams-dev.eoraa.com/api/student/ud/"+userId+"/",
-         headers: {
-             "Content-Type": "application/json",
-              "Authorization": token,
-           },
-           
-           data: jsonObj
-     }
- 
-     axios(config)
+   
+
+     handleMutation({
+        resourceUrl: `student/ud/${userId}`,
+        method: "PUT",
+        reqBody: jsonObj,
+      })
+    
+    
  }
  
 
  const StudentInfoDelete=(userId:string)=>{
 
     
- 
-    const token=GetAuthToken()
-    
-   
-    const config={
-        method: "delete",
-        url: "https://pippams-dev.eoraa.com/api/student/ud/"+userId+"/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
 
-    axios(config)
+    handleMutation({
+        resourceUrl: `student/ud/${userId}`,
+        method: "DELETE",
+       
+      })
+
 }
 
- const ManagerList=()=>{
-
-    const token=GetAuthToken()
-    const config={
-        method: "get",
-        url: "https://pippams-dev.eoraa.com/api/assigned_account_managers/list/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    return axios(config)
-}
+ const ManagerList=()=>handleQuery({ resourceUrl: `assigned_account_managers/list` })
 
 
 export const StudentResObj={
