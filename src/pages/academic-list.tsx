@@ -1,11 +1,7 @@
-import { studentinfo } from "@/features/student";
-import {
-  AcademicTable,
-  AcademicPersonalTable,
-  AddActivityForm,
-} from "@/features/academic_plan";
-import { Navbar, MenuBar } from "@/features/home";
 import { useState } from "react";
+
+import { AcademicPersonalTable, AcademicTable } from "@/features/academic_plan";
+import { studentinfo } from "@/features/student";
 
 function AcademicPlan() {
   const [isTable, setIsTable] = useState(false);
@@ -16,6 +12,7 @@ function AcademicPlan() {
   const addDataInTable = (data, index) => {
     setAddActivity((addActivity) => !addActivity);
     const tempArr = storeActivityData;
+
     tempArr.push(data[index]);
     setStoreActivityData(storeActivityData);
   };
@@ -36,33 +33,34 @@ function AcademicPlan() {
 
   return (
     <>
-      <div className={!addActivity ? `bg-white` : `opacity-[0.3]`}>
-        <Navbar />
-        <div className="z-0 flex items-center">
-          <MenuBar />
+      <div className="py-6">
+        <div>
           {!isTable ? (
             <AcademicTable academicData={studentinfo} onClick1={setTable} />
           ) : (
             <AcademicPersonalTable
+              activityData={storeActivityData}
               onClick1={isAddActive}
               onClick2={deleteDataInTable}
-              activityData={storeActivityData}
             />
           )}
         </div>
+      </div>
+      {/* <div className={!addActivity ? `bg-white` : `opacity-[0.3]`}>
+
       </div>
 
       {addActivity ? (
         <div className="relative z-10 -mt-[155vh] flex h-[170vh] w-full justify-center">
           <AddActivityForm
+            activeData={storeActivityData}
             onClick1={addDataInTable}
             onClick2={isAddActive}
-            activeData={storeActivityData}
           />
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </>
   );
 }
