@@ -179,8 +179,6 @@ function AccountManager() {
           header="Are you sure you want to delete this Account Manager?"
         />
       ) : null}
-
-      <ToastContainer autoClose={2000} />
     </>
   );
 }

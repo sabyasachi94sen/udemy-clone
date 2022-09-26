@@ -184,7 +184,6 @@ function Admin() {
           header="Are you sure you want to delete this Admin?"
         />
       ) : null}
-      <ToastContainer autoClose={2000} />
     </>
   );
 }

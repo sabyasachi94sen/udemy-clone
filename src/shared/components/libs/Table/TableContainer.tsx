@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useMemo, useState, useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-import { Table } from "./Table";
+import { BaseTable } from "./BaseTable";
 
 export type TableContainerProps = {};
 export function TableContainer(): JSX.Element {
@@ -16,7 +16,7 @@ export function TableContainer(): JSX.Element {
         accessor: "id",
       },
     ],
-    []
+    [],
   );
 
   // We'll start our table without any data
@@ -35,7 +35,7 @@ export function TableContainer(): JSX.Element {
     setLoading(true);
 
     const d = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_page=${pageIndex}&_limit=${pageSize}`
+      `https://jsonplaceholder.typicode.com/posts?_page=${pageIndex}&_limit=${pageSize}`,
     );
 
     setData(d.data);
@@ -49,7 +49,7 @@ export function TableContainer(): JSX.Element {
 
   return (
     <div className="max-w-4xl">
-      <Table
+      <BaseTable
         columns={columns}
         data={data}
         fetchData={fetchData}

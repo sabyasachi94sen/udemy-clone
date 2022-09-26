@@ -22,12 +22,12 @@ export function LoginForm() {
   // TODO: add types
   const loginMutation = useMutation(loginObj.login, {
     onSuccess: (data) => {
-      setToken("auth", res.data.token);
-      setToken("userType", res.data.user_type);
+      setToken("auth", data.data.token);
+      setToken("userType", data.data.user_type);
 
       // todo: to be removed
-      SetAuthToken(res.data.token);
-      SetUserType(res.data.user_type);
+      SetAuthToken(data.data.token);
+      SetUserType(data.data.user_type);
 
       router.push({ pathname: "/home" });
     },
@@ -36,30 +36,6 @@ export function LoginForm() {
       displayErrorMessages(error);
     },
   });
-
-  // const handleLogin = (loginCreds: object) => {
-  //   const response = loginObj.login(loginCreds);
-
-  //   response
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         SetAuthToken(res.data.token);
-  //         SetUserType(res.data.user_type);
-  //         toast.success("Login Successful", {
-  //           position: toast.POSITION.TOP_CENTER,
-  //         });
-  //         setTimeout(() => {}, 1000);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.response.data.errorMessage, {
-  //         position: toast.POSITION.TOP_CENTER,
-  //       });
-  //       toast.error(err.response.data.errorType, {
-  //         position: toast.POSITION.TOP_CENTER,
-  //       });
-  //     });
-  // };
 
   const onSubmit = (data) => {
     loginMutation.mutate(data);
@@ -83,51 +59,10 @@ export function LoginForm() {
           />
           <Input label="Password" {...register("password")} type="password" />
         </div>
-        {/* <label
-          className="text-md font-medium text-gray-900 dark:text-gray-300"
-          htmlFor="email"
-        >
-          Email
-          <input
-            required
-            className="mb-4 w-full rounded bg-gray-200 py-2 px-1 text-gray-500 outline-none"
-            id="email"
-            placeholder="Email"
-            type="email"
-            {...register("email")}
-          />
-        </label> */}
-
-        {/* <label
-          className="text-md font-medium text-gray-900 dark:text-gray-300"
-          htmlFor="password"
-        >
-          Password
-          <input
-            required
-            className="mb-4 w-full rounded bg-gray-200 py-2 px-1 text-gray-500 outline-none"
-            id="password"
-            placeholder="•••••••••"
-            type="password"
-            {...register("password")}
-          />
-        </label> */}
 
         <div className="my-6 flex items-center justify-between">
           <div>
             <Checkbox label="Remember me" />
-            {/* <label
-              className="text block font-bold text-neutral"
-              htmlFor="remember"
-            >
-              <input
-                className="relative top-[2px] ml-2 h-4 w-4 leading-tight"
-                id="remember"
-                name="remember"
-                type="checkbox"
-              />
-              <span className="ml-2 text-sm">Remember me</span>
-            </label> */}
           </div>
           <Link href={{ pathname: "/reset-password" }}>
             <p className="cursor-pointer font-sans text-sm text-primary">
@@ -140,11 +75,6 @@ export function LoginForm() {
           <Button isLoading={loginMutation.isLoading} type="submit">
             Login
           </Button>
-          {/* <input
-            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9 py-2 font-bold text-white hover:bg-blue-500"
-            type="submit"
-            value="Login"
-          /> */}
         </div>
       </div>
     </form>

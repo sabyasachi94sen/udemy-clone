@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import {
@@ -6,6 +7,7 @@ import {
   CreateSuperAdminForm,
   EditSuperAdminForm,
 } from "@/features/admin";
+import { NAdminTable } from "@/features/admin/components/NAdminTable";
 import { SuperAdminResObj } from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus } from "@/features/ui";
@@ -40,9 +42,7 @@ function SuperAdmin() {
       }, 1000);
     },
     onError: () => {
-      toast.error("This Email Already Exist", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error("This Email Already Exist");
     },
   });
 
@@ -129,6 +129,7 @@ function SuperAdmin() {
         <Navbar />
         <div className="z-0 flex items-center">
           <MenuBar />
+          <NAdminTable />
 
           <AdminTable
             adminData={data && data?.data && data.data?.results}
@@ -165,7 +166,6 @@ function SuperAdmin() {
           header="Are you sure you want to delete this Super Admin?"
         />
       ) : null}
-      <ToastContainer autoClose={2000} />
     </>
   );
 }

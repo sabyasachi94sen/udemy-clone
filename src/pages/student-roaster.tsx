@@ -163,7 +163,6 @@ function StudentRoaster() {
           header="Are you sure you want to delete this Student?"
         />
       ) : null}
-      <ToastContainer autoClose={2000} />
     </>
   );
 }
