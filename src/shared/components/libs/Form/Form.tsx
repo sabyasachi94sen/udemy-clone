@@ -1,8 +1,8 @@
 import {
-  useForm,
-  UseFormReturn,
   SubmitHandler,
+  useForm,
   UseFormProps,
+  UseFormReturn,
 } from "react-hook-form";
 
 export type FormProps<TFormValues> = {
@@ -15,7 +15,7 @@ export type FormProps<TFormValues> = {
 // @see https://react-hook-form.com/advanced-usage#SmartFormComponent
 // @see https://react-hook-form.com/ts#UseFormReturn
 export function Form<
-  TFormValues extends Record<string, unknown> = Record<string, unknown>
+  TFormValues extends Record<string, unknown> = Record<string, unknown>,
 >({
   onSubmit,
   children,

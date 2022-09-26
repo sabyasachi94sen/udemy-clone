@@ -19,25 +19,23 @@ export const Default: Story<FormProps<FormValues>> = (args) => {
 
   return (
     <Form<FormValues> onSubmit={onSubmit}>
-      {({ register, formState: { errors } }) => {
-        return (
-          <div className="space-y-4">
-            <Input
-              invalidText={errors?.email?.message}
-              isInvalid={!!errors?.email}
-              label="Email"
-              {...register("email", { required: "This is required." })}
-            />
-            <Input
-              invalidText={errors?.name?.message}
-              isInvalid={!!errors?.name}
-              label="Name"
-              {...register("name", { required: "This is required." })}
-            />
-            <Button type="submit">Submit</Button>
-          </div>
-        );
-      }}
+      {({ register, formState: { errors } }) => (
+        <div className="space-y-4">
+          <Input
+            invalidText={errors?.email?.message}
+            isInvalid={!!errors?.email}
+            label="Email"
+            {...register("email", { required: "This is required." })}
+          />
+          <Input
+            invalidText={errors?.name?.message}
+            isInvalid={!!errors?.name}
+            label="Name"
+            {...register("name", { required: "This is required." })}
+          />
+          <Button type="submit">Submit</Button>
+        </div>
+      )}
     </Form>
   );
 };
