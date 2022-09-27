@@ -232,7 +232,7 @@ export function ActivityDataBaseForm({
                  <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative ml-3" name="name" type="text"/><br />
 
                </div> */}
-            <input {...register("grade_low")} type="text" className="w-[8%] h-[3vh]" value={gradeVal[0]} />
+            <input {...register("grade_low")} type="text" className="w-[8%] h-[3vh] relative left-[4%]" value={gradeVal[0]} />
             <div className="w-[50%]">
               <Slider value={gradeVal} onChange={handleGradeVal} className="mt-2"  />
             </div>
@@ -249,10 +249,10 @@ export function ActivityDataBaseForm({
 
               </div> */}
 
-            <input type="text" className="w-[8%] relative left-[2.5%]" {...register("age_low")} value={ageVal[0]} />
+            <input type="text" className="w-[8%] relative left-[6%]" {...register("age_low")} value={ageVal[0]} />
 
             <div className="w-[50%]">
-              <Slider value={ageVal} onChange={handleAgeVal} className="mt-2" />
+              <Slider value={ageVal} onChange={handleAgeVal} className="mt-2 relative left-[2%]" />
             </div>
 
             <input {...register("age_high")} type="text" className="w-[8%] relative" value={ageVal[1]} />
