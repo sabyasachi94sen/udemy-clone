@@ -8,7 +8,7 @@ import {
   MenuInfoSuperAdmin,
 } from "@/features/home";
 
-interface MenuInfoVal {
+interface MenuItem {
   name: string;
   image: string;
   imageType: string;
@@ -56,4 +56,4 @@ export function MenuBar() {
     </div>
   );
 }
-//new comment
+// new comment
