@@ -60,7 +60,7 @@ export function ActivityDataBaseForm({
       </div>
       <div className="mx-auto flex h-auto w-[90%] justify-around">
         <div className="h-auto w-[40%]">
-          <h1 className="mb-6 text-lg font-bold text-[#6F6F6F]">
+          <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
             Activity Information
           </h1>
           <div className="mt-2 flex items-center">
@@ -178,7 +178,7 @@ export function ActivityDataBaseForm({
             <br />
           </div>
 
-          <div className="mt-4 mb-10 flex items-center">
+          <div className="mt-4 mb-5 flex items-center">
             <span className="text-md font-bold">Application Date</span>
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
@@ -188,20 +188,20 @@ export function ActivityDataBaseForm({
             <br />
           </div>
 
-          <div className="mt-4 mb-10 flex items-center">
+          <div className="mb-6 flex items-center">
             <span className="text-md font-bold">Activity Start</span>
             <input
-              className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+              className="relative ml-10 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
               {...register("activity_start_date")}
               type="date"
             />
             <br />
           </div>
 
-          <div className="mt-4 mb-10 flex items-center">
+          <div className="mb-6 flex items-center">
             <span className="text-md font-bold">Activity End</span>
             <input
-              className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+              className="relative ml-12 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
               {...register("activity_end_date")}
               type="date"
             />
@@ -209,7 +209,7 @@ export function ActivityDataBaseForm({
           </div>
         </div>
         <div className="h-auto w-[45%] border-l-2 border-l-cyan-400 pl-12">
-          <h1 className="mb-6 text-lg font-bold text-[#6F6F6F]">
+          <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
             Eligibility Restrictions
           </h1>
           <div className="mt-2 flex items-center">
