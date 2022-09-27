@@ -1,7 +1,8 @@
 import { useQuery } from "react-query"
 import Link from "next/link";
 import { AepResObj } from "@/features/api"
-import moment from "moment"
+import moment from "moment";
+import {GetUserType} from "@/features/helpers"
 
 interface AcademicPersonalTableProps{
   isAddActive: ()=>void;
@@ -18,7 +19,7 @@ export function AcademicPersonalTable({ isAddActive,deleteDataInTable,setTable,s
     
   const { data }=useQuery(["student-activity"],()=>AepResObj.aep_student_activity(studentId))
   
-  
+  const user=GetUserType();
 
 
     return (
@@ -44,7 +45,7 @@ export function AcademicPersonalTable({ isAddActive,deleteDataInTable,setTable,s
             <div className="w-[60%] h-[7vh] flex justify-around ml-2 text-white
              ">
               <Link href="/aep-tracker"><button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" type="button" >View AEP Status Tracker (student)</button></Link>
-              <button className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" type="button" onClick={isAddActive}>Update AEP</button>
+              <button disabled={user!="super_admin"?false: true} className="w-[46%] h-[6vh] bg-cyan-500 rounded-md" type="button" onClick={isAddActive}>Update AEP</button>
             </div>
           </div>
           {/* <div className="bg-[#3AB0FB52] h-[6vh] w-[95%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
