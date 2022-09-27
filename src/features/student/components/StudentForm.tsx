@@ -7,6 +7,7 @@ import { Button } from "@/shared/components";
 interface StudentFormProps {
   handleBackBlur: () => void;
   handleForm: () => void;
+  individualStudentData: object;
   title: string;
 }
 
@@ -24,14 +25,24 @@ interface FormValues {
   account_manager: string;
 }
 
+const activeOptions=[{
+  option: "Active",
+  value: "active"
+},{
+  option: "Inactive",
+  value: "inactive"
+}]
+
 export function StudentForm({
   handleBackBlur,
   handleForm,
+  individualStudentData,
   title,
 }: StudentFormProps) {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const { data }=useQuery(["manager_list"],()=> StudentResObj.manager_list())
+
 
 
 
@@ -58,7 +69,8 @@ export function StudentForm({
               placeholder="Student name"
               type="text"
               {...register("student_name")}
-              disabled={title=="View a student to the roster"?true:false}
+              defaultValue={title=="View a student to the roster"?individualStudentData?.student_name: null}
+              disabled={title=="View a student to the roster"}
             />
           </div>
           <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -68,7 +80,8 @@ export function StudentForm({
               placeholder="Date of Birth"
               type="date"
               {...register("date_of_birth")}
-              disabled={title=="View a student to the roster"?true:false}
+              defaultValue={title=="View a student to the roster"?individualStudentData?.date_of_birth: null}
+              disabled={title=="View a student to the roster"}
             />
           </div>
 
@@ -79,7 +92,8 @@ export function StudentForm({
               placeholder="Grade"
               type="number"
               {...register("current_grade")}
-              disabled={title=="View a student to the roster"?true:false}
+              defaultValue={title=="View a student to the roster"?individualStudentData?.current_grade: null}
+              disabled={title=="View a student to the roster"}
             />
           </div>
         </div>
@@ -92,10 +106,11 @@ export function StudentForm({
             <select
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
               {...register("country_of_residence")}
-              disabled={title=="View a student to the roster"?true:false}
+              disabled={title=="View a student to the roster"}
+             
             >
               <option>Select Country</option>
-              <option>India</option>
+              <option selected={title=="View a student to the roster"?true:false}>India</option>
             </select>
           </div>
           <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -103,7 +118,8 @@ export function StudentForm({
             <input
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
               {...register("city_of_residence")}
-              disabled={title=="View a student to the roster"?true:false}
+              defaultValue={title=="View a student to the roster"?individualStudentData?.student_city_residence[0]?.city_of_residence: null}
+              disabled={title=="View a student to the roster"}
               type="text"
             />
           </div>
@@ -113,10 +129,10 @@ export function StudentForm({
             <select
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
               {...register("country_of_citizenship")}
-              disabled={title=="View a student to the roster"?true:false}
+              disabled={title=="View a student to the roster"}
             >
               <option>Select Country</option>
-              <option>India</option>
+              <option selected={title=="View a student to the roster"?true:false}>India</option>
             </select>
           </div>
         </div>
@@ -129,10 +145,11 @@ export function StudentForm({
             <select
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
               {...register("account_manager")}
-              disabled={title=="View a student to the roster"?true:false}
+              disabled={title=="View a student to the roster"}
+              
             >
               <option>Select account manager</option>
-              {data && data.map((item,index)=><option key={index} value={item.id}>{item && item?.username}</option>)}
+              {data && data.map((item,index)=><option key={index} selected={!!(title=="View a student to the roster" && individualStudentData?.student_assignment[0]?.account_manager?.username==item?.username)} value={item.id}>{item && item?.username}</option>)}
             </select>
           </div>
           <div className="flex w-[37%] flex-col items-start text-lg font-bold">
@@ -140,11 +157,11 @@ export function StudentForm({
             <select
               {...register("is_active")}
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
-              disabled={title=="View a student to the roster"?true:false}
+              disabled={title=="View a student to the roster"}
+
             >
               <option>Select Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
+              {activeOptions.map((item,index)=><option key={index} value={item.value} selected={title=="View a student to the roster" && ((individualStudentData?.is_active && item.value=="active") || (!individualStudentData?.is_active && item.value=="inactive"))?true:false}>{item.option}</option>)}
             </select>
           </div>
 
@@ -156,10 +173,10 @@ export function StudentForm({
             <select
               className="relative left-3 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"
               {...register("country_of_boarding_school")}
-              disabled={title=="View a student to the roster"?true:false}
+              disabled={title=="View a student to the roster"}
             >
               <option>Select Country of Boarding School</option>
-              <option>India</option>
+              <option selected={title=="View a student to the roster"?true:false}>India</option>
             </select>
           </div>
         </div>
@@ -173,7 +190,8 @@ export function StudentForm({
             placeholder="Email"
             type="email"
             {...register("email")}
-            disabled={title=="View a student to the roster"?true:false}
+            disabled={title=="View a student to the roster"}
+            defaultValue={individualStudentData?.student_assignment[0]?.account_manager.email}
             />
         </div>
         <div className="flex w-[80%] flex-col items-start text-lg font-bold">
@@ -181,9 +199,12 @@ export function StudentForm({
           <input
             className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
             placeholder="Phone Number"
-            type="number"
+            type="tel"
             {...register("phone_number")}
-            disabled={title=="View a student to the roster"?true:false}
+            disabled={title=="View a student to the roster"}
+            defaultValue={individualStudentData?.phone_number}
+
+          
             />
         </div>
       </div>
@@ -196,7 +217,7 @@ export function StudentForm({
 
       <div className="mx-auto mt-7 h-[20vh] w-[50%] text-center text-lg font-bold">
         <p>Remarks</p>
-        <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" disabled={title=="View a student to the roster"?true:false} />
+        <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" disabled={title=="View a student to the roster"} defaultValue={individualStudentData?.remarks}/>
       </div>
       <div className="mx-auto mt-8 mb-10 w-[8%] font-bold">
         {title!=="View a student to the roster"?

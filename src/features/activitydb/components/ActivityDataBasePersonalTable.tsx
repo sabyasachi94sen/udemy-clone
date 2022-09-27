@@ -91,6 +91,7 @@ export function ActivityDataBasePersonalTable({
                 <td />
                 <td />
                 <td />
+                <td />
                
               </tr>
 
@@ -110,7 +111,7 @@ export function ActivityDataBasePersonalTable({
                       See action maps
                     </Button>
                   </td>
-                  <td><Button className="bg-yellow-50 text-black rounded-none w-[60%] border-black hover:bg-slate-200" onClick={handleBackgroundBlurOnView}>Details</Button></td>
+                  <td><button type="button" className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg"onClick={handleBackgroundBlurOnView}>Details</button></td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
                       alt="edit-icon"

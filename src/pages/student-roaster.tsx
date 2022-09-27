@@ -23,7 +23,7 @@ function StudentRoaster() {
 
     const [backgroundBlurViewStudent, setBackGroundBlurViewStudent] =
     useState(false);
-  const [studentData, setStudentData] = useState(studentinfo);
+  const [individualStudentData, setIndividualStudentData] = useState({});
   const [studentDataId, setStudentDataId] = useState("");
   const [mutateParams, setMutateParams] = useState({
     mutateFunc: StudentResObj.student_info_list,
@@ -80,8 +80,9 @@ function StudentRoaster() {
   };
 
 
-  const handleViewBackBlur=()=>{
+  const handleViewBackBlur=(individual_student_info:object)=>{
     setBackGroundBlurViewStudent(!backgroundBlurViewStudent)
+    setIndividualStudentData(individual_student_info)
   }
 
   const handleAddSubmit = (postData: StudentPostDataObjVal) => {
@@ -138,7 +139,8 @@ function StudentRoaster() {
         className={
           !backgroundBlurAddStudent &&
           !backgroundBlurEditStudent &&
-          !backgroundBlurDeleteStudent
+          !backgroundBlurDeleteStudent &&
+          !backgroundBlurViewStudent
             ? `bg-white`
             : `opacity-[0.2]`
         }
@@ -175,7 +177,7 @@ function StudentRoaster() {
       {backgroundBlurViewStudent ? (
         <StudentForm
           handleBackBlur={handleViewBackBlur}
-           
+           individualStudentData={individualStudentData}
           title="View a student to the roster"
         />
       ) : null}

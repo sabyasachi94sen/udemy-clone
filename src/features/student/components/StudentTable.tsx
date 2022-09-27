@@ -13,7 +13,7 @@ interface StudentTableProps{
 export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBackBlur,handleDeleteBackBlur,studentData,name }: StudentTableProps){
 
 
-    
+  
 
     return (
 
@@ -79,7 +79,7 @@ export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBa
                   <td className="h-[7vh]">{val && val?.student_assignment[0] && val.student_assignment[0]?.account_manager && val.student_assignment[0].account_manager?.username}</td>
                     
                   {val?.is_active?<td className="h-[7vh] text-[#20A464]">Active</td>:<td className="h-[7vh]">Inactive</td>}
-                  <td><Button  className="bg-yellow-50 text-black rounded-none w-[80%] border-black hover:bg-slate-200" onClick={handleViewBackBlur}>Details</Button></td>
+                  <td><button type="button" className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg" onClick={()=>handleViewBackBlur(val)}>Details</button></td>
                   <td className="h-[7vh] cursor-pointer"><img alt="edit-icon" className="mx-auto block" src="/images/edit.png" onClick={()=>handleEditBackBlur(val && val?.id)} /></td>
                   <td className="h-[7vh] cursor-pointer"><img alt="delete-icon" className="mx-auto block" src="/images/delete.png" onClick={()=>handleDeleteBackBlur(val && val?.id)}/></td>
 
