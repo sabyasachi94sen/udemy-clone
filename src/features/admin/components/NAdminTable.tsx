@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 
+import { Button } from "@/shared/components";
 import { BaseTable } from "@/shared/components/libs/BaseTable/BaseTable";
 
 interface NAdminTableProps {}
@@ -19,43 +20,55 @@ export function NAdminTable({}: NAdminTableProps): JSX.Element {
       {
         header: "Partition ID",
         accessorKey: "title",
+        cell: (info) => (
+          <div className="px-1">
+            <Button onClick={() => console.log(info.getValue())}>
+              {info.getValue()}
+            </Button>
+          </div>
+        ),
       },
       {
         header: "Total Messages",
         accessorKey: "id",
+        cell: (info) => (
+          <div className="px-1">
+            <Button
+              variant="outlined"
+              onClick={() => console.log(info.getValue())}
+            >
+              {info.getValue()}
+            </Button>
+          </div>
+        ),
       },
     ],
     [],
   );
 
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount] = useState(5);
 
   const router = useRouter();
 
-  const { pageIndex, pageSize } = router;
-  const tableResult = useQuery(["key"], async () =>
-    axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_page=${pageIndex}&_limit=${pageSize}`,
-    ),
-  );
+  const { page, perPage } = router.query;
 
-  console.log(
-    "file: NAdminTable.tsx ~ line 38 ~ NAdminTable ~ tableResult",
-    tableResult?.data,
+  const tableResult = useQuery(
+    ["key", { page, perPage }],
+    async () =>
+      axios.get(
+        `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${perPage}`,
+      ),
+    {
+      keepPreviousData: true,
+    },
   );
-  // useEffect(() => {
-  //   fetchData({ pageSize: 50 || 10, pageIndex: pageIndex || 0 }).then(() => {
-  //     console.log(data);
-  //   });
-  // }, [pageSize, pageIndex]);
 
   return (
     <BaseTable
-      {...{
-        data: tableResult?.data,
-        pageCount,
-        columns,
-      }}
+      columns={columns}
+      data={tableResult?.data?.data}
+      isLoading={tableResult.isLoading}
+      pageCount={pageCount}
     />
   );
 }

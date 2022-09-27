@@ -18,22 +18,17 @@ export const updatePaginationState = (
     pageSize: Number(perPage || PER_PAGE),
   };
 
-  console.log(
-    "file: update-pagination-state.ts ~ line 16 ~ previousState",
-    previousState,
-  );
   const newState = updater(previousState);
 
-  console.log(
-    "file: update-pagination-state.ts ~ line 26 ~ newState",
-    newState,
-  );
-
-  searchParams.page = String(newState.pageIndex + 1);
-  searchParams.perPage = newState.pageSize.toString();
+  // searchParams.page = String(newState.pageIndex + 1);
+  // searchParams.perPage = newState.pageSize.toString();
 
   // searchParams.set("page", String(newState.pageIndex + 1));
   // searchParams.set("perPage", newState.pageSize.toString());
 
-  return newState;
+  return {
+    ...newState,
+    page: newState.pageIndex + 1,
+    perPage: newState.pageSize,
+  };
 };
