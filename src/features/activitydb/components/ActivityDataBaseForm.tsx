@@ -1,25 +1,51 @@
 import { Slider } from "@material-ui/core";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+
 
 interface ActivityDataBaseFormProps {
   handleBackgroundBlur: () => void;
+  addActivityData: ()=>void;
   name: string;
+}
+
+interface FormValues {
+  activity_name:           string;
+  activity_type:           string;
+  subject:                 string;
+  location_type:           string;
+  country_activity:        string;
+  country_residence:       string;
+  country_citizenship:     string;
+  grade_range:             number[];
+  age_range:               number[];
+  application_requirement: string;
+  registration_open:       string;
+  application_deadline:    string;
+  activity_start_date:     string;
+  activity_end_date:       string;
+  remarks:                 string;
 }
 
 export function ActivityDataBaseForm({
   handleBackgroundBlur,
+  addActivityData,
   name,
 }: ActivityDataBaseFormProps) {
   const [gradeVal, setGradeVal] = useState([0, 100]);
   const [ageVal, setAgeVal] = useState([0, 100]);
 
-  const handleGradeVal = (e, data) => {
+  const handleGradeVal = (e: SyntheticEvent, data: number[]) => {
     setGradeVal(data);
   };
 
-  const handleAgeVal = (e, data) => {
+  const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
     setAgeVal(data);
   };
+
+ 
+   
+  const { handleSubmit,register }=useForm<FormValues>()
 
   return (
     <div className="relative z-10 mx-auto -mt-[150vh] h-[100vh] w-[80%] overflow-y-scroll rounded-lg border-2 bg-[#FDFEFF]">
@@ -41,7 +67,7 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Name</span>
             <input
               className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("activity_name")}
               type="text"
             />
             <br />
@@ -50,52 +76,82 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Type</span>
             <select
               className="relative ml-12 h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
-              name="status"
+              {...register("activity_type")}
             >
               <option> Select Type</option>
+              <option>Exam</option>
+              <option>Competition </option>
+              <option>STEP programs </option>
+              <option> Online Course </option>
+              <option> Summer Schools : selective speciality</option>
+              <option> Summer Schools : credit bearing</option>
+              <option>Other</option>
             </select>
           </div>
           <div className="mt-4 flex items-center">
             <span className="text-md font-bold">Subject</span>
             <select
               className="relative ml-7 h-[5vh] w-[100%] rounded-md bg-[#EEEE] outline-none"
-              name="status"
+              {...register("subject")}
             >
               <option> Select Subject</option>
+              <option> Math </option>
+              <option>Computer Science </option>
+              <option>Physics </option>
+              <option>Chemistry </option>
+              <option>Biology </option>
+              <option>Environmental Science </option>
+              <option>General Science </option>
+              <option>Economics/Business/Finance </option>
+              <option>English </option>
+              <option>Political Science </option>
+              <option>Psychology </option>
+              <option>Other </option>
             </select>
           </div>
           <div className="mt-4 flex items-center">
             <span className="text-md font-bold">Application requirement</span>
             <select
               className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"
-              name="status"
+              {...register("application_requirement")}
             >
               <option>Application requirement</option>
+              <option> Fee </option>
+              <option>Form </option>
+              <option>Essay </option>
+              <option>Multiple Essays</option>
+              <option>LOR </option>
+              <option>Multiple LORs </option>
+              <option>Other</option>
             </select>
           </div>
           <div className="mt-4 flex items-center">
             <span className="text-md font-bold">Location Type</span>
             <select
               className="relative ml-14 h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
-              name="status"
+              {...register("location_type")}
             >
-              <option>Select Location</option>
+              <option>Location Type</option>
+              <option> Country / City </option>
+              <option>Virtual </option>
+              <option>Country / City & Virtual </option>
             </select>
           </div>
           <div className="mt-4 flex items-center">
             <span className="text-md font-bold">Country of Activity</span>
             <select
               className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
-              name="status"
+             {...register("country_residence")}
             >
               <option>Select Country</option>
+              <option>India</option>
             </select>
           </div>
           <div className="mt-4 flex items-center">
             <span className="text-md font-bold">City of Activity</span>
             <input
               className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("country_citizenship")}
               type="text"
             />
             <br />
@@ -105,7 +161,7 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">URL</span>
             <input
               className="relative ml-14 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("url")}
               type="text"
             />
             <br />
@@ -116,7 +172,7 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Registration open</span>
             <input
               className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("registration_open")}
               type="date"
             />
             <br />
@@ -126,7 +182,7 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Application Date</span>
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("application_deadline")}
               type="date"
             />
             <br />
@@ -136,7 +192,7 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Activity Start</span>
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("activity_start_date")}
               type="date"
             />
             <br />
@@ -146,7 +202,7 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Activity End</span>
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("activity_end_date")}
               type="date"
             />
             <br />
@@ -160,13 +216,15 @@ export function ActivityDataBaseForm({
             <span className="text-md font-bold">Range Type</span>
             <select
               className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
-              name="status"
+              {...register("range_type")}
             >
               <option>Select range type</option>
+              <option>Grade range</option>
+              <option>Age range </option>
             </select>
           </div>
 
-          <div className="mt-4 flex w-[90%] items-center justify-between">
+          <div className="mt-4 flex w-[100%] items-center justify-between">
             <span className="text-md font-bold">Grade Range</span>
             {/* <div className="flex justify-around items-center w-[40%] ml-14">
                <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative" name="name" type="text"/><br />
@@ -174,15 +232,15 @@ export function ActivityDataBaseForm({
                  <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative ml-3" name="name" type="text"/><br />
 
                </div> */}
-            <span className="w-[2px]">{gradeVal[0]}</span>
+            <input {...register("grade_low")} type="text" className="w-[8%] h-[3vh]" value={gradeVal[0]} />
             <div className="w-[50%]">
-              <Slider value={gradeVal} onChange={handleGradeVal} />
+              <Slider value={gradeVal} onChange={handleGradeVal} className="mt-2"  />
             </div>
 
-            <span className="w-[2px]">{gradeVal[1]}</span>
+            <input {...register("grade_high")} type="text" className="w-[8%] h-[3vh]" value={gradeVal[1]} />
           </div>
 
-          <div className="mt-4 flex w-[90%] items-center justify-between">
+          <div className="mt-4 flex w-[100%] items-center justify-between">
             <span className="text-md font-bold">Age Range</span>
             {/* <div className="flex justify-around items-center w-[40%] ml-[4.6vw]">
                 <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative" name="name" type="text"/><br />
@@ -191,13 +249,13 @@ export function ActivityDataBaseForm({
 
               </div> */}
 
-            <span className="w-[2px] ml-4">{ageVal[0]}</span>
+            <input type="text" className="w-[8%] relative left-[2.5%]" {...register("age_low")} value={ageVal[0]} />
 
             <div className="w-[50%]">
-              <Slider value={ageVal} onChange={handleAgeVal} />
+              <Slider value={ageVal} onChange={handleAgeVal} className="mt-2" />
             </div>
 
-            <span className="w-[2px]">{ageVal[1]}</span>
+            <input {...register("age_high")} type="text" className="w-[8%] relative" value={ageVal[1]} />
           </div>
           <div className="text-md mt-5 flex w-[60%] flex-col">
             <p className="text-md font-bold font-bold ">
@@ -205,9 +263,10 @@ export function ActivityDataBaseForm({
             </p>
             <select
               className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
-              name="country"
+              {...register("only open to residence of these countries")}
             >
               <option>Select country</option>
+              <option>India</option>
             </select>
           </div>
           <div className="text-md mt-5 flex w-[60%] flex-col">
@@ -216,31 +275,33 @@ export function ActivityDataBaseForm({
             </p>
             <select
               className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
-              name="country"
+              {...register("Only open to citizens of these countries")}
             >
               <option>Select country</option>
+              <option>India</option>
             </select>
           </div>
           <div className="mt-14">
             <h1 className="text-lg font-bold text-[#6F6F6F]">Remarks</h1>
-            <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" />
+            <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" {...register("remarks")} />
           </div>
 
           <div className="mt-10 mb-10 flex items-center">
             <span className="text-md font-bold">Last Update Date</span>
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-              name="name"
+              {...register("last_update_date")}
               type="date"
             />
             <br />
           </div>
         </div>
       </div>
-      {name!=="View an activity to the database"?
-      <button className="mx-auto mt-10 mb-10 flex h-[5vh] w-[15%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600">
-        Save
-      </button>:  null}
+      {name !== "View an activity to the database" ? (
+        <button onClick={handleSubmit(addActivityData)} className="mx-auto mt-10 mb-10 flex h-[5vh] w-[15%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600" type="button">
+          Save
+        </button>
+      ) : null}
     </div>
   );
 }

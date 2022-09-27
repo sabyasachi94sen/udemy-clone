@@ -1,26 +1,24 @@
-import { studentinfo } from "@/features/student";
+import { useState } from "react";
+import { useMutation ,useQuery } from "react-query"
+
 import {
-  AcademicTable,
   AcademicPersonalTable,
+  AcademicTable,
   AddActivityForm,
 } from "@/features/academic_plan";
-import { Navbar, MenuBar } from "@/features/home";
-import { useState } from "react";
-import {AepResObj} from "@/features/api"
-import {useQuery,useMutation,useQueryClient} from "react-query"
+import { AdminResObj, AepResObj } from "@/features/api"
+import { MenuBar, Navbar } from "@/features/home";
 
 function AcademicPlan() {
   const [isTable, setIsTable] = useState(false);
   const [addActivity, setAddActivity] = useState(false);
+
+  const [studentId,setStudentId]=useState("");
+  const [studentName,setStudentName]=useState("")
   const [storeActivityData, setStoreActivityData] = useState([]);
   const [count, setCount] = useState(0);
 
-  const addDataInTable = (data, index) => {
-    setAddActivity((addActivity) => !addActivity);
-    const tempArr = storeActivityData;
-    tempArr.push(data[index]);
-    setStoreActivityData(storeActivityData);
-  };
+  const { data }=useQuery(["aep-list"],()=> AepResObj.aep_list())
 
   const deleteDataInTable = (data, index) => {
     data.splice(index, 1);
@@ -28,32 +26,39 @@ function AcademicPlan() {
     setCount(count + 1);
   };
 
-  const setTable = () => {
-    setIsTable((isTable) => !isTable);
+  const setTable = (student_id:string,student_name: string) => {
+
+    setIsTable(!isTable);
+    setStudentId(student_id)
+    setStudentName(student_name)
   };
 
   const isAddActive = () => {
-    setAddActivity((addActivity) => !addActivity);
+    setAddActivity(!addActivity);
   };
 
+ 
 
-  const {data}=useQuery(["aep-list"],()=> AepResObj.aep_list())
-  console.log(data)
+
+
 
   return (
     <>
-      <div className={!addActivity ? `bg-white` : `opacity-[0.3]`}>
+      <div className={!addActivity? `bg-white` : `opacity-[0.3]`}>
         <Navbar />
         <div className="z-0 flex items-center">
           <MenuBar />
           {!isTable ? (
-            <AcademicTable academicData={data && data?.data} setTable={setTable} />
+            <AcademicTable academicData={data} setTable={setTable} />
           ) : (
             <AcademicPersonalTable
-              isAddActive={isAddActive}
-              deleteDataInTable={deleteDataInTable}
-              setTable={setTable}
               activityData={storeActivityData}
+              deleteDataInTable={deleteDataInTable}
+              isAddActive={isAddActive}
+              
+              setTable={setTable}
+              studentId={studentId}
+              studentName={studentName}
             />
           )}
         </div>
@@ -62,14 +67,16 @@ function AcademicPlan() {
       {addActivity ? (
         <div className="relative z-10 -mt-[155vh] flex h-[170vh] w-full justify-center">
           <AddActivityForm
-            addDataInTable={addDataInTable}
             isAddActive={isAddActive}
-            activeData={storeActivityData}
+            studentId={studentId}
+         
           />
         </div>
       ) : (
-        ""
+        null
       )}
+
+    
     </>
   );
 }

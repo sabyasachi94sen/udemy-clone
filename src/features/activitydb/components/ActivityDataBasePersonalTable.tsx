@@ -1,5 +1,5 @@
 import { Button } from "@/shared/components";
-
+import moment from "moment"
 interface ActivityDataBasePersonalTableProps {
   activityData: {}[];
   handleBackgroundBlurOnAdd: () => void;
@@ -67,7 +67,7 @@ export function ActivityDataBasePersonalTable({
 
         <div
           className={`${
-            activityData.length > 10 ? `h-[60vh]` : `h-auto`
+            activityData && activityData?.length > 10 ? `h-[60vh]` : `h-auto`
           } mt-8 overflow-y-scroll`}
         >
           <table className="relative left-2 mx-auto -mt-1 w-[95%] break-all border-solid bg-gray-50 text-center font-sans  text-[0.9rem] font-bold text-[#344054]">
@@ -94,12 +94,12 @@ export function ActivityDataBasePersonalTable({
                
               </tr>
 
-              {activityData.map((val, index) => (
+              {activityData && activityData.map((val, index) => (
                 <tr key={index} className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
-                  <td className="h-[7vh]">{val.name}</td>
-                  <td className="h-[7vh]">{val.type}</td>
-                  <td className="h-[7vh]">{val.subject}</td>
-                  <td className="h-[7vh]">{val.deadline}</td>
+                  <td className="h-[7vh]">{val && val?.activity_name}</td>
+                  <td className="h-[7vh]">{val && val?.activity_type}</td>
+                  <td className="h-[7vh]">{val && val?.subject}</td>
+                  <td className="h-[7vh]">{moment(val && val?.application_deadline).format("YYYY-MM-DD")}</td>
            
                   
                   <td className="h-[7vh]">

@@ -22,17 +22,17 @@ const api: AxiosInstance = axios.create({
 });
 
 // Global interceptor for auth token
-api.interceptors.request.use((config: AxiosRequestConfig) => {
-  // Get the authToken cookie, it's set when user logs in or signs up
-  const authToken = getToken("auth");
+// api.interceptors.request.use((config: AxiosRequestConfig) => {
+//   // Get the authToken cookie, it's set when user logs in or signs up
+//   const authToken = getToken("auth");
 
-  if (authToken) {
-    // eslint-disable-next-line no-param-reassign
-    config.headers.Authorization = `Bearer ${authToken}`;
-  }
+//   if (authToken) {
+//     // eslint-disable-next-line no-param-reassign
+//     config.headers.Authorization = `Bearer ${authToken}`;
+//   }
 
-  return config;
-});
+//   return config;
+// });
 
 /* ---- Base function to get data ---- */
 export const handleQuery = async <TResponse, TQuery>(config: {

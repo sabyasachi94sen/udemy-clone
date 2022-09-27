@@ -1,11 +1,12 @@
 import { SyntheticEvent, useState } from "react";
+import { useMutation, useQuery } from "react-query";
 
 import {
   ActionMapForm,
   ActivityDataBaseForm,
-  ActivityDataBasePersonalTable,
-  activityinfo
+  ActivityDataBasePersonalTable
 } from "@/features/activitydb";
+import { ActivityResObj } from "@/features/api"
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus } from "@/features/ui";
 
@@ -16,6 +17,12 @@ function Activity() {
   const [editBackBlur, setEditBackBlur] = useState(false);
   const [viewBackBlur,setViewBackBlur]=useState(false)
   const [deleteBackBlur, setDeleteBackBlur] = useState(false);
+
+
+  const { data }=useQuery(["activity-list"],()=>ActivityResObj.activity_list())
+  const {mutate}=useMutation(ActivityResObj.activity_add,{
+
+  })
 
   const isActivityTable = () => {
     setIsTable(!isTable);
@@ -47,6 +54,21 @@ function Activity() {
     setDeleteBackBlur(!deleteBackBlur);
   }
 
+  const addActivityData=(formVal: FormValues)=>{
+    const mutateObj={
+      ...formVal,
+      grade_range:[formVal.grade_low,formVal.grade_high],
+      age_range: [formVal.age_low,formVal.age_high],
+    }
+
+    mutate(mutateObj)
+    
+  }
+
+
+  
+
+
   return (
     <>
       <div
@@ -61,13 +83,14 @@ function Activity() {
           <MenuBar />
          
           <ActivityDataBasePersonalTable
-            activityData={activityinfo}
+            activityData={data && data?.results}
             handleBackgroundBlurOnAdd={handleBackgroundBlurOnAdd}
+            handleBackgroundBlurOnDelete={handleBackgroundBlurOnDelete}
             handleBackgroundBlurOnEdit={handleBackgroundBlurOnEdit}
             handleBackgroundBlurOnMap={handleBackgroundBlurOnMap}
             handleBackgroundBlurOnView={handleBackgroundBlurOnView}
-            handleBackgroundBlurOnDelete={handleBackgroundBlurOnDelete}
             isActivityTable={isActivityTable}
+            
             />
           
         </div>
@@ -75,22 +98,23 @@ function Activity() {
 
       {addBackBlur ? (
         <ActivityDataBaseForm
-          name="Add an activity to the database"
           handleBackgroundBlur={handleBackgroundBlurOnAdd}
+          name="Add an activity to the database"
+          addActivityData={addActivityData}
         />
       ) : null}
 
       {editBackBlur ? (
         <ActivityDataBaseForm
-          name="Edit an activity to the database"
           handleBackgroundBlur={handleBackgroundBlurOnEdit}
+          name="Edit an activity to the database"
         />
       ) : null}
 
       {viewBackBlur ? (
         <ActivityDataBaseForm
-          name="View an activity to the database"
           handleBackgroundBlur={handleBackgroundBlurOnView}
+          name="View an activity to the database"
         />
       ) : null}
 
