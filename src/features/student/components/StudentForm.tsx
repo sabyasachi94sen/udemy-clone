@@ -58,6 +58,7 @@ export function StudentForm({
               placeholder="Student name"
               type="text"
               {...register("student_name")}
+              disabled={title=="View a student to the roster"?true:false}
             />
           </div>
           <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -67,6 +68,7 @@ export function StudentForm({
               placeholder="Date of Birth"
               type="date"
               {...register("date_of_birth")}
+              disabled={title=="View a student to the roster"?true:false}
             />
           </div>
 
@@ -77,6 +79,7 @@ export function StudentForm({
               placeholder="Grade"
               type="number"
               {...register("current_grade")}
+              disabled={title=="View a student to the roster"?true:false}
             />
           </div>
         </div>
@@ -89,6 +92,7 @@ export function StudentForm({
             <select
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
               {...register("country_of_residence")}
+              disabled={title=="View a student to the roster"?true:false}
             >
               <option>Select Country</option>
               <option>India</option>
@@ -99,6 +103,7 @@ export function StudentForm({
             <input
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
               {...register("city_of_residence")}
+              disabled={title=="View a student to the roster"?true:false}
               type="text"
             />
           </div>
@@ -108,6 +113,7 @@ export function StudentForm({
             <select
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
               {...register("country_of_citizenship")}
+              disabled={title=="View a student to the roster"?true:false}
             >
               <option>Select Country</option>
               <option>India</option>
@@ -123,6 +129,7 @@ export function StudentForm({
             <select
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
               {...register("account_manager")}
+              disabled={title=="View a student to the roster"?true:false}
             >
               <option>Select account manager</option>
               {data && data.map((item,index)=><option key={index} value={item.id}>{item && item?.username}</option>)}
@@ -133,6 +140,7 @@ export function StudentForm({
             <select
               {...register("is_active")}
               className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+              disabled={title=="View a student to the roster"?true:false}
             >
               <option>Select Status</option>
               <option value="active">Active</option>
@@ -148,6 +156,7 @@ export function StudentForm({
             <select
               className="relative left-3 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"
               {...register("country_of_boarding_school")}
+              disabled={title=="View a student to the roster"?true:false}
             >
               <option>Select Country of Boarding School</option>
               <option>India</option>
@@ -155,18 +164,48 @@ export function StudentForm({
           </div>
         </div>
       </div>
+
+      <div className="relative mt-10 flex h-[12vh] w-[70%] justify-between">
+        <div className="flex w-[80%] flex-col items-start text-lg font-bold">
+          <p className="ml-8">Email</p>
+          <input
+            className="text-small relative left-8 mt-4 h-[5vh] w-[93%] rounded-md bg-[#EEEE] pl-3 font-medium"
+            placeholder="Email"
+            type="email"
+            {...register("email")}
+            disabled={title=="View a student to the roster"?true:false}
+            />
+        </div>
+        <div className="flex w-[80%] flex-col items-start text-lg font-bold">
+          <p className="ml-8">Phone Number</p>
+          <input
+            className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+            placeholder="Phone Number"
+            type="number"
+            {...register("phone_number")}
+            disabled={title=="View a student to the roster"?true:false}
+            />
+        </div>
+      </div>
+
+
+
+
+
+
+
       <div className="mx-auto mt-7 h-[20vh] w-[50%] text-center text-lg font-bold">
         <p>Remarks</p>
-        <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" />
+        <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" disabled={title=="View a student to the roster"?true:false} />
       </div>
       <div className="mx-auto mt-8 mb-10 w-[8%] font-bold">
         {title!=="View a student to the roster"?
-        <Button
-          className="h-[6vh] w-[100%] rounded-md"
-          onClick={handleSubmit(handleForm)}
+          <Button
+            className="h-[6vh] w-[100%] rounded-md"
+            onClick={handleSubmit(handleForm)}
         >
-          Save
-        </Button>: null}
+            Save
+          </Button>: null}
       </div>
     </div>
   );
