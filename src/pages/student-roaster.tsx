@@ -61,12 +61,14 @@ function StudentRoaster() {
     );
   };
 
-  const handleEditBackBlur = (id: string) => {
+  const handleEditBackBlur = (individual_student_info:object,id:string) => {
+ 
     setBackGroundBlurEditStudent(
       !backgroundBlurEditStudent,
     );
 
     setStudentDataId(id);
+    setIndividualStudentData(individual_student_info)
   };
 
   const handleDeleteBackBlur = (id: string) => {
@@ -169,7 +171,9 @@ function StudentRoaster() {
       {backgroundBlurEditStudent ? (
         <StudentForm
           handleBackBlur={handleEditBackBlur}
+          individualStudentData={individualStudentData}
           handleForm={handleEditSubmit}
+         
           title="Update a student to the roster"
         />
       ) : null}

@@ -80,7 +80,7 @@ export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBa
                     
                   {val?.is_active?<td className="h-[7vh] text-[#20A464]">Active</td>:<td className="h-[7vh]">Inactive</td>}
                   <td><button type="button" className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg" onClick={()=>handleViewBackBlur(val)}>Details</button></td>
-                  <td className="h-[7vh] cursor-pointer"><img alt="edit-icon" className="mx-auto block" src="/images/edit.png" onClick={()=>handleEditBackBlur(val && val?.id)} /></td>
+                  <td className="h-[7vh] cursor-pointer"><img alt="edit-icon" className="mx-auto block" src="/images/edit.png" onClick={()=>handleEditBackBlur(val,val && val?.id)} /></td>
                   <td className="h-[7vh] cursor-pointer"><img alt="delete-icon" className="mx-auto block" src="/images/delete.png" onClick={()=>handleDeleteBackBlur(val && val?.id)}/></td>
 
                 </tr>)}

@@ -1,4 +1,5 @@
 import { Button } from "@/shared/components";
+import moment from "moment"
 
 interface AdminTableProps {
   handleAddBlur: () => void;
@@ -116,7 +117,7 @@ export function AdminTable({
                       {val && val?.username}
                     </td>
                     <td className="h-[7vh]">{val && val?.email}</td>
-                    <td className="h-[7vh]">02/04/2022</td>
+                    <td className="h-[7vh]">{val && val?.last_update?moment(val && val?.last_update).format("YYYY-MM-DD"): null}</td>
                     {val && val?.is_active ? (
                       <td className="h-[7vh] text-[#20A464]">Active</td>
                     ) : (
