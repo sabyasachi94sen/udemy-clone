@@ -1,5 +1,7 @@
-import { Button } from "@/shared/components";
 import moment from "moment"
+
+import { Button } from "@/shared/components";
+
 interface ActivityDataBasePersonalTableProps {
   activityData: {}[];
   handleBackgroundBlurOnAdd: () => void;
@@ -106,18 +108,18 @@ export function ActivityDataBasePersonalTable({
                   <td className="h-[7vh]">
                     <Button
                       className="h-[6vh] w-[90%] rounded-md xl:text-[0.6rem] 2xl:text-[0.8rem]"
-                      onClick={handleBackgroundBlurOnMap}
+                      onClick={()=>handleBackgroundBlurOnMap(val?.id)}
                     >
                       See action maps
                     </Button>
                   </td>
-                  <td><button type="button" className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg"onClick={()=>handleBackgroundBlurOnView(val)}>Details</button></td>
+                  <td><button className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg" type="button"onClick={()=>handleBackgroundBlurOnView(val)}>Details</button></td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
                       alt="edit-icon"
                       className="mx-auto"
                       src="/images/edit.png"
-                      onClick={()=>handleBackgroundBlurOnEdit(val)}
+                      onClick={()=>handleBackgroundBlurOnEdit(val,val?.id)}
                     />
                   </td>
                   <td className="h-[7vh] cursor-pointer">
@@ -125,7 +127,7 @@ export function ActivityDataBasePersonalTable({
                       alt="delete-icon"
                       className="mx-auto"
                       src="/images/delete.png"
-                      onClick={()=>handleBackgroundBlurOnDelete()}
+                      onClick={()=>handleBackgroundBlurOnDelete(val?.id)}
                     />
                   </td>
                 </tr>

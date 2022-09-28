@@ -29,15 +29,13 @@ const AepStudentAssignActivity=(payload: AepStudentPayload)=>handleMutation({
 const AepStudentActivityFilter=(filterObj: FilterObjVal)=>handleQuery({ resourceUrl:`activity_assignment/aep/filter/?student_id=${filterObj.student_id}&&activity_status=${filterObj.activity_status}&&activity_subject=${filterObj.activity_subject}` })
 
 
-const AepStudentActivityDelete=(payload: AepStudentPayload)=>{
-    handleMutation({
+const AepStudentActivityDelete=(payload: AepStudentPayload)=>handleMutation({
         resourceUrl: `student/aep/list`,
         
         method: "DELETE",
         queryParams: { ...payload }
     
       })
-}
 
 export const AepResObj={
     aep_list: AepList,

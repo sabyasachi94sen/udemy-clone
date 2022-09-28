@@ -22,17 +22,11 @@ export interface SuperAdminPostDataObjVal{
 const SuperAdminInfoList= ()=>handleQuery({ resourceUrl: "super_admin" })
 
 
-const SuperAdminInfoSubmit= (postDataObj: SuperAdminPostDataObjVal )=>{
-
-
-  handleMutation({
+const SuperAdminInfoSubmit= (postDataObj: SuperAdminPostDataObjVal )=>handleMutation({
         resourceUrl: "super_admin",
         method: "POST",
         reqBody: postDataObj,
       })
-
-  
-}
 
 
 const SuperAdminInfoEdit=(putDataObj :SuperAdminPutDataObjVal)=>{
@@ -48,7 +42,7 @@ const SuperAdminInfoEdit=(putDataObj :SuperAdminPutDataObjVal)=>{
    })
     
 
-    handleMutation({
+    return handleMutation({
         resourceUrl: `super_admin/${userId}`,
         method: "PUT",
         reqBody: jsonObj
@@ -57,16 +51,11 @@ const SuperAdminInfoEdit=(putDataObj :SuperAdminPutDataObjVal)=>{
 
 
 
-const SuperAdminInfoDelete=(userId:string)=>{
-   
-
-
-    handleMutation({
+const SuperAdminInfoDelete=(userId:string)=>handleMutation({
         resourceUrl: `super_admin/${userId}`,
         method: "DELETE",
         
       })
-}
 
 
 

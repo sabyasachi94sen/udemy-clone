@@ -24,20 +24,11 @@ export interface AdminPayloadData {
 const AdminInfoList= ()=>handleQuery({ resourceUrl: "admin" })
 
 
-const AdminInfoSubmit= (postData: AdminPostDataObjVal)=>{
-
-   
-
-
-    
-
-  handleMutation({
+const AdminInfoSubmit= (postData: AdminPostDataObjVal)=>handleMutation({
     resourceUrl: "admin",
     method: "POST",
     reqBody: postData,
   })
-
-}
 
 
 const AdminInfoEdit=(putDataObj: AdminPutDataObjVal)=>{
@@ -59,7 +50,7 @@ const AdminInfoEdit=(putDataObj: AdminPutDataObjVal)=>{
      
  
 
-     handleMutation({
+    return handleMutation({
         resourceUrl: `admin/${userId}`,
         method: "PUT",
         reqBody: jsonObj,
@@ -68,18 +59,11 @@ const AdminInfoEdit=(putDataObj: AdminPutDataObjVal)=>{
 }
 
 
-const AdminInfoDelete=(userId:string)=>{
-
-
- 
-
-
-    handleMutation({
+const AdminInfoDelete=(userId:string)=>handleMutation({
         resourceUrl: `admin/${userId}`,
         method: "DELETE",
        
       })
-}
 
 
 

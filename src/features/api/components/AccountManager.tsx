@@ -37,7 +37,7 @@ const AccountManagerInfoAdd=(postDataObj: ManagerPostDataObjVal)=>{
    
     
 
-    handleMutation({
+   return handleMutation({
         resourceUrl:"manager/register",
         method: "POST",
         reqBody: jsonObj,
@@ -58,22 +58,18 @@ const AccountManagerInfoEdit=(putDataObj: ManagerPutDataObjVal)=>{
     })
     
 
-     handleMutation({
+    return handleMutation({
         resourceUrl:`manager/ud/${userId}`,
         method: "PUT",
         reqBody: jsonObj,
       })
 }
 
-const AccountManagerInfoDelete=(userId:string)=>{
-    
-
-    handleMutation({
+const AccountManagerInfoDelete=(userId:string)=>handleMutation({
         resourceUrl:`manager/ud/${userId}`,
         method: "DELETE",
      
       })
-}
 
 
 

@@ -69,7 +69,7 @@ const StudentInfoAdd=(postData: StudentPostDataObjVal)=>{
    
 
      
-  handleMutation({
+ return handleMutation({
     resourceUrl: "student/register",
     method: "POST",
     reqBody: jsonObj,
@@ -111,7 +111,7 @@ const StudentInfoEdit=(putDataObj:StudentPutDataObjVal)=>{
  
    
 
-     handleMutation({
+    return handleMutation({
         resourceUrl: `student/ud/${userId}`,
         method: "PUT",
         reqBody: jsonObj,
@@ -121,17 +121,11 @@ const StudentInfoEdit=(putDataObj:StudentPutDataObjVal)=>{
  }
  
 
- const StudentInfoDelete=(userId:string)=>{
-
-    
-
-    handleMutation({
+ const StudentInfoDelete=(userId:string)=>handleMutation({
         resourceUrl: `student/ud/${userId}`,
         method: "DELETE",
        
       })
-
-}
 
  const ManagerList=()=>handleQuery({ resourceUrl: `assigned_account_managers/list` })
 

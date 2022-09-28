@@ -1,12 +1,12 @@
 import { Slider } from "@material-ui/core";
-import { SyntheticEvent, useState } from "react";
+import moment from "moment"
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 
 interface ActivityDataBaseFormProps {
   handleBackgroundBlur: () => void;
   individualActivityInfo: object;
-  addActivityData: ()=>void;
+  handleCrud: ()=>void;
   name: string;
 }
 
@@ -31,7 +31,8 @@ interface FormValues {
 export function ActivityDataBaseForm({
   handleBackgroundBlur,
   individualActivityInfo,
-  addActivityData,
+  handleCrud,
+  
   name,
 }: ActivityDataBaseFormProps) {
 
@@ -120,6 +121,11 @@ const locationTypeOptions=[{
 
 
 
+ useEffect(()=>{
+     if(name!=="Add an activity to the database")
+       setAgeVal(individualActivityInfo && individualActivityInfo?.age_range && individualActivityInfo.age_range)
+ },[])
+
 
 
   
@@ -165,9 +171,9 @@ const locationTypeOptions=[{
             <input
               className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
               {...register("activity_name")}
+              defaultValue={name!=="Add an activity to the database"?individualActivityInfo?.activity_name: null}
+              disabled={name==="View an activity to the database"}
               type="text"
-              defaultValue={name!="Add an activity to the database"?individualActivityInfo?.activity_name: null}
-              disabled={name=="View an activity to the database"}
             />
             <br />
           </div>
@@ -177,12 +183,10 @@ const locationTypeOptions=[{
               className="relative ml-12 h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
               {...register("activity_type")}
               
-              disabled={name=="View an activity to the database"}
+              disabled={name==="View an activity to the database"}
             >
               <option>Select Type</option>
-              {activityTypeOptions.map((item,index)=>{
-                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.activity_type==item.option?true: false}>{item.option}</option>
-              })}
+              {activityTypeOptions.map((item,index)=><option key={index} selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.activity_type==item.option)}>{item.option}</option>)}
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -190,12 +194,10 @@ const locationTypeOptions=[{
             <select
               className="relative ml-7 h-[5vh] w-[100%] rounded-md bg-[#EEEE] outline-none"
               {...register("subject")}
-              disabled={name=="View an activity to the database"}
+              disabled={name==="View an activity to the database"}
             >
               <option>Select Subject</option>
-              {subjectOptions.map((item,index)=>{
-                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.subject==item.option?true:false}>{item.option}</option>
-              })}
+              {subjectOptions.map((item,index)=><option key={index} selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.subject==item.option)}>{item.option}</option>)}
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -203,11 +205,9 @@ const locationTypeOptions=[{
             <select
               className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"
               {...register("application_requirement")}
-              disabled={name=="View an activity to the database"}
+              disabled={name==="View an activity to the database"}
             >
-              {applicationOptions.map((item,index)=>{
-                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.application_requirement==item.option?true:false}>{item.option}</option>
-              })}
+              {applicationOptions.map((item,index)=><option key={index} selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.application_requirement==item.option)}>{item.option}</option>)}
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -215,21 +215,21 @@ const locationTypeOptions=[{
             <select
               className="relative ml-14 h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
               {...register("location_type")}
+              disabled={name==="View an activity to the database"}
             >
               <option>Location Type</option>
-              {locationTypeOptions.map((item,index)=>{
-                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.location_type==item.option?true:false}>{item.option}</option>
-              })}
+              {locationTypeOptions.map((item,index)=><option key={index} selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.location_type==item.option)}>{item.option}</option>)}
             </select>
           </div>
           <div className="mt-4 flex items-center">
             <span className="text-md font-bold">Country of Activity</span>
             <select
               className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
-             {...register("country_residence")}
+              {...register("country_residence")}
+              disabled={name==="View an activity to the database"}
             >
               <option>Select Country</option>
-              <option>India</option>
+              <option selected={name!=="Add an activity to the database"}>India</option>
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -237,6 +237,8 @@ const locationTypeOptions=[{
             <input
               className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
               {...register("country_citizenship")}
+              defaultValue={individualActivityInfo?.country_residence}
+              disabled={name==="View an activity to the database"}
               type="text"
             />
             <br />
@@ -247,6 +249,8 @@ const locationTypeOptions=[{
             <input
               className="relative ml-14 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
               {...register("url")}
+              defaultValue={individualActivityInfo?.url}
+              disabled={name==="View an activity to the database"}
               type="text"
             />
             <br />
@@ -258,6 +262,8 @@ const locationTypeOptions=[{
             <input
               className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
               {...register("registration_open")}
+              defaultValue={individualActivityInfo?.registration_open}
+              disabled={name==="View an activity to the database"}
               type="date"
             />
             <br />
@@ -268,6 +274,8 @@ const locationTypeOptions=[{
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
               {...register("application_deadline")}
+              defaultValue={moment(individualActivityInfo?.created_at).format("YYYY-MM-DD")}
+              disabled={name==="View an activity to the database"}
               type="date"
             />
             <br />
@@ -278,6 +286,8 @@ const locationTypeOptions=[{
             <input
               className="relative ml-10 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
               {...register("activity_start_date")}
+              defaultValue={individualActivityInfo?.activity_start_date}
+              disabled={name==="View an activity to the database"}
               type="date"
             />
             <br />
@@ -288,6 +298,8 @@ const locationTypeOptions=[{
             <input
               className="relative ml-12 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
               {...register("activity_end_date")}
+              defaultValue={individualActivityInfo?.activity_end_date}
+              disabled={name==="View an activity to the database"}
               type="date"
             />
             <br />
@@ -317,12 +329,12 @@ const locationTypeOptions=[{
                  <input className="bg-[#EEEE] rounded-md w-[35%] h-[5vh] relative ml-3" name="name" type="text"/><br />
 
                </div> */}
-            <input {...register("grade_low")} type="text" className="w-[8%] h-[3vh] relative left-[4%]" value={gradeVal[0]} />
+            <input {...register("grade_low")} className="w-[8%] h-[3vh] relative left-[4%]" type="text" value={gradeVal[0]} />
             <div className="w-[50%]">
-              <Slider value={gradeVal} onChange={handleGradeVal} className="mt-2"  />
+              <Slider className="mt-2" value={gradeVal} onChange={handleGradeVal}  />
             </div>
 
-            <input {...register("grade_high")} type="text" className="w-[8%] h-[3vh]" value={gradeVal[1]} />
+            <input {...register("grade_high")} className="w-[8%] h-[3vh]" type="text" value={gradeVal[1]} />
           </div>
 
           <div className="mt-4 flex w-[100%] items-center justify-between">
@@ -334,13 +346,13 @@ const locationTypeOptions=[{
 
               </div> */}
 
-            <input type="text" className="w-[8%] relative left-[6%]" {...register("age_low")} value={ageVal[0]} />
+            <input className="w-[8%] relative left-[6%]" type="text" {...register("age_low")} value={ageVal[0]} />
 
             <div className="w-[50%]">
-              <Slider value={ageVal} onChange={handleAgeVal} className="mt-2 relative left-[2%]" />
+              <Slider className="mt-2 relative left-[2%]" value={ageVal} onChange={handleAgeVal} />
             </div>
 
-            <input {...register("age_high")} type="text" className="w-[8%] relative" value={ageVal[1]} />
+            <input {...register("age_high")} className="w-[8%] relative" type="text" value={ageVal[1]} />
           </div>
           <div className="text-md mt-5 flex w-[60%] flex-col">
             <p className="text-md font-bold font-bold ">
@@ -349,9 +361,10 @@ const locationTypeOptions=[{
             <select
               className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
               {...register("only open to residence of these countries")}
+              selected={name!=="Add an activity to the database"}
             >
               <option>Select country</option>
-              <option>India</option>
+              <option selected={name!=="Add an activity to the database"}>India</option>
             </select>
           </div>
           <div className="text-md mt-5 flex w-[60%] flex-col">
@@ -361,14 +374,15 @@ const locationTypeOptions=[{
             <select
               className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
               {...register("Only open to citizens of these countries")}
+              disabled={name==="View an activity to the database"}
             >
               <option>Select country</option>
-              <option>India</option>
+              <option selected={name!=="Add an activity to the database"}>India</option>
             </select>
           </div>
           <div className="mt-14">
             <h1 className="text-lg font-bold text-[#6F6F6F]">Remarks</h1>
-            <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" {...register("remarks")} />
+            <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" {...register("remarks")} defaultValue={individualActivityInfo?.remarks} disabled={name==="View an activity to the database"}/>
           </div>
 
           <div className="mt-10 mb-10 flex items-center">
@@ -383,7 +397,7 @@ const locationTypeOptions=[{
         </div>
       </div>
       {name !== "View an activity to the database" ? (
-        <button onClick={handleSubmit(addActivityData)} className="mx-auto mt-10 mb-10 flex h-[5vh] w-[15%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600" type="button">
+        <button className="mx-auto mt-10 mb-10 flex h-[5vh] w-[15%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600" type="button" onClick={handleSubmit(handleCrud)}>
           Save
         </button>
       ) : null}
