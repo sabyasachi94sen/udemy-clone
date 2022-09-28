@@ -16,11 +16,6 @@ export function UpdateSuperAdminModal({}) {
   const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
 
-  console.log(
-    "file: UpdateSuperAdminModal.tsx ~ line 17 ~ UpdateSuperAdminModal ~ selectedData",
-    selectedData?.is_active,
-  );
-
   const updateSuperAdminMutation = useUpdateSuperAdmin(() => {
     onModalClose();
   });

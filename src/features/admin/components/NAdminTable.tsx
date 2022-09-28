@@ -45,7 +45,11 @@ export function NewSuperAdminTable({
     columnHelper.accessor((row) => row.last_update, {
       id: "last_update",
       header: "Last update",
-      cell: (info) => <TableRowCell rowValue={formatDate(info.getValue())} />,
+      cell: (info) => (
+        <TableRowCell
+          rowValue={info.getValue() ? formatDate(info.getValue()) : null}
+        />
+      ),
     }),
     columnHelper.accessor((row) => row.is_active, {
       id: "is_active",
