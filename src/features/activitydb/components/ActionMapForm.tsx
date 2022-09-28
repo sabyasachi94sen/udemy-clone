@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 import { ActionMapStepForm } from "@/features/activitydb";
 import { ActivityResObj } from "@/features/api";
-
 
 interface ActionMapFormProps {
   handleBackgroundBlurOnMap: () => void;
@@ -15,129 +14,13 @@ interface StepFormValues {
   deadline_days: string;
 }
 
-          {storeMapData.before_register.map((item, index) => (
-            <div className="mt-2 flex h-[8vh]  w-full">
-              <div className="flex h-[7vh] w-[69%] items-center justify-around text-xl">
-                <p>
-                  Action: <span className="font-bold">{item.action}</span>
-                </p>
-                <p>
-                  Number of days: <span className="font-bold">{item.days}</span>
-                </p>
-              </div>
-              <div className="flex h-[7vh] w-[30%] items-center justify-around">
-                <button
-                  className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
-                  onClick={() =>
-                    backgroundBlurOnEditStep(index, "before_register")
-                  }
-                >
-                  Edit{" "}
-                </button>
-                <button
-                  className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-[#6F6F6F] text-center text-[18px] text-white hover:bg-blue-600"
-                  onClick={() => deleteStepData(index, "before_register")}
-                >
-                  Delete{" "}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0]">
-          <div className="flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10">
-            <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
-              {" "}
-              After registration open
-            </h1>
-            <button
-              className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
-              onClick={() => backgroundBlurOnAddStep("after_register")}
-            >
-              Add step&nbsp; <img alt="plus-icon" src="/images/plus.png" />{" "}
-            </button>
-          </div>
-
-          {storeMapData.after_register.map((item, index) => (
-            <div className="mt-2 flex h-[8vh]  w-full">
-              <div className="flex h-[7vh] w-[69%] items-center justify-between justify-around text-xl">
-                <p>
-                  Action: <span className="font-bold">{item.action}</span>
-                </p>
-                <p>
-                  Number of days: <span className="font-bold">{item.days}</span>
-                </p>
-              </div>
-              <div className="flex h-[7vh] w-[30%] items-center justify-around">
-                <button
-                  className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
-                  onClick={() =>
-                    backgroundBlurOnEditStep(index, "after_register")
-                  }
-                >
-                  Edit{" "}
-                </button>
-                <button
-                  className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-[#6F6F6F] text-center text-[18px] text-white hover:bg-blue-600"
-                  onClick={() => deleteStepData(index, "after_register")}
-                >
-                  Delete{" "}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0]">
-          <div className="mx-auto flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10 ">
-            <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
-              Before application deadline
-            </h1>
-            <button
-              className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
-              onClick={() => backgroundBlurOnAddStep("before_deadline")}
-            >
-              Add step&nbsp; <img alt="plus-icon" src="/images/plus.png" />{" "}
-            </button>
-          </div>
-          {storeMapData.before_deadline.map((item, index) => (
-            <div className="mt-2 flex h-[8vh] w-full">
-              <div className="flex h-[7vh] w-[69%] items-center justify-between justify-around text-xl">
-                <p>
-                  Action: <span className="font-bold">{item.action}</span>
-                </p>
-                <p>
-                  Number of days: <span className="font-bold">{item.days}</span>
-                </p>
-              </div>
-              <div className="flex h-[7vh] w-[30%] items-center justify-around">
-                <button
-                  className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
-                  onClick={() =>
-                    backgroundBlurOnEditStep(index, "before_deadline")
-                  }
-                >
-                  Edit{" "}
-                </button>
-                <button
-                  className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-[#6F6F6F] text-center text-[18px] text-white hover:bg-blue-600"
-                  onClick={() => deleteStepData(index, "before_deadline")}
-                >
-                  Delete{" "}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
 export function ActionMapForm({
   handleBackgroundBlurOnMap,
   activityId,
 }: ActionMapFormProps) {
   const [backBlurAddStep, setBackBlurOnAddStep] = useState(false);
   const [backBlurEditStep, setBackBlurOnEditStep] = useState(false);
-  const [stepData,setStepData]=useState({})
+  const [stepData, setStepData] = useState({});
   const [mutateParams, setMutateParams] = useState({
     mutateFunc: ActivityResObj.action_map_step_add,
     action: "add",
@@ -155,7 +38,8 @@ export function ActionMapForm({
   const { mutate } = useMutation(mutateParams.mutateFunc, {
     onSuccess: () => {
       if (mutateParams.action === "add") setBackBlurOnAddStep(!backBlurAddStep);
-      else if(mutateParams.action==="edit") setBackBlurOnEditStep(!backBlurEditStep)
+      else if (mutateParams.action === "edit")
+        setBackBlurOnEditStep(!backBlurEditStep);
 
       setTimeout(() => {
         queryClient.invalidateQueries("action-map-list");
@@ -169,10 +53,13 @@ export function ActionMapForm({
     setStepId(add_step_id);
   };
 
-  const backgroundBlurOnEditStep = (edit_step_id: string,stepFormVal: StepFormValues) => {
+  const backgroundBlurOnEditStep = (
+    edit_step_id: string,
+    stepFormVal: StepFormValues,
+  ) => {
     setBackBlurOnEditStep(!backBlurEditStep);
     setStepId(edit_step_id);
-    setStepData(stepFormVal)
+    setStepData(stepFormVal);
   };
 
   const submitStepData = (addStepFormValues: StepFormValues) => {
@@ -193,24 +80,29 @@ export function ActionMapForm({
   };
 
   const editStepData = (editStepFormValues: StepFormValues) => {
-    const mutateObj={
+    const mutateObj = {
       stepId,
-      data: { ...editStepFormValues }
-    }
+      data: { ...editStepFormValues },
+    };
 
-
-    setMutateParams({ mutateFunc:ActivityResObj.action_map_step_edit,action:"edit" })
-    setTimeout(()=>{
-      mutate(mutateObj)
-    },1000)
+    setMutateParams({
+      mutateFunc: ActivityResObj.action_map_step_edit,
+      action: "edit",
+    });
+    setTimeout(() => {
+      mutate(mutateObj);
+    }, 1000);
   };
 
-  const deleteStepData = (delete_step_id:string) => {
-    setMutateParams({mutateFunc: ActivityResObj.action_map_step_delete,action: "DELETE"})
+  const deleteStepData = (delete_step_id: string) => {
+    setMutateParams({
+      mutateFunc: ActivityResObj.action_map_step_delete,
+      action: "DELETE",
+    });
 
-    setTimeout(()=>{
-       mutate(delete_step_id)
-    },1000)
+    setTimeout(() => {
+      mutate(delete_step_id);
+    }, 1000);
   };
 
   return (
@@ -268,7 +160,9 @@ export function ActionMapForm({
                   <button
                     className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
                     type="button"
-                    onClick={() => backgroundBlurOnEditStep(item && item?.id,item)}
+                    onClick={() =>
+                      backgroundBlurOnEditStep(item && item?.id, item)
+                    }
                   >
                     Edit
                   </button>
@@ -319,7 +213,9 @@ export function ActionMapForm({
                   <button
                     className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
                     type="button"
-                    onClick={() => backgroundBlurOnEditStep(item && item?.id,item)}
+                    onClick={() =>
+                      backgroundBlurOnEditStep(item && item?.id, item)
+                    }
                   >
                     Edit{" "}
                   </button>
@@ -368,7 +264,9 @@ export function ActionMapForm({
                   <button
                     className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
                     type="button"
-                    onClick={() => backgroundBlurOnEditStep(item && item?.id,item)}
+                    onClick={() =>
+                      backgroundBlurOnEditStep(item && item?.id, item)
+                    }
                   >
                     Edit{" "}
                   </button>
@@ -418,7 +316,9 @@ export function ActionMapForm({
                     className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
                     type="button"
                     type="button"
-                    onClick={() => backgroundBlurOnEditStep(item && item?.id,item)}
+                    onClick={() =>
+                      backgroundBlurOnEditStep(item && item?.id, item)
+                    }
                   >
                     Edit
                   </button>
@@ -467,7 +367,9 @@ export function ActionMapForm({
                   <button
                     className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
                     type="button"
-                    onClick={() => backgroundBlurOnEditStep(item && item?.id,item)}
+                    onClick={() =>
+                      backgroundBlurOnEditStep(item && item?.id, item)
+                    }
                   >
                     Edit
                   </button>
@@ -487,7 +389,6 @@ export function ActionMapForm({
       {backBlurAddStep || backBlurEditStep ? (
         <div className="relative z-20 -mt-[100vh] flex h-[160vh] w-full justify-center pt-32 ">
           <ActionMapStepForm
-
             handleActionMapStepCrud={
               backBlurAddStep ? submitStepData : editStepData
             }

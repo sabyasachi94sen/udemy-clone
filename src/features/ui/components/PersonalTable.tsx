@@ -20,8 +20,6 @@ export function PersonalTable({
 }: PersonalTable) {
   const checkActivityData = () => {};
 
-  const checkActivityData = () => {};
-
   useEffect(() => {
     checkActivityData();
   }, []);
