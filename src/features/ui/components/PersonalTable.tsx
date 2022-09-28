@@ -1,6 +1,8 @@
 import moment from "moment";
 import { useEffect } from "react";
 
+import "react-toastify/dist/ReactToastify.css";
+
 interface PersonalTable {
   tableCheck: () => void;
   title1: string;
@@ -18,9 +20,13 @@ export function PersonalTable({
 }: PersonalTable) {
   const checkActivityData = () => {};
 
+  const checkActivityData = () => {};
+
   useEffect(() => {
     checkActivityData();
   }, []);
+
+  console.log(activityData);
 
   return (
     <div className="-mt-44 h-screen w-[90%] rounded-md bg-white">

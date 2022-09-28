@@ -1,119 +1,75 @@
-import axios from "axios";
+import { handleMutation,handleQuery } from "@/shared/services/api-client"
 
-import { GetAuthToken } from "@/features/helpers"
-
-
-
-const AdminInfoList= ()=>{
-
-const token=GetAuthToken()
-
-
-    const config={
-        method:"get",
-        url: "https://pippams-dev.eoraa.com/api/admin/",
-    
-            headers: {
-              "Content-Type": "application/json",
-               "Authorization": token,
-            }
-    
-        
-    }
-
-    return axios(config);
+export interface AdminPostDataObjVal {
+    name:  string;
+    email: string;
 }
 
 
-const AdminInfoSubmit= (data: object)=>{
+export interface AdminPutDataObjVal {
+    data: AdminPayloadData;
+    id:   number;
+}
 
-    
-const token=GetAuthToken()
-   
-    const config={
-        method: "post",
-        url: "https://pippams-dev.eoraa.com/api/admin/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-
-          data: JSON.stringify(data)
-  
-
-    }
-    axios(config)
+export interface AdminPayloadData {
+    username: string;
+    email:    string;
+    status:   string;
+    role:     string;
 }
 
 
-const AdminInfoEdit=(putDataObj)=>{
+
+
+const AdminInfoList= ()=>handleQuery({ resourceUrl: "admin" })
+
+
+const AdminInfoSubmit= (postData: AdminPostDataObjVal)=>handleMutation({
+    resourceUrl: "admin",
+    method: "POST",
+    reqBody: postData,
+  })
+
+
+const AdminInfoEdit=(putDataObj: AdminPutDataObjVal)=>{
+
+
+
   
    
     const userId=putDataObj.id;
     const jsonObj=JSON.stringify({
      ...putDataObj.data,
-     is_active: putDataObj.data.status==="Yes"?true: false,
+     is_active: putDataObj.data.status==="Yes",
      
      
       
     })
+
+
      
  
-     const token=GetAuthToken()
- 
-     const config={
-         method: "put",
-         url: "https://pippams-dev.eoraa.com/api/admin/"+userId+"/",
-         headers: {
-             "Content-Type": "application/json",
-              "Authorization": token,
-           },
-           
-           data: jsonObj
-     }
- 
-     axios(config)
-}
 
-
-const AdminInfoDelete=(userId)=>{
-    const token=GetAuthToken()
-
-    const config={
-        method: "delete",
-        url: "https://pippams-dev.eoraa.com/api/admin/"+userId+"/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    axios(config)
-}
-
-
-
-
-
-const AdminActivity=async (adminId:string)=>{
-
-    const token=GetAuthToken()
+    return handleMutation({
+        resourceUrl: `admin/${userId}`,
+        method: "PUT",
+        reqBody: jsonObj,
+      })
     
-    const config={
-        method: "get",
-        url: "https://pippams-dev.eoraa.com/api/admin_list/?id="+adminId,
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    return await axios(config)
 }
+
+
+const AdminInfoDelete=(userId:string)=>handleMutation({
+        resourceUrl: `admin/${userId}`,
+        method: "DELETE",
+       
+      })
+
+
+
+
+
+const AdminActivity=(adminId:string)=>handleQuery({ resourceUrl: `admin_list/?id=${adminId}` })
 
 
 

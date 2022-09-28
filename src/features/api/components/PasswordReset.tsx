@@ -1,59 +1,34 @@
-import axios from "axios";
 
-const verifyEmail = async (email: object) => {
-  const config = {
-    method: "post",
-    url: "https://pippams-dev.eoraa.com/api/forgot/password/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(email),
+import { handleMutation } from "@/shared/services/api-client";
+
+const verifyEmail = (email: object) => handleMutation({
+    resourceUrl: "forgot/password",
+    method: "POST",
+    reqBody: email,
+  });
+
+const verifyOTP = (mutateObj: object) => {
+  const data = {
+     ...mutateObj
   };
 
-  const res = await axios(config);
-
-  return res;
+  return handleMutation({
+    resourceUrl: "verify/otp",
+    method: "POST",
+    reqBody: data,
+  });
 };
 
-const verifyOTP = async (email: string, otp: object) => {
+const confirmPassword = (mutateObj: object) => {
   const data = {
-    email,
-    ...otp,
+   ...mutateObj
   };
 
-  const config = {
-    method: "post",
-    url: "https://pippams-dev.eoraa.com/api/verify/otp/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(data),
-  };
-
-  const res = await axios(config);
-
-  return res;
-};
-
-const confirmPassword = async (email: string, password: object) => {
-  const data = {
-    email,
-    ...password,
-  };
-
-  const config = {
-    method: "post",
-    url: "https://pippams-dev.eoraa.com/api/reset/password/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    data: JSON.stringify(data),
-  };
-
-  const res = await axios(config);
-
-  return res;
+  return handleMutation({
+    resourceUrl: "reset/password",
+    method: "POST",
+    reqBody: data,
+  });
 };
 
 export const PasswordResetObj = {

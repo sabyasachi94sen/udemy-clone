@@ -1,10 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
-import { StudentResObj } from "@/features/api";
+import {
+  StudentPostDataObjVal,
+  StudentPutDataObjVal,
+  StudentResObj,
+} from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
-import { StudentForm, studentinfo, StudentTable } from "@/features/student";
+import { StudentForm, StudentTable } from "@/features/student";
 import { ActiveStatus } from "@/features/ui";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function StudentRoaster() {
   const [backgroundBlurAddStudent, setBackGroundBlurAddStudent] =
@@ -13,7 +20,10 @@ function StudentRoaster() {
     useState(false);
   const [backgroundBlurDeleteStudent, setBackGroundBlurDeleteStudent] =
     useState(false);
-  const [studentData, setStudentData] = useState(studentinfo);
+
+  const [backgroundBlurViewStudent, setBackGroundBlurViewStudent] =
+    useState(false);
+  const [individualStudentData, setIndividualStudentData] = useState({});
   const [studentDataId, setStudentDataId] = useState("");
   const [mutateParams, setMutateParams] = useState({
     mutateFunc: StudentResObj.student_info_list,
@@ -46,30 +56,28 @@ function StudentRoaster() {
   );
 
   const handleAddBackBlur = () => {
-    setBackGroundBlurAddStudent(
-      (backgroundBlurAddStudent) => !backgroundBlurAddStudent,
-    );
+    setBackGroundBlurAddStudent(!backgroundBlurAddStudent);
   };
 
-  const handleEditBackBlur = (id) => {
-    setBackGroundBlurEditStudent(
-      (backgroundBlurEditStudent) => !backgroundBlurEditStudent,
-    );
+  const handleEditBackBlur = (individual_student_info: object, id: string) => {
+    setBackGroundBlurEditStudent(!backgroundBlurEditStudent);
+
+    setStudentDataId(id);
+    setIndividualStudentData(individual_student_info);
+  };
+
+  const handleDeleteBackBlur = (id: string) => {
+    setBackGroundBlurDeleteStudent(!backgroundBlurDeleteStudent);
 
     setStudentDataId(id);
   };
 
-  const handleDeleteBackBlur = (id) => {
-    setBackGroundBlurDeleteStudent(
-      (backgroundBlurDeleteStudent) => !backgroundBlurDeleteStudent,
-    );
-
-    console.log(id);
-
-    setStudentDataId(id);
+  const handleViewBackBlur = (individual_student_info: object) => {
+    setBackGroundBlurViewStudent(!backgroundBlurViewStudent);
+    setIndividualStudentData(individual_student_info);
   };
 
-  const handleAddSubmit = (postData: object) => {
+  const handleAddSubmit = (postData: StudentPostDataObjVal) => {
     setMutateParams({
       mutateFunc: StudentResObj.student_info_add,
       action: "create_user",
@@ -80,7 +88,7 @@ function StudentRoaster() {
     }, 1000);
   };
 
-  const handleEditSubmit = (putData: object) => {
+  const handleEditSubmit = (putData: StudentPutDataObjVal) => {
     setMutateParams({
       mutateFunc: StudentResObj.student_info_edit,
       action: "edit_user",
@@ -96,14 +104,14 @@ function StudentRoaster() {
     }, 1000);
   };
 
-  const deleteStatus = (e, flag) => {
-    if (flag == 1)
+  const deleteStatus = (e: SyntheticEvent, flag: number) => {
+    if (flag === 1)
       setBackGroundBlurDeleteStudent(
         (backgroundBlurDeleteStudent) => !backgroundBlurDeleteStudent,
       );
   };
 
-  const handleDeleteSubmit = (confirmStatus) => {
+  const handleDeleteSubmit = (confirmStatus: boolean) => {
     if (confirmStatus) {
       setMutateParams({
         mutateFunc: StudentResObj.student_info_delete,
@@ -123,7 +131,8 @@ function StudentRoaster() {
         className={
           !backgroundBlurAddStudent &&
           !backgroundBlurEditStudent &&
-          !backgroundBlurDeleteStudent
+          !backgroundBlurDeleteStudent &&
+          !backgroundBlurViewStudent
             ? `bg-white`
             : `opacity-[0.2]`
         }
@@ -135,8 +144,9 @@ function StudentRoaster() {
             handleAddBackBlur={handleAddBackBlur}
             handleDeleteBackBlur={handleDeleteBackBlur}
             handleEditBackBlur={handleEditBackBlur}
+            handleViewBackBlur={handleViewBackBlur}
             name="Essai Student Roster"
-            studentData={data && data?.data}
+            studentData={data}
           />
         </div>
       </div>
@@ -152,7 +162,16 @@ function StudentRoaster() {
         <StudentForm
           handleBackBlur={handleEditBackBlur}
           handleForm={handleEditSubmit}
+          individualStudentData={individualStudentData}
           title="Update a student to the roster"
+        />
+      ) : null}
+
+      {backgroundBlurViewStudent ? (
+        <StudentForm
+          handleBackBlur={handleViewBackBlur}
+          individualStudentData={individualStudentData}
+          title="View a student to the roster"
         />
       ) : null}
 
@@ -163,6 +182,7 @@ function StudentRoaster() {
           header="Are you sure you want to delete this Student?"
         />
       ) : null}
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

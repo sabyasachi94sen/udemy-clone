@@ -13,6 +13,21 @@ type FormValues = {
   password: string;
 };
 
+interface ResponseVal {
+  token: string;
+  user_id: number;
+  email: string;
+  password_verification: boolean;
+  user_type: string;
+}
+
+interface ErrorVal {
+  data: {
+    errorType: string;
+    errorMessage: string;
+  };
+}
+
 export function LoginForm() {
   const router = useRouter();
   const { displayErrorMessages } = useBackendErrors();

@@ -1,93 +1,75 @@
 
-import axios from "axios";
+import { handleMutation,handleQuery } from "@/shared/services/api-client"
 
-import { GetAuthToken } from "@/features/helpers"
 
-const AccountManagerList=()=>{
-    const token=GetAuthToken()
-
-    const config={
-        method: "get",
-        url: "https://pippams-dev.eoraa.com/api/account_managers/list/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    return axios(config);
+export interface ManagerPostDataObjVal {
+    name:  string;
+    email: string;
 }
 
-const AccountManagerInfoAdd=(postData: object)=>{
-    const token=GetAuthToken()
+
+export interface ManagerPutDataObjVal {
+    data: ManagerPayloadData;
+    id:   number;
+}
+
+export interface ManagerPayloadData {
+    username: string;
+    email:    string;
+    status:   string;
+    role:     string;
+}
+
+
+const AccountManagerList=()=>handleQuery({ resourceUrl: "account_managers/list" })
+
+const AccountManagerInfoAdd=(postDataObj: ManagerPostDataObjVal)=>{
+
+
+
 
 
     const jsonObj={
-        email: postData.email,
-        manager_name: postData.name,
+        email: postDataObj.email,
+        manager_name: postDataObj.name,
 
     }
    
-    const config={
-        method: "post",
-        url: "https://pippams-dev.eoraa.com/api/manager/register/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
+    
 
-          data: JSON.stringify(jsonObj)
-  
-
-    }
-    axios(config)
+   return handleMutation({
+        resourceUrl:"manager/register",
+        method: "POST",
+        reqBody: jsonObj,
+      })
 }
 
 
-const AccountManagerInfoEdit=(putDataObj: object)=>{
+const AccountManagerInfoEdit=(putDataObj: ManagerPutDataObjVal)=>{
+
+
+
 
     const userId=putDataObj.id;
     const jsonObj=JSON.stringify({
      ...putDataObj.data,
-     is_active: putDataObj.data.status==="Yes"?true: false,
+     is_active: putDataObj.data.status==="Yes",
      
     })
+    
+
+    return handleMutation({
+        resourceUrl:`manager/ud/${userId}`,
+        method: "PUT",
+        reqBody: jsonObj,
+      })
+}
+
+const AccountManagerInfoDelete=(userId:string)=>handleMutation({
+        resourceUrl:`manager/ud/${userId}`,
+        method: "DELETE",
      
- 
-     const token=GetAuthToken()
- 
-     const config={
-         method: "put",
-         url: "https://pippams-dev.eoraa.com/api/manager/ud/"+userId+"/",
-         headers: {
-             "Content-Type": "application/json",
-              "Authorization": token,
-           },
-           
-           data: jsonObj
-     }
- 
-     axios(config)
-}
-
-const AccountManagerInfoDelete=(userId)=>{
-    const token=GetAuthToken()
-
-    const config={
-        method: "delete",
-        url: "https://pippams-dev.eoraa.com/api/manager/ud/"+userId+"/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    axios(config)
-}
+      })
 
 
 

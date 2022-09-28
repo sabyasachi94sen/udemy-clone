@@ -1,6 +1,7 @@
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import { PasswordResetObj } from "@/features/api";
 
@@ -8,28 +9,48 @@ interface FormValues {
   email: string;
 }
 
+interface ResponseVal {
+  message: string;
+}
+
+interface PayLoad {
+  email: string;
+}
+
+interface ErrorVal {
+  data: {
+    email: string;
+  };
+}
+
 export function ResetPasswordForm() {
   const { register, handleSubmit } = useForm<FormValues>();
   const router = useRouter();
 
-  const handleEmail = (email: { email: string }) => {
-    const response = PasswordResetObj.verify_email(email);
-
-    response
-      .then((res) => {
-        toast.success(res.data.message);
-        setTimeout(() => {
-          router.push({
-            pathname: "/reset-password-otp",
-            query: {
-              email: email.email,
-            },
-          });
-        }, 1000);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.email);
+  const { mutate } = useMutation(PasswordResetObj.verify_email, {
+    onSuccess: (res: ResponseVal, email: PayLoad) => {
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_CENTER,
       });
+      setTimeout(() => {
+        router.push({
+          pathname: "/reset-password-otp",
+          query: {
+            email: email.email,
+          },
+        });
+      }, 1000);
+    },
+
+    onError: (err: ErrorVal) => {
+      toast.error(err.data.email, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    },
+  });
+
+  const handleEmail = (email: PayLoad) => {
+    mutate(email);
   };
 
   return (

@@ -1,96 +1,61 @@
-import axios from "axios";
 
-import { GetAuthToken } from "@/features/helpers"
+import { handleMutation ,handleQuery } from "@/shared/services/api-client";
 
+export interface SuperAdminPutDataObjVal {
+    data: SuperAdminPayloadData ;
+    id:   number;
+}
 
-
-const SuperAdminInfoList= ()=>{
-
-const token=GetAuthToken()
-
-
-    const config={
-        method:"get",
-        url: "https://pippams-dev.eoraa.com/api/super_admin/",
-    
-            headers: {
-              "Content-Type": "application/json",
-               "Authorization": token,
-            }
-    
-        
-    }
-
-    return axios(config);
+export interface SuperAdminPayloadData {
+    username: string;
+    email:    string;
+    status:   string;
 }
 
 
-const SuperAdminInfoSubmit= (data: object)=>{
-
-    
-const token=GetAuthToken()
-   
-    const config={
-        method: "post",
-        url: "https://pippams-dev.eoraa.com/api/super_admin/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-
-          data: JSON.stringify(data)
-  
-
-    }
-    axios(config)
+export interface SuperAdminPostDataObjVal{
+    username: string;
+    email: string
 }
 
 
-const SuperAdminInfoEdit=(putDataObj)=>{
+const SuperAdminInfoList= ()=>handleQuery({ resourceUrl: "super_admin" })
+
+
+const SuperAdminInfoSubmit= (postDataObj: SuperAdminPostDataObjVal )=>handleMutation({
+        resourceUrl: "super_admin",
+        method: "POST",
+        reqBody: postDataObj,
+      })
+
+
+const SuperAdminInfoEdit=(putDataObj :SuperAdminPutDataObjVal)=>{
+
+
 
    const userId=putDataObj.id;
    const jsonObj=JSON.stringify({
     ...putDataObj.data,
-    is_active: putDataObj.data.status==="Yes"?true: false,
+    is_active: putDataObj.data.status==="Yes",
     role: "superadmin"
      
    })
     
 
-    const token=GetAuthToken()
-
-    const config={
-        method: "put",
-        url: "https://pippams-dev.eoraa.com/api/super_admin/"+userId+"/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-          data: jsonObj
-    }
-
-    axios(config)
+    return handleMutation({
+        resourceUrl: `super_admin/${userId}`,
+        method: "PUT",
+        reqBody: jsonObj
+      })
 }
 
 
 
-const SuperAdminInfoDelete=(userId)=>{
-    const token=GetAuthToken()
-
-    const config={
-        method: "delete",
-        url: "https://pippams-dev.eoraa.com/api/super_admin/"+userId+"/",
-        headers: {
-            "Content-Type": "application/json",
-             "Authorization": token,
-          },
-          
-         
-    }
-
-    axios(config)
-}
+const SuperAdminInfoDelete=(userId:string)=>handleMutation({
+        resourceUrl: `super_admin/${userId}`,
+        method: "DELETE",
+        
+      })
 
 
 

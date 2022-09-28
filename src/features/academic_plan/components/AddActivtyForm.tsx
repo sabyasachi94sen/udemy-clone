@@ -10,7 +10,7 @@ interface AddActivityFormProps {
   studentId: string;
 }
 
-interface ResVal {
+interface ResponseVal {
   id: number;
   created_by: CreatedBy;
   action_map_activity: any[];
@@ -76,7 +76,7 @@ export function AddActivityForm({
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation(mutateParams.mutateFunc, {
-    onSuccess: (res) => {
+    onSuccess: (res: ResponseVal) => {
       setTimeout(() => {
         if (mutateParams.action === "add")
           queryClient.invalidateQueries("assigned-student-activity");

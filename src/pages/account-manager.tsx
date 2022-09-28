@@ -1,9 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 import { AccountManagerTable } from "@/features/account_manger";
 import { CreateSuperAdminForm, EditAdminForm } from "@/features/admin";
-import { AccountManagerResObj } from "@/features/api";
+import {
+  AccountManagerResObj,
+  ManagerPostDataObjVal,
+  ManagerPutDataObjVal,
+} from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus, personaldata, PersonalTable } from "@/features/ui";
 
@@ -29,7 +34,6 @@ function AccountManager() {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(mutateParams.mutateFunc, {
     onSuccess: () => {
-      console.log("success");
       if (mutateParams.action === "create_user")
         setBackGroundBlurAddManager(!backgroundBlurAddManager);
       else if (mutateParams.action === "edit_user") {
@@ -63,13 +67,13 @@ function AccountManager() {
     setManagerDataId(id);
   };
 
-  const handleDeleteBlur = (id) => {
+  const handleDeleteBlur = (id: string) => {
     setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
 
     setManagerDataId(id);
   };
 
-  const handleAddSubmit = (postData: object) => {
+  const handleAddSubmit = (postData: ManagerPostDataObjVal) => {
     setMutateParams({
       mutateFunc: AccountManagerResObj.account_manager_info_add,
       action: "create_user",
@@ -80,7 +84,7 @@ function AccountManager() {
     }, 1000);
   };
 
-  const handleEditSubmit = (putData: object) => {
+  const handleEditSubmit = (putData: ManagerPutDataObjVal) => {
     const putDataObj = {
       data: putData,
       id: managerDataId,
@@ -116,8 +120,9 @@ function AccountManager() {
     setManagerActivity([]);
   };
 
-  const deleteStatus = (e, flag) => {
-    if (flag == 1) setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
+  const deleteStatus = (e: SyntheticEvent, flag: number) => {
+    if (flag === 1)
+      setBackGroundBlurDeleteManager(!backgroundBlurDeleteManager);
   };
 
   return (
@@ -139,7 +144,7 @@ function AccountManager() {
               handleAddBlur={handleAddBlur}
               handleDeleteBlur={handleDeleteBlur}
               handleEditBlur={handleEditBlur}
-              managerData={data && data?.data}
+              managerData={data}
               name="Essai Account Manager Roaster"
               tableCheck={isTableCheck}
             />
