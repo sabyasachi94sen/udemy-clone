@@ -13,8 +13,8 @@ export function TableRowCell({
 }
 
 const STATUS_VARIANT_MAPS = {
-  active: "text-green-800",
-  inactive: "text-red-800",
+  active: "bg-green-100 text-green-800",
+  inactive: "bg-red-100 text-red-800",
 };
 
 export function StatusCell({
@@ -28,7 +28,7 @@ export function StatusCell({
     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
       <span
         className={clsx(
-          "inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 ",
+          "inline-flex rounded-full px-2 text-xs font-semibold leading-5 ",
           STATUS_VARIANT_MAPS[statusColor],
         )}
       >

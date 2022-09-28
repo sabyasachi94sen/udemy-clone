@@ -21,10 +21,9 @@ import { updatePaginationState } from "./update-pagination-state";
 
 export interface BaseTableProps<TData> {
   data: TData[];
-  totalResultsCount?: number;
-  totalPagesCount?: number;
-  pageCount?: number;
-  columns: ColumnDef<TData>[];
+  totalResultsCount: number;
+  totalPagesCount: number;
+  columns: ColumnDef<TData, unknown>[];
   isLoading?: boolean;
 
   // Server-side processing: sorting, pagination
@@ -184,15 +183,18 @@ export function BaseTable<T>({
                 )} */}
               </tbody>
             </table>
-            <Pagination
-              canGoToNextPage={table.getCanNextPage()}
-              canGoToPreviousPage={table.getCanPreviousPage()}
-              currentPage={table.getState().pagination.pageIndex + 1}
-              totalPagesCount={table.getPageCount()}
-              totalResultsCount={totalResultsCount}
-              onGoToNextPage={() => table.nextPage()}
-              onGoToPreviousPage={() => table.previousPage()}
-            />
+            {/* Only show pagination, when there's more than one page */}
+            {totalPagesCount > 1 && (
+              <Pagination
+                canGoToNextPage={table.getCanNextPage()}
+                canGoToPreviousPage={table.getCanPreviousPage()}
+                currentPage={table.getState().pagination.pageIndex + 1}
+                totalPagesCount={table.getPageCount()}
+                totalResultsCount={totalResultsCount}
+                onGoToNextPage={() => table.nextPage()}
+                onGoToPreviousPage={() => table.previousPage()}
+              />
+            )}
           </div>
         </div>
       </div>

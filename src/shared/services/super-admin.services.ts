@@ -11,11 +11,19 @@ export interface SuperAdminsResp {
   previous?: string | null;
   results: Array<Account>;
 }
-export const useSuperAdmins = (params?: { page: number }) =>
+export const useSuperAdmins = (
+  params?: { page: number },
+  // https://tanstack.com/query/v4/docs/guides/paginated-queries#better-paginated-queries-with-keeppreviousdata
+  queryOptions?: { keepPreviousData?: boolean },
+) =>
   useQuery(
     [queryKeys.superAdmins.list(params?.page)],
 
     () => SuperAdminService.superAdminList({ ...params }),
+    {
+      keepPreviousData: true,
+      ...queryOptions,
+    },
   );
 
 export function useCreateSuperAdmin(onSuccess?: () => void) {

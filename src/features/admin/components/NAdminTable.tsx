@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React from "react";
 
 import { Account } from "@/api";
 import {
@@ -16,11 +16,14 @@ import { formatDate } from "@/shared/utils";
 export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
   const router = useRouter();
   const { page, perPage } = router.query;
-  const superAdminsResult = useSuperAdmins();
+  const superAdminsResult = useSuperAdmins({ page });
 
   const columnHelper = createColumnHelper<Account>();
 
-  const columns = [
+  // REF: https://github.com/TanStack/table/issues/4241
+  // to prevent this we're using any here
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const columns: ColumnDef<Account, any>[] = [
     columnHelper.accessor((row) => row.username, {
       id: "username",
       header: "Name",
@@ -39,7 +42,12 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
     columnHelper.accessor((row) => row.is_active, {
       id: "is_active",
       header: "Active Status",
-      cell: (info) => <TableRowCell rowValue={info.getValue()} />,
+      cell: (info) => (
+        <StatusCell
+          rowValue={info.getValue() !== true ? "Active" : "Inactive"}
+          statusColor={info.getValue() !== true ? "active" : "inactive"}
+        />
+      ),
     }),
     columnHelper.accessor((row) => row.id, {
       id: "id",
@@ -61,61 +69,8 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
     }),
   ];
 
-  const columnsA = useMemo<ColumnDef<Account>[]>(
-    () => [
-      {
-        header: "Name",
-        accessorKey: "username",
-        cell: (info) => <TableRowCell rowValue={info.getValue()} />,
-      },
-      {
-        header: "Email",
-        accessorKey: "email",
-        cell: (info) => <TableRowCell rowValue={info.getValue()} />,
-      },
-      {
-        header: "Last update",
-        accessorKey: "last_update",
-        cell: (info) => <TableRowCell rowValue={formatDate(info.getValue())} />,
-      },
-      {
-        header: "Active Status",
-        accessorKey: "username",
-        cell: (info) => <StatusCell rowValue={info.getValue() === "ac"} />,
-      },
-      {
-        header: "",
-        accessorKey: "id",
-        cell: (info) => (
-          <Button width="max" onClick={() => console.log(info.getValue())}>
-            Edit
-          </Button>
-        ),
-      },
-      {
-        header: "",
-        accessorKey: "id",
-        cell: (info) => (
-          <Button width="max" onClick={() => console.log(info.getValue())}>
-            Delete
-          </Button>
-        ),
-      },
-      // {
-      //   header: "Total Messages",
-      //   accessorKey: "title",
-      //   cell: (info) => <TableRowCell rowValue={info.getValue()} />,
-      // },
-    ],
-    [],
-  );
-
-  if (superAdminsResult.isLoading && !superAdminsResult.data) {
-    return null;
-  }
-
   return (
-    <BaseTable
+    <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
       data={superAdminsResult.data?.results}

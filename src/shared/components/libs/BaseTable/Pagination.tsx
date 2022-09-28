@@ -20,12 +20,11 @@ export function Pagination({
   totalResultsCount = 100,
   visibleResultCountStart = 1,
   visibleResultCountEnd = 10,
-  t,
 }: PaginationProps) {
   return (
     <nav
       aria-label="Pagination"
-      className="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 sm:px-6"
+      className="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-3 py-3"
     >
       <div className="hidden sm:block">
         <p className="text-sm text-gray-700">
