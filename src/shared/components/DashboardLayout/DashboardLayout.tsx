@@ -29,11 +29,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const userType = getToken("userType");
 
-    console.log(
-      "file: DashboardLayout.tsx ~ line 31 ~ useEffect ~ userType",
-      userType,
-    );
-
     if (userType === "super_admin") setMenuItems(MenuInfoSuperAdmin);
     else if (userType === "admin") setMenuItems(MenuInfoAdmin);
     else {

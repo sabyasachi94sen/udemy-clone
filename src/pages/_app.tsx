@@ -10,7 +10,6 @@ import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { DashboardLayout } from "@/shared/components";
 import { TWResponsiveIndicator } from "@/shared/components/libs";
 import { AppProviders } from "@/shared/stores/app-providers";
-import { AuthProvider } from "@/shared/stores/auth.context";
 
 // Pages are by default, checked for protected
 // Ones with publicRoute true are public pages
@@ -38,20 +37,20 @@ export default function MyApp(props: AppProps): JSX.Element {
           stopDelayMs={200}
         />
         <AppProviders>
-          <AuthProvider>
-            <TWResponsiveIndicator />
-            {Component.isPublicRoute ? (
-              // public page
+          {/* <AuthProvider> */}
+          <TWResponsiveIndicator />
+          {Component.isPublicRoute ? (
+            // public page
+            <Component {...pageProps} />
+          ) : (
+            // Do auth check for the protected routes
+            // <AuthGuard>
+            <DashboardLayout>
               <Component {...pageProps} />
-            ) : (
-              // Do auth check for the protected routes
-              // <AuthGuard>
-              <DashboardLayout>
-                <Component {...pageProps} />
-              </DashboardLayout>
-              // </AuthGuard>
-            )}
-          </AuthProvider>
+            </DashboardLayout>
+            // </AuthGuard>
+          )}
+          {/* </AuthProvider> */}
         </AppProviders>
       </Hydrate>
     </QueryClientProvider>

@@ -1,15 +1,21 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Account, ApiError, SuperAdminService } from "@/api";
 import { useRefreshQuery } from "@/shared/hooks/use-refresh-query";
 
 import { queryKeys } from "./query-keys";
 
-export const useSuperAdmins = (params: { page: number }) =>
+export interface SuperAdminsResp {
+  count: number;
+  next?: string | null;
+  previous?: string | null;
+  results: Array<Account>;
+}
+export const useSuperAdmins = (params?: { page: number }) =>
   useQuery(
-    [queryKeys.superAdmins.list(params.page)],
+    [queryKeys.superAdmins.list(params?.page)],
 
-    () => SuperAdminService.superAdminList(params),
+    () => SuperAdminService.superAdminList({ ...params }),
   );
 
 export function useCreateSuperAdmin(onSuccess?: () => void) {

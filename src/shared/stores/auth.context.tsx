@@ -23,9 +23,9 @@
  * actual route push by authProvider functions
  */
 
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React, { createContext, useContext, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 
 import { FullPageLoader } from "@/shared/components";
 import { fetchAuthUser } from "@/shared/services";
@@ -53,22 +53,19 @@ const setRedirect = (redirect: string) => {
   window.sessionStorage.setItem(redirectKey, redirect);
 };
 
-const getRedirect = (): string | null => {
-  return window.sessionStorage.getItem(redirectKey);
-};
+const getRedirect = (): string | null =>
+  window.sessionStorage.getItem(redirectKey);
 
-const clearRedirect = () => {
-  return window.sessionStorage.removeItem(redirectKey);
-};
+const clearRedirect = () => window.sessionStorage.removeItem(redirectKey);
 
 /**
  * Calls user api-endpoint on first-load,to check for if user is authenticated, and stores
  */
-export const AuthProvider = ({
+export function AuthProvider({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element => {
+}): JSX.Element {
   const userResult = useQuery(["authUser"], () => fetchAuthUser(), {
     staleTime: Infinity, // never auto refetch this query, only through manual query fn
   });
@@ -88,7 +85,7 @@ export const AuthProvider = ({
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 /**
  * useAuth hook to access context value from authProvider easily
@@ -107,11 +104,11 @@ export const useAuth = (): AppContextValue => {
  * Shows laoding state while backend authcheck call is being done,
  * redirects accordingly if user not authenticated
  */
-export const AuthGuard = ({
+export function AuthGuard({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element => {
+}): JSX.Element {
   const router = useRouter();
 
   const { isAuthenticated, isLoading } = useAuth();
@@ -131,7 +128,7 @@ export const AuthGuard = ({
 
   // if auth initialized with a valid user show protected page
   return <>{children}</>;
-};
+}
 
 /**
  * Check if user needs to have verified email, before visting a route
@@ -142,19 +139,19 @@ export const AuthGuard = ({
 const ONBOARDING_PATH = "/add-details";
 const CONFIRM_EMAIL_PATH = "/confirm-email";
 
-export const EmailVerifyGuard = ({
+export function EmailVerifyGuard({
   noRequireVerifyPaths,
   children,
 }: {
   noRequireVerifyPaths: string[];
   children: React.ReactNode;
-}): JSX.Element => {
+}): JSX.Element {
   const router = useRouter();
   const { user } = useAuth();
 
   // check if current path requires email verified to access
   const pathRequiresVerfication = !noRequireVerifyPaths.includes(
-    router.pathname
+    router.pathname,
   );
 
   useEffect(() => {
@@ -205,4 +202,4 @@ export const EmailVerifyGuard = ({
   }
 
   return <>{children}</>;
-};
+}

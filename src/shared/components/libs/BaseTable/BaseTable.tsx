@@ -16,6 +16,7 @@ import React, { useCallback } from "react";
 
 import { PER_PAGE } from "@/shared/utils";
 
+import { Pagination } from "./Pagination";
 import { updatePaginationState } from "./update-pagination-state";
 
 export type Person = {
@@ -150,13 +151,17 @@ export function BaseTable<T>({
     autoResetPageIndex: false,
   });
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="mt-4 flex flex-col">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
           <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-100">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
@@ -198,6 +203,15 @@ export function BaseTable<T>({
                 )} */}
               </tbody>
             </table>
+
+            <Pagination
+              canGoToNextPage={table.getCanNextPage()}
+              canGoToPreviousPage={table.getCanPreviousPage()}
+              currentPage={table.getState().pagination.pageIndex + 1}
+              totalPages={table.getPageCount()}
+              onGoToNextPage={() => table.nextPage()}
+              onGoToPreviousPage={() => table.previousPage()}
+            />
             <div className="flex items-center gap-2">
               <button
                 className="rounded border p-1"

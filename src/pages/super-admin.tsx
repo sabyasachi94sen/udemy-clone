@@ -1,11 +1,13 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { HiSearch } from "react-icons/hi";
+import { useMutation, useQueryClient } from "react-query";
 
 import { CreateSuperAdminForm, EditSuperAdminForm } from "@/features/admin";
-import { NAdminTable } from "@/features/admin/components/NAdminTable";
+import { NewSuperAdminTable } from "@/features/admin/components/NAdminTable";
 import { SuperAdminResObj } from "@/features/api";
 import { ActiveStatus } from "@/features/ui";
+import { Button, Input } from "@/shared/components";
 
 export default function SuperAdmin() {
   const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
@@ -41,9 +43,9 @@ export default function SuperAdmin() {
     },
   });
 
-  const { data } = useQuery(["super-admin-list"], () =>
-    SuperAdminResObj.super_admin_info_list(),
-  );
+  // const { data } = useQuery(["super-admin-list"], () =>
+  //   SuperAdminResObj.super_admin_info_list(),
+  // );
 
   const handleAddBlur = () => {
     setBackGroundBlurAddAdmin(!backgroundBlurAddAdmin);
@@ -114,7 +116,15 @@ export default function SuperAdmin() {
     <>
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">Super Admin Table</h1>
-        <NAdminTable />
+        <div className="mt-8 flex justify-between">
+          <Input
+            leftAddOn={<HiSearch />}
+            placeholder="Search the staff member here"
+            width="96"
+          />
+          <Button width="max">Add Staff</Button>
+        </div>
+        <NewSuperAdminTable />
 
         {/* <AdminTable
             adminData={data && data?.data && data.data?.results}

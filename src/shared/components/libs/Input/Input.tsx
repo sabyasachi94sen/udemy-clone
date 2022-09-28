@@ -2,17 +2,29 @@ import cx from "clsx";
 import { forwardRef, ReactNode } from "react";
 import { HiExclamationCircle } from "react-icons/hi";
 
-const SIZE_MAPS: Record<string, string> = {
+const SIZE_MAPS = {
   sm: "px-1 py-1 sm:text-xs",
   base: "py-2 sm:text-sm",
   lg: "px-4 py-4 sm:text-base",
 };
 
-type Size = "sm" | "base" | "lg";
+const WIDTH_MAPS = {
+  full: "w-full",
+  "16": "w-16 sm:!w-16",
+  "28": "w-28",
+  "32": "w-32",
+  "64": "w-64",
+  "80": "w-80",
+  "96": "w-96",
+  "4/5": "w-4/5", // 80%
+  "2/5": "w-2/5", // 40%
+  "3/4": "w-3/4", // 75%
+  max: "w-max",
+};
 
 export type InputProps = {
-  size?: Size;
-  width?: string;
+  size?: keyof typeof SIZE_MAPS;
+  width?: keyof typeof WIDTH_MAPS;
   type?: string;
   label?: string;
   placeholder?: string;
@@ -34,7 +46,7 @@ export type InputProps = {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      width = "w-full",
+      width = "full",
       type = "text",
       label,
       placeholder,
@@ -57,7 +69,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     // TODO: Write docs
     // Don't need to pass name seperately, react-hook-form takes care of it
 
-    <div className={cx(width)}>
+    <div className={cx(WIDTH_MAPS[width])}>
       {label && (
         <div className="mb-1 flex justify-between">
           <label

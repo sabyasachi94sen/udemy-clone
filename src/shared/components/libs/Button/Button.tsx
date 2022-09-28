@@ -2,6 +2,16 @@ import cx from "clsx";
 
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
+const WIDTH_MAPS = {
+  "36": "w-36 sm:w-24",
+  "42": "w-44 sm:w-24",
+  "44": "w-44 sm:w-24",
+  "48": "w-48 sm:w-36",
+  "64": "w-64 sm:w-64",
+  max: "w-max",
+  full: "w-full",
+};
+
 const SIZE_MAPS = {
   xs: "px-2.5 py-1.5 text-xs rounded",
   sm: "px-3 py-2 text-sm leading-4 rounded-md",
@@ -32,7 +42,7 @@ export type ButtonProps = React.PropsWithChildren<{
   loadingText?: string;
   onClick?: () => void;
   className?: string;
-  width?: string;
+  width?: keyof typeof WIDTH_MAPS;
   isLoading?: boolean;
   isDisabled?: boolean;
   leadingAddOn?: React.ReactNode;
@@ -41,7 +51,7 @@ export type ButtonProps = React.PropsWithChildren<{
   React.ComponentPropsWithoutRef<"button">;
 
 export function Button({
-  width = "w-full",
+  width = "max",
   type = "button",
   className,
   loadingText,
@@ -65,6 +75,7 @@ export function Button({
         {
           "opacity-50": isLoading || isDisabled,
         },
+        WIDTH_MAPS[width],
         VARIANT_MAPS[variant],
         SIZE_MAPS[size],
       )}
