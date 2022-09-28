@@ -46,7 +46,7 @@ export function CreateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
                   type="submit"
                   width="full"
                 >
-                  Login
+                  Submit
                 </Button>
               </div>
             </div>

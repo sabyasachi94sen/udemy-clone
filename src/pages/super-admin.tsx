@@ -13,7 +13,6 @@ export default function SuperAdmin() {
 
   return (
     <>
-      {/* {currModalKey === "createSuperAdmin" && <CreateSuperAdminModal />} */}
       <CreateSuperAdminModal isOpen={currModalKey === "createSuperAdmin"} />
       <UpdateSuperAdminModal isOpen={currModalKey === "updateSuperAdmin"} />
       <DeleteSuperAdminModal isOpen={currModalKey === "deleteSuperAdmin"} />
