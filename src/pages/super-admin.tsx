@@ -3,13 +3,16 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { HiSearch } from "react-icons/hi";
 
+import { Account } from "@/api";
 import { CreateSuperAdminForm, EditSuperAdminForm } from "@/features/admin";
 import { CreateSuperAdminModal } from "@/features/admin/components/CreateSuperAdminModal";
+import { DeleteSuperAdminModal } from "@/features/admin/components/DeleteSuperAdminModal";
 import { NewSuperAdminTable } from "@/features/admin/components/NAdminTable";
+import { UpdateSuperAdminModal } from "@/features/admin/components/UpdateSuperAdminModal";
 import { SuperAdminResObj } from "@/features/api";
 import { ActiveStatus } from "@/features/ui";
 import { Button, Input } from "@/shared/components";
-import { useModal } from "@/shared/stores/modal.store";
+import { ModalState, useModal } from "@/shared/stores/modal.store";
 
 export default function SuperAdmin() {
   const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
@@ -114,11 +117,13 @@ export default function SuperAdmin() {
     if (flag == 1) setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
   };
 
-  const { currModalKey, isModalOpen, onModalClose, onModalOpen } = useModal();
+  const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
 
   return (
     <>
       {currModalKey === "createSuperAdmin" && <CreateSuperAdminModal />}
+      {currModalKey === "updateSuperAdmin" && <UpdateSuperAdminModal />}
+      {currModalKey === "deleteSuperAdmin" && <DeleteSuperAdminModal />}
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">Super Admin Table</h1>
         <div className="mt-8 flex justify-between">
@@ -131,8 +136,11 @@ export default function SuperAdmin() {
             Add Staff
           </Button>
         </div>
-        <NewSuperAdminTable />
-
+        <NewSuperAdminTable
+          onDelete={(user) => onModalOpen("deleteSuperAdmin", user)}
+          onUpdate={(user) => onModalOpen("updateSuperAdmin", user)}
+        />
+        {/* onDelete={} onUpdate={} */}
         {/* <AdminTable
             adminData={data && data?.data && data.data?.results}
             handleAddBlur={handleAddBlur}

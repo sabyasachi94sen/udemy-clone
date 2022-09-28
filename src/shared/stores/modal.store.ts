@@ -8,19 +8,19 @@ type ModalKey =
   | "updateSuperAdmin"
   | "deleteSuperAdmin";
 
-interface ModalState {
+export interface ModalState<TStoredData = unknown> {
   isModalOpen: boolean;
   currModalKey: ModalKey | null;
-  onModalOpen: (key: ModalKey, data?: unknown) => void;
+  onModalOpen: (key: ModalKey, data?: TStoredData) => void;
   onModalClose: () => void;
-  selectedData?: unknown;
+  selectedData?: TStoredData;
 }
 
-export const useModal = create<ModalState>((set) => ({
+export const useModal = create<ModalState<unknown>>()((set) => ({
   isModalOpen: false,
   currModalKey: null,
   selectedData: null,
-  onModalOpen: (key: ModalKey, data?: unknown) => {
+  onModalOpen: (key, data) => {
     set({ currModalKey: key, isModalOpen: true, selectedData: data });
   },
   onModalClose: () => {

@@ -15,7 +15,7 @@ export interface SuperAdminsResp {
   results: Array<Account>;
 }
 export const useSuperAdmins = (
-  params?: { page: number },
+  params?: { page?: number },
   // https://tanstack.com/query/v4/docs/guides/paginated-queries#better-paginated-queries-with-keeppreviousdata
   queryOptions?: { keepPreviousData?: boolean },
 ) =>
@@ -59,6 +59,7 @@ export function useCreateSuperAdmin(onSuccess?: () => void) {
 
 export function useUpdateSuperAdmin(onSuccess?: () => void) {
   const { refreshQuery } = useRefreshQuery();
+  const { displayErrorMessages } = useBackendErrors();
 
   return useMutation<
     Account,
@@ -70,23 +71,24 @@ export function useUpdateSuperAdmin(onSuccess?: () => void) {
   >((data) => SuperAdminService.superAdminPartialUpdate(data), {
     onSuccess() {
       // invalidate all the list queries
-
       refreshQuery({
         // eslint-disable-next-line no-underscore-dangle
         queryKey: queryKeys.superAdmins.list._def,
       });
 
+      toast.success("Super admin user updated successfully");
       onSuccess?.();
     },
 
     onError(err) {
-      console.log(err);
+      displayErrorMessages(err);
     },
   });
 }
 
 export function useDeleteSuperAdmin(onSuccess?: () => void) {
   const { refreshQuery } = useRefreshQuery();
+  const { displayErrorMessages } = useBackendErrors();
 
   return useMutation<
     void,
@@ -97,16 +99,17 @@ export function useDeleteSuperAdmin(onSuccess?: () => void) {
   >((data) => SuperAdminService.superAdminDelete(data), {
     onSuccess() {
       // invalidate all the list queries
-
       refreshQuery({
         // eslint-disable-next-line no-underscore-dangle
         queryKey: queryKeys.superAdmins.list._def,
       });
 
+      toast.success("Super admin user deleted successfully");
       onSuccess?.();
     },
+
     onError(err) {
-      console.log(err);
+      displayErrorMessages(err);
     },
   });
 }

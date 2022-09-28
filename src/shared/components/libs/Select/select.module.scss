@@ -3,4 +3,7 @@
   [class$="-control"] {
     @apply rounded-md border-2 border-gray-300 text-sm shadow-sm hover:border-primary focus:border-primary;
   }
+  [class$="-menu"] {
+    @apply z-50 overflow-hidden rounded-md border-2 border-gray-300 text-sm shadow-sm;
+  }
 }

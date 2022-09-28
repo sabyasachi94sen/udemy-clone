@@ -66,7 +66,7 @@ export function BaseModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="my-8 inline-block transform overflow-hidden rounded-md bg-white text-left align-middle shadow-xl transition-all">
+              <div className="my-8 inline-block transform rounded-md bg-white text-left align-middle shadow-xl transition-all">
                 {hasHeader && (
                   <Dialog.Title
                     as="h1"

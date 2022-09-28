@@ -75,7 +75,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <label
             className={cx("block text-sm font-medium text-gray-700", {
               "opacity-30": isDisabled,
-              "!text-red-500": isInvalid,
+              "!text-secondary": isInvalid,
             })}
             htmlFor={name}
           >
@@ -85,7 +85,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             <span className="text-sm text-gray-500">{cornerText}</span>
           )}
 
-          {isRequired && <span className="text-sm text-red-600">required</span>}
+          {isRequired && (
+            <span className="text-sm text-secondary">required</span>
+          )}
         </div>
       )}
 
@@ -124,7 +126,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <HiExclamationCircle
               aria-hidden="true"
-              className="h-5 w-5 text-red-500"
+              className="h-5 w-5 text-secondary"
             />
           </div>
         )}
@@ -135,7 +137,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       )}
 
       {isInvalid && invalidText && (
-        <p className="mt-2 text-sm text-red-600" id={`${name}-error`}>
+        <p className="mt-2 text-sm text-secondary" id={`${name}-error`}>
           {invalidText}
         </p>
       )}

@@ -13,7 +13,15 @@ import {
 import { useSuperAdmins } from "@/shared/services/super-admin.service";
 import { formatDate } from "@/shared/utils";
 
-export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
+interface NewSuperAdminTableProps {
+  onDelete: (user: Account) => void;
+  onUpdate: (user: Account) => void;
+}
+
+export function NewSuperAdminTable({
+  onDelete,
+  onUpdate,
+}: NewSuperAdminTableProps): JSX.Element {
   const router = useRouter();
   const { page, perPage } = router.query;
   const superAdminsQuery = useSuperAdmins({ page });
@@ -44,8 +52,8 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
       header: "Active Status",
       cell: (info) => (
         <StatusCell
-          rowValue={info.getValue() !== true ? "Active" : "Inactive"}
-          statusColor={info.getValue() !== true ? "active" : "inactive"}
+          rowValue={info.getValue() === true ? "Active" : "Inactive"}
+          statusColor={info.getValue() === true ? "active" : "inactive"}
         />
       ),
     }),
@@ -53,7 +61,7 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
       id: "edit",
       header: "",
       cell: (info) => (
-        <Button width="max" onClick={() => console.log(info.getValue())}>
+        <Button width="max" onClick={() => onUpdate(info.row.original)}>
           Edit
         </Button>
       ),
@@ -62,7 +70,7 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
       id: "delete",
       header: "",
       cell: (info) => (
-        <Button width="max" onClick={() => console.log(info.getValue())}>
+        <Button width="max" onClick={() => onDelete(info.row.original)}>
           Delete
         </Button>
       ),

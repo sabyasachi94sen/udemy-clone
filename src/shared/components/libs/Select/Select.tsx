@@ -43,9 +43,8 @@ export type SelectProps<
   isRequired?: boolean;
   isDisabled?: boolean;
   isInvalid?: boolean;
-  options: { value: string; label: string }[];
+  options: { value: string | number | boolean; label: string }[];
   isClearable?: boolean;
-  cornerText?: string;
   optionalText?: string;
   label?: string;
   invalidText?: string;
@@ -107,7 +106,7 @@ export function Select<
       )}
       <ReactSelect
         className={styles.select}
-        classNamePrefix="react-select"
+        classNamePrefix="custom-select"
         components={{}}
         defaultValue={defaultValue}
         isClearable={isClearable}
