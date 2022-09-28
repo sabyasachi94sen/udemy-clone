@@ -5,10 +5,9 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { CreateSuperAdminForm, EditSuperAdminForm } from "@/features/admin";
 import { NAdminTable } from "@/features/admin/components/NAdminTable";
 import { SuperAdminResObj } from "@/features/api";
-import { MenuBar, Navbar } from "@/features/home";
 import { ActiveStatus } from "@/features/ui";
 
-function SuperAdmin() {
+export default function SuperAdmin() {
   const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
   const [backgroundBlurEditAdmin, setBackGroundBlurEditAdmin] = useState(false);
   const [backgroundBlurDeleteAdmin, setBackGroundBlurDeleteAdmin] =
@@ -113,21 +112,11 @@ function SuperAdmin() {
 
   return (
     <>
-      <div
-        className={
-          !backgroundBlurAddAdmin &&
-          !backgroundBlurEditAdmin &&
-          !backgroundBlurDeleteAdmin
-            ? `bg-white`
-            : `opacity-[0.2]`
-        }
-      >
-        <Navbar />
-        <div className="z-0 flex items-center">
-          <MenuBar />
-          <NAdminTable />
+      <div className="px-4 py-6 sm:px-6 lg:px-8">
+        <h1 className="font-sans text-3xl font-bold">Super Admin Table</h1>
+        <NAdminTable />
 
-          {/* <AdminTable
+        {/* <AdminTable
             adminData={data && data?.data && data.data?.results}
             handleAddBlur={handleAddBlur}
             handleDeleteBlur={handleDeleteBlur}
@@ -135,7 +124,6 @@ function SuperAdmin() {
             name="Essai Super Admin Roster"
             tableCheck={isTableCheck}
           /> */}
-        </div>
       </div>
       {backgroundBlurAddAdmin ? (
         <CreateSuperAdminForm
@@ -165,6 +153,3 @@ function SuperAdmin() {
     </>
   );
 }
-
-export default SuperAdmin;
-SuperAdmin.isPublicRoute = true;

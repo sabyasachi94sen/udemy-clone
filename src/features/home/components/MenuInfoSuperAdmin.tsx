@@ -1,35 +1,39 @@
+import { BiStats } from "react-icons/bi";
+import { FaClipboardList } from "react-icons/fa";
+import { HiCog, HiHome } from "react-icons/hi";
+
 export const MenuInfoSuperAdmin = [
   {
     name: "Home",
-    icon: "/images/person.png",
+    icon: HiHome,
     imageType: "home-icon",
     url: "/home",
     id: 1,
   },
   {
     name: "Super Admin Roster",
-    icon: "/images/person.png",
+    icon: BiStats,
     imageType: "person-icon",
     url: "/super-admin",
     id: 2,
   },
   {
     name: "Admin Roster",
-    icon: "/images/person.png",
+    icon: BiStats,
     imageType: "person-icon",
     url: "/admin",
     id: 3,
   },
   {
     name: "Account Manager Roster",
-    icon: "/images/group.png",
+    icon: BiStats,
     imageType: "grorup-icon",
     url: "/account-manager",
     id: 4,
   },
   {
     name: "Student Roster",
-    icon: "/images/hat.png",
+    icon: BiStats,
     imageType: "hat-icon",
     url: "/student-roaster",
     id: 5,
@@ -37,14 +41,14 @@ export const MenuInfoSuperAdmin = [
 
   {
     name: "Activity Database",
-    icon: "/images/furniture.png",
+    icon: BiStats,
     imageType: "furniture-icon",
     url: "/activity-database",
     id: 6,
   },
   {
     name: "Academic Enrichment Plans (AEPs)",
-    icon: "/images/list.png",
+    icon: FaClipboardList,
     imageType: "list-icon",
     url: "/academic-list",
     id: 7,
@@ -52,14 +56,14 @@ export const MenuInfoSuperAdmin = [
 
   {
     name: "AEP Status Tracker",
-    icon: "/images/bars.png",
+    icon: BiStats,
     imageType: "bars-icon",
     url: "/aep-tracker",
     id: 8,
   },
   {
     name: "Analytics",
-    icon: "/images/analysisGraph.png",
+    icon: BiStats,
     imageType: "analysisGraph-icon",
     url: "/analytics",
     id: 9,
@@ -67,7 +71,7 @@ export const MenuInfoSuperAdmin = [
 
   {
     name: "Settings",
-    icon: "/images/setting.png",
+    icon: HiCog,
     imageType: "settings-icon",
     url: "/setting",
     id: 10,
