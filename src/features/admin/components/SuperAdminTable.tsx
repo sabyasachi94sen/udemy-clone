@@ -13,15 +13,15 @@ import {
 import { useSuperAdmins } from "@/shared/services/super-admin.service";
 import { formatDate } from "@/shared/utils";
 
-interface NewSuperAdminTableProps {
+interface SuperAdminTableProps {
   onDelete: (user: Account) => void;
   onUpdate: (user: Account) => void;
 }
 
-export function NewSuperAdminTable({
+export function SuperAdminTable({
   onDelete,
   onUpdate,
-}: NewSuperAdminTableProps): JSX.Element {
+}: SuperAdminTableProps): JSX.Element {
   const router = useRouter();
   const { page, perPage } = router.query;
   const superAdminsQuery = useSuperAdmins({ page });
