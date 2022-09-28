@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query"
+import { useMutation } from "react-query";
 import { toast, ToastContainer } from "react-toastify";
 
 import { loginObj } from "@/features/api";
-import { SetAuthToken, SetUserType,StoreLoginCreds } from "@/features/helpers";
-
+import { SetAuthToken, SetUserType, StoreLoginCreds } from "@/features/helpers";
+import { useAuth } from "@/shared/stores/auth.context";
 import "react-toastify/dist/ReactToastify.css";
-
 
 interface FormValues {
   email: string;
@@ -16,71 +15,50 @@ interface FormValues {
 }
 
 interface ResponseVal {
-  token:                 string;
-  user_id:               number;
-  email:                 string;
+  token: string;
+  user_id: number;
+  email: string;
   password_verification: boolean;
-  user_type:             string;
+  user_type: string;
 }
 
 interface ErrorVal {
   data: {
-  errorType:    string;
-  errorMessage: string;
-  }
+    errorType: string;
+    errorMessage: string;
+  };
 }
-
-
-
 
 export function LoginForm() {
   const router = useRouter();
   const { register, handleSubmit } = useForm<FormValues>();
+  const { refetchAuthUser } = useAuth();
 
-  const { mutate }=useMutation(loginObj.login,{
-    onSuccess: (res:ResponseVal,loginCreds: FormValues)=>{
-      StoreLoginCreds(loginCreds)
+  const { mutate } = useMutation(loginObj.login, {
+    onSuccess: (res: ResponseVal, loginCreds: FormValues) => {
+      StoreLoginCreds(loginCreds);
       SetAuthToken(res.token);
-      SetUserType(res.user_type)
-      toast.success(
-        "Login Successful",
-        {
-          position: toast.POSITION.TOP_CENTER,
-        },
-      
-      );
+      SetUserType(res.user_type);
+      refetchAuthUser();
+      toast.success("Login Successful", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       setTimeout(() => {
         router.push("/home");
       }, 1000);
-    
-
     },
 
-    onError: (err:ErrorVal)=>{
-      toast.error(
-        err && err?.data && err.data?.errorMessage,
-        {
-          position: toast.POSITION.TOP_CENTER,
-        },
-        
-      );
-      toast.error(
-       err && err?.data && err.data?.errorType,
-        {
-          position: toast.POSITION.TOP_CENTER,
-        },
-        
-      );
-    }
-
-  
-  })
+    onError: (err: ErrorVal) => {
+      toast.error(err && err?.data && err.data?.errorMessage, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      toast.error(err && err?.data && err.data?.errorType, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    },
+  });
   const handleLogin = (loginCreds: FormValues) => {
-  
-    mutate(loginCreds)
-     
-  
-    
+    mutate(loginCreds);
   };
 
   return (
