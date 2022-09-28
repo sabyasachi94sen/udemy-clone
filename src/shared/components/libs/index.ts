@@ -27,3 +27,4 @@ export {
 export { FullPageLoader } from "./FullPageLoader/FullPageLoader";
 export { DropdownMenu } from "./DropdownMenu/DropdownMenu";
 export { BaseModal } from "./BaseModal/BaseModal";
+export { IconButton } from "./IconButton/IconButton";

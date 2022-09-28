@@ -3,7 +3,7 @@ import { BaseModal, Button } from "@/shared/components";
 import { useDeleteSuperAdmin } from "@/shared/services/super-admin.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 
-export function DeleteSuperAdminModal({}) {
+export function DeleteSuperAdminModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
 
@@ -15,7 +15,7 @@ export function DeleteSuperAdminModal({}) {
     <BaseModal
       hasHeader
       showHeaderCloseButton
-      isOpen={isModalOpen}
+      isOpen={isModalOpen && isOpen}
       title="Delete super admin"
       onRequestClose={() => {
         onModalClose();

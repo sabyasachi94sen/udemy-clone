@@ -11,7 +11,7 @@ import {
 import { useUpdateSuperAdmin } from "@/shared/services/super-admin.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 
-export function UpdateSuperAdminModal({}) {
+export function UpdateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
   // Ref: https://github.com/pmndrs/zustand/discussions/841
   const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
@@ -24,7 +24,7 @@ export function UpdateSuperAdminModal({}) {
     <BaseModal
       hasHeader
       showHeaderCloseButton
-      isOpen={isModalOpen}
+      isOpen={isModalOpen && isOpen}
       title="Edit Super Admin"
       onRequestClose={() => {
         onModalClose();

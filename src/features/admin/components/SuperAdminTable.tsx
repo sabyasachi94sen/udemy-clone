@@ -1,15 +1,11 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
+import { FaUserEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
 
 import { Account } from "@/api";
-import {
-  BaseTable,
-  Button,
-  StatusCell,
-  TableRowCell,
-} from "@/shared/components";
+import { BaseTable, IconButton, StatusCell } from "@/shared/components";
 import { useSuperAdmins } from "@/shared/services/super-admin.service";
 import { formatDate } from "@/shared/utils";
 
@@ -31,55 +27,60 @@ export function SuperAdminTable({
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const columns: ColumnDef<Account, any>[] = [
-    columnHelper.accessor((row) => row.username, {
-      id: "username",
-      header: "Name",
-      cell: (info) => <TableRowCell rowValue={info.getValue()} />,
-    }),
-    columnHelper.accessor((row) => row.email, {
-      id: "email",
-      header: "Email",
-      cell: (info) => <TableRowCell rowValue={info.getValue()} />,
-    }),
-    columnHelper.accessor((row) => row.last_update, {
-      id: "last_update",
-      header: "Last update",
-      cell: (info) => (
-        <TableRowCell
-          rowValue={info.getValue() ? formatDate(info.getValue()) : null}
-        />
-      ),
-    }),
-    columnHelper.accessor((row) => row.is_active, {
-      id: "is_active",
-      header: "Active Status",
-      cell: (info) => (
-        <StatusCell
-          rowValue={info.getValue() === true ? "Active" : "Inactive"}
-          statusColor={info.getValue() === true ? "active" : "inactive"}
-        />
-      ),
-    }),
-    columnHelper.accessor((row) => row.id, {
-      id: "edit",
-      header: "",
-      cell: (info) => (
-        <Button width="max" onClick={() => onUpdate(info.row.original)}>
-          Edit
-        </Button>
-      ),
-    }),
-    columnHelper.accessor((row) => row.id, {
-      id: "delete",
-      header: "",
-      cell: (info) => (
-        <Button width="max" onClick={() => onDelete(info.row.original)}>
-          Delete
-        </Button>
-      ),
-    }),
-  ];
+  const columns = useMemo<ColumnDef<Account, any>[]>(
+    () => [
+      columnHelper.accessor((row) => row.username, {
+        id: "username",
+        header: "Name",
+        cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor((row) => row.email, {
+        id: "email",
+        header: "Email",
+        cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor((row) => row.last_update, {
+        id: "last_update",
+        header: "Last update",
+        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+      }),
+      columnHelper.accessor((row) => row.is_active, {
+        id: "is_active",
+        header: "Active Status",
+        cell: (info) => (
+          <StatusCell
+            rowValue={info.getValue() === true ? "Active" : "Inactive"}
+            statusColor={info.getValue() === true ? "active" : "inactive"}
+          />
+        ),
+      }),
+      columnHelper.accessor((row) => row.id, {
+        id: "edit",
+        header: "",
+        cell: (info) => (
+          <IconButton
+            toolTipText="Edit"
+            onClick={() => onUpdate(info.row.original)}
+          >
+            <FaUserEdit className="text-xl text-neutral text-opacity-80" />
+          </IconButton>
+        ),
+      }),
+      columnHelper.accessor((row) => row.id, {
+        id: "delete",
+        header: "",
+        cell: (info) => (
+          <IconButton
+            toolTipText="Delete"
+            onClick={() => onDelete(info.row.original)}
+          >
+            <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
+          </IconButton>
+        ),
+      }),
+    ],
+    [],
+  );
 
   return (
     <BaseTable<Account>

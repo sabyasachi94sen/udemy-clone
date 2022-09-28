@@ -218,15 +218,21 @@ export function BaseTable<T>({
                 {!isLoading &&
                   data &&
                   table.getRowModel().rows.map((row) => (
-                    <tr key={row.id}>
-                      {row
-                        .getVisibleCells()
-                        .map(({ id, getContext, column: { columnDef } }) => (
-                          <td key={id} style={columnDef.meta}>
-                            {flexRender(columnDef.cell, getContext())}
-                          </td>
-                        ))}
-                    </tr>
+                    <React.Fragment key={row.id}>
+                      <tr>
+                        {row
+                          .getVisibleCells()
+                          .map(({ id, getContext, column: { columnDef } }) => (
+                            <td
+                              key={id}
+                              className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900"
+                              style={columnDef.meta}
+                            >
+                              {flexRender(columnDef.cell, getContext())}
+                            </td>
+                          ))}
+                      </tr>
+                    </React.Fragment>
                   ))}
 
                 {/* {table.getRowModel().rows.length === 0 && (

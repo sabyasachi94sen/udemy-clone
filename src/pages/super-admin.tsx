@@ -13,9 +13,10 @@ export default function SuperAdmin() {
 
   return (
     <>
-      {currModalKey === "createSuperAdmin" && <CreateSuperAdminModal />}
-      {currModalKey === "updateSuperAdmin" && <UpdateSuperAdminModal />}
-      {currModalKey === "deleteSuperAdmin" && <DeleteSuperAdminModal />}
+      {/* {currModalKey === "createSuperAdmin" && <CreateSuperAdminModal />} */}
+      <CreateSuperAdminModal isOpen={currModalKey === "createSuperAdmin"} />
+      <UpdateSuperAdminModal isOpen={currModalKey === "updateSuperAdmin"} />
+      <DeleteSuperAdminModal isOpen={currModalKey === "deleteSuperAdmin"} />
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">
           Essai Super Admin Roster

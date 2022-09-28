@@ -3,7 +3,7 @@ import { BaseModal, Button, Form, Input } from "@/shared/components";
 import { useCreateSuperAdmin } from "@/shared/services/super-admin.service";
 import { useModal } from "@/shared/stores/modal.store";
 
-export function CreateSuperAdminModal({}) {
+export function CreateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose } = useModal();
 
   const createSuperAdminMutaton = useCreateSuperAdmin(() => {
@@ -14,7 +14,7 @@ export function CreateSuperAdminModal({}) {
     <BaseModal
       hasHeader
       showHeaderCloseButton
-      isOpen={isModalOpen}
+      isOpen={isModalOpen && isOpen}
       title="Create Super Admin"
       onRequestClose={() => {
         onModalClose();

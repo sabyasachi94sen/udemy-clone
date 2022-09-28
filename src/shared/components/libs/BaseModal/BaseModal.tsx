@@ -39,7 +39,7 @@ export function BaseModal({
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-200"
+              enter="ease-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"
               leave="ease-in duration-200"
@@ -70,7 +70,7 @@ export function BaseModal({
                 {hasHeader && (
                   <Dialog.Title
                     as="h1"
-                    className="flex items-start justify-between bg-gray-50 px-6 py-4 text-lg font-bold"
+                    className="flex items-start justify-between rounded-tr-md rounded-tl-md bg-gray-50 px-6 py-4 text-lg font-bold"
                   >
                     {title}
 
