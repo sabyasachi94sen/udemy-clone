@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useMutation ,useQuery } from "react-query"
+import { useMutation ,useQuery ,useQueryClient } from "react-query"
 
 import {
   AcademicPersonalTable,
   AcademicTable,
   AddActivityForm,
 } from "@/features/academic_plan";
-import { AdminResObj, AepResObj } from "@/features/api"
+import { AepResObj } from "@/features/api"
 import { MenuBar, Navbar } from "@/features/home";
 
 function AcademicPlan() {
@@ -19,12 +19,9 @@ function AcademicPlan() {
   const [count, setCount] = useState(0);
 
   const { data }=useQuery(["aep-list"],()=> AepResObj.aep_list())
+  const queryClient=useQueryClient()
 
-  const deleteDataInTable = (data, index) => {
-    data.splice(index, 1);
-    setStoreActivityData(data);
-    setCount(count + 1);
-  };
+ 
 
   const setTable = (student_id:string,student_name: string) => {
 
@@ -35,6 +32,8 @@ function AcademicPlan() {
 
   const isAddActive = () => {
     setAddActivity(!addActivity);
+  
+
   };
 
  
@@ -53,7 +52,7 @@ function AcademicPlan() {
           ) : (
             <AcademicPersonalTable
               activityData={storeActivityData}
-              deleteDataInTable={deleteDataInTable}
+            
               isAddActive={isAddActive}
               
               setTable={setTable}

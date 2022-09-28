@@ -62,10 +62,11 @@ export const handleQuery = async <TResponse, TQuery>(config: {
 /* ---- Base function for Data mutation requests -> POST, PUT, PATCH, DELETE ---- */
 type MutationMethods = "POST" | "PUT" | "PATCH" | "DELETE";
 
-export const handleMutation = async <TResponse, TBody>(config: {
+export const handleMutation = async <TResponse, TBody,TQuery>(config: {
   resourceUrl: string;
   method: MutationMethods;
   reqBody?: TBody;
+  queryParams?: TQuery;
 }): Promise<TResponse> => {
   // Check if the passed method: POST, PUT, PATCH, DELETE
   if (!["POST", "PUT", "DELETE", "PATCH"].includes(config.method)) {
@@ -75,9 +76,11 @@ export const handleMutation = async <TResponse, TBody>(config: {
   console.log(APP_API_ENDPOINT)
 
   try {
+   
     const response = await api.request({
       method: `${config.method}`,
       url: `${APP_API_ENDPOINT}${config.resourceUrl}/`,
+      ...(config.queryParams && { params: { ...config.queryParams } }),
       ...(config.reqBody && { data: config.reqBody }),
       headers: {
         Authorization: GetAuthToken()

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 
 interface ActivityDataBaseFormProps {
   handleBackgroundBlur: () => void;
+  individualActivityInfo: object;
   addActivityData: ()=>void;
   name: string;
 }
@@ -29,9 +30,103 @@ interface FormValues {
 
 export function ActivityDataBaseForm({
   handleBackgroundBlur,
+  individualActivityInfo,
   addActivityData,
   name,
 }: ActivityDataBaseFormProps) {
+
+
+  const activityTypeOptions=[{
+    option: "Exam"
+  },{
+    option: "Competition"
+  },{
+    option: "STEP programs"
+  },{
+    option: "Online Course"
+  },{
+    option: "Summer Schools : selective speciality"
+  },{
+    option: "Summer Schools : credit bearing"
+  },{
+    option: "Other"
+  }]
+
+
+  const subjectOptions=[{
+    option: "Maths"
+  },{
+    option: "Computer"
+  },{
+    option: "Physics"
+  },{
+    option: "Chemistry"
+  },{
+    option: "Physics"
+  },{
+    option: "Chemistry"
+  },{
+    option: "Biology"
+  },{
+    option: "Environmental Science"
+  },{
+    option: "General Science"
+  },{
+    option:"Economics/Business/Finance"
+  },{
+    option: "General Science"
+  },{
+    option:"Economics/Business/Finance"
+  },{
+    option: "English"
+  },{
+    option: "Political Science"
+  },{
+    option: "Psychology"
+  },{
+    option: "Other"
+  }]
+
+
+
+
+const applicationOptions=[{
+  
+    option: "Fee"
+  
+},{
+  option: "Form"
+},{
+  option: "Essay"
+},{
+  option:"Multiple Essays"
+},{
+  option: "LOR"
+},{
+  option: "Multiple LORs"
+},{
+  option: "Other"
+}]
+
+
+
+const locationTypeOptions=[{
+  option: "Country / City"
+},{
+  option: "Virtual"
+},{
+  option: "Country / City & Virtual"
+}]
+
+
+
+
+
+  
+
+
+
+
   const [gradeVal, setGradeVal] = useState([0, 100]);
   const [ageVal, setAgeVal] = useState([0, 100]);
 
@@ -46,6 +141,8 @@ export function ActivityDataBaseForm({
  
    
   const { handleSubmit,register }=useForm<FormValues>()
+
+  console.log(individualActivityInfo)
 
   return (
     <div className="relative z-10 mx-auto -mt-[150vh] h-[100vh] w-[80%] overflow-y-scroll rounded-lg border-2 bg-[#FDFEFF]">
@@ -69,6 +166,8 @@ export function ActivityDataBaseForm({
               className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
               {...register("activity_name")}
               type="text"
+              defaultValue={name!="Add an activity to the database"?individualActivityInfo?.activity_name: null}
+              disabled={name=="View an activity to the database"}
             />
             <br />
           </div>
@@ -77,15 +176,13 @@ export function ActivityDataBaseForm({
             <select
               className="relative ml-12 h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
               {...register("activity_type")}
+              
+              disabled={name=="View an activity to the database"}
             >
-              <option> Select Type</option>
-              <option>Exam</option>
-              <option>Competition </option>
-              <option>STEP programs </option>
-              <option> Online Course </option>
-              <option> Summer Schools : selective speciality</option>
-              <option> Summer Schools : credit bearing</option>
-              <option>Other</option>
+              <option>Select Type</option>
+              {activityTypeOptions.map((item,index)=>{
+                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.activity_type==item.option?true: false}>{item.option}</option>
+              })}
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -93,20 +190,12 @@ export function ActivityDataBaseForm({
             <select
               className="relative ml-7 h-[5vh] w-[100%] rounded-md bg-[#EEEE] outline-none"
               {...register("subject")}
+              disabled={name=="View an activity to the database"}
             >
-              <option> Select Subject</option>
-              <option> Math </option>
-              <option>Computer Science </option>
-              <option>Physics </option>
-              <option>Chemistry </option>
-              <option>Biology </option>
-              <option>Environmental Science </option>
-              <option>General Science </option>
-              <option>Economics/Business/Finance </option>
-              <option>English </option>
-              <option>Political Science </option>
-              <option>Psychology </option>
-              <option>Other </option>
+              <option>Select Subject</option>
+              {subjectOptions.map((item,index)=>{
+                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.subject==item.option?true:false}>{item.option}</option>
+              })}
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -114,15 +203,11 @@ export function ActivityDataBaseForm({
             <select
               className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"
               {...register("application_requirement")}
+              disabled={name=="View an activity to the database"}
             >
-              <option>Application requirement</option>
-              <option> Fee </option>
-              <option>Form </option>
-              <option>Essay </option>
-              <option>Multiple Essays</option>
-              <option>LOR </option>
-              <option>Multiple LORs </option>
-              <option>Other</option>
+              {applicationOptions.map((item,index)=>{
+                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.application_requirement==item.option?true:false}>{item.option}</option>
+              })}
             </select>
           </div>
           <div className="mt-4 flex items-center">
@@ -132,9 +217,9 @@ export function ActivityDataBaseForm({
               {...register("location_type")}
             >
               <option>Location Type</option>
-              <option> Country / City </option>
-              <option>Virtual </option>
-              <option>Country / City & Virtual </option>
+              {locationTypeOptions.map((item,index)=>{
+                return <option key={index} selected={name!="Add an activity to the database" && individualActivityInfo?.location_type==item.option?true:false}>{item.option}</option>
+              })}
             </select>
           </div>
           <div className="mt-4 flex items-center">

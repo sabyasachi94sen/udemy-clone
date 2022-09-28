@@ -1,4 +1,3 @@
-import { Button } from "@/shared/components";
 import moment from "moment"
 
 interface AdminTableProps {
@@ -83,21 +82,21 @@ export function AdminTable({
                 <td className="rounded-br-lg rounded-tr-lg">Delete</td>
               </tr>
               <tr className="sticky top-[7vh] h-[4vh] bg-white">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td />
+                <td />
+                <td />
+                <td />
                 {name != "Essai Super Admin Roster" ? (
                   <>
-                    <td></td>
-                    <td></td>
+                    <td />
+                    <td />
                   </>
                 ) : (
                   null
                 )}
 
-                <td></td>
-                <td></td>
+                <td />
+                <td />
               </tr>
 
               {adminData &&
@@ -136,17 +135,17 @@ export function AdminTable({
                     <td className="h-[7vh] cursor-pointer">
                       <img
                         alt="edit-icon"
+                        className="mx-auto block"
                         src="/images/edit.png"
                         onClick={() => handleEditBlur(val && val?.id,val)}
-                        className="mx-auto block"
                       />
                     </td>
                     <td className="h-[7vh] cursor-pointer">
                       <img
                         alt="delete-icon"
+                        className="mx-auto block"
                         src="/images/delete.png"
                         onClick={() => handleDeleteBlur(val && val?.id)}
-                        className="mx-auto block"
                       />
                     </td>
                   </tr>
@@ -159,4 +158,4 @@ export function AdminTable({
   );
 }
 
-//comment
+// comment

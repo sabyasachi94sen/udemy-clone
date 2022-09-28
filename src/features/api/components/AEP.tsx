@@ -1,7 +1,7 @@
 import { handleMutation, handleQuery } from "@/shared/services/api-client";
 
 
-interface AepStudent{
+interface AepStudentPayload{
     activity_id: string,
     student_id: string
 }
@@ -20,20 +20,23 @@ const AepStudentActivity=(student_id: string)=>handleQuery({ resourceUrl:`studen
 
 const AepStudentAssignedActivityList=(student_id:string)=>handleQuery({ resourceUrl: `activity_assignment/aep/filter/?student_id=${student_id}` })
 
-const AepStudentAssignActivity=(postDataObj: AepStudent)=>{
-
-    
-
-    handleMutation({
+const AepStudentAssignActivity=(payload: AepStudentPayload)=>handleMutation({
         resourceUrl: "activity_assignment_api",
         method: "POST",
-        reqBody: postDataObj,
+        reqBody: payload,
       })
-}
 
-const AepStudentActivityFilter=(filterObj: FilterObjVal)=>{
+const AepStudentActivityFilter=(filterObj: FilterObjVal)=>handleQuery({ resourceUrl:`activity_assignment/aep/filter/?student_id=${filterObj.student_id}&&activity_status=${filterObj.activity_status}&&activity_subject=${filterObj.activity_subject}` })
 
-    handleQuery({ resourceUrl:`activity_assignment/aep/filter/?student_id=${filterObj.student_id}&&activity_status=${filterObj.activity_status}&&activity_subject=${filterObj.activity_subject}` })
+
+const AepStudentActivityDelete=(payload: AepStudentPayload)=>{
+    handleMutation({
+        resourceUrl: `student/aep/list`,
+        
+        method: "DELETE",
+        queryParams: { ...payload }
+    
+      })
 }
 
 export const AepResObj={
@@ -42,4 +45,5 @@ export const AepResObj={
     aep_student_assignment_activity_list: AepStudentAssignedActivityList,
     aep_student_assign_activity: AepStudentAssignActivity,
     aep_student_activity_filter: AepStudentActivityFilter,
+    aep_student_activity_delete: AepStudentActivityDelete,
 }

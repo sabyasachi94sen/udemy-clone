@@ -17,6 +17,7 @@ function Activity() {
   const [editBackBlur, setEditBackBlur] = useState(false);
   const [viewBackBlur,setViewBackBlur]=useState(false)
   const [deleteBackBlur, setDeleteBackBlur] = useState(false);
+  const [individualActivityInfo,setIndividualActivityInfo]=useState({})
 
 
   const { data }=useQuery(["activity-list"],()=>ActivityResObj.activity_list())
@@ -36,13 +37,16 @@ function Activity() {
     setAddBackBlur(!addBackBlur);
   };
 
-  const handleBackgroundBlurOnEdit = () => {
+  const handleBackgroundBlurOnEdit = (individual_activity_info:object) => {
     setEditBackBlur(!editBackBlur);
+    setIndividualActivityInfo(individual_activity_info)
   };
 
 
-  const handleBackgroundBlurOnView=()=>{
+  const handleBackgroundBlurOnView=(individual_activity_info:object)=>{
+    console.log(individual_activity_info)
     setViewBackBlur(!viewBackBlur)
+    setIndividualActivityInfo(individual_activity_info)
   }
 
   const handleBackgroundBlurOnDelete = () => {
@@ -108,6 +112,7 @@ function Activity() {
         <ActivityDataBaseForm
           handleBackgroundBlur={handleBackgroundBlurOnEdit}
           name="Edit an activity to the database"
+          individualActivityInfo={individualActivityInfo}
         />
       ) : null}
 
@@ -115,6 +120,7 @@ function Activity() {
         <ActivityDataBaseForm
           handleBackgroundBlur={handleBackgroundBlurOnView}
           name="View an activity to the database"
+          individualActivityInfo={individualActivityInfo}
         />
       ) : null}
 

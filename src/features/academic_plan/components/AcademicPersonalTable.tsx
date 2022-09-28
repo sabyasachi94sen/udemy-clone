@@ -1,4 +1,4 @@
-import { useQuery } from "react-query"
+import { useQuery ,useMutation,useQueryClient} from "react-query"
 import Link from "next/link";
 import { AepResObj } from "@/features/api"
 import moment from "moment";
@@ -7,19 +7,39 @@ import {GetUserType} from "@/features/helpers"
 interface AcademicPersonalTableProps{
   isAddActive: ()=>void;
  
-  deleteDataInTable: ()=>void;
+
   setTable: ()=>void;
   studentId: string;
   studentName: string;
   activityData: {}[]
 }
 
-export function AcademicPersonalTable({ isAddActive,deleteDataInTable,setTable,studentId,studentName,activityData }: AcademicPersonalTableProps){
+export function AcademicPersonalTable({ isAddActive,setTable,studentId,studentName,activityData }: AcademicPersonalTableProps){
 
     
   const { data }=useQuery(["student-activity"],()=>AepResObj.aep_student_activity(studentId))
+  const queryClient=useQueryClient()
+  const { mutate }=useMutation(AepResObj.aep_student_activity_delete,{
+      onSuccess: ()=>{
+        setTimeout(()=>{
+  
+        queryClient.invalidateQueries("student-activity")
+                
+      },1000)
+      }
+  })
   
   const user=GetUserType();
+
+  const deleteDataInTable = (activity_id:string,student_id: string) => {
+    const mutateObj={
+      activity_id,
+      student_id
+    }
+
+    mutate(mutateObj)
+
+  };
 
 
     return (
@@ -103,7 +123,7 @@ export function AcademicPersonalTable({ isAddActive,deleteDataInTable,setTable,s
                       <input className="leading-tight h-[5vh] w-[50%] relative top-[2px] relative" id="complete-task" name="complete" type="checkbox" />
   
                     </label></td>
-                  <td className="cursor-pointer"><img alt="delete-icon" className="block mx-auto" src="/images/delete.png" onClick={()=>deleteDataInTable(activityData,index)}/></td>
+                  <td className="cursor-pointer"><img alt="delete-icon" className="block mx-auto" src="/images/delete.png" onClick={()=>deleteDataInTable(item?.activity?.id,studentId)}/></td>
                 </tr>)}
             
               </tbody>

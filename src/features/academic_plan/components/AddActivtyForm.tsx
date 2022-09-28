@@ -1,5 +1,5 @@
 import moment from "moment"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
 import { useMutation ,useQuery,useQueryClient } from "react-query";
 
@@ -13,6 +13,54 @@ interface AddActivityFormProps{
 
 }
 
+interface ResVal {
+  id:                      number;
+  created_by:              CreatedBy;
+  action_map_activity:     any[];
+  activity_name:           string;
+  activity_type:           string;
+  subject:                 string;
+  location_type:           string;
+  country_activity:        null | string;
+  country_residence:       string;
+  country_citizenship:     string;
+  grade_range:             number[];
+  age_range:               number[];
+  application_requirement: string;
+  registration_open:       Date;
+  application_deadline:    Date;
+  activity_start_date:     Date;
+  activity_end_date:       Date;
+  remarks:                 string;
+  url:                     null | string;
+  is_active:               boolean;
+  is_deleted:              boolean;
+  created_at:              Date;
+  updated_at:              Date;
+}
+
+interface CreatedBy {
+  id:                    number;
+  username:              string;
+  email:                 string;
+  date_joined:           Date;
+  last_login:            Date;
+  last_seen:             Date;
+  profile_image:         null;
+  is_email_verified:     boolean;
+  is_admin:              boolean;
+  is_super_admin:        boolean;
+  is_active:             boolean;
+  is_staff:              boolean;
+  is_superuser:          boolean;
+  acc_showTour:          boolean;
+  is_student:            boolean;
+  is_account_manager:    boolean;
+  password_verification: boolean;
+  last_update:           Date;
+}
+
+
 interface FormValues{
   activity_status: string;
   activity_subject: string;
@@ -21,38 +69,34 @@ interface FormValues{
 
 export function AddActivityForm({ isAddActive,studentId }: AddActivityFormProps){
 
-    const [mutateParams,setMutateParams]=useState({ mutateFunc: AepResObj.aep_student_assign_activity })
-   
+    const [mutateParams,setMutateParams]=useState({ mutateFunc: AepResObj.aep_student_assign_activity,action: "add" })
+    const [activityData,setActivityData]=useState([])
+    
 
     
-    const submitActivity=(filterParams: FormValues )=>{
-
-
-
-      const mutateObj={
-        student_id: studentId,
-        ...filterParams
-      }
-     
-          setMutateParams({ mutateFunc: AepResObj.aep_student_activity_filter })
-          setTimeout(()=>{
-            mutate(mutateObj)
-          },1000)
-        
-
-    }
-
+    
    
-    const { data }=useQuery(["assigned-student-activity"],()=>AepResObj.aep_student_assignment_activity_list(studentId))
+    
     const { register,handleSubmit }=useForm<FormValues>()
    
 
 
   const queryClient=useQueryClient()
   const { mutate }=useMutation(mutateParams.mutateFunc,{
-    onSuccess: ()=>{
+    onSuccess: (res)=>{
+
+     
       
-       queryClient.invalidateQueries("assigned-student-activity")
+      setTimeout(()=>{
+        
+        if(mutateParams.action==="add")
+        queryClient.invalidateQueries("assigned-student-activity")
+        else
+        setActivityData(res)
+        
+        
+      },1000)
+  
     }
   })
 
@@ -66,8 +110,49 @@ export function AddActivityForm({ isAddActive,studentId }: AddActivityFormProps)
       student_id
     }
 
-    mutate(mutateObj)
+    setMutateParams({ mutateFunc: AepResObj.aep_student_assign_activity,action:"add" })
+
+    setTimeout(()=>{
+      mutate(mutateObj)
+    })
+
+
   };
+
+  const filterActivity=(filterParams: FormValues )=>{
+
+
+
+    const mutateObj={
+      student_id: studentId,
+      ...filterParams
+    }
+
+
+   
+        setMutateParams({ mutateFunc: AepResObj.aep_student_activity_filter,action:"filter" })
+        setTimeout(()=>{
+          mutate(mutateObj)
+        },1000)
+      
+
+  }
+
+  const { data ,isSuccess }=useQuery(["assigned-student-activity"],()=>AepResObj.aep_student_assignment_activity_list(studentId))
+
+
+
+    useEffect(()=>{
+
+      
+
+        
+      if(isSuccess)
+      setActivityData(data)
+
+    },[data])
+
+    
 
 
  
@@ -105,7 +190,7 @@ export function AddActivityForm({ isAddActive,studentId }: AddActivityFormProps)
           </div>
 
         </div>
-        <button className="bg-cyan-500 rounded-lg w-[15%] h-[6vh] mx-auto block mt-4 text-white" type="button" onClick={handleSubmit(submitActivity)}>Submit</button>
+        <button className="bg-cyan-500 rounded-lg w-[15%] h-[6vh] mx-auto block mt-4 text-white" type="button" onClick={handleSubmit(filterActivity)}>Submit</button>
 
         <div className="bg-[#3AB0FB52] h-[6vh] w-[100%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[0.7rem] flex justify-around items-center pr-4">
           <p>Activity name</p>
@@ -124,7 +209,7 @@ export function AddActivityForm({ isAddActive,studentId }: AddActivityFormProps)
         <div className="h-[40vh] mt-4 overflow-y-scroll">
           <table className="border-solid w-[100%] mx-auto relative font-sans font-medium text-[0.7rem] -mt-1   text-[#344054] break-all">
             <tbody className="overflow">
-              {data && data.map((item,index)=><tr key={index} className="h-[6vh]">
+              {activityData && activityData.map((item,index)=><tr key={index} className="h-[6vh]">
                 <td className="w-[5.3%] text-center">{item && item?.activity_name} Exam</td>
                 <td className=" w-[5%] text-center">{item && item?.activity_type}</td>
                 <td className="w-[3%] text-center">{item && item?.subject}</td>

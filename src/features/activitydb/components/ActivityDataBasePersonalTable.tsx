@@ -111,13 +111,13 @@ export function ActivityDataBasePersonalTable({
                       See action maps
                     </Button>
                   </td>
-                  <td><button type="button" className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg"onClick={handleBackgroundBlurOnView}>Details</button></td>
+                  <td><button type="button" className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg"onClick={()=>handleBackgroundBlurOnView(val)}>Details</button></td>
                   <td className="h-[7vh] cursor-pointer">
                     <img
                       alt="edit-icon"
                       className="mx-auto"
                       src="/images/edit.png"
-                      onClick={handleBackgroundBlurOnEdit}
+                      onClick={()=>handleBackgroundBlurOnEdit(val)}
                     />
                   </td>
                   <td className="h-[7vh] cursor-pointer">
@@ -125,7 +125,7 @@ export function ActivityDataBasePersonalTable({
                       alt="delete-icon"
                       className="mx-auto"
                       src="/images/delete.png"
-                      onClick={handleBackgroundBlurOnDelete}
+                      onClick={()=>handleBackgroundBlurOnDelete()}
                     />
                   </td>
                 </tr>
