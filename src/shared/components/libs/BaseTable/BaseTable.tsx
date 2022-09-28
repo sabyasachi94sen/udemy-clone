@@ -17,6 +17,7 @@ import React, { useCallback } from "react";
 import { PER_PAGE } from "@/shared/utils";
 
 import { Pagination } from "./Pagination";
+import { TableLoader } from "./TableLoader";
 import { updatePaginationState } from "./update-pagination-state";
 
 export interface BaseTableProps<TData> {
@@ -131,10 +132,6 @@ export function BaseTable<T>({
     autoResetPageIndex: false,
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="mt-4 flex flex-col">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -163,9 +160,63 @@ export function BaseTable<T>({
                   </tr>
                 ))}
               </thead>
+              {isLoading && (
+                <tbody className="w-full divide-y divide-gray-200 bg-white">
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <>
+                      <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                          <td key={header.id}>
+                            <div className="flex w-full">
+                              <TableLoader />
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                      <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                          <td key={header.id}>
+                            <div className="flex w-full">
+                              <TableLoader />
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                      <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                          <td key={header.id}>
+                            <div className="flex w-full">
+                              <TableLoader />
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                      <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                          <td key={header.id}>
+                            <div className="flex w-full">
+                              <TableLoader />
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                      <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                          <td key={header.id}>
+                            <div className="flex w-full">
+                              <TableLoader />
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                    </>
+                  ))}
+                </tbody>
+              )}
 
               <tbody className="w-full divide-y divide-gray-200 bg-white">
                 {!isLoading &&
+                  data &&
                   table.getRowModel().rows.map((row) => (
                     <tr key={row.id}>
                       {row
