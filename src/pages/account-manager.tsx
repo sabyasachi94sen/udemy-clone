@@ -1,5 +1,5 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import { AccountManagerTable } from "@/features/account_manger";
 import { CreateSuperAdminForm, EditAdminForm } from "@/features/admin";

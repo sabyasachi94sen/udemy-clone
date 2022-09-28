@@ -1,5 +1,5 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import { StudentResObj } from "@/features/api";
 import { MenuBar, Navbar } from "@/features/home";

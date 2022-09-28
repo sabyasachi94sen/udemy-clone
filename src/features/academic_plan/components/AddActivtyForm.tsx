@@ -1,10 +1,9 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import { AepResObj } from "@/features/api";
-import { GetUserType } from "@/features/helpers";
 
 interface AddActivityFormProps {
   isAddActive: () => void;

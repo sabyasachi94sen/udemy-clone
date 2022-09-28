@@ -1,7 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query"
 
-import { StudentResObj } from "@/features/api"
+import { StudentResObj } from "@/features/api";
 import { Button } from "@/shared/components";
 
 interface StudentFormProps {
@@ -31,9 +31,9 @@ export function StudentForm({
 }: StudentFormProps) {
   const { register, handleSubmit } = useForm<FormValues>();
 
-  const { data }=useQuery(["manager_list"],()=> StudentResObj.manager_list())
-
-
+  const { data } = useQuery(["manager_list"], () =>
+    StudentResObj.manager_list(),
+  );
 
   return (
     <div className="relative z-10 mx-auto -mt-[150vh] h-auto w-[90%] rounded-xl border-2 bg-[#FDFEFF]">
@@ -125,7 +125,12 @@ export function StudentForm({
               {...register("account_manager")}
             >
               <option>Select account manager</option>
-              {data && data?.data.map((item,index)=><option key={index} value={item.id}>{item && item?.username}</option>)}
+              {data &&
+                data?.data.map((item, index) => (
+                  <option key={index} value={item.id}>
+                    {item && item?.username}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="flex w-[37%] flex-col items-start text-lg font-bold">
