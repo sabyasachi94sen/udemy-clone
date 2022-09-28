@@ -22,6 +22,7 @@ export {
   TableHeader,
   TableHeaderCell,
   TableRowCell,
+  StatusCell,
 } from "./BaseTable";
 export { FullPageLoader } from "./FullPageLoader/FullPageLoader";
 export { DropdownMenu } from "./DropdownMenu/DropdownMenu";

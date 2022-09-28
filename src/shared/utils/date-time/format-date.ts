@@ -6,8 +6,6 @@ import { format } from "date-fns";
  * date: "2000-01-01", default current date
  */
 export const formatDate = (
+  date: string | Date = new Date(),
   dateFormat = "yyyy/MM/dd",
-  date: string | Date = new Date()
-): string => {
-  return format(new Date(date), dateFormat);
-};
+): string => format(new Date(date), dateFormat);

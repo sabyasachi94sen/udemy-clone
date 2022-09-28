@@ -1,23 +1,23 @@
 interface PaginationProps {
-  totalPages: number | string;
+  totalPagesCount: number | string;
   currentPage: number | string;
   onGoToNextPage: () => void;
   onGoToPreviousPage: () => void;
   canGoToNextPage: boolean;
   canGoToPreviousPage: boolean;
-  totalResultCount: number;
+  totalResultsCount: number;
   visibleResultCountStart: number;
   visibleResultCountEnd: number;
 }
 
 export function Pagination({
-  totalPages = 10,
+  totalPagesCount = 10,
   currentPage = 1,
   onGoToNextPage,
   onGoToPreviousPage,
   canGoToNextPage = true,
   canGoToPreviousPage = false,
-  totalResultCount = 100,
+  totalResultsCount = 100,
   visibleResultCountStart = 1,
   visibleResultCountEnd = 10,
   t,
@@ -25,13 +25,13 @@ export function Pagination({
   return (
     <nav
       aria-label="Pagination"
-      className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+      className="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 sm:px-6"
     >
       <div className="hidden sm:block">
         <p className="text-sm text-gray-700">
           Showing <span className="font-medium">{visibleResultCountStart}</span>{" "}
           to <span className="font-medium">{visibleResultCountEnd}</span> of{" "}
-          <span className="font-medium">{totalResultCount}</span> results
+          <span className="font-medium">{totalResultsCount}</span> results
         </p>
       </div>
       <div className="flex flex-1 items-center justify-between sm:justify-end">
@@ -39,7 +39,7 @@ export function Pagination({
           <span>Page:</span>
           <span>{currentPage}</span>
           <span>of</span>
-          <span>{totalPages}</span>
+          <span>{totalPagesCount}</span>
         </p>
         <button
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"

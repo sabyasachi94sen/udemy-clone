@@ -19,18 +19,10 @@ import { PER_PAGE } from "@/shared/utils";
 import { Pagination } from "./Pagination";
 import { updatePaginationState } from "./update-pagination-state";
 
-export type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  progress: number;
-  status: "relationship" | "complicated" | "single";
-  subRows?: Person[];
-};
-
 export interface BaseTableProps<TData> {
   data: TData[];
+  totalResultsCount?: number;
+  totalPagesCount?: number;
   pageCount?: number;
   columns: ColumnDef<TData>[];
   isLoading?: boolean;
@@ -89,25 +81,14 @@ type UpdaterFn<T> = (previousState: T) => T;
 
 export function BaseTable<T>({
   data,
-  pageCount,
+  totalResultsCount,
+  totalPagesCount,
   columns,
-  // renderSubComponent: SubComponent,
   serverSideProcessing = true,
   enableSorting = false,
-  // batchActionsBar: BatchActionsBar,
   emptyMessage,
   isLoading,
 }: BaseTableProps<T>) {
-  // const table = useReactTable({
-  //   data,
-  //   columns,
-  //   // Pipeline
-  //   getCoreRowModel: getCoreRowModel(),
-  //   getFilteredRowModel: getFilteredRowModel(),
-  //   getPaginationRowModel: getPaginationRowModel(),
-  //   //
-  //   debugTable: true,
-  // });
   const router = useRouter();
   const getPaginationFromSearchParams = (searchParams: ParsedUrlQuery) => {
     const { page, perPage } = searchParams;
@@ -135,7 +116,7 @@ export function BaseTable<T>({
 
   const table = useReactTable({
     data,
-    pageCount,
+    pageCount: totalPagesCount,
     columns,
     state: {
       pagination: getPaginationFromSearchParams(router.query),
@@ -159,15 +140,15 @@ export function BaseTable<T>({
     <div className="mt-4 flex flex-col">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-          <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
+          <div className="max-h-[80vh] overflow-scroll border-b border-gray-200 shadow sm:rounded-lg">
+            <table className="relative  min-w-full divide-y divide-gray-200 overflow-x-scroll">
               <thead className="bg-gray-100">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
-                        className="group px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        className="group sticky top-0 z-10 bg-gray-100 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                         scope="col"
                       >
                         <div className="flex items-center justify-between">
@@ -203,80 +184,15 @@ export function BaseTable<T>({
                 )} */}
               </tbody>
             </table>
-
             <Pagination
               canGoToNextPage={table.getCanNextPage()}
               canGoToPreviousPage={table.getCanPreviousPage()}
               currentPage={table.getState().pagination.pageIndex + 1}
-              totalPages={table.getPageCount()}
+              totalPagesCount={table.getPageCount()}
+              totalResultsCount={totalResultsCount}
               onGoToNextPage={() => table.nextPage()}
               onGoToPreviousPage={() => table.previousPage()}
             />
-            <div className="flex items-center gap-2">
-              <button
-                className="rounded border p-1"
-                disabled={!table.getCanPreviousPage()}
-                onClick={() => table.setPageIndex(0)}
-              >
-                {"<<"}
-              </button>
-              <button
-                className="rounded border p-1"
-                disabled={!table.getCanPreviousPage()}
-                onClick={() => table.previousPage()}
-              >
-                {"<"}
-              </button>
-              <button
-                className="rounded border p-1"
-                disabled={!table.getCanNextPage()}
-                onClick={() => table.nextPage()}
-              >
-                {">"}
-              </button>
-              <button
-                className="rounded border p-1"
-                disabled={!table.getCanNextPage()}
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              >
-                {">>"}
-              </button>
-              <span className="flex items-center gap-1">
-                <div>Page</div>
-                <strong>
-                  {table.getState().pagination.pageIndex + 1} of{" "}
-                  {table.getPageCount()}
-                </strong>
-              </span>
-              <span className="flex items-center gap-1">
-                | Go to page:
-                <input
-                  className="w-16 rounded border p-1"
-                  defaultValue={table.getState().pagination.pageIndex + 1}
-                  type="number"
-                  onChange={(e) => {
-                    const page = e.target.value
-                      ? Number(e.target.value) - 1
-                      : 0;
-
-                    table.setPageIndex(page);
-                  }}
-                />
-              </span>
-              <select
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => {
-                  table.setPageSize(Number(e.target.value));
-                }}
-              >
-                {[10, 20, 30, 40, 50].map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))}
-              </select>
-              {isLoading ? "Loading..." : null}
-            </div>
           </div>
         </div>
       </div>
