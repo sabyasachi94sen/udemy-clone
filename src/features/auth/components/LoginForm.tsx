@@ -35,12 +35,12 @@ export function LoginForm() {
   // TODO: add types
   const loginMutation = useMutation(loginObj.login, {
     onSuccess: (data) => {
-      setToken("auth", data.data.token);
-      setToken("userType", data.data.user_type);
+      setToken("auth", data.token);
+      setToken("userType", data.user_type);
 
       // todo: to be removed
-      SetAuthToken(data.data.token);
-      SetUserType(data.data.user_type);
+      SetAuthToken(data.token);
+      SetUserType(data.user_type);
 
       router.push({ pathname: "/home" });
     },
@@ -86,7 +86,11 @@ export function LoginForm() {
           </div>
 
           <div className="mx-auto flex justify-center">
-            <Button isLoading={loginMutation.isLoading} type="submit">
+            <Button
+              isLoading={loginMutation.isLoading}
+              type="submit"
+              width="full"
+            >
               Login
             </Button>
           </div>
