@@ -1,14 +1,16 @@
 import { HiSearch } from "react-icons/hi";
 
 import { Account } from "@/api";
-import { SuperAdminTable } from "@/features/admin";
-import { CreateSuperAdminModal } from "@/features/admin/components/CreateSuperAdminModal";
-import { DeleteSuperAdminModal } from "@/features/admin/components/DeleteSuperAdminModal";
-import { UpdateSuperAdminModal } from "@/features/admin/components/UpdateSuperAdminModal";
+import {
+  CreateSuperAdminModal,
+  DeleteSuperAdminModal,
+  SuperAdminTable,
+  UpdateSuperAdminModal,
+} from "@/features/admin";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 
-export default function SuperAdmin() {
+export default function SuperAdminPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
 
   return (
