@@ -1,6 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 import { Account, ApiError, SuperAdminService } from "@/api";
+import { useBackendErrors } from "@/shared/hooks/use-backend-errors";
 import { useRefreshQuery } from "@/shared/hooks/use-refresh-query";
 
 import { queryKeys } from "./query-keys";
@@ -17,7 +20,7 @@ export const useSuperAdmins = (
   queryOptions?: { keepPreviousData?: boolean },
 ) =>
   useQuery(
-    [queryKeys.superAdmins.list(params?.page)],
+    queryKeys.superAdmins.list(params?.page),
 
     () => SuperAdminService.superAdminList({ ...params }),
     {
@@ -28,6 +31,7 @@ export const useSuperAdmins = (
 
 export function useCreateSuperAdmin(onSuccess?: () => void) {
   const { refreshQuery } = useRefreshQuery();
+  const { displayErrorMessages } = useBackendErrors();
 
   return useMutation<
     Account,
@@ -38,16 +42,17 @@ export function useCreateSuperAdmin(onSuccess?: () => void) {
   >((data) => SuperAdminService.superAdminCreate(data), {
     onSuccess() {
       // invalidate all the list queries
-
       refreshQuery({
         // eslint-disable-next-line no-underscore-dangle
         queryKey: queryKeys.superAdmins.list._def,
       });
 
+      toast.success("Super admin user created successfully");
+
       onSuccess?.();
     },
     onError(err) {
-      console.log(err);
+      displayErrorMessages(err);
     },
   });
 }

@@ -252,10 +252,6 @@ export function request<T>(options: ApiRequestOptions): CancelablePromise<T> {
       const formData = getFormData(options);
       const body = getRequestBody(options);
       const headers = await getHeaders(options, formData);
-      console.log(
-        "file: request.ts ~ line 254 ~ returnnewCancelablePromise ~ headers",
-        headers,
-      );
 
       if (!onCancel.isCancelled) {
         const response = await sendRequest(
@@ -270,10 +266,6 @@ export function request<T>(options: ApiRequestOptions): CancelablePromise<T> {
         const responseHeader = getResponseHeader(
           response,
           options.responseHeader,
-        );
-        console.log(
-          "file: request.ts ~ line 270 ~ returnnewCancelablePromise ~ responseHeader",
-          responseHeader,
         );
 
         const result: ApiResult = {

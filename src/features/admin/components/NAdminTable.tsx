@@ -10,13 +10,13 @@ import {
   StatusCell,
   TableRowCell,
 } from "@/shared/components";
-import { useSuperAdmins } from "@/shared/services/super-admin.services";
+import { useSuperAdmins } from "@/shared/services/super-admin.service";
 import { formatDate } from "@/shared/utils";
 
 export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
   const router = useRouter();
   const { page, perPage } = router.query;
-  const superAdminsResult = useSuperAdmins({ page });
+  const superAdminsQuery = useSuperAdmins({ page });
 
   const columnHelper = createColumnHelper<Account>();
 
@@ -50,7 +50,7 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
       ),
     }),
     columnHelper.accessor((row) => row.id, {
-      id: "id",
+      id: "edit",
       header: "",
       cell: (info) => (
         <Button width="max" onClick={() => console.log(info.getValue())}>
@@ -59,7 +59,7 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
       ),
     }),
     columnHelper.accessor((row) => row.id, {
-      id: "id",
+      id: "delete",
       header: "",
       cell: (info) => (
         <Button width="max" onClick={() => console.log(info.getValue())}>
@@ -73,10 +73,10 @@ export function NewSuperAdminTable({}: NewSuperAdminTableProps): JSX.Element {
     <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={superAdminsResult.data?.results}
-      isLoading={superAdminsResult.isLoading}
+      data={superAdminsQuery.data?.results}
+      isLoading={superAdminsQuery.isLoading}
       totalPagesCount={10} // TODO: fix This once backend adds limit in query
-      totalResultsCount={superAdminsResult.data?.count || 0}
+      totalResultsCount={superAdminsQuery.data?.count || 0}
     />
   );
 }

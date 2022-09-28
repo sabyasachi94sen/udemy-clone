@@ -20,7 +20,6 @@ export function LoginForm() {
   // TODO: add types
   const loginMutation = useMutation(loginObj.login, {
     onSuccess: (data) => {
-      console.log("file: LoginForm.tsx ~ line 23 ~ LoginForm ~ data", data);
       setToken("auth", data.data.token);
       setToken("userType", data.data.user_type);
 

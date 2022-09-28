@@ -164,7 +164,7 @@ export function BaseTable<T>({
                 <tbody className="w-full divide-y divide-gray-200 bg-white">
                   {table.getHeaderGroups().map((headerGroup) => (
                     <>
-                      <tr key={headerGroup.id}>
+                      <tr key={`${headerGroup.id}-1`}>
                         {headerGroup.headers.map((header) => (
                           <td key={header.id}>
                             <div className="flex w-full">
@@ -173,7 +173,7 @@ export function BaseTable<T>({
                           </td>
                         ))}
                       </tr>
-                      <tr key={headerGroup.id}>
+                      <tr key={`${headerGroup.id}-2`}>
                         {headerGroup.headers.map((header) => (
                           <td key={header.id}>
                             <div className="flex w-full">
@@ -182,7 +182,7 @@ export function BaseTable<T>({
                           </td>
                         ))}
                       </tr>
-                      <tr key={headerGroup.id}>
+                      <tr key={`${headerGroup.id}-3`}>
                         {headerGroup.headers.map((header) => (
                           <td key={header.id}>
                             <div className="flex w-full">
@@ -191,7 +191,7 @@ export function BaseTable<T>({
                           </td>
                         ))}
                       </tr>
-                      <tr key={headerGroup.id}>
+                      <tr key={`${headerGroup.id}-4`}>
                         {headerGroup.headers.map((header) => (
                           <td key={header.id}>
                             <div className="flex w-full">
@@ -200,7 +200,7 @@ export function BaseTable<T>({
                           </td>
                         ))}
                       </tr>
-                      <tr key={headerGroup.id}>
+                      <tr key={`${headerGroup.id}-5`}>
                         {headerGroup.headers.map((header) => (
                           <td key={header.id}>
                             <div className="flex w-full">

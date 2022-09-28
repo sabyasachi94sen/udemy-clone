@@ -1,13 +1,15 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { HiSearch } from "react-icons/hi";
-import { useMutation, useQueryClient } from "react-query";
 
 import { CreateSuperAdminForm, EditSuperAdminForm } from "@/features/admin";
+import { CreateSuperAdminModal } from "@/features/admin/components/CreateSuperAdminModal";
 import { NewSuperAdminTable } from "@/features/admin/components/NAdminTable";
 import { SuperAdminResObj } from "@/features/api";
 import { ActiveStatus } from "@/features/ui";
 import { Button, Input } from "@/shared/components";
+import { useModal } from "@/shared/stores/modal.store";
 
 export default function SuperAdmin() {
   const [backgroundBlurAddAdmin, setBackGroundBlurAddAdmin] = useState(false);
@@ -112,8 +114,11 @@ export default function SuperAdmin() {
     if (flag == 1) setBackGroundBlurDeleteAdmin(!backgroundBlurDeleteAdmin);
   };
 
+  const { currModalKey, isModalOpen, onModalClose, onModalOpen } = useModal();
+
   return (
     <>
+      {currModalKey === "createSuperAdmin" && <CreateSuperAdminModal />}
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">Super Admin Table</h1>
         <div className="mt-8 flex justify-between">
@@ -122,7 +127,9 @@ export default function SuperAdmin() {
             placeholder="Search the staff member here"
             width="96"
           />
-          <Button width="max">Add Staff</Button>
+          <Button width="max" onClick={() => onModalOpen("createSuperAdmin")}>
+            Add Staff
+          </Button>
         </div>
         <NewSuperAdminTable />
 

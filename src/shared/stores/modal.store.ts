@@ -2,7 +2,11 @@ import create from "zustand";
 
 // TODO: Write docs
 
-type ModalKey = "addActivity";
+type ModalKey =
+  | "addActivity"
+  | "createSuperAdmin"
+  | "updateSuperAdmin"
+  | "deleteSuperAdmin";
 
 interface ModalState {
   isModalOpen: boolean;
