@@ -1,6 +1,10 @@
+import { AiFillDatabase } from "react-icons/ai";
 import { BiStats } from "react-icons/bi";
-import { FaClipboardList } from "react-icons/fa";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { FaClipboardList, FaUserGraduate } from "react-icons/fa";
 import { HiCog, HiHome } from "react-icons/hi";
+import { IoIosPeople } from "react-icons/io";
+import { MdAnalytics } from "react-icons/md";
 
 export const MenuInfoSuperAdmin = [
   {
@@ -12,28 +16,28 @@ export const MenuInfoSuperAdmin = [
   },
   {
     name: "Super Admin Roster",
-    icon: BiStats,
+    icon: BsFillPeopleFill,
     imageType: "person-icon",
     url: "/super-admin",
     id: 2,
   },
   {
     name: "Admin Roster",
-    icon: BiStats,
+    icon: BsFillPeopleFill,
     imageType: "person-icon",
     url: "/admin",
     id: 3,
   },
   {
     name: "Account Manager Roster",
-    icon: BiStats,
+    icon: IoIosPeople,
     imageType: "grorup-icon",
     url: "/account-manager",
     id: 4,
   },
   {
     name: "Student Roster",
-    icon: BiStats,
+    icon: FaUserGraduate,
     imageType: "hat-icon",
     url: "/student-roaster",
     id: 5,
@@ -41,7 +45,7 @@ export const MenuInfoSuperAdmin = [
 
   {
     name: "Activity Database",
-    icon: BiStats,
+    icon: AiFillDatabase,
     imageType: "furniture-icon",
     url: "/activity-database",
     id: 6,
@@ -63,7 +67,7 @@ export const MenuInfoSuperAdmin = [
   },
   {
     name: "Analytics",
-    icon: BiStats,
+    icon: MdAnalytics,
     imageType: "analysisGraph-icon",
     url: "/analytics",
     id: 9,
