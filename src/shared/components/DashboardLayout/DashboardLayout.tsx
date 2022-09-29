@@ -9,6 +9,7 @@ import {
   MenuInfoAdmin,
   MenuInfoSuperAdmin,
 } from "@/features/home";
+import { useCurrentPath } from "@/shared/hooks/use-current-path";
 import { getToken } from "@/shared/utils";
 
 const userNavigation = [
@@ -19,6 +20,8 @@ const userNavigation = [
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { isMatchCurrentPath } = useCurrentPath();
 
   const [menuItems, setMenuItems] = useState<
     | typeof MenuInfoSuperAdmin
@@ -96,19 +99,18 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                     <Link key={item.name} href={{ pathname: item.url }}>
                       <div
                         className={clsx(
-                          // TODO: check url to set the marker on active link
-                          // item.current
-                          //   ? "bg-gray-900 text-white"
-                          //   : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          isMatchCurrentPath(item.url)
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "group flex cursor-pointer items-center rounded-md px-2 py-2 text-base font-medium",
                         )}
                       >
                         <item.icon
                           aria-hidden="true"
                           className={clsx(
-                            // item.current
-                            //   ? "text-gray-300"
-                            //   : "text-gray-400 group-hover:text-gray-300",
+                            isMatchCurrentPath(item.url)
+                              ? "text-gray-300"
+                              : "text-gray-400 group-hover:text-gray-300",
                             "mr-4 h-6 w-6 flex-shrink-0",
                           )}
                         />
@@ -140,19 +142,19 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Link key={item.name} href={{ pathname: item.url }}>
                   <div
                     className={clsx(
-                      // item.current
-                      //   ? "bg-gray-900 text-white"
-                      //   : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      isMatchCurrentPath(item.url)
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
                       "group flex cursor-pointer items-center rounded-md  px-2 py-2 text-sm font-medium text-white",
                     )}
                   >
                     <item.icon
                       aria-hidden="true"
                       className={clsx(
-                        "mr-3 h-6 w-6 flex-shrink-0",
-                        item.current
+                        isMatchCurrentPath(item.url)
                           ? "text-gray-300"
                           : "text-gray-400 group-hover:text-gray-300",
+                        "mr-3 h-6 w-6 flex-shrink-0",
                       )}
                     />
                     {item.name}
