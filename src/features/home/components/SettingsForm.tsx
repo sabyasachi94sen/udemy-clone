@@ -1,27 +1,54 @@
 import Link from "next/link";
-import { useEffect,useState } from "react"
+import { useForm } from "react-hook-form";
+import { useMutation,useQuery } from "react-query";
 
-import { GetLoginCreds } from "@/features/helpers";
-import { Button } from "@/shared/components";
+import { SettingObj } from "@/features/api"
+import {  GetUserType } from "@/features/helpers";
 
-
+interface FormValues{
+  username: string;
+  email: string;
+}
 
 
 export function SettingsForm() {
   
-  const [loginData,setLoginData]=useState({})
-
-  useEffect(()=>{
-    const login_creds=GetLoginCreds()
-    const userName=login_creds && login_creds?.email.split("@")[0]
-    const loginObj={
-      name: userName,
-      email: login_creds.email,
-    }
-
-    setLoginData(loginObj)
  
-  },[])
+
+ const { handleSubmit,register }=useForm<FormValues>()
+
+ const userType=GetUserType()
+  const { data }=useQuery(["user-details"],()=> SettingObj.user_details())
+  const { mutate }=useMutation(SettingObj.user_details_update,{
+    onSuccess: ()=>{
+       window.location.href="/setting"
+    },
+
+    onError: ()=>{
+
+    }
+  })
+
+  const  editUserDetails=(formValues:FormValues)=>{
+    const mutateObj={
+      
+    };
+
+      if(formValues.username==="" && formValues.email!=="")
+            {
+              mutateObj.username=data?.username;
+              mutateObj.email=formValues.email
+            }
+            else if(formValues.username!=="" && formValues.email===""){
+              mutateObj.username=formValues.username;
+              mutateObj.email=data?.email
+            }
+            else if(formValues.username!=="" && formValues.email!==""){
+              mutateObj=formValues
+            }
+    mutate(mutateObj)
+  }
+
 
   return (
     <div className="-mt-24 h-auto w-[40%] rounded-lg bg-white bg-cyan-100 pt-6 pl-24 pr-24 shadow-lg">
@@ -36,22 +63,24 @@ export function SettingsForm() {
       <div className="mb-1">
         <p className="mb-4 font-sans font-medium text-black">Name</p>
         <input
-          disabled
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          defaultValue={loginData && loginData?.name}
+          defaultValue={data && data?.username}
+          disabled={userType!=="super_admin"}
           name="name"
           type="text"
+          {...register("username")}
         />
       </div>
 
       <div className="mb-1">
         <p className="mb-4 font-sans font-sans font-medium text-black">Email</p>
         <input
-          disabled
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          defaultValue={loginData && loginData?.email}
+          defaultValue={data && data?.email}
+          disabled={userType!=="super_admin"}
           name="email"
           type="email"
+          {...register("email")}
         />
       </div>
 
@@ -60,8 +89,8 @@ export function SettingsForm() {
           Organisation
         </p>
         <input
-          disabled
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
+          disabled={userType!=="super_admin"}
           name="organisation"
           type="text"
         />
@@ -85,11 +114,11 @@ export function SettingsForm() {
       </Link>
 
       <div className="mx-auto mb-28 mt-10 flex justify-center">
-        <Link href="/home">
-          <Button className="h-[6vh] w-[90%] rounded-md bg-cyan-400 py-2 text-[21px] font-bold font-bold text-white">
-            Save my changes
-          </Button>
-        </Link>
+        
+        <button className={`h-[7vh] w-[90%] ${userType!=="super_admin"?`bg-cyan-500`: `hover:bg-blue-500 bg-cyan-500`} mx-auto rounded-md py-2 text-[21px] font-bold font-bold text-white`} disabled={userType!=="super_admin"} type="button" onClick={handleSubmit(editUserDetails)}>
+          Save my changes
+        </button>
+        
       </div>
     </div>
   );

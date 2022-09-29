@@ -6,4 +6,5 @@ export { StudentResObj ,StudentPostDataObjVal,StudentPutDataObjVal } from "./Stu
 export { AccountManagerResObj,ManagerPostDataObjVal,ManagerPutDataObjVal
 } from "./AccountManager"
 export { AepResObj } from "./AEP";
-export { ActivityResObj } from "./Activity"
+export { ActivityResObj } from "./Activity";
+export { SettingObj } from "./Settings"
