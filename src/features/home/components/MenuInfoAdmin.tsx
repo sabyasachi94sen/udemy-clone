@@ -1,7 +1,14 @@
+import { AiFillDatabase } from "react-icons/ai";
+import { BiStats } from "react-icons/bi";
+import { FaClipboardList, FaUserGraduate } from "react-icons/fa";
+import { HiCog, HiHome } from "react-icons/hi";
+import { IoIosPeople } from "react-icons/io";
+import { MdAnalytics } from "react-icons/md";
+
 export const MenuInfoAdmin = [
   {
     name: "Home",
-    icon: "/images/home.png",
+    icon: HiHome,
     imageType: "home-icon",
     url: "/home",
     id: 1,
@@ -9,14 +16,14 @@ export const MenuInfoAdmin = [
 
   {
     name: "Account Manager Roster",
-    icon: "/images/group.png",
+    icon: IoIosPeople,
     imageType: "grorup-icon",
     url: "/account-manager",
     id: 2,
   },
   {
     name: "Student Roster",
-    icon: "/images/hat.png",
+    icon: FaUserGraduate,
     imageType: "hat-icon",
     url: "/student-roaster",
     id: 3,
@@ -24,14 +31,14 @@ export const MenuInfoAdmin = [
 
   {
     name: "Activity Database",
-    icon: "/images/furniture.png",
+    icon: AiFillDatabase,
     imageType: "furniture-icon",
     url: "/activity-database",
     id: 4,
   },
   {
     name: "Academic Enrichment Plans (AEPs)",
-    icon: "/images/list.png",
+    icon: FaClipboardList,
     imageType: "list-icon",
     url: "/academic-list",
     id: 5,
@@ -39,14 +46,14 @@ export const MenuInfoAdmin = [
 
   {
     name: "AEP Status Tracker",
-    icon: "/images/bars.png",
+    icon: BiStats,
     imageType: "bars-icon",
     url: "/aep-tracker",
     id: 6,
   },
   {
     name: "Analytics",
-    icon: "/images/analysisGraph.png",
+    icon: MdAnalytics,
     imageType: "analysisGraph-icon",
     url: "/analytics",
     id: 7,
@@ -54,7 +61,7 @@ export const MenuInfoAdmin = [
 
   {
     name: "Settings",
-    icon: "/images/setting.png",
+    icon: HiCog,
     imageType: "settings-icon",
     url: "/setting",
     id: 8,
