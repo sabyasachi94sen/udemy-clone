@@ -4,10 +4,11 @@ import NextNprogress from "nextjs-progressbar";
 import React from "react";
 
 import "@/shared/styles/globals.css";
+import { Hydrate,QueryClient,QueryClientProvider } from "react-query"
+
 import { TWResponsiveIndicator } from "@/shared/components/libs";
 import { AppProviders } from "@/shared/stores/app-providers";
-import { AuthProvider, AuthGuard } from "@/shared/stores/auth.context";
-import {Hydrate,QueryClient,QueryClientProvider} from "react-query"
+import { AuthGuard, AuthProvider } from "@/shared/stores/auth.context";
 
 // Pages are by default, checked for protected
 // Ones with publicRoute true are public pages
@@ -24,33 +25,31 @@ export default function MyApp(props: AppProps): JSX.Element {
   const queryClient=React.useRef(new QueryClient())
 
   return (
-    <>
     <QueryClientProvider client={queryClient.current}>
       <Hydrate state={pageProps.dehydrateState}>
-      <NextNprogress
-        showOnShallow
-        color="#29D"
-        height={3}
-        options={{ showSpinner: false }}
-        startPosition={0.3}
-        stopDelayMs={200}
+        <NextNprogress
+          showOnShallow
+          color="#29D"
+          height={3}
+          options={{ showSpinner: false }}
+          startPosition={0.3}
+          stopDelayMs={200}
       />
-      <AppProviders>
-        <AuthProvider>
-          <TWResponsiveIndicator />
-          {Component.isPublicRoute ? (
+        <AppProviders>
+          <AuthProvider>
+            <TWResponsiveIndicator />
+            {Component.isPublicRoute ? (
             // public page
-            <Component {...pageProps} />
+              <Component {...pageProps} />
           ) : (
             // Do auth check for the protected routes
             <AuthGuard>
               <Component {...pageProps} />
             </AuthGuard>
           )}
-        </AuthProvider>
-      </AppProviders>
+          </AuthProvider>
+        </AppProviders>
       </Hydrate>
-      </QueryClientProvider>
-    </>
+    </QueryClientProvider>
   );
 }

@@ -27,7 +27,7 @@ function HomePage() {
 
     if (userType === "admin") setHomeItems(homeInfoAdmin);
     else if (userType === "super_admin") setHomeItems(homeInfoSuperAdmin);
-    else setHomeItems(homeInfoAccountManager)
+    else setHomeItems(homeInfoAccountManager);
   }, []);
 
   return (

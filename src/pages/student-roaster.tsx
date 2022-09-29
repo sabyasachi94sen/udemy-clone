@@ -199,4 +199,4 @@ function StudentRoaster() {
 }
 
 export default StudentRoaster;
-StudentRoaster.isPublicRoute = true;
+StudentRoaster.isPublicRoute = false;

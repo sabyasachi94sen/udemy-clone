@@ -19,4 +19,4 @@ function SettingPage(){
 
 
 export default SettingPage
-SettingPage.isPublicRoute = true;
+SettingPage.isPublicRoute = false;

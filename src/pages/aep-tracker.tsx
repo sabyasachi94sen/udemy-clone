@@ -41,4 +41,4 @@ function AEPTracker() {
 }
 
 export default AEPTracker;
-AEPTracker.isPublicRoute = true;
+AEPTracker.isPublicRoute = false;

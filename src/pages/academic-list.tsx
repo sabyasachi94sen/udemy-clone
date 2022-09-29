@@ -75,10 +75,12 @@ function AcademicPlan() {
         null
       )}
 
+   
+
     
     </>
   );
 }
 
 export default AcademicPlan;
-AcademicPlan.isPublicRoute = true;
+AcademicPlan.isPublicRoute = false;

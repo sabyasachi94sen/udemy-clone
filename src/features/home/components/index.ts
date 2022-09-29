@@ -7,6 +7,7 @@ export { homeInfoAdmin } from "./HomeInfoAdmin"
 export { homeInfoAccountManager } from "./HomeInfoAccountManager"
 export { MenuInfoAdmin } from "./MenuInfoAdmin"
 export { MenuInfoSuperAdmin } from "./MenuInfoSuperAdmin"
-export { MenuInfoAccountManager } from "./MenuInfoAccountManager"
+export { MenuInfoAccountManager } from "./MenuInfoAccountManager";
+
 
 

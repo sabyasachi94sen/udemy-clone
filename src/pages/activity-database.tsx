@@ -227,5 +227,5 @@ function Activity() {
 }
 
 export default Activity;
-Activity.isPublicRoute = true;
+Activity.isPublicRoute = false;
 

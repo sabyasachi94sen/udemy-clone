@@ -191,4 +191,4 @@ function AccountManager() {
 }
 
 export default AccountManager;
-AccountManager.isPublicRoute = true;
+AccountManager.isPublicRoute = false;

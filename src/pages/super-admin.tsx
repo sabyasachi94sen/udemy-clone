@@ -188,4 +188,4 @@ interface SuperAdminDataValues{
 }
 
 export default SuperAdmin;
-SuperAdmin.isPublicRoute = true;
+SuperAdmin.isPublicRoute = false;

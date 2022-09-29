@@ -1,11 +1,7 @@
-
 import HomePage from "./home";
 
-
 export default function Home(): JSX.Element {
-  return (
-    <HomePage />
-  );
+  return <HomePage />;
 }
 
 Home.isPublicRoute = false;

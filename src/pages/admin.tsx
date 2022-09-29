@@ -223,6 +223,6 @@ function Admin() {
 }
 
 export default Admin;
-Admin.isPublicRoute = true;
+Admin.isPublicRoute = false;
 
 // new comment
