@@ -46,6 +46,6 @@ function HomePage() {
 }
 
 export default HomePage;
-HomePage.isPublicRoute = true;
+HomePage.isPublicRoute = false;
 
 // update comment

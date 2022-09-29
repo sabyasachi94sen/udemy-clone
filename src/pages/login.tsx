@@ -4,6 +4,7 @@ function LoginPage() {
   return (
     <main className="bg-white-100 flex h-screen items-center justify-evenly">
       <div className="absolute top-0 left-0">
+       
         <img
           alt="bottom-wave-img"
           className="h-[12vh] w-[70%]"
