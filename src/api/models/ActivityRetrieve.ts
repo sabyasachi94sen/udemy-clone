@@ -3,12 +3,11 @@
 /* eslint-disable */
 
 import type { Account } from './Account';
-import type { ActionMapStepAct } from './ActionMapStepAct';
 
 export type ActivityRetrieve = {
     readonly id?: number;
     created_by: Account;
-    action_map_activity: Array<ActionMapStepAct>;
+    readonly action_maps?: string;
     activity_name?: string | null;
     activity_type?: string | null;
     subject?: string | null;

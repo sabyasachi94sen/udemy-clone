@@ -26,4 +26,28 @@ export class UserService {
             });
         }
 
-    }
+        /**
+         * User Update Api View
+         * API to Update User details
+         *
+         * Authentication Required : YES
+         *
+         * Headers : {
+             * "Authorization" : "Token XXXX"
+             * }
+             *
+             * PUT Data : {
+                 * "username" : "kamal",
+                 * "email"    : "karre@eoraa.com"
+                 * }
+                 * @returns any
+                 * @throws ApiError
+                 */
+                public static userUpdateUpdate(): CancelablePromise<any> {
+                    return __request({
+                        method: 'PUT',
+                        path: `/user/update/`,
+                    });
+                }
+
+            }

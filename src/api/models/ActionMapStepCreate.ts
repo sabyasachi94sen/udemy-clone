@@ -4,11 +4,10 @@
 
 export type ActionMapStepCreate = {
     readonly id?: number;
-    task?: string | null;
-    remainder_type?: string | null;
-    days_before_or_after?: 'Before' | 'After';
+    action?: string | null;
     deadline_days?: number | null;
     readonly created_at?: string;
     readonly updated_at?: string;
+    action_map?: number | null;
     activity?: number | null;
 }

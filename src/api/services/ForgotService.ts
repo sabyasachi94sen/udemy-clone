@@ -8,11 +8,11 @@ export class ForgotService {
 
     /**
      * Forgot Password API
-     *
      * Authentication Required : NO
-     * Request Data
+     *
+     * Request Data :
      * {
-         * "email" : ""
+         * "email" : "email@domain.com"
          * }
          * @returns any
          * @throws ApiError

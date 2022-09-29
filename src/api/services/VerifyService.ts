@@ -8,9 +8,9 @@ export class VerifyService {
 
     /**
      * Verify OTP API
-     *
      * Authentication Required : NO
-     * Request Data
+     *
+     * Request Data :
      * {
          * "email" : "email@domain.com",
          * "otp" : "1232"

@@ -53,103 +53,92 @@ export class StudentService {
              * GET params : {
                  * "student_id" : 1
                  * }
-                 * @returns any
-                 * @throws ApiError
-                 */
-                public static studentAepListList(): CancelablePromise<any> {
-                    return __request({
-                        method: 'GET',
-                        path: `/student/aep/list/`,
-                    });
-                }
-
-                /**
-                 * @returns any
-                 * @throws ApiError
-                 */
-                public static studentListList({
-                    id,
-                }: {
-                    /** Student ID **/
-                    id?: string,
-                }): CancelablePromise<any> {
-                    return __request({
-                        method: 'GET',
-                        path: `/student/list/`,
-                        query: {
-                            'id': id,
-                        },
-                    });
-                }
-
-                /**
-                 * Student Registration APIView
-                 * API to Register Student
                  *
-                 * Authentication Required : YES
-                 *
-                 * Data :{
-                     * "student_details":{
-                         * "student_name" : "User X",
-                         * "email" : "email@domain.com",
-                         * "phone_number" : "+91 xxxxxxxxxx"
-                         * "date_of_birth" : "2000-06-01",
-                         * "current_grade" : "9.0",
-                         * "country_of_boarding_school" : "country X",
-                         * "country_of_citizenship" : "country Y",
-                         * "is_active" : true,
-                         * "residence" : {
-                             * "city_of_residence" : "city",
-                             * "country_of_residence" : "country"
+                 * DELETE params : {
+                     * "student_id" : 1,
+                     * "activity_id" : 1
+                     * }
+                     * @returns any
+                     * @throws ApiError
+                     */
+                    public static studentAepListList(): CancelablePromise<any> {
+                        return __request({
+                            method: 'GET',
+                            path: `/student/aep/list/`,
+                        });
+                    }
+
+                    /**
+                     * AEP Enrichment Plan (Student)
+                     * Authentication Required : YES
+                     *
+                     * GET params : {
+                         * "student_id" : 1
+                         * }
+                         *
+                         * DELETE params : {
+                             * "student_id" : 1,
+                             * "activity_id" : 1
                              * }
-                             * },
-                             * "account_manager" : 1
-                             * }
-                             * @returns any
+                             * @returns void
                              * @throws ApiError
                              */
-                            public static studentRegisterCreate(): CancelablePromise<any> {
+                            public static studentAepListDelete(): CancelablePromise<void> {
                                 return __request({
-                                    method: 'POST',
-                                    path: `/student/register/`,
+                                    method: 'DELETE',
+                                    path: `/student/aep/list/`,
                                 });
                             }
 
                             /**
-                             * Student Update and Delete APIView
-                             * API to Update and Delete Student
+                             * @returns any
+                             * @throws ApiError
+                             */
+                            public static studentListList({
+                                id,
+                            }: {
+                                /** Student ID **/
+                                id?: string,
+                            }): CancelablePromise<any> {
+                                return __request({
+                                    method: 'GET',
+                                    path: `/student/list/`,
+                                    query: {
+                                        'id': id,
+                                    },
+                                });
+                            }
+
+                            /**
+                             * Student Registration APIView
+                             * API to Register Student
                              *
                              * Authentication Required : YES
                              *
-                             * Data :
-                             * {
+                             * Data :{
                                  * "student_details":{
                                      * "student_name" : "User X",
                                      * "email" : "email@domain.com",
                                      * "phone_number" : "+91 xxxxxxxxxx"
                                      * "date_of_birth" : "2000-06-01",
                                      * "current_grade" : "9.0",
-                                     * "country_of_boarding_school" : "country X"
+                                     * "country_of_boarding_school" : "country X",
                                      * "country_of_citizenship" : "country Y",
                                      * "is_active" : true,
                                      * "residence" : {
                                          * "city_of_residence" : "city",
                                          * "country_of_residence" : "country"
                                          * }
-                                         * }
+                                         * },
                                          * "account_manager" : 1
                                          * }
                                          * @returns any
                                          * @throws ApiError
                                          */
-                                        public static studentUdUpdate({
-                                            id,
-                                        }: {
-                                            id: string,
-                                        }): CancelablePromise<any> {
+                                        public static studentRegisterCreate(): CancelablePromise<any> {
                                             return __request({
-                                                method: 'PUT',
-                                                path: `/student/ud/${id}/`,
+                                                method: 'POST',
+                                                path: `/student/register/`,
                                             });
                                         }
 
@@ -159,8 +148,7 @@ export class StudentService {
                                          *
                                          * Authentication Required : YES
                                          *
-                                         * Data :
-                                         * {
+                                         * Data : {
                                              * "student_details":{
                                                  * "student_name" : "User X",
                                                  * "email" : "email@domain.com",
@@ -177,18 +165,55 @@ export class StudentService {
                                                      * }
                                                      * "account_manager" : 1
                                                      * }
-                                                     * @returns void
+                                                     * @returns any
                                                      * @throws ApiError
                                                      */
-                                                    public static studentUdDelete({
+                                                    public static studentUdUpdate({
                                                         id,
                                                     }: {
                                                         id: string,
-                                                    }): CancelablePromise<void> {
+                                                    }): CancelablePromise<any> {
                                                         return __request({
-                                                            method: 'DELETE',
+                                                            method: 'PUT',
                                                             path: `/student/ud/${id}/`,
                                                         });
                                                     }
 
-                                                }
+                                                    /**
+                                                     * Student Update and Delete APIView
+                                                     * API to Update and Delete Student
+                                                     *
+                                                     * Authentication Required : YES
+                                                     *
+                                                     * Data : {
+                                                         * "student_details":{
+                                                             * "student_name" : "User X",
+                                                             * "email" : "email@domain.com",
+                                                             * "phone_number" : "+91 xxxxxxxxxx"
+                                                             * "date_of_birth" : "2000-06-01",
+                                                             * "current_grade" : "9.0",
+                                                             * "country_of_boarding_school" : "country X"
+                                                             * "country_of_citizenship" : "country Y",
+                                                             * "is_active" : true,
+                                                             * "residence" : {
+                                                                 * "city_of_residence" : "city",
+                                                                 * "country_of_residence" : "country"
+                                                                 * }
+                                                                 * }
+                                                                 * "account_manager" : 1
+                                                                 * }
+                                                                 * @returns void
+                                                                 * @throws ApiError
+                                                                 */
+                                                                public static studentUdDelete({
+                                                                    id,
+                                                                }: {
+                                                                    id: string,
+                                                                }): CancelablePromise<void> {
+                                                                    return __request({
+                                                                        method: 'DELETE',
+                                                                        path: `/student/ud/${id}/`,
+                                                                    });
+                                                                }
+
+                                                            }
