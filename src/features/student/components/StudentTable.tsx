@@ -1,4 +1,5 @@
 import { Button } from "@/shared/components";
+import {useState,useEffect} from "react"
 
 interface StudentTableProps{
     handleAddBackBlur: ()=>void;
@@ -12,6 +13,23 @@ interface StudentTableProps{
 
 export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBackBlur,handleDeleteBackBlur,studentData,name }: StudentTableProps){
 
+  const [storeStudentData,setStoreStudentData]=useState([])
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=studentData.filter((item) => {
+       if(item.student_name.includes(staffName))
+       return item;
+     })
+     
+   
+    setStoreStudentData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreStudentData(studentData)
+  },[studentData])
 
   
 
@@ -23,7 +41,7 @@ export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBa
           <h1 className="text-black font-bold text-4xl font-sans ml-[6.5%] z-0 relative right-4">{name}</h1>
           <div className="w-[100%] h-[6vh] flex items-center justify-around mt-6 relative right-[1.5%]">
             <div className="w-[65%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
-              <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
+              <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here" onChange={searchStaff} type="text"/>
                
               <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
                
@@ -43,7 +61,7 @@ export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBa
             </div> */}
 
             
-          <div className={`${studentData && studentData?.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
+          <div className={`${storeStudentData && storeStudentData?.length>10 ?`h-[60vh]`: `h-auto`} overflow-y-scroll mt-8`}>
             <table className="border-solid w-[90%] text-center mx-auto relative left-2 font-sans font-bold text-[0.9rem] -mt-1  bg-gray-50 text-[#344054] break-all">
           
               <tbody className="overflow">
@@ -72,7 +90,7 @@ export function StudentTable({ handleAddBackBlur,handleEditBackBlur,handleViewBa
                 </tr>
                
               
-                {studentData && studentData.map((val,index)=><tr key={index} className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
+                {storeStudentData && storeStudentData.map((val,index)=><tr key={index} className="border-b-[1.5px] border-b-[#EDEDED] border-gray-50">
                   <td className="h-[7vh]">{val && val?.student_name}</td>
                   <td className="h-[7vh] ">{val && val?.date_of_birth}</td>
                   <td className="h-[7vh]">{val && val?.country_of_citizenship}</td>

@@ -44,6 +44,7 @@ const { register, handleSubmit } = useForm<FormValues>();
             name="name"
             type="text"
             {...register("name")}
+            required
            
           />
           <br />
@@ -57,15 +58,16 @@ const { register, handleSubmit } = useForm<FormValues>();
             name="email"
             type="email"
             {...register("email")}
+            required
 
           />
           <br />
         </div>
       </div>
       <div className="mx-auto mt-2 mb-10 w-28">
-        <Button className="bg-[#3AB0FB h-12 w-28" onClick={handleSubmit(handleAddSubmit)}>
+        <button type="button" className="bg-[#3AB0FB] h-12 w-28 mx-auto rounded-lg text-white" onClick={handleSubmit(handleAddSubmit)}>
           Save
-        </Button>
+        </button>
       </div>
     </div>
   );

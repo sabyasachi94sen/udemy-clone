@@ -1,4 +1,5 @@
 import moment from "moment" ;
+import { useEffect, useState } from "react";
 
 
 interface AccountManagerTableProps {
@@ -19,8 +20,25 @@ export function AccountManagerTable({
   managerData,
   name,
 }: AccountManagerTableProps) {
+ 
 
+  const [storeManagerData,setStoreManagerData]=useState([])
 
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=managerData.filter((item) => {
+       if(item.manager_name.includes(staffName))
+       return item;
+     })
+     
+
+     setStoreManagerData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreManagerData(managerData)
+  },[managerData])
 
 
   return (
@@ -36,6 +54,7 @@ export function AccountManagerTable({
               name="search"
               placeholder="Search the staff member here"
               type="text"
+              onChange={searchStaff}
             />
 
             <img
@@ -66,7 +85,7 @@ export function AccountManagerTable({
 
         <div
           className={`${
-           managerData &&  managerData?.length > 10 ? `h-[60vh]` : `h-auto`
+           storeManagerData &&  storeManagerData?.length > 10 ? `h-[60vh]` : `h-auto`
           } mt-8 overflow-y-scroll`}
         >
           <table className="relative left-2 mx-auto -mt-1 w-[88%]  break-all border-solid bg-gray-50 text-center font-sans  text-[0.9rem] font-bold text-[#344054]">
@@ -91,7 +110,7 @@ export function AccountManagerTable({
                 <td />
               </tr>
 
-              {managerData && managerData.map((val, index) => (
+              {storeManagerData && storeManagerData.map((val, index) => (
                 <tr key={index} className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
                   <td
                     className="h-[7vh]  cursor-pointer hover:underline"
@@ -113,7 +132,7 @@ export function AccountManagerTable({
                       alt="edit-icon"
                       className="mx-auto block"
                       src="/images/edit.png"
-                      onClick={() => handleEditBlur(val && val?.id)}
+                      onClick={() => handleEditBlur(val && val?.id,val && val?.account)}
                     />
                   </td>
                   <td className="h-[7vh] cursor-pointer">

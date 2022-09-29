@@ -122,8 +122,9 @@ const locationTypeOptions=[{
 
 
  useEffect(()=>{
-     if(name!=="Add an activity to the database")
+     if(name!=="Add an activity to the database"){
        setAgeVal(individualActivityInfo && individualActivityInfo?.age_range && individualActivityInfo.age_range)
+        setGradeVal(individualActivityInfo && individualActivityInfo?.grade_range && individualActivityInfo.grade_range)}
  },[])
 
 
@@ -138,10 +139,12 @@ const locationTypeOptions=[{
 
   const handleGradeVal = (e: SyntheticEvent, data: number[]) => {
     setGradeVal(data);
+    window.localStorage.setItem("gradeVal",JSON.stringify(data))
   };
 
   const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
     setAgeVal(data);
+    window.localStorage.setItem("ageVal",JSON.stringify(data))
   };
 
  
@@ -206,6 +209,7 @@ const locationTypeOptions=[{
               className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"
               {...register("application_requirement")}
               disabled={name==="View an activity to the database"}
+            
             >
               {applicationOptions.map((item,index)=><option key={index} selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.application_requirement==item.option)}>{item.option}</option>)}
             </select>
@@ -389,8 +393,9 @@ const locationTypeOptions=[{
             <span className="text-md font-bold">Last Update Date</span>
             <input
               className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-              {...register("last_update_date")}
+              {...register("last_update")}
               type="date"
+              
             />
             <br />
           </div>

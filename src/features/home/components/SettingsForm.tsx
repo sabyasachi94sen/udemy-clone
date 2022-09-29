@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useMutation,useQuery } from "react-query";
+import { useMutation,useQuery,useQueryClient } from "react-query";
 
 import { SettingObj } from "@/features/api"
 import {  GetUserType } from "@/features/helpers";
@@ -18,7 +18,12 @@ export function SettingsForm() {
  const { handleSubmit,register }=useForm<FormValues>()
 
  const userType=GetUserType()
-  const { data }=useQuery(["user-details"],()=> SettingObj.user_details())
+
+
+ 
+  const { data,isFetched }=useQuery(["user-details"],()=> SettingObj.user_details())
+
+  console.log(isFetched)
   const { mutate }=useMutation(SettingObj.user_details_update,{
     onSuccess: ()=>{
        window.location.href="/setting"
@@ -49,6 +54,7 @@ export function SettingsForm() {
     mutate(mutateObj)
   }
 
+   console.log(data)
 
   return (
     <div className="-mt-24 h-auto w-[40%] rounded-lg bg-white bg-cyan-100 pt-6 pl-24 pr-24 shadow-lg">
@@ -64,9 +70,9 @@ export function SettingsForm() {
         <p className="mb-4 font-sans font-medium text-black">Name</p>
         <input
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          defaultValue={data && data?.username}
+          defaultValue={isFetched && data && data?.username}
           disabled={userType!=="super_admin"}
-          name="name"
+  
           type="text"
           {...register("username")}
         />
@@ -76,9 +82,9 @@ export function SettingsForm() {
         <p className="mb-4 font-sans font-sans font-medium text-black">Email</p>
         <input
           className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          defaultValue={data && data?.email}
+          defaultValue={isFetched && data && data?.email}
           disabled={userType!=="super_admin"}
-          name="email"
+         
           type="email"
           {...register("email")}
         />

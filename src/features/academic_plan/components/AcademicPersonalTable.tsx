@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AepResObj } from "@/features/api"
 import moment from "moment";
 import {GetUserType} from "@/features/helpers"
+import { useState,useEffect } from "react";
 
 interface AcademicPersonalTableProps{
   isAddActive: ()=>void;
@@ -17,6 +18,7 @@ interface AcademicPersonalTableProps{
 export function AcademicPersonalTable({ isAddActive,setTable,studentId,studentName,activityData }: AcademicPersonalTableProps){
 
     
+  const [storeActivityData,setStoreActivityData]=useState([])
   const { data }=useQuery(["student-activity"],()=>AepResObj.aep_student_activity(studentId))
   const queryClient=useQueryClient()
   const { mutate }=useMutation(AepResObj.aep_student_activity_delete,{
@@ -41,6 +43,26 @@ export function AcademicPersonalTable({ isAddActive,setTable,studentId,studentNa
 
   };
 
+  
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=data.filter((item) => {
+       if(item.activity.activity_name.includes(staffName))
+       return item;
+     })
+
+  
+     
+
+     setStoreActivityData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreActivityData(data)
+  },[data])
+
 
     return (
        
@@ -54,7 +76,7 @@ export function AcademicPersonalTable({ isAddActive,setTable,studentId,studentNa
           </div>
           <div className="w-[80%] h-[6vh] mt-6 z-0 ml-20">
             <div className="w-[90%] h-[6vh] flex items-center rounded-md pl-4 bg-gray-50">
-              <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here"  type="text"/>
+              <input className="w-[90%] h-[6vh] bg-gray-50 pl-7 placeholder-gray-600 bg-white outline-none" name="search" placeholder="Search the staff member here" onChange={searchStaff} type="text"/>
               <img alt="search-icon" className="ml-8 w-[1.5vw] h-[3.5vh]" src="/images/searchBlue.png" />
             </div>
           </div>
@@ -110,7 +132,7 @@ export function AcademicPersonalTable({ isAddActive,setTable,studentId,studentNa
                   <td />
                    
                 </tr> 
-                {data && data.map((item,index)=><tr key={index} className="h-[6vh] bg-gray-50">
+                {storeActivityData && storeActivityData.map((item,index)=><tr key={index} className="h-[6vh] bg-gray-50">
                   <td className="">{item && item?.activity && item.activity?.activity_name} exam</td>
                   <td className="">{item && item?.activity && item.activity?.activity_type}</td>
                   <td className="">{item && item?.activity && item.activity?.subject}</td>
@@ -120,7 +142,7 @@ export function AcademicPersonalTable({ isAddActive,setTable,studentId,studentNa
                   <td className="">{moment(item && item?.activity && item?.activity?.activity_start_date).format("YYYY-MM-DD")}</td>
                   <td className="">
                     <label className="block text-gray-500 font-bold text w-[100%] mt-2" htmlFor="complte-task" >
-                      <input className="leading-tight h-[5vh] w-[50%] relative top-[2px] relative" id="complete-task" name="complete" type="checkbox" />
+                      <input className="leading-tight h-[5vh] w-[50%] top-[2px]" id="complete-task" name="complete" type="checkbox" />
   
                     </label></td>
                   <td className="cursor-pointer"><img alt="delete-icon" className="block mx-auto" src="/images/delete.png" onClick={()=>deleteDataInTable(item?.activity?.id,studentId)}/></td>

@@ -23,15 +23,17 @@ function Activity() {
   const [viewBackBlur,setViewBackBlur]=useState(false)
   const [deleteBackBlur, setDeleteBackBlur] = useState(false);
   const [individualActivityInfo,setIndividualActivityInfo]=useState({})
+  const [activityName,setActivityName]=useState("")
   const [mutateParams,setMutateParams]=useState({ mutateFunc: ActivityResObj.activity_add,action: "add" })
 
   const isActivityTable = () => {
     setIsTable(!isTable);
   };
 
-  const handleBackgroundBlurOnMap = (activity_id:string) => {
+  const handleBackgroundBlurOnMap = (activity_id:string,activity_name: string) => {
     setIsMap(!isMap);
     setActivityId(activity_id)
+    setActivityName(activity_name)
   };
 
   const handleBackgroundBlurOnAdd = () => {
@@ -102,10 +104,13 @@ function Activity() {
   }
 
   const editActivityData=(formVal: FormValues)=>{
+
+    const gradeRange=JSON.parse(window.localStorage.getItem("gradeVal"))
+    const ageRange=JSON.parse(window.localStorage.getItem("ageVal"));
     const mutateObj={
       data: { ...formVal,
-      grade_range:[formVal.grade_low,formVal.grade_high],
-      age_range: [formVal.age_low,formVal.age_high],
+      grade_range:gradeRange,
+      age_range: ageRange,
       },
       activity_id: activityId
     }
@@ -209,7 +214,7 @@ function Activity() {
 
 
 
-      {isMap ? <ActionMapForm handleBackgroundBlurOnMap={handleBackgroundBlurOnMap} activityId={activityId} /> : null}
+      {isMap ? <ActionMapForm handleBackgroundBlurOnMap={handleBackgroundBlurOnMap} activityName={activityName} activityId={activityId} /> : null}
 
      
 

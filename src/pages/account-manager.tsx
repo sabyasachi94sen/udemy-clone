@@ -22,6 +22,7 @@ function AccountManager() {
     useState(false);
   const [managerSpecificData, setManagerSpecificData] = useState({ username: "",emai:"" });
   const [managerActivity, setManagerActivity] = useState([]);
+  const [individualManagerActivity,setIndividualActivity]=useState([])
   const [managerDataId, setManagerDataId] = useState("");
   const [mutateParams, setMutateParams] = useState({
     mutateFunc: AccountManagerResObj.account_manager_info_add,
@@ -59,9 +60,9 @@ function AccountManager() {
     setBackGroundBlurAddManager(!backgroundBlurAddManager);
   };
 
-  const handleEditBlur = (id) => {
+  const handleEditBlur = (id:string,individual_manager_data:object) => {
     setBackGroundBlurEditManager(!backgroundBlurEditManager);
-
+    setIndividualActivity(individual_manager_data)
     setManagerDataId(id);
   };
 
@@ -172,7 +173,7 @@ function AccountManager() {
           handleEditBlur={handleEditBlur}
           handleEditSubmit={handleEditSubmit}
           header="Are you sure you want to make this account manager  inactive?"
-          specificData={managerSpecificData}
+          specificData={individualManagerActivity}
           title="Edit an Account Manager role"
         />
       ) : null}

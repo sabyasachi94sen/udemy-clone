@@ -84,7 +84,7 @@ export function EditAdminForm({
   const {handleSubmit,register}=useForm<FormValues>()
 
 
-
+  console.log(specificData)
 
   return (
     <>

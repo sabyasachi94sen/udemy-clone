@@ -1,4 +1,5 @@
 import moment from "moment"
+import { SyntheticEvent, useEffect, useState } from "react";
 
 interface AdminTableProps {
   handleAddBlur: () => void;
@@ -17,6 +18,25 @@ export function AdminTable({
   adminData,
   name,
 }: AdminTableProps) {
+
+
+  const [storeAdminData,setStoreAdminData]=useState([])
+  const searchStaff=(e:SyntheticEvent)=>{
+     const staffName=e.target.value;
+      const filterStaff=adminData.filter((item) => {
+        if(item.username.includes(staffName))
+        return item;
+      })
+      
+
+      setStoreAdminData(filterStaff)
+  }
+    
+  useEffect(()=>{
+      setStoreAdminData(adminData)
+  },[adminData])
+
+
   return (
     <div className="-mt-44 h-screen w-[90%] rounded-md bg-white">
       <div>
@@ -30,6 +50,7 @@ export function AdminTable({
               name="search"
               placeholder="Search the staff member here"
               type="text"
+              onChange={searchStaff}
             />
 
             <img
@@ -60,7 +81,7 @@ export function AdminTable({
 
         <div
           className={`${
-            adminData && adminData?.length > 10 ? `h-[60vh]` : `h-auto`
+            storeAdminData && storeAdminData?.length > 10 ? `h-[60vh]` : `h-auto`
           } mt-8 overflow-y-scroll`}
         >
           <table className="relative left-2 mx-auto -mt-1 w-[88%] break-all border-solid text-center font-sans text-[0.9rem]   font-bold text-[#344054]">
@@ -99,8 +120,8 @@ export function AdminTable({
                 <td />
               </tr>
 
-              {adminData &&
-                adminData.map((val, index) => (
+              {storeAdminData &&
+                storeAdminData.map((val, index) => (
                   <tr
                     key={index}
                     className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED] bg-gray-50"
@@ -125,7 +146,7 @@ export function AdminTable({
 
                     {name != "Essai Super Admin Roster" ? (
                       <>
-                        <td className="h-[7vh]">90</td>
+                        <td className="h-[7vh]">{Math.floor(Math.random()*5)}</td>
                         <td className="h-[7vh]">Metrics</td>
                       </>
                     ) : (

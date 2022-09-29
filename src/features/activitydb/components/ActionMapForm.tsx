@@ -8,6 +8,7 @@ import { ActivityResObj } from "@/features/api";
 interface ActionMapFormProps {
   handleBackgroundBlurOnMap: () => void;
   activityId: string;
+  activityName: string;
 }
 
 interface StepFormValues {
@@ -22,6 +23,7 @@ interface StepFormValues {
 export function ActionMapForm({
   handleBackgroundBlurOnMap,
   activityId,
+  activityName,
 }: ActionMapFormProps) {
   const [backBlurAddStep, setBackBlurOnAddStep] = useState(false);
   const [backBlurEditStep, setBackBlurOnEditStep] = useState(false);
@@ -33,7 +35,7 @@ export function ActionMapForm({
 
   const [stepId, setStepId] = useState("");
 
-  const [activityName, setActivityName] = useState("");
+  
 
   const { data } = useQuery(["action-map-list"], () =>
     ActivityResObj.activity_actionmap_list(activityId),
@@ -120,7 +122,7 @@ export function ActionMapForm({
           </h1>
         </div>
         <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
-          Activity Name: Math Exam
+          Activity Name: {activityName}
         </h1>
         <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0]">
           <div className="flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10">

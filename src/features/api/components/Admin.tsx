@@ -40,7 +40,7 @@ const AdminInfoEdit=(putDataObj: AdminPutDataObjVal)=>{
     const userId=putDataObj.id;
     const jsonObj=JSON.stringify({
      ...putDataObj.data,
-     is_active: putDataObj.data.status==="Yes",
+     is_active: putDataObj.data.status==="active",
      
      
       

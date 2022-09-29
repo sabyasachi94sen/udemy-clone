@@ -40,6 +40,8 @@ export const handleQuery = async <TResponse, TQuery>(config: {
   queryParams?: TQuery;
 }): Promise<TResponse> => {
   try {
+
+   
     const response = await api.request({
       method: "GET",
       url: `${APP_API_ENDPOINT}${config.resourceUrl}`,
@@ -76,7 +78,8 @@ export const handleMutation = async <TResponse, TBody,TQuery>(config: {
   console.log(APP_API_ENDPOINT)
 
   try {
-   
+      
+    
     const response = await api.request({
       method: `${config.method}`,
       url: `${APP_API_ENDPOINT}${config.resourceUrl}/`,

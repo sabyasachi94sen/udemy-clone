@@ -149,7 +149,7 @@ export function StudentForm({
               
             >
               <option>Select account manager</option>
-              {data && data.map((item,index)=><option key={index} selected={!!(title!="Add a student to the roster" && individualStudentData?.student_assignment[0]?.account_manager?.username==item?.username)} value={item.id}>{item && item?.username}</option>)}
+              {data && data.map((item,index)=><option key={index} selected={(title!="Add a student to the roster" && individualStudentData?.student_assignment[0]?.account_manager?.username==item?.username)} value={item.id}>{item && item?.username}</option>)}
             </select>
           </div>
           <div className="flex w-[37%] flex-col items-start text-lg font-bold">
@@ -190,7 +190,7 @@ export function StudentForm({
             placeholder="Email"
             type="email"
             {...register("email")}
-            defaultValue={title!="Add a student to the roster"?individualStudentData?.student_assignment[0]?.account_manager.email:null}
+            defaultValue={title!="Add a student to the roster"?individualStudentData?.account.email:null}
             disabled={title=="View a student to the roster"}
             />
         </div>
@@ -217,7 +217,7 @@ export function StudentForm({
 
       <div className="mx-auto mt-7 h-[20vh] w-[50%] text-center text-lg font-bold">
         <p>Remarks</p>
-        <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" defaultValue={individualStudentData?.remarks} disabled={title=="View a student to the roster"}/>
+        <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" defaultValue={individualStudentData?.remarks} disabled={title=="View a student to the roster"} {...register("remarks")}/>
       </div>
       <div className="mx-auto mt-8 mb-10 w-[8%] font-bold">
         {title!=="View a student to the roster"?

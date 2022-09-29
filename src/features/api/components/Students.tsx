@@ -46,7 +46,7 @@ const StudentInfoAdd=(postData: StudentPostDataObjVal)=>{
     const jsonObj=JSON.stringify({
         student_details:{
             student_name :postData.student_name,
-           email: `abc${randNum}@gmail.com`,
+           email: postData.email,
            phone_number : "+91 9999999997",
             date_of_birth :postData.date_of_birth,
             current_grade :postData.current_grade,
@@ -90,8 +90,9 @@ const StudentInfoEdit=(putDataObj:StudentPutDataObjVal)=>{
      const jsonObj=JSON.stringify({
         student_details:{
             student_name :studentDetails.student_name,
-           email: `xyz${randNum}@gmail.com`,
-           phone_number : "+91 9999999997",
+           email: studentDetails.email,
+           phone_number : studentDetails.phone_number,
+           remarks: studentDetails.remarks,
             date_of_birth :studentDetails.date_of_birth,
             current_grade :studentDetails.current_grade,
             country_of_boarding_school :studentDetails.country_of_boarding_school,

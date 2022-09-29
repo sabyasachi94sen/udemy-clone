@@ -20,14 +20,17 @@ interface FormValues{
 const selectOptionsStatus = [
   {
     option: "Select Status",
+    value: null,
    
   },
   {
     option: "Active",
+    value: "active",
   
   },
   {
     option: "Inactive",
+    value: "inactive",
  
   },
 ];
@@ -114,7 +117,7 @@ export function EditSuperAdminForm({
                  onChange={()=>checkStatus(event,0)}
               >
                 {selectOptionsStatus.map((item, i) => {
-                  return <option key={i} selected={(activeVal=="No" && item.option=="Active")||(specificData.is_active && item.option=="Active" && activeVal==null  || !specificData.is_active && item.option=="Inactive" && activeVal==null) ?true : false}>{item.option}</option>;
+                  return <option key={i} value={item.value} selected={(activeVal=="No" && item.option=="Active")||(specificData.is_active && item.option=="Active" && activeVal==null  || !specificData.is_active && item.option=="Inactive" && activeVal==null) ?true : false}>{item.option}</option>;
                 
                 })}
               </select>

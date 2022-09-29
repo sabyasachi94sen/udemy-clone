@@ -1,9 +1,32 @@
+import { useState,useEffect } from "react";
+
 interface AcademicTableProps {
   academicData: {}[];
   setTable: () => void;
 }
 
 export function AcademicTable({ academicData,setTable }: AcademicTableProps) {
+
+  const [storeAcademicData,setStoreAcademicData]=useState([])
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=academicData.filter((item) => {
+       if(item.student.student_name.includes(staffName))
+       return item;
+     })
+
+  
+     
+
+     setStoreAcademicData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreAcademicData(academicData)
+  },[academicData])
+
   return (
     <div className="-mt-44 h-screen w-[90%] rounded-md">
       <div>
@@ -17,6 +40,7 @@ export function AcademicTable({ academicData,setTable }: AcademicTableProps) {
               name="search"
               placeholder="Search the staff member here"
               type="text"
+              onChange={searchStaff}
               />
 
             <img
@@ -39,7 +63,7 @@ export function AcademicTable({ academicData,setTable }: AcademicTableProps) {
 
         <div
           className={`${
-              academicData && academicData?.length > 10 ? `h-[60vh]` : `h-auto`
+              storeAcademicData && storeAcademicData?.length > 10 ? `h-[60vh]` : `h-auto`
             } mt-8 overflow-y-scroll`}
           >
           <table className="relative left-2 mx-auto -mt-1 w-[88%] break-all border-solid text-center font-sans text-[0.9rem]   font-bold text-[#344054]">
@@ -59,7 +83,7 @@ export function AcademicTable({ academicData,setTable }: AcademicTableProps) {
                 <td />
               </tr>
 
-              {academicData && academicData.map((val, index) => (
+              {storeAcademicData && storeAcademicData.map((val, index) => (
                 <tr key={index} className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED] bg-gray-50">
                   <td
                     className="h-[7vh] cursor-pointer text-center"

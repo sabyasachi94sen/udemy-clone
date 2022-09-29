@@ -7,4 +7,5 @@ export { AccountManagerResObj,ManagerPostDataObjVal,ManagerPutDataObjVal
 } from "./AccountManager"
 export { AepResObj } from "./AEP";
 export { ActivityResObj } from "./Activity";
-export { SettingObj } from "./Settings"
+export { SettingObj } from "./Settings";
+export { AepTrackerObj } from "./AepTracker"
