@@ -46,8 +46,12 @@ export function AEPTable({ aepData,openStatusTable  }: AEPTableProps){
    
 
   useEffect(()=>{
-    
-
+     
+      
+    if(aepData!=undefined){
+    var filterData=aepData.sort((x1,x2)=>x1.date_of_birth-x2.date_of_birth)
+    }
+    console.log(filterData)
      setStoreAepData(aepData)
   },[aepData])
 

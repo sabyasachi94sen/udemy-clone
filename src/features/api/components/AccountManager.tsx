@@ -71,6 +71,9 @@ const AccountManagerInfoDelete=(userId:string)=>handleMutation({
      
       })
 
+      const AccountManagerActivityList=(activityId:string)=>{
+        handleQuery({resourceUrl: `account_manager/details/${activityId}`})
+      }
 
 
 export const AccountManagerResObj={
@@ -78,4 +81,5 @@ export const AccountManagerResObj={
     account_manager_info_add: AccountManagerInfoAdd,
     account_manager_info_edit:AccountManagerInfoEdit,
     account_manager_info_delete: AccountManagerInfoDelete,
+    account_manager_activity_list:AccountManagerActivityList
 }
