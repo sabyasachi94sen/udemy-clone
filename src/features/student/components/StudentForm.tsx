@@ -221,12 +221,13 @@ export function StudentForm({
       </div>
       <div className="mx-auto mt-8 mb-10 w-[8%] font-bold">
         {title!=="View a student to the roster"?
-          <Button
-            className="h-[6vh] w-[100%] rounded-md"
+          <button
+            className="h-[6vh] w-[100%] rounded-lg text-white bg-cyan-500 hover:bg-blue-500 mx-auto"
             onClick={handleSubmit(handleForm)}
+            type="button"
         >
             Save
-          </Button>: null}
+          </button>: null}
       </div>
     </div>
   );
