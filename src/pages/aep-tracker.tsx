@@ -36,7 +36,7 @@ function AEPTracker() {
         <div className="z-0 flex items-center">
           <MenuBar />
 
-          <AEPTable aepData={data} openStatusTable={openStatusTable} />
+          <AEPTable aepData={[]} openStatusTable={openStatusTable} />
         </div>
       </div>
 
