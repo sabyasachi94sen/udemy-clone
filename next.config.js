@@ -1,4 +1,6 @@
 // ref: https://github.com/cyrilwanner/next-compose-plugins/issues/59#issuecomment-1230325393
+const { withRoutes } = require("nextjs-routes/next-config.cjs");
+
 const plugins = [];
 
 if (process.env.ANALYZE === "true") {
@@ -13,7 +15,13 @@ if (process.env.ANALYZE === "true") {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // i18n,
-  experimental: { esmExternals: true, scrollRestoration: true },
+  experimental: {
+    esmExternals: true,
+    scrollRestoration: true,
+    images: {
+      allowFutureImage: true,
+    },
+  },
   reactStrictMode: true,
   eslint: {
     // !! WARNING: This allows production builds to successfully complete even if
@@ -28,4 +36,5 @@ const nextConfig = {
   generateBuildId: () => "build",
 };
 
-module.exports = () => plugins.reduce((acc, next) => next(acc), nextConfig);
+module.exports = () =>
+  withRoutes(plugins.reduce((acc, next) => next(acc), nextConfig));

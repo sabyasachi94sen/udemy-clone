@@ -1,17 +1,7 @@
-import Image from "next/image";
-
-import { Head } from "@/shared/components";
+import HomePage from "./home";
 
 export default function Home(): JSX.Element {
-  return (
-    <>
-      <Head title="Home" />
-
-      <div className="flex flex-col items-center justify-center py-2 min-h-screen">
-        <p>Hello</p>
-      </div>
-    </>
-  );
+  return <HomePage />;
 }
 
-Home.isPublicRoute = true;
+Home.isPublicRoute = false;

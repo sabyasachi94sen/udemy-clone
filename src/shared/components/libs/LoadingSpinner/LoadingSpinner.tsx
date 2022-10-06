@@ -2,8 +2,8 @@ import cx from "clsx";
 import { CgSpinner } from "react-icons/cg";
 
 const COLOR_MAPS: Record<string, string> = {
-  primary: "text-primary-500",
-  secondary: "text-secondary-500",
+  primary: "text-primary",
+  secondary: "text-secondary",
   white: "text-white",
 };
 
@@ -22,7 +22,7 @@ export function LoadingSpinner({
 
   return (
     <CgSpinner
-      className={cx("fill-current animate-spin", size, COLOR_MAPS[fillColor])}
+      className={cx("animate-spin fill-current", size, COLOR_MAPS[fillColor])}
     />
   );
 }

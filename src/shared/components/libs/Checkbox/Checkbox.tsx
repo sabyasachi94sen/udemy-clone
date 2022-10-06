@@ -16,42 +16,42 @@ export type CheckboxProps = {
   onInputChange?: () => void;
   isDisabled?: boolean;
   name?: string;
+  isChecked?:boolean;
 } & React.ComponentPropsWithoutRef<"input">;
 
 // eslint-disable-next-line react/display-name
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
-    { size = "sm", label, optionalText, onInputChange, isDisabled, name },
-    ref
-  ) => {
-    return (
-      <div className="relative flex items-start">
-        <div className="flex items-center h-5 disabled:cursor-not-allowed">
-          <input
-            ref={ref}
-            aria-describedby={`${name}-description`}
-            className={cx(
-              "form-checkbox text-primary-500 focus:ring-primary-500 border-gray-300 rounded",
-              SIZE_MAPS[size]
-            )}
-            disabled={isDisabled}
-            id={name}
-            name={name}
-            type="checkbox"
-            onChange={onInputChange}
-          />
-        </div>
-        <div className="ml-3 text-sm">
-          <label className="text-gray-700 font-medium" htmlFor={name}>
-            {label}
-          </label>
-          {optionalText && (
-            <p className="text-gray-500" id={`${name}-description`}>
-              {optionalText}
-            </p>
+    { size = "sm", label, optionalText, onInputChange, isDisabled, name,isChecked },
+    ref,
+  ) => (
+    <div className="relative flex items-start">
+      <div className="flex h-5 items-center disabled:cursor-not-allowed">
+        <input
+          ref={ref}
+          aria-describedby={`${name}-description`}
+          className={cx(
+            "form-checkbox rounded border-gray-300 text-primary focus:ring-primary",
+            SIZE_MAPS[size],
           )}
-        </div>
+          disabled={isDisabled}
+          id={name}
+          name={name}
+          type="checkbox"
+          onChange={onInputChange}
+          defaultChecked={isChecked}
+        />
       </div>
-    );
-  }
+      <div className="ml-3 text-sm">
+        <label className="font-medium text-gray-700" htmlFor={name}>
+          {label}
+        </label>
+        {optionalText && (
+          <p className="text-gray-500" id={`${name}-description`}>
+            {optionalText}
+          </p>
+        )}
+      </div>
+    </div>
+  ),
 );

@@ -17,5 +17,17 @@ export { Toast } from "./Toast/Toast";
 export { Toggle } from "./Toggle/Toggle";
 export { Popover } from "./Popover/Popover";
 export { Button } from "./Button/Button";
-export { Table } from "./Table";
+export {
+  BaseTable,
+  TableHeader,
+  TableHeaderCell,
+  TableRowCell,
+  StatusCell,
+  CompleteBar,
+  RowNavigate,
+  ViewButton
+} from "./BaseTable";
 export { FullPageLoader } from "./FullPageLoader/FullPageLoader";
+export { DropdownMenu } from "./DropdownMenu/DropdownMenu";
+export { BaseModal } from "./BaseModal/BaseModal";
+export { IconButton } from "./IconButton/IconButton";

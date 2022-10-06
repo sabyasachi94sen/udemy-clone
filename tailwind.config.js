@@ -8,12 +8,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["InterVariable", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: colors.blue,
-        secondary: colors.red,
-        neutral: colors.gray,
+        primary: "#0ea5e9",
+        secondary: "#FC566F",
+        // neutral: colors.gray,
+        neutral: "#222",
       },
     },
   },
@@ -24,5 +25,6 @@ module.exports = {
     require("@tailwindcss/forms")({
       strategy: "class",
     }),
+    require("tailwindcss-radix")(),
   ],
 };

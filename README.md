@@ -1,4 +1,4 @@
-# Pimpams frontend
+# Pimpams Frontend
 
 ## How to setup
 
