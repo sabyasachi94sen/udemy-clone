@@ -107,13 +107,16 @@ export function AEPTable({
     if(AepTrackerQuery.isSuccess){
     const not_completed=AepTrackerQuery?.data?.yet_to_be_completed;
 
-     for(let i=not_completed.length-1;i>=0;i--)
+     for(let i=0;i<not_completed.length;i++)
      tempArr.push(not_completed[i])
 
      const completed=AepTrackerQuery?.data?.completed;
 
-     for(let j=completed.length-1;j>=0;j--)
+     for(let j=0;j<completed.length;j++)
      tempArr.push(completed[j])
+      
+    
+    
 
      setStoreAepData(tempArr)
     }
