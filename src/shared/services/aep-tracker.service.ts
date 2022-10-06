@@ -71,8 +71,7 @@ export const useAepTracker = (
         Account,
         ApiError,
         {
-          id: number;
-          data: Account;
+          is_completed:string
         }
       >((data) => AepTrackerService.updateComplete(data), {
         onSuccess() {

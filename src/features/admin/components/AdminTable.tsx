@@ -32,7 +32,7 @@ export function AdminTable({
       columnHelper.accessor((row) => row.username, {
         id: "username",
         header: "Name",
-        cell: (info) => (<RowNavigate rowLink={(row)=>router.push(`/admin/${info.row.original.id}`)} rowValue={info.getValue()} />),
+        cell: (info) => (<RowNavigate rowLink={()=>router.push(`/admin/${info.row.original.id}`)} rowValue={info.getValue()} />),
       }),
       columnHelper.accessor((row) => row.email, {
         id: "email",
