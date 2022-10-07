@@ -2,6 +2,7 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+import {setLocalStorage} from "@/features/helpers"
 
 import { Account } from "@/api";
 import {
@@ -42,6 +43,7 @@ export function AcademicTable({ onView }): JSX.Element {
             rowLink={() => {
               router.push(`/academic-list/${info.row.original?.student?.id}`);
               setStoredData({ studentName: info.getValue() });
+              setLocalStorage("studentId",info.row.original?.student?.id)
             }}
             rowValue={info.getValue()}
           />

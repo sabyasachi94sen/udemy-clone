@@ -8,6 +8,8 @@ import { Account } from "@/api";
 import { BaseTable, IconButton, StatusCell } from "@/shared/components";
 import { useAdmins } from "@/shared/services/admin.service";
 import { formatDate } from "@/shared/utils";
+import { useStoreData } from "@/shared/stores/modal.store";
+import {setLocalStorage} from "@/features/helpers"
 
 interface AdminTableProps {
   onDelete: (user: Account) => void;
@@ -23,6 +25,7 @@ export function AdminTable({
   const AdminsQuery = useAdmins({ page });
 
   const columnHelper = createColumnHelper<Account>();
+  const { setStoredData} = useStoreData();
 
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
@@ -32,7 +35,17 @@ export function AdminTable({
       columnHelper.accessor((row) => row.username, {
         id: "username",
         header: "Name",
-        cell: (info) => (<RowNavigate rowLink={()=>router.push(`/admin/${info.row.original.id}`)} rowValue={info.getValue()} />),
+        cell: (info) => (
+          <RowNavigate
+            rowLink={() => {
+              router.push(`/admin/${info.row.original.id}`)
+             setLocalStorage("adminId",info.row.original.id)
+            }}
+            rowValue={info.getValue()}
+          
+            
+          />
+        ),
       }),
       columnHelper.accessor((row) => row.email, {
         id: "email",

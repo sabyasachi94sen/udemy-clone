@@ -7,6 +7,8 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { us } from "@/shared/stores/modal.store";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import {getLocalStorage} from "@/features/helpers"
+
 
 import { Account } from "@/api";
 import {
@@ -28,8 +30,10 @@ interface AccountManagerTableProps {
 
 export function AdminActivityTable(): JSX.Element {
   const router = useRouter();
-  const { page, perPage, adminId } = router.query;
-
+  const { page, perPage } = router.query;
+  const adminId=getLocalStorage("adminId");
+    
+  
   const adminActivity = useAdminActivity(adminId);
 
   const { isModalOpen, onModalClose, selectedData } =
@@ -66,11 +70,11 @@ export function AdminActivityTable(): JSX.Element {
     ],
     [],
   );
-  const { storedData } = useStoreData();
+  // const { storedData } = useStoreData();
 
-  useEffect(() => {
-    console.log(storedData);
-  }, []);
+  // useEffect(() => {
+  //   console.log(storedData);
+  // }, []);
 
   return (
     <BaseTable<Account>

@@ -49,7 +49,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
          info.getValue()
         ),
       }),
-      columnHelper.accessor((row) => row.action_map?.created_at, {
+      columnHelper.accessor((row) => row?.target_date, {
         id: "target_date",
         header: "Target Date",
         cell: (info) => (
@@ -85,7 +85,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
       isOpen={isModalOpen && isOpen}
       title="AEP implementation status table"
       
-      modalWidth="max-w-[80%]"
+      modalWidth="max-w-[82%]"
       onRequestClose={() => {
         onModalClose();
       }}

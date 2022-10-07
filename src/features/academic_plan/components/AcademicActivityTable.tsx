@@ -6,6 +6,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { us } from "@/shared/stores/modal.store";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { getLocalStorage } from "@/features/helpers";
 
 import { Account } from "@/api";
 import {
@@ -24,7 +25,8 @@ interface AcademicActivityTableProps {
 
 export function AcademicActivityTable({ onDelete }): JSX.Element {
   const router = useRouter();
-  const { page, perPage, aepId } = router.query;
+  const { page, perPage } = router.query;
+  const aepId=getLocalStorage("studentId");
 
   const aepActivityQuery = useAepActivity(aepId);
 
