@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState} from "react";
 import { useModal } from "@/shared/stores/modal.store";
 import { useRouter } from "next/router";
 import { formatDate } from "@/shared/utils";
+import {useAepTrackerStatus} from "@/shared/services/aep-tracker.service"
 
 export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose ,selectedData} = useModal();
@@ -14,6 +15,11 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const columnHelper = createColumnHelper<Account>();
   const router=useRouter()
   const { page, perPage } = router.query;
+
+  console.log(selectedData)
+
+  const aepTrackerStatusQuery=useAepTrackerStatus(selectedData?.activity_assignment?.student?.id)
+  console.log(aepTrackerStatusQuery)
 
 
   const columns = useMemo<ColumnDef<Account, any>[]>(
@@ -61,16 +67,6 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
         ),
       }),
 
-
-
-
-      columnHelper.accessor((row) => row.remarks, {
-        id: "status",
-        header: "Status",
-        cell: (info) => (
-           <Input  className="w-[70%] h-[4vh] rounded-lg bg-cyan-500" isDisabled={true} defaultValue={info.getValue()}/>
-        ),
-      }),
     ],
     [],
   );
@@ -89,7 +85,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
       isOpen={isModalOpen && isOpen}
       title="AEP implementation status table"
       
-      modalWidth="max-w-[70%]"
+      modalWidth="max-w-[80%]"
       onRequestClose={() => {
         onModalClose();
       }}
@@ -99,7 +95,8 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
     <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={selectedData!=null?[selectedData]: []}
+      data={aepTrackerStatusQuery?.data}
+      isLoading={aepTrackerStatusQuery?.isLoading}
   
       totalPagesCount={10} // TODO: fix This once backend adds limit in query
     

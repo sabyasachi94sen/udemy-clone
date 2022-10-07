@@ -1,108 +1,89 @@
-interface AcademicTableProps {
-  academicData: {}[];
-  setTable: () => void;
-}
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { useRouter } from "next/router";
+import React, { useEffect, useMemo, useState } from "react";
+import { MdDeleteOutline } from "react-icons/md";
 
-export function AcademicTable({ academicData, setTable }: AcademicTableProps) {
+import { Account } from "@/api";
+import {
+  BaseTable,
+  IconButton,
+  StatusCell,
+  Checkbox,
+  Input,
+  RowNavigate,
+} from "@/shared/components";
+import { useAepList } from "@/shared/services/aep.service";
+import { formatDate } from "@/shared/utils";
+import { useStoreData } from "@/shared/stores/modal.store";
+
+export function AcademicTable({ onView }): JSX.Element {
+  const router = useRouter();
+  const { page, perPage } = router.query;
+  const AepListQuery = useAepList({ page });
+  // const updateCompleteMutation = useUpdateComplete();
+
+  const { setStoredData } = useStoreData();
+
+  const columnHelper = createColumnHelper<Account>();
+
+  const [storeAepData, setStoreAepData] = useState([]);
+
+  // REF: https://github.com/TanStack/table/issues/4241
+  // to prevent this we're using any here
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const columns = useMemo<ColumnDef<Account, any>[]>(
+    () => [
+      columnHelper.accessor((row) => row.student?.student_name, {
+        id: "student_name",
+        header: "Name",
+        cell: (info) => (
+          <RowNavigate
+            onClick={() => storeStudentName(info.getValue())}
+            rowLink={() => {
+              router.push(`/academic-list/${info.row.original?.student?.id}`);
+              setStoredData({ studentName: info.getValue() });
+            }}
+            rowValue={info.getValue()}
+          />
+        ),
+      }),
+      columnHelper.accessor((row) => row.student?.date_of_birth, {
+        id: "date_of_birth",
+        header: "Date of Birth",
+        cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
+        id: "country",
+        header: "Country of residence",
+        cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor((row) => row.account_manager?.username, {
+        id: "manager_name",
+        header: "Account Manager",
+        cell: (info) => info.getValue(),
+      }),
+
+      columnHelper.accessor((row) => row?.is_active, {
+        id: "is_active",
+        header: "Active",
+        cell: (info) => (
+          <StatusCell
+            rowValue={info.getValue() === true ? "Active" : "Inactive"}
+            statusColor={info.getValue() === true ? "active" : "inactive"}
+          />
+        ),
+      }),
+    ],
+    [],
+  );
+
   return (
-    <div className="-mt-44 h-screen w-[90%] rounded-md">
-      <div>
-        <h1 className="relative right-4 z-0 ml-24 font-sans text-4xl font-bold text-black">
-          Essai Academic Enrichment Plan Summary
-        </h1>
-        <div className="z-0 mt-6 ml-20 h-[6vh] w-[80%]">
-          <div className="flex h-[6vh] w-[90%] items-center rounded-md bg-gray-50 pl-4">
-            <input
-              className="h-[6vh] w-[90%] bg-gray-50 bg-white pl-7 placeholder-gray-600 outline-none"
-              name="search"
-              placeholder="Search the staff member here"
-              type="text"
-            />
-
-            <img
-              alt="search-icon"
-              className="ml-8 h-[3.5vh] w-[1.5vw]"
-              src="/images/searchBlue.png"
-            />
-          </div>
-        </div>
-
-        {/*
-        <div className="bg-[#3AB0FB52] h-[6vh] w-[87%] mt-10 mx-auto rounded-md text-[#5F5F5F] font-medium text-[1rem] flex justify-around items-center">
-          <p>Name</p>
-          <p>Date of Birth</p>
-          <p>Country of Residence</p>
-          <p>Account Manager</p>
-          <p>Active Status</p>
-
-        </div> */}
-
-        <div
-          className={`${
-            academicData && academicData?.length > 10 ? `h-[60vh]` : `h-auto`
-          } mt-8 overflow-y-scroll`}
-        >
-          <table className="relative left-2 mx-auto -mt-1 w-[88%] break-all border-solid text-center font-sans text-[0.9rem]   font-bold text-[#344054]">
-            <tbody className="overflow">
-              <tr className="sticky top-0 mx-auto h-[7vh] w-full bg-blue-200  text-center text-[1rem] font-medium">
-                <td className="rounded-bl-md rounded-tl-md">Name</td>
-                <td className="">Date of Birth</td>
-                <td className="">Country of residence</td>
-                <td className="">Account manager</td>
-                <td className="rounded-br-md rounded-tr-md">Active Status</td>
-              </tr>
-              <tr className="sticky top-[7vh] h-[3vh] bg-white">
-                <td />
-                <td />
-                <td />
-                <td />
-                <td />
-              </tr>
-
-              {academicData &&
-                academicData.map((val, index) => (
-                  <tr
-                    key={index}
-                    className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED] bg-gray-50"
-                  >
-                    <td
-                      className="h-[7vh] cursor-pointer text-center"
-                      onClick={() =>
-                        setTable(
-                          val && val?.student && val.student?.id,
-                          val && val?.student && val.student?.student_name,
-                        )
-                      }
-                    >
-                      {val && val?.student && val.student?.student_name}
-                    </td>
-                    <td className="h-[7vh]">
-                      {val && val?.student && val.student?.date_of_birth}
-                    </td>
-                    <td className="h-[7vh]">
-                      {val &&
-                        val?.student &&
-                        val.student?.country_of_citizenship}
-                    </td>
-                    <td className="h-[7vh] text-center">
-                      {val &&
-                        val?.account_manager &&
-                        val.account_manager.username}
-                    </td>
-
-                    {val && val.is_active ? (
-                      <td className="h-[7vh]  text-center text-[#20A464]">
-                        Active
-                      </td>
-                    ) : (
-                      <td className="h-[7vh] text-center">Inactive</td>
-                    )}
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <BaseTable<Account>
+      columns={columns}
+      currentPage={Number(page) || 1}
+      data={AepListQuery?.data}
+      isLoading={AepListQuery?.isLoading}
+      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+    />
   );
 }

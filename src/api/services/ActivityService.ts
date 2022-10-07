@@ -30,14 +30,14 @@ export class ActivityService {
          * @returns any
          * @throws ApiError
          */
-        public static activityRead({
+        public static activityList({
             id,
         }: {
             id: string,
         }): CancelablePromise<any> {
             return __request({
                 method: 'GET',
-                path: `/activity/${id}/`,
+                path: `/activity_api/${id}/`,
             });
         }
 

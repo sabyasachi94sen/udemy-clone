@@ -9,7 +9,7 @@ import { useAepTracker } from "@/shared/services/aep-tracker.service";
 import { formatDate } from "@/shared/utils";
 
 
-export function AEPTable({
+export function AEPTrackerTable({
   onView
 }): JSX.Element {
   const router = useRouter();
@@ -86,15 +86,6 @@ export function AEPTable({
       }),
 
 
-
-
-      columnHelper.accessor((row) => row.remarks, {
-        id: "status",
-        header: "Status",
-        cell: (info) => (
-           <Input  className="w-[130%] h-[4vh] rounded-lg bg-cyan-500" defaultValue={info.getValue()} />
-        ),
-      }),
     ],
     [],
   );

@@ -1,5 +1,9 @@
 import clsx from "clsx";
 
+import { useEffect } from "react";
+import { AiOutlineConsoleSql } from "react-icons/ai";
+
+
 export function TableRowCell({
   rowValue,
 }: {
@@ -41,6 +45,7 @@ export function StatusCell({
 export function CompleteBar({ rowValue }: {rowValue: string}): JSX.Element{
 
   const percentValue=String(rowValue+"%")
+  
   return (
     <div className="flex items-start text-gray-500">
       <span>{rowValue} %</span>
@@ -54,7 +59,11 @@ export function CompleteBar({ rowValue }: {rowValue: string}): JSX.Element{
 }
 
 
-export function RowNavigate({ rowLink,rowValue }): JSX.Element{
+export function RowNavigate({ rowLink,rowValue,onClick }): JSX.Element{
+
+  
+
+
   return (
     <div className="hover:underline cursor-pointer" onClick={rowLink}>{rowValue}</div>
   )
@@ -64,7 +73,7 @@ export function RowNavigate({ rowLink,rowValue }): JSX.Element{
 export function ViewButton({ onClick }):JSX.Element{
  
    return (
-     <button className="bg-white text-black mt-1 w-[90%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg" type="button" onClick={onClick}>Details</button>
+     <button className="bg-white text-black mt-1 w-[100%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg" type="button" onClick={onClick}>Details</button>
    )
 }
 

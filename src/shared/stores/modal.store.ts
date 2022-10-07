@@ -20,7 +20,16 @@ type ModalKey =
   | "viewStudent"
   | "deleteAepTracker"
   | "viewStatusTable"
-
+  | "deleteAepStudentActivity"
+  | "updateAepActivity"
+  | "viewActionMap"
+  | "createActivity"
+  | "viewActivity"
+  | "updateActivity"
+  | "deleteActivity"
+  | "createActionStep"
+  | "updateActionStep"
+  | "deleteActionStep"
 export interface ModalState<TStoredData = unknown> {
   isModalOpen: boolean;
   currModalKey: ModalKey | null;

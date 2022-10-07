@@ -27,6 +27,28 @@ export const queryKeys = createQueryKeyStore({
   aep_tracker: {
     list: (page?: number) => [page],
   },
+  aep_tracker_status: {
+    list: (page?: number) => [page],
+  },
+  aep: {
+    list: (page?: number) => [page],
+  },
+  aep_activity: {
+    list: (page?: number) => [page],
+  },
+  aep_activity_filter: {
+    list: (page?: number) => [page],
+  },
+
+   activity: {
+    list: (page?: number) => [page],
+  },
+  activity_action_map: {
+    list: (page?: number) => [page],
+  },
+  
+  
+  
   settings: {
     list: (page?: number) => [page],
   },

@@ -6,6 +6,7 @@
 declare module "nextjs-routes" {
   export type Route =
     | { pathname: "/academic-list"; query?: Query | undefined }
+    | { pathname: "/academic-list/[aepId]"; query: Query<{ "aepId": string }> }
     | { pathname: "/account-manager"; query?: Query | undefined }
     | { pathname: "/account-manager/[studentId]"; query: Query<{ "studentId": string }> }
     | { pathname: "/activity-database"; query?: Query | undefined }

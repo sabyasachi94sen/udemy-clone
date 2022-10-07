@@ -30,23 +30,12 @@ export class ActionMapApiService {
                  * @returns any
                  * @throws ApiError
                  */
-                public static actionMapApiList({
-                    page,
-                }: {
-                    /** A page number within the paginated result set. **/
-                    page?: number,
-                }): CancelablePromise<{
-                    count: number;
-                    next?: string | null;
-                    previous?: string | null;
-                    results: Array<ActionMapStepCreate>;
-                }> {
+                public static actionMapApiList(id)
+                 {
                     return __request({
                         method: 'GET',
-                        path: `/action_map_api/`,
-                        query: {
-                            'page': page,
-                        },
+                        path: `/action_map_api/?activity_id=${id}`,
+                        
                     });
                 }
 
@@ -144,7 +133,7 @@ export class ActionMapApiService {
                                                      * @throws ApiError
                                                      */
                                                     public static actionMapApiUpdate({
-                                                        id,
+                                                        action_step_id,
                                                         data,
                                                     }: {
                                                         /** A unique integer value identifying this Action Map Step. **/
@@ -153,7 +142,7 @@ export class ActionMapApiService {
                                                     }): CancelablePromise<ActionMapStepCreate> {
                                                         return __request({
                                                             method: 'PUT',
-                                                            path: `/action_map_api/${id}/`,
+                                                            path: `/action_map_api/${action_step_id}/`,
                                                             body: data,
                                                         });
                                                     }

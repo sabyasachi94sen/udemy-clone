@@ -32,6 +32,21 @@ export const useAepTracker = (
       },
     );
 
+    export const useAepTrackerStatus = (
+     id: string
+    ) =>
+      useQuery(
+        queryKeys.aep_tracker_status.list(1),
+    
+        () => AepTrackerService.aepTrackerStatus(id),
+        
+      );
+
+
+
+
+
+
 
     export function useDeleteAepTracker(onSuccess?: () => void) {
       const { refreshQuery } = useRefreshQuery();

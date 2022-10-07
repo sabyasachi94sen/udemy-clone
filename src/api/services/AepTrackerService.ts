@@ -56,6 +56,16 @@ export class AepTrackerService {
             }
 
 
+            public static aepTrackerStatus(id
+                ): CancelablePromise<void> {
+                     return __request({
+                         method: 'GET',
+                         path: `/student/aep/list/?student_id=${id}`,
+                         
+                     });
+                 }
+
+
 
 
 
