@@ -1,4 +1,4 @@
-mport { HiSearch } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
 
 import { Account } from "@/api";
 import {

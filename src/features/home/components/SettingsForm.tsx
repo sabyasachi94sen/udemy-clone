@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-<<<<<<< HEAD
 import {useUserDetails,useUpdateDetails} from "@/shared/services/settings.service"
 import {
   BaseModal,
@@ -10,11 +9,6 @@ import {
   SelectDynamic,
 } from "@/shared/components";
 import { useRouter } from "next/router";
-=======
-import { useMutation,useQuery,useQueryClient } from "react-query";
-
-import { SettingObj } from "@/features/api"
->>>>>>> 1307155c60173b5826916d8b67c92fa2660b5b8b
 import {  GetUserType } from "@/features/helpers";
 
 interface FormValues{
@@ -25,7 +19,6 @@ interface FormValues{
 
 export function SettingsForm() {
   
-<<<<<<< HEAD
   const router = useRouter();
   const { page, perPage } = router.query;
 
@@ -40,50 +33,6 @@ export function SettingsForm() {
 
 
  
-=======
- 
-
- const { handleSubmit,register }=useForm<FormValues>()
-
- const userType=GetUserType()
-
-
- 
-  const { data,isFetched }=useQuery(["user-details"],()=> SettingObj.user_details())
-
-  console.log(isFetched)
-  const { mutate }=useMutation(SettingObj.user_details_update,{
-    onSuccess: ()=>{
-       window.location.href="/setting"
-    },
-
-    onError: ()=>{
-
-    }
-  })
-
-  const  editUserDetails=(formValues:FormValues)=>{
-    const mutateObj={
-      
-    };
-
-      if(formValues.username==="" && formValues.email!=="")
-            {
-              mutateObj.username=data?.username;
-              mutateObj.email=formValues.email
-            }
-            else if(formValues.username!=="" && formValues.email===""){
-              mutateObj.username=formValues.username;
-              mutateObj.email=data?.email
-            }
-            else if(formValues.username!=="" && formValues.email!==""){
-              mutateObj=formValues
-            }
-    mutate(mutateObj)
-  }
-
-   console.log(data)
->>>>>>> 1307155c60173b5826916d8b67c92fa2660b5b8b
 
   const  editUserDetails=(formValues:FormValues)=>{
     const mutateObj={
@@ -118,17 +67,10 @@ export function SettingsForm() {
 
       <div className="mb-1">
         <p className="mb-4 font-sans font-medium text-black">Name</p>
-<<<<<<< HEAD
         <Input
           className="mb-4 w-full rounded-lg bg-cyan-500 py-2 px-1 text-black outline-none"
           defaultValue={userDetailsQuery?.data?.username}
           isDisabled={userType!=="super_admin"}
-=======
-        <input
-          className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          defaultValue={isFetched && data && data?.username}
-          disabled={userType!=="super_admin"}
->>>>>>> 1307155c60173b5826916d8b67c92fa2660b5b8b
   
           type="text"
           {...register("username")}
@@ -137,17 +79,10 @@ export function SettingsForm() {
 
       <div className="mb-1">
         <p className="mb-4 font-sans font-sans font-medium text-black">Email</p>
-<<<<<<< HEAD
         <Input
           className="mb-4 w-full rounded-lg bg-cyan-500 py-2 px-1 text-black outline-none"
           defaultValue={userDetailsQuery?.data?.email}
           isDisabled={userType!=="super_admin"}
-=======
-        <input
-          className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          defaultValue={isFetched && data && data?.email}
-          disabled={userType!=="super_admin"}
->>>>>>> 1307155c60173b5826916d8b67c92fa2660b5b8b
          
           type="email"
           {...register("email")}
@@ -158,15 +93,9 @@ export function SettingsForm() {
         <p className="mb-4 font-sans font-sans font-medium text-black">
           Organisation
         </p>
-<<<<<<< HEAD
         <Input
           className="mb-4 w-full rounded-lg bg-cyan-500 py-2 px-1 text-black outline-none"
           isDisabled={userType!=="super_admin"}
-=======
-        <input
-          className="mb-4 w-full rounded-lg bg-cyan-200 py-2 px-1 text-gray-500 outline-none"
-          disabled={userType!=="super_admin"}
->>>>>>> 1307155c60173b5826916d8b67c92fa2660b5b8b
           name="organisation"
           type="text"
         />
@@ -189,7 +118,6 @@ export function SettingsForm() {
         </p>
       </Link>
 
-<<<<<<< HEAD
       <div className="mx-auto mb-10 mt-10 flex justify-center">
       
 
@@ -201,13 +129,6 @@ export function SettingsForm() {
                   >
                     Save
                   </Button>
-=======
-      <div className="mx-auto mb-28 mt-10 flex justify-center">
-        
-        <button className={`h-[7vh] w-[90%] ${userType!=="super_admin"?`bg-cyan-500`: `hover:bg-blue-500 bg-cyan-500`} mx-auto rounded-md py-2 text-[21px] font-bold font-bold text-white`} disabled={userType!=="super_admin"} type="button" onClick={handleSubmit(editUserDetails)}>
-          Save my changes
-        </button>
->>>>>>> 1307155c60173b5826916d8b67c92fa2660b5b8b
         
       </div>
     </div>
