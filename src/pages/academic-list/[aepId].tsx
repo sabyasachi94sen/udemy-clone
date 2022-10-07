@@ -58,7 +58,7 @@ export default function AepActivityPage() {
               type="button"
               width="w-[46%]"
               onClick={()=>onModalOpen("updateAepActivity")}
-              isDisabled={GetUserType()!=="super_admin"?true:false}
+              isDisabled={GetUserType()==="super_admin"?true:false}
               
             >
               Update AEP
