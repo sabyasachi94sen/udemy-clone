@@ -6,12 +6,18 @@ import { AcademicActivityTable,DeleteAepTrackerModal ,UpdateAepModal } from "@/f
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal , useStoreData } from "@/shared/stores/modal.store";
 import { GetUserType } from "@/features/helpers";
+import { useEffect,useState } from "react";
 
 
 
 export default function AepActivityPage() {
   const { currModalKey, onModalOpen,isModalOpen } = useModal() as ModalState<Account>;
-  const { storedData }=useStoreData()
+  const { storedData }=useStoreData();
+  const [isLoading,setIsLoading]=useState(false)
+
+  useEffect(()=>{
+    setIsLoading(true)
+  },[])
  
 
   return (
@@ -51,7 +57,7 @@ export default function AepActivityPage() {
                 View AEP Status Tracker (student)
               </Button>
             </Link>
-            
+            {isLoading?
             <Button
               className={`h-[6vh] rounded-md  text-white ${GetUserType()==="super_admin"?`hover:bg-blue-500 bg-cyan-500`: `bg-cyan-500`} `}
             //   disabled={user == "super_admin"}
@@ -62,7 +68,7 @@ export default function AepActivityPage() {
               
             >
               Update AEP
-            </Button>
+            </Button>: null}
           </div>
         </div>
 

@@ -1,15 +1,14 @@
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import {useUserDetails,useUpdateDetails} from "@/shared/services/settings.service"
-import {
-  BaseModal,
-  Button,
-  Form,
-  Input,
-  SelectDynamic,
-} from "@/shared/components";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { useState,useEffect } from "react";
+
 import {  GetUserType } from "@/features/helpers";
+import {
+  Button,
+  Input,
+} from "@/shared/components";
+import { useUpdateDetails,useUserDetails } from "@/shared/services/settings.service"
 
 interface FormValues{
   username: string;
@@ -26,10 +25,9 @@ export function SettingsForm() {
 
  const userType=GetUserType()
 
- const userDetailsQuery=useUserDetails({page})
+ const userDetailsQuery=useUserDetails({ page })
  const userDetailsMutation=useUpdateDetails()
 
- console.log(userType=="super_admin")
 
 
  
@@ -51,10 +49,11 @@ export function SettingsForm() {
             else if(formValues.username!=="" && formValues.email!==""){
               mutateObj=formValues
             }
-    userDetailsMutation.mutate({data: mutateObj})
+    userDetailsMutation.mutate({ data: mutateObj })
   }
 
-  
+
+
   return (
     <div className="-mt-14 h-auto w-[40%] rounded-lg bg-white bg-gray-200 pt-6 pl-24 pr-24 shadow-lg">
       <div className="mb-6">
@@ -121,14 +120,16 @@ export function SettingsForm() {
       <div className="mx-auto mb-10 mt-10 flex justify-center">
       
 
-             <Button
-                    isLoading={userDetailsMutation.isLoading}
-                    type="submit"
-                    width="full"
-                    className={`h-[7vh] w-[90%] ${userType!=="super_admin"?`bg-cyan-500`: `hover:bg-blue-500 bg-cyan-500`} mx-auto rounded-md py-2 text-[21px] font-bold font-bold text-white`} isDisabled={userType!=="super_admin"} type="button" onClick={handleSubmit(editUserDetails)}
+        <Button
+          className={`h-[7vh] w-[90%] ${userType!=="super_admin"?`bg-cyan-500`: `hover:bg-blue-500 bg-cyan-500`} mx-auto rounded-md py-2 text-[21px] font-bold font-bold text-white`}
+          isDisabled={userType!=="super_admin"}
+          isLoading={userDetailsMutation.isLoading}
+          type="submit" 
+          type="button" width="full" 
+          onClick={handleSubmit(editUserDetails)}
                   >
-                    Save
-                  </Button>
+          Save
+        </Button>
         
       </div>
     </div>
