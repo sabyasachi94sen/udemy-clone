@@ -16,7 +16,7 @@ interface ActionMapEditStepDataVal{
   }
 }
 
-const ActivityList = () => handleQuery({ resourceUrl: "activity_api" });
+const ActivityList = () => handleQuery({ resourceUrl: "student/activity/tracker" });
 
 const ActivityAdd = (postData) =>
   handleMutation({

@@ -13,8 +13,8 @@
     const [isStatus,setIsStatus]=useState(false)
     const [isDelete,setIsDelete]=useState(true)
 
-    const checkIsStatus=(selectedVal)=>{
-        setIsStatus(isStatus=>!isStatus)
+    const checkIsStatus=(selectedVal: string)=>{
+        setIsStatus(!isStatus)
         if(selectedVal==="Yes")
         setIsDelete(true)
         else {

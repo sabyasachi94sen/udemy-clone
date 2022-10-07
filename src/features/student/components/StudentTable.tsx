@@ -9,6 +9,23 @@ import { BaseTable, IconButton, StatusCell ,ViewButton} from "@/shared/component
 import { useStudent } from "@/shared/services/student.sevices";
 import { formatDate } from "@/shared/utils";
 
+  const [storeStudentData,setStoreStudentData]=useState([])
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=studentData.filter((item) => {
+       if(item.student_name.includes(staffName))
+       return item;
+     })
+     
+   
+    setStoreStudentData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreStudentData(studentData)
+  },[studentData])
 
 interface AdminTableProps {
   onDelete: (user: Account) => void;

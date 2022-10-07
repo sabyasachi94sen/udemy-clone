@@ -97,7 +97,23 @@ export function AccountManagerTable({
 
   const { storedData, setStoredData } = useStoreData();
 
+  const [storeManagerData,setStoreManagerData]=useState([])
 
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=managerData.filter((item) => {
+       if(item.manager_name.includes(staffName))
+       return item;
+     })
+     
+
+     setStoreManagerData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreManagerData(managerData)
+  },[managerData])
 
   useEffect(() => {
     setStoredData({name:"sabya"});

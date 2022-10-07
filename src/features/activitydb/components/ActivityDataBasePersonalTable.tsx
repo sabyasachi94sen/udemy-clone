@@ -1,5 +1,5 @@
 import moment from "moment"
-
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Button } from "@/shared/components";
 
 interface ActivityDataBasePersonalTableProps {
@@ -21,6 +21,27 @@ export function ActivityDataBasePersonalTable({
   handleBackgroundBlurOnDelete,
   isActivityTable,
 }: ActivityDataBasePersonalTableProps) {
+
+
+  const [storeActivityData,setStoreActivityData]=useState([])
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+     const filterStaff=activityData.filter((item) => {
+       if(item.activity_name.includes(staffName))
+       return item;
+     })
+     
+
+     setStoreActivityData(filterStaff)
+ }
+   
+
+  useEffect(()=>{
+     setStoreActivityData(activityData)
+  },[activityData])
+
+
   return (
     <div className="-mt-44 h-screen w-[90%] rounded-md bg-white">
       <div>
@@ -38,6 +59,7 @@ export function ActivityDataBasePersonalTable({
               name="search"
               placeholder="Search the staff member here"
               type="text"
+              onChange={searchStaff}
             />
 
             <img
@@ -69,7 +91,7 @@ export function ActivityDataBasePersonalTable({
 
         <div
           className={`${
-            activityData && activityData?.length > 10 ? `h-[60vh]` : `h-auto`
+            storeActivityData && storeActivityData?.length > 10 ? `h-[60vh]` : `h-auto`
           } mt-8 overflow-y-scroll`}
         >
           <table className="relative left-2 mx-auto -mt-1 w-[95%] break-all border-solid bg-gray-50 text-center font-sans  text-[0.9rem] font-bold text-[#344054]">
@@ -97,7 +119,7 @@ export function ActivityDataBasePersonalTable({
                
               </tr>
 
-              {activityData && activityData.map((val, index) => (
+              {storeActivityData && storeActivityData.map((val, index) => (
                 <tr key={index} className="border-b-[1.5px] border-gray-50 border-b-[#EDEDED]">
                   <td className="h-[7vh]">{val && val?.activity_name}</td>
                   <td className="h-[7vh]">{val && val?.activity_type}</td>
@@ -108,7 +130,7 @@ export function ActivityDataBasePersonalTable({
                   <td className="h-[7vh]">
                     <Button
                       className="h-[6vh] w-[90%] rounded-md xl:text-[0.6rem] 2xl:text-[0.8rem]"
-                      onClick={()=>handleBackgroundBlurOnMap(val?.id)}
+                      onClick={()=>handleBackgroundBlurOnMap(val && val?.id,val && val?.activity_name)}
                     >
                       See action maps
                     </Button>
