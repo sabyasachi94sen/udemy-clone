@@ -18,8 +18,8 @@ import { useCurrentPath } from "@/shared/hooks/use-current-path";
 import { getToken } from "@/shared/utils";
 
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  
+  { name: "Settings", href: "/setting" },
   { name: "Sign out", href: "#" },
 ];
 

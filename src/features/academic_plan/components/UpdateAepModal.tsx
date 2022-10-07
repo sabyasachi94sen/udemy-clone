@@ -134,7 +134,7 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
 
             <div className="mt-8 flex h-[8vh] w-full justify-between">
               <div className="w-[70%] pl-5">
-                <span className="text-md font-bold">Active Status</span>
+                <span className="text-md font-bold">Active Type</span>
                 <select
                   {...register("activity_status")}
                   className="relative left-3 h-[5vh] w-[60%] rounded-md bg-[#EEEE] outline-none"
