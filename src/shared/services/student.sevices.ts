@@ -128,7 +128,7 @@ export const useStudent = (
           queryKey: queryKeys.student.list._def,
         });
   
-        toast.success("Delete user deleted successfully");
+        toast.success("Deleted user successfully");
         onSuccess?.();
       },
   
