@@ -1,39 +1,20 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-
-import { useStoreData } from "@/shared/stores/modal.store";
-import React, { useMemo, useEffect } from "react";
-import { FaUserEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
-import { us } from "@/shared/stores/modal.store";
-import { ModalState, useModal } from "@/shared/stores/modal.store";
-import {getLocalStorage} from "@/features/helpers"
-
+import React, { useMemo } from "react";
 
 import { Account } from "@/api";
-import {
-  BaseTable,
-  IconButton,
-  RowNavigate,
-  StatusCell,
-  CompleteBar
-} from "@/shared/components";
+import { getLocalStorage } from "@/features/helpers";
+import { BaseTable, CompleteBar } from "@/shared/components";
 import { useAdminActivity } from "@/shared/services/admin.service";
+import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 
-interface AccountManagerTableProps {
-  onDelete: (user: Account) => void;
-  onUpdate: (user: Account) => void;
-  showManagerActivities: () => void;
-  studentId: string;
-}
 
 export function AdminActivityTable(): JSX.Element {
   const router = useRouter();
   const { page, perPage } = router.query;
-  const adminId=getLocalStorage("adminId");
-    
-  
+
+  const adminId = getLocalStorage("adminId");
   const adminActivity = useAdminActivity(adminId);
 
   const { isModalOpen, onModalClose, selectedData } =
@@ -65,16 +46,11 @@ export function AdminActivityTable(): JSX.Element {
       columnHelper.accessor((row) => row.completion_status, {
         id: "completion_status",
         header: "Completion Status",
-        cell: (info) => (<CompleteBar rowValue={info.getValue()}/>),
+        cell: (info) => <CompleteBar rowValue={info.getValue()} />,
       }),
     ],
     [],
   );
-  // const { storedData } = useStoreData();
-
-  // useEffect(() => {
-  //   console.log(storedData);
-  // }, []);
 
   return (
     <BaseTable<Account>

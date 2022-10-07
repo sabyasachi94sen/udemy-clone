@@ -51,6 +51,7 @@ export class AepService {
         return __request({
             method: 'GET',
             path: `/aep/activity/student/?student_id=${id}`,
+           
         });
     }
 

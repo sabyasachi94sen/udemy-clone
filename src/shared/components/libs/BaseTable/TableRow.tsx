@@ -1,8 +1,5 @@
 import clsx from "clsx";
 
-import { useEffect } from "react";
-import { AiOutlineConsoleSql } from "react-icons/ai";
-
 
 export function TableRowCell({
   rowValue,
@@ -42,40 +39,39 @@ export function StatusCell({
   );
 }
 
-export function CompleteBar({ rowValue }: {rowValue: string}): JSX.Element{
+export function CompleteBar({ rowValue }: { rowValue: string }): JSX.Element {
 
-  const percentValue=String(rowValue+"%")
-  
   return (
-    <div className="flex items-start text-gray-500">
-      <span>{rowValue} %</span>
-      <div className="ml-3 h-[2vh] w-[35%] rounded-full bg-gray-200 dark:bg-gray-700">
-        <div className={`h-[2vh] w-[${percentValue}] rounded-full bg-gray-500 p-0.5 text-center text-xs font-medium leading-none text-blue-100`} />
-      </div>
+    
+     
+        <div className="flex items-start text-gray-500">
+          <span>{rowValue} %</span>
+          <div className="ml-3 h-[2vh] w-[45%] rounded-full bg-gray-200 dark:bg-gray-700">
+            <div
+              className={`h-[2vh] w-[${rowValue<10?10:rowValue}%] rounded-full bg-gray-500 p-0.5 text-center text-xs font-medium leading-none text-blue-100`}
+        />
+          </div>
+        </div>
+    
+  );
+}
+
+export function RowNavigate({ rowLink, rowValue, onClick }): JSX.Element {
+  return (
+    <div className="cursor-pointer hover:underline" onClick={rowLink}>
+      {rowValue}
     </div>
-  )
-
-
+  );
 }
 
-
-export function RowNavigate({ rowLink,rowValue,onClick }): JSX.Element{
-
-  
-
-
+export function ViewButton({ onClick }): JSX.Element {
   return (
-    <div className="hover:underline cursor-pointer" onClick={rowLink}>{rowValue}</div>
-  )
+    <button
+      className="mt-1 h-[6vh] w-[100%] rounded-lg border-[1px] border-black bg-white text-black hover:bg-slate-200"
+      type="button"
+      onClick={onClick}
+    >
+      Details
+    </button>
+  );
 }
-
-
-export function ViewButton({ onClick }):JSX.Element{
- 
-   return (
-     <button className="bg-white text-black mt-1 w-[100%] h-[6vh] border-black hover:bg-slate-200 border-[1px] rounded-lg" type="button" onClick={onClick}>Details</button>
-   )
-}
-
-
-
