@@ -94,6 +94,28 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                   </div>
                 </div>
               </div>
+              <div className="relative mt-10 flex h-[12vh] w-[70%] justify-between">
+                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
+                  <p className="ml-8">Email</p>
+                  <input
+                    className="text-small relative left-8 mt-4 h-[5vh] w-[93%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                    placeholder="Email"
+                    type="email"
+                    {...register("email")}
+                    disabled
+                  />
+                </div>
+                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
+                  <p className="ml-8">Phone Number</p>
+                  <input
+                    className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                    placeholder="Phone Number"
+                    type="tel"
+                    {...register("phone_number")}
+                    disabled
+                  />
+                </div>
+              </div>
 
               <div>
                 <div className="relative mt-10 flex h-[12vh] w-[90%] justify-between">
@@ -183,30 +205,9 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                 </div>
               </div>
 
-              <div className="relative mt-10 flex h-[12vh] w-[70%] justify-between">
-                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
-                  <p className="ml-8">Email</p>
-                  <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[93%] rounded-md bg-[#EEEE] pl-3 font-medium"
-                    placeholder="Email"
-                    type="email"
-                    {...register("email")}
-                    disabled
-                  />
-                </div>
-                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
-                  <p className="ml-8">Phone Number</p>
-                  <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
-                    placeholder="Phone Number"
-                    type="tel"
-                    {...register("phone_number")}
-                    disabled
-                  />
-                </div>
-              </div>
+           
 
-              <div className="mx-auto mt-7 h-[20vh] w-[50%] text-center text-lg font-bold">
+              <div className="mx-auto mt-16 h-[20vh] w-[50%] text-center text-lg font-bold">
                 <p>Remarks</p>
                 <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" {...register("remarks")} disabled/>
               </div>
