@@ -151,7 +151,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
            
             <div className="mx-auto flex h-[70vh] w-full justify-around overflow-y-scroll mb-12">
               <div className="h-auto w-[40%]">
-                <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
+                <h1 className="mb-6 text-[1.4rem] font-bold">
                   Activity Information
                 </h1>
                 <div className="mt-2 flex items-center">
@@ -255,7 +255,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <br />
                 </div>
       
-                <h1 className="mt-4 text-lg font-bold text-[#6F6F6F]">Key Dates</h1>
+                <h1 className="mt-4 text-lg text-[1.4rem] font-bold text-[#6F6F6F]">Key Dates</h1>
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Registration open</span>
                   <input
@@ -384,7 +384,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   </select>
                 </div>
                 <div className="mt-14">
-                  <h1 className="text-lg font-bold text-[#6F6F6F]">Remarks</h1>
+                  <h1 className="text-lg text-[1.4rem] font-bold text-[#6F6F6F]">Remarks</h1>
                   <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" {...register("remarks")} 
                   
                     disabled
