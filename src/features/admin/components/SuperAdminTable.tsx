@@ -1,7 +1,8 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useMemo,useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
+
 import { MdDeleteOutline } from "react-icons/md";
 
 import { Account } from "@/api";
@@ -21,6 +22,7 @@ export function SuperAdminTable({
   const router = useRouter();
   const { page, perPage } = router.query;
   const superAdminsQuery = useSuperAdmins({ page });
+  const [superAdminList,setSuperAdminList]=useState([])
 
   const columnHelper = createColumnHelper<Account>();
 
@@ -82,8 +84,16 @@ export function SuperAdminTable({
     [],
   );
 
+
+  // useEffect(()=>{
+  //   setSuperAdminList(superAdminsQuery)
+
+  // },[superAdminsQuery.isSuccess])
+
   return (
-    <BaseTable<Account>
+    <>
+
+      <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
       data={superAdminsQuery.data?.results}
@@ -91,5 +101,6 @@ export function SuperAdminTable({
       totalPagesCount={10} // TODO: fix This once backend adds limit in query
       totalResultsCount={superAdminsQuery.data?.count || 0}
     />
+    </>
   );
 }

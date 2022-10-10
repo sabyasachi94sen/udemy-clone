@@ -70,7 +70,9 @@ export function BaseModal({
             onOpenAutoFocus={(e) => e.preventDefault()}
           >
             {title && (
-              <DialogPrimitive.Title className="flex items-start justify-between rounded-tr-md rounded-tl-md bg-gray-50 px-6 py-4 text-lg font-bold">
+              <DialogPrimitive.Title className="flex items-start rounded-tr-md rounded-tl-md bg-gray-50 px-6 py-4 text-lg font-bold">
+                {title?.includes("View")?<img src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] mr-3" />: null}
+
                 {title}
               </DialogPrimitive.Title>
             )}
