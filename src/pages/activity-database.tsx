@@ -28,7 +28,7 @@ export default function StudentPage() {
           width="96"
           />
           <Button width="max" onClick={() => onModalOpen("createActivity")}>
-            Add Staff
+            Add Activity
           </Button>
         
       </div>

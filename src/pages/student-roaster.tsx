@@ -25,7 +25,7 @@ export default function StudentPage() {
             width="96"
           />
           <Button width="max" onClick={() => onModalOpen("createStudent")}>
-            Add Staff
+            Add Student
           </Button>
         </div>
         <StudentTable
