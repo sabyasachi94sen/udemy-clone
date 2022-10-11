@@ -5,50 +5,29 @@ import { useAepActivityAssignment, useAepActivityAssignmentFilter, useAepActivit
 import { useModal } from "@/shared/stores/modal.store";
 import {useEffect, useMemo, useState} from "react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import { useRefreshQuery } from "@/shared/hooks/use-refresh-query";
-
 import { queryKeys } from "@/shared/services";
+import { ViewButton } from "@/shared/components";
+import { ViewActivityModal } from "./ViewActivityModal";
+
 
 
 
 export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
 
     
-  const activeOptions = [
-    {
-      option: "Active",
-      value: "active",
-    },
-    {
-      option: "Inactive",
-      value: "inactive",
-    },
-  ];
 
-  const data = [];
+
   const router=useRouter()
-  const { isModalOpen, onModalClose ,selectedData} = useModal();
+  const { isModalOpen, onModalClose ,currModalKey,onModalOpen} = useModal();
   const { page, perPage,aepId } = router.query;
-
-
-  const [renderPage,setRenderPage]=useState(0)
-   
-
-  
-
-//   const createStudentMutaton = useCreateStudent(() => {
-//     onModalClose();
-//   });
-
   const aepActivityFilter=useAepActivityFilter(aepId)
   const aepActivityAssignment=useAepActivityAssignment()
   const aepActivityAssignmentFilter=useAepActivityAssignmentFilter()
-  
-  
-  const { refreshQuery } = useRefreshQuery();
-
-
   const columnHelper = createColumnHelper<Account>();
+
+
+
+
 
   
 
@@ -92,6 +71,17 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
         <Input className="bg-cyan-500 rounded-lg w-[60%] h-[6vh]" defaultValue={info.getValue()}  />
         ),
       }),
+      columnHelper.accessor((row) => row?.id, {
+        id: "details",
+        header: "Details",
+        cell: (info) => (
+          <ViewButton
+          
+          onClick={()=>onModalOpen("viewActivityDetails",info.row.original)}
+        />
+        ),
+      }),
+
 
 
       columnHelper.accessor((row) => row?.id, {
@@ -113,6 +103,8 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
   
 
   return (
+    <>
+    <ViewActivityModal isOpen={currModalKey==="viewActivityDetails"} />
     <BaseModal
       hasHeader
       showHeaderCloseButton
@@ -123,13 +115,15 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
         onModalClose();
       }}
     >
+       <div className="h-[80vh]">
       <Form<Account>
         
         onSubmit={(formData) =>aepActivityAssignmentFilter.mutate({status:formData.activity_status,subject:formData.activity_subject,student_id:aepId})}
         >
         {({ register }) => (
+         
             <div>
-          <div className="h-auto w-full bg-white pb-10">
+              <div className="h-auto w-full pb-10">
         
 
             <div className="mt-8 flex h-[8vh] w-full justify-between">
@@ -158,7 +152,7 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
             </div>
         
           </div>
-          <div className="mx-auto  flex justify-center">
+          <div className="mx-auto flex justify-center">
                 <Button
                   isLoading={false}
                   type="submit"
@@ -170,18 +164,25 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
           </div>
        
       )}
-      </Form>
       
-
-
+      </Form>
+      <div className="h-[57vh] overflow-y-scroll overflow-x-hidden mt-10">
       <BaseTable<Account>
         columns={columns}
         currentPage={Number(page) || 1}
         data={aepActivityFilter?.isSuccess && !aepActivityAssignmentFilter?.isSuccess?aepActivityFilter?.data : aepActivityAssignmentFilter?.data}
         isLoading={aepActivityFilter?.isLoading}
-        totalPagesCount={10} // TODO: fix This once backend adds limit in query
-    
+        // totalPagesCount={10} // TODO: fix This once backend adds limit in query
+       
     />
+    </div>
+    </div>
+      
+
+
+     
     </BaseModal>
+    
+    </>
   );
 }

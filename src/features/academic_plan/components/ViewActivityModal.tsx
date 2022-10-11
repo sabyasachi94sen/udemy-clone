@@ -1,11 +1,12 @@
+import { Slider } from "@material-ui/core";
+import { useState,useEffect } from "react";
+
 import { Account } from "@/api";
-import { BaseModal, Button, Form, Input } from "@/shared/components";
+import { BaseModal, Button, Form } from "@/shared/components";
 import { useCreateActivity } from "@/shared/services/activity.service";
 import { useModal } from "@/shared/stores/modal.store";
-import { useState } from "react";
-import { Slider } from "@material-ui/core";
 
-export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
+export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
   const activityTypeOptions=[{
     option: "Exam"
   },{
@@ -93,42 +94,62 @@ const [ageVal, setAgeVal] = useState([0, 100]);
 
 const handleGradeVal = (e: SyntheticEvent, data: number[]) => {
   setGradeVal(data);
-  window.localStorage.setItem("gradeVal",JSON.stringify(data))
+ 
 };
 
 const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
   setAgeVal(data);
-  window.localStorage.setItem("ageVal",JSON.stringify(data))
+  
 };
 
-  const { isModalOpen, onModalClose } = useModal();
+  const { isModalOpen, onModalClose,selectedData } = useModal();
   const createActivityMutation = useCreateActivity(() => {
     onModalClose();
   });
 
-  
+  useEffect(()=>{
+    
+    if(selectedData!=null){
+    setAgeVal(selectedData?.age_range)
+     setGradeVal(selectedData?.grade_range)
+    }
+},[selectedData])
 
   return (
     <BaseModal
       hasHeader
       showHeaderCloseButton
       isOpen={isModalOpen && isOpen}
-      title="Create Activity"
       modalWidth="max-w-[90%]"
+      title="View Activity"
       onRequestClose={() => {
         onModalClose();
       }}
     >
    
-        <Form<Account>
-          onSubmit={(formData) =>
-            createActivityMutation.mutate({ data: {...formData,age_range:ageVal,grade_range:gradeVal} })
-          }
-        >
-          {({ register }) => (
-            <div>
+      <Form<Account>
+       
+        form={{
+        defaultValues: {
+            activity_name: selectedData?.activity_name,
+            country_citizenship: selectedData?.country_citizenship,
+            url: selectedData?.url,
+            registration_open: selectedData?.registration_open,
+            application_deadline: selectedData?.application_deadline,
+            activity_start_date: selectedData?.activity_start_date,
+            activity_end_date: selectedData?.activity_end_date,
+            remarks: selectedData?.remarks,
+            last_update: selectedData?.created_by?.last_update
+          
            
-            <div className="mx-auto flex h-[70vh] w-full justify-around overflow-y-scroll">
+           
+        },
+      }}
+        >
+        {({ register }) => (
+          <div>
+           
+            <div className="mx-auto flex h-[70vh] w-full justify-around overflow-y-scroll mb-12">
               <div className="h-auto w-[40%]">
                 <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
                   Activity Information
@@ -139,7 +160,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
                     {...register("activity_name")}
                     // defaultValue={name!=="Add an activity to the database"?individualActivityInfo?.activity_name: null}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                     type="text"
                   />
                   <br />
@@ -150,14 +171,14 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-12 h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
                     {...register("activity_type")}
                     
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                   >
                     <option>Select Type</option>
                     {activityTypeOptions.map((item,index)=><option key={index} 
-                    // selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.activity_type==item.option)}
+                    selected={selectedData?.activity_type==item.option}
                     >
                       {item.option}
-                      </option>)}
+                    </option>)}
                   </select>
                 </div>
                 <div className="mt-4 flex items-center">
@@ -165,11 +186,11 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="relative ml-7 h-[5vh] w-[100%] rounded-md bg-[#EEEE] outline-none"
                     {...register("subject")}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                   >
                     <option>Select Subject</option>
                     {subjectOptions.map((item,index)=><option key={index} 
-                    // selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.subject==item.option)}
+                    selected={selectedData?.subject==item.option}
                     >{item.option}</option>)}
                   </select>
                 </div>
@@ -178,11 +199,11 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"
                     {...register("application_requirement")}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                   
                   >
                     {applicationOptions.map((item,index)=><option key={index} 
-                    // selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.application_requirement==item.option)}
+                    selected={selectedData?.application_requirement==item.option}
                     >{item.option}</option>)}
                   </select>
                 </div>
@@ -191,11 +212,11 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="relative ml-14 h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
                     {...register("location_type")}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                   >
                     <option>Location Type</option>
                     {locationTypeOptions.map((item,index)=><option key={index} 
-                    // selected={!!(name!=="Add an activity to the database" && individualActivityInfo?.location_type==item.option)}
+                    selected={selectedData?.location_type==item.option}
                     >{item.option}</option>)}
                   </select>
                 </div>
@@ -204,10 +225,10 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
                     {...register("country_residence")}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                   >
                     <option>Select Country</option>
-                    <option selected={name!=="Add an activity to the database"}>India</option>
+                    <option selected>India</option>
                   </select>
                 </div>
                 <div className="mt-4 flex items-center">
@@ -215,8 +236,8 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <input
                     className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
                     {...register("country_citizenship")}
-                    // defaultValue={individualActivityInfo?.country_residence}
-                    // disabled={name==="View an activity to the database"}
+                    
+                    disabled
                     type="text"
                   />
                   <br />
@@ -228,7 +249,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-14 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
                     {...register("url")}
                     // defaultValue={individualActivityInfo?.url}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                     type="text"
                   />
                   <br />
@@ -241,7 +262,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     // defaultValue={individualActivityInfo?.registration_open}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                     type="date"
                   />
                   <br />
@@ -253,7 +274,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
                     {...register("application_deadline")}
                     // defaultValue={moment(individualActivityInfo?.created_at).format("YYYY-MM-DD")}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                     type="date"
                   />
                   <br />
@@ -265,7 +286,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-10 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
                     {...register("activity_start_date")}
                     // defaultValue={individualActivityInfo?.activity_start_date}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                     type="date"
                   />
                   <br />
@@ -277,7 +298,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     className="relative ml-12 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
                     {...register("activity_end_date")}
                     // defaultValue={individualActivityInfo?.activity_end_date}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                     type="date"
                   />
                   <br />
@@ -292,6 +313,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
                     {...register("range_type")}
+                    disabled
                   >
                     <option>Select range type</option>
                     <option>Grade range</option>
@@ -337,11 +359,12 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
                     {...register("only open to residence of these countries")}
-                    // selected={name!=="Add an activity to the database"}
+                    
+                    disabled
                   >
                     <option>Select country</option>
                     <option 
-                    // selected={name!=="Add an activity to the database"}
+                   selected
                     >India</option>
                   </select>
                 </div>
@@ -352,36 +375,40 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <select
                     className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
                     {...register("Only open to citizens of these countries")}
-                    // disabled={name==="View an activity to the database"}
+                    disabled
                   >
                     <option>Select country</option>
                     <option 
-                    // selected={name!=="Add an activity to the database"}
+                    selected
                     >India</option>
                   </select>
                 </div>
                 <div className="mt-14">
                   <h1 className="text-lg text-[1.45rem] font-bold text-[#6F6F6F]">Remarks</h1>
                   <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" {...register("remarks")} 
-                  // defaultValue={individualActivityInfo?.remarks} disabled={name==="View an activity to the database"}
+                  
+                    disabled
                   />
                 </div>
       
+                <div className="mt-10 mb-10 flex items-center">
+                  <span className="text-md font-bold">Last Update Date</span>
+                  <input
+                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+                    {...register("last_update")}
+                    disabled
+                    type="date"
+                    
+                  />
+                  <br />
+                </div>
               </div>
               
             </div>
-            <div className="mx-auto mt-6 mb-6 flex justify-center">
-                <Button
-                  isLoading={createActivityMutation.isLoading}
-                  type="submit"
-                  width="w-[15%]"
-                >
-                  Submit
-                </Button>
-              </div>
+            
           </div>
           )}
-        </Form>
+      </Form>
  
     </BaseModal>
   );

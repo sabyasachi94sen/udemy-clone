@@ -71,7 +71,7 @@ export function BaseModal({
           >
             {title && (
               <DialogPrimitive.Title className="flex items-start rounded-tr-md rounded-tl-md bg-gray-50 px-6 py-4 text-lg font-bold">
-                {title?.includes("View")?<img src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] mr-3" />: null}
+                {title?.includes("View")?<img src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem]" />: null}
 
                 {title}
               </DialogPrimitive.Title>

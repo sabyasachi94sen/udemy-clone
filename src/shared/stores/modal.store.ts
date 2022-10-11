@@ -30,6 +30,10 @@ type ModalKey =
   | "createActionStep"
   | "updateActionStep"
   | "deleteActionStep"
+  | "viewActivityDetails"
+
+
+
 export interface ModalState<TStoredData = unknown> {
   isModalOpen: boolean;
   currModalKey: ModalKey | null;

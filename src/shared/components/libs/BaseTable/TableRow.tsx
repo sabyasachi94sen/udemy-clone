@@ -67,11 +67,11 @@ export function RowNavigate({ rowLink, rowValue, onClick }): JSX.Element {
 export function ViewButton({ onClick }): JSX.Element {
   return (
     <button
-      className="mt-1 h-[6vh] w-[100%] rounded-lg border-[1px] border-black bg-white text-black hover:bg-slate-200"
+      className="mt-1 h-[6vh] w-[100%] rounded-lg border-[1px] border-black bg-white text-black hover:bg-slate-200 flex items-center justify-center"
       type="button"
       onClick={onClick}
     >
-      Details
+    <img src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem]" />
     </button>
   );
 }
