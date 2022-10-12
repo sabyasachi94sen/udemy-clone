@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import { RowNavigate } from "@/shared/components";
+
 import { Account } from "@/api";
-import { BaseTable, IconButton, StatusCell } from "@/shared/components";
+import { setLocalStorage } from "@/features/helpers"
+import { BaseTable , IconButton, RowNavigate, StatusCell } from "@/shared/components";
 import { useAdmins } from "@/shared/services/admin.service";
-import { formatDate } from "@/shared/utils";
 import { useStoreData } from "@/shared/stores/modal.store";
-import {setLocalStorage} from "@/features/helpers"
+import { formatDate } from "@/shared/utils";
 
 interface AdminTableProps {
   onDelete: (user: Account) => void;
@@ -23,9 +23,10 @@ export function AdminTable({
   const router = useRouter();
   const { page, perPage } = router.query;
   const AdminsQuery = useAdmins({ page });
+  
 
   const columnHelper = createColumnHelper<Account>();
-  const { setStoredData} = useStoreData();
+  const { setStoredData } = useStoreData();
 
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
@@ -39,7 +40,8 @@ export function AdminTable({
           <RowNavigate
             rowLink={() => {
               router.push(`/admin/${info.row.original.id}`)
-             setLocalStorage("adminId",info.row.original.id)
+             setLocalStorage("adminInfo",info.row.original.id)
+             setLocalStorage("adminName",info.getValue())
             }}
             rowValue={info.getValue()}
           

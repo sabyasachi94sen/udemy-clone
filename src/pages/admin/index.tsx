@@ -20,7 +20,7 @@ export default function AdminPage() {
       <DeleteAdminModal isOpen={currModalKey === "deleteAdmin"} /> 
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">
-        (AM or Admin Name) details
+        Essai Admin Roster
         </h1>
         <div className="mt-8 flex justify-between">
           <Input

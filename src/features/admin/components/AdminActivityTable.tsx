@@ -14,7 +14,9 @@ export function AdminActivityTable(): JSX.Element {
   const router = useRouter();
   const { page, perPage } = router.query;
 
-  const adminId = getLocalStorage("adminId");
+
+  const adminId = getLocalStorage("adminInfo");
+
   const adminActivity = useAdminActivity(adminId);
 
   const { isModalOpen, onModalClose, selectedData } =

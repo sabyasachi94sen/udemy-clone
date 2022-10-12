@@ -8,6 +8,7 @@ import { Account } from "@/api";
 import { BaseTable, IconButton,RowNavigate,StatusCell } from "@/shared/components";
 import { useAccountManager ,useAccountManagerActivities } from "@/shared/services/account-manager.service";
 import { formatDate } from "@/shared/utils";
+import { setLocalStorage } from "@/features/helpers";
 
 
 interface AccountManagerTableProps {
@@ -40,7 +41,14 @@ export function AccountManagerTable({
       columnHelper.accessor((row) => row.manager_name, {
         id: "manager_name",
         header: "Name",
-        cell: (info) => (<RowNavigate rowLink={(row)=>router.push(`/account-manager/${info.row.original.id}`)} rowValue={info.getValue()} />),
+        cell: (info) => (
+        <RowNavigate rowLink={(row)=>{
+          router.push(`/account-manager/${info.row.original.id}`)
+          setLocalStorage("studentId",info.row.original.id)
+          setLocalStorage("managerName",info.getValue())
+        }
+        } 
+        rowValue={info.getValue()} />),
       }),
      
       columnHelper.accessor((row) => row.last_update, {

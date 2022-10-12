@@ -11,6 +11,7 @@ import { Account } from "@/api";
 import { BaseTable, IconButton,RowNavigate,StatusCell } from "@/shared/components";
 import { useAccountManagerActivities } from "@/shared/services/account-manager.service";
 import { formatDate } from "@/shared/utils";
+import {getLocalStorage} from "@/features/helpers"
 
 interface AccountManagerTableProps {
   onDelete: (user: Account) => void;
@@ -21,11 +22,13 @@ interface AccountManagerTableProps {
 
 export function AccountManagerActivityTable(): JSX.Element {
   const router = useRouter();
-  const { page, perPage,studentId } = router.query;
+  const { page, perPage } = router.query;
+  const studentId=getLocalStorage("studentId");
+ 
 
   const accountManagerActivity=useAccountManagerActivities(studentId)
   
-  
+   
 
  
  

@@ -42,7 +42,7 @@ export function AcademicTable({ onView }): JSX.Element {
             onClick={() => storeStudentName(info.getValue())}
             rowLink={() => {
               router.push(`/academic-list/${info.row.original?.student?.id}`);
-              setStoredData({ studentName: info.getValue() });
+              setLocalStorage("studentName",info.getValue())
               setLocalStorage("studentId",info.row.original?.student?.id)
             }}
             rowValue={info.getValue()}
