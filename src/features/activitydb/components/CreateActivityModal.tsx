@@ -275,6 +275,8 @@ export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
               application_requirement: storeOptions,
               age_range: ageVal,
               grade_range: gradeVal,
+              only_open_to_citizens_of_these_countries: storeCitizen,
+              only_open_to_residence_of_these_countries: storeResidence,
             },
           })
         }

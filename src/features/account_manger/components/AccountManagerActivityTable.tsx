@@ -28,15 +28,7 @@ export function AccountManagerActivityTable(): JSX.Element {
 
   const accountManagerActivity=useAccountManagerActivities(studentId)
   
-   
-
- 
- 
- 
-
-
-  
-  const { isModalOpen, onModalClose, selectedData } =
+   const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
 
 
