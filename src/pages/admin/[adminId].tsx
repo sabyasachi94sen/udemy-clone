@@ -7,10 +7,39 @@ import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useStoreData } from "@/shared/stores/modal.store";
 import { getLocalStorage } from "@/features/helpers";
+import { useRouter } from "next/router";
+import { useAdminActivity } from "@/shared/services/admin.service";
 
 export default function AdminPersonalPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
   const [adminName,setAdminName]=useState(null)
+  const [adminStudentList,setAdminStudentList]=useState(null)
+  const [isSearch,setIsSearch]=useState(false)
+  const router = useRouter();
+  const { page, perPage } = router.query;
+
+
+  const adminId = getLocalStorage("adminInfo");
+
+  const adminActivity = useAdminActivity(adminId);
+
+  
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+    const searchResults=adminActivity?.data?.filter((item)=>item?.student.includes(staffName))
+    console.log(searchResults)
+
+
+    
+    if(searchResults.length!=0){
+      setIsSearch(true)
+      setAdminStudentList({isLoading: false, isSuccess: true, data:searchResults
+     
+    })
+  }
+ }
+
 
   useEffect(()=>{
     const admin_name=getLocalStorage("adminName");
@@ -30,10 +59,15 @@ export default function AdminPersonalPage() {
             leftAddOn={<HiSearch />}
             placeholder="Search the staff member here"
             width="96"
+            onChange={searchStaff}
           />
         </div>
 
-        <AdminActivityTable />
+        <AdminActivityTable 
+        adminActivity={!isSearch?adminActivity: adminStudentList}
+        page={page}
+        
+        />
       </div>
     </>
   );

@@ -22,7 +22,7 @@ export type CheckboxProps = {
 // eslint-disable-next-line react/display-name
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
-    { size = "sm", label, optionalText, onInputChange, isDisabled, name,isChecked },
+    { size = "sm", label, optionalText, onInputChange, isDisabled, name,isChecked,onClick },
     ref,
   ) => (
     <div className="relative flex items-start">
@@ -34,10 +34,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "form-checkbox rounded border-gray-300 text-primary focus:ring-primary",
             SIZE_MAPS[size],
           )}
-          disabled={isDisabled}
+          disabled={isChecked}
           id={name}
           name={name}
           type="checkbox"
+          onClick={onClick}
           onChange={onInputChange}
           defaultChecked={isChecked}
         />

@@ -7,7 +7,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Account } from "@/api";
 import { setLocalStorage } from "@/features/helpers"
 import { BaseTable , IconButton, RowNavigate, StatusCell } from "@/shared/components";
-import { useAdmins } from "@/shared/services/admin.service";
+
 import { useStoreData } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 
@@ -19,14 +19,14 @@ interface AdminTableProps {
 export function AdminTable({
   onDelete,
   onUpdate,
+  AdminsQuery,
+  page,
+  isSearch
 }: AdminTableProps): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const AdminsQuery = useAdmins({ page });
   
 
   const columnHelper = createColumnHelper<Account>();
-  const { setStoredData } = useStoreData();
+  const router=useRouter()
 
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
@@ -73,24 +73,32 @@ export function AdminTable({
         id: "edit",
         header: "Edit",
         cell: (info) => (
+          <div className="pl-2">
           <IconButton
             toolTipText="Edit"
-            onClick={() => onUpdate(info.row.original)}
+            onClick={() => {onUpdate(info.row.original)
+               isSearch()
+            }}
           >
             <FaUserEdit className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {
         id: "delete",
         header: "Delete",
         cell: (info) => (
+          <div className="pl-4">
           <IconButton
             toolTipText="Delete"
-            onClick={() => onDelete(info.row.original)}
+            onClick={() => {onDelete(info.row.original)
+            isSearch()
+            }}
           >
             <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
     ],
@@ -104,7 +112,7 @@ export function AdminTable({
       data={AdminsQuery?.data}
       isLoading={AdminsQuery.isLoading}
       totalPagesCount={10} // TODO: fix This once backend adds limit in query
-      totalResultsCount={AdminsQuery.data?.count || 0}
+      // totalResultsCount={AdminsQuery.data?.count || 0}
     />
   );
 }

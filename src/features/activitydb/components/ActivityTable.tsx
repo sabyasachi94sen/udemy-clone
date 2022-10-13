@@ -6,7 +6,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useStoreData } from "@/shared/stores/modal.store";
 import { Account } from "@/api";
 import { BaseTable, Button, IconButton,RowNavigate,StatusCell,ViewButton } from "@/shared/components";
-import { useActivityList } from "@/shared/services/activity.service";
+
+
 import { formatDate } from "@/shared/utils";
 
 
@@ -22,14 +23,16 @@ export function ActivityTable({
    onUpdateActivity,
    onDeleteActivity,
    onViewActionMap,
+   activityListQuery,
+   page,
+   isSearch,
   
 }: ActivityTableProps): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const activityListQuery = useActivityList({ page });
-  console.log(activityListQuery)
+  
+  
 
-  const {setStoreData}=useStoreData()
+
+  
 
  
     
@@ -87,24 +90,33 @@ export function ActivityTable({
         id: "edit",
         header: "Edit",
         cell: (info) => (
+          <div className="pl-2">
           <IconButton
             toolTipText="Edit"
-            onClick={() => onUpdateActivity(info.row.original)}
+            onClick={() =>{ onUpdateActivity(info.row.original)
+            isSearch()
+            
+            }}
           >
             <FaUserEdit className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {
         id: "delete",
         header: "Delete",
         cell: (info) => (
+          <div className="pl-4">
           <IconButton
             toolTipText="Delete"
-            onClick={() => onDeleteActivity(info.row.original)}
+            onClick={() =>{ onDeleteActivity(info.row.original)
+              isSearch()
+            }}
           >
             <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
     ],

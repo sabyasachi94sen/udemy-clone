@@ -5,8 +5,15 @@ import { Account } from "@/api";
 import { BaseModal, Button, Form } from "@/shared/components";
 import { useUpdateActivity } from "@/shared/services/activity.service";
 import { useModal } from "@/shared/stores/modal.store";
+import { formatDate } from "@/shared/utils";
+import Select from "react-select"
 
 export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
+
+  const [storeOptions,setStoreOptions]=useState(null)
+  const [storeResidence,setStoreResidence]=useState(null)
+  const [storeCitizen,setStoreCitizen]=useState(null)
+
   const activityTypeOptions=[{
     option: "Exam"
   },{
@@ -57,28 +64,35 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
   },{
     option: "Other"
   }]
-
-
-
-
-const applicationOptions=[{
   
-    option: "Fee"
-  
-},{
-  option: "Form"
-},{
-  option: "Essay"
-},{
-  option:"Multiple Essays"
-},{
-  option: "LOR"
-},{
-  option: "Multiple LORs"
-},{
-  option: "Other"
-}]
-
+ 
+ 
+ 
+ 
+ const applicationOptions=[{
+   
+     label: "Fee",
+     value: "fee"
+   
+ },{
+   label: "Form",
+   value: "form"
+ },{
+   label: "Essay",
+   value: "essay"
+ },{
+   label:"Multiple Essays",
+   value: "multiple_essay"
+ },{
+   label: "LOR",
+   value: "lor"
+ },{
+   label: "Multiple LORs",
+   value: "multiple_lors"
+ },{
+   label: "Other",
+   value: "other"
+ }]
 
 
 const locationTypeOptions=[{
@@ -88,6 +102,77 @@ const locationTypeOptions=[{
 },{
   option: "Country / City & Virtual"
 }]
+
+const countries=[{
+  label: "India",
+  value: "india"
+ },{
+  label: "Japan",
+  value: "japan"
+ },
+ {
+  label: "China",
+  value: "china"
+ },{
+ label: "Indonesia",
+  value: "indonesia"
+ },
+ {
+  label: "Malaysia",
+  value: "malaysia"
+ },{
+  label: "Thailand",
+  value: "thailand"
+ },
+ {
+  label: "Singapore",
+  value: "singapore"
+ },{
+  label: "North Korea",
+  value: "north korea"
+ },
+ {
+  label: "Taiwan",
+  value: "taiwan"
+ },{
+  label: "Vietnam",
+  value: "vietnam"
+ },
+ {
+  label: "Mongolia",
+  value: "mongolia"
+ },{
+  label: "Myanmar",
+  value: "myanmar"
+ },
+ {
+  label: "Bangladesh",
+  value: "bangladesh"
+ },{
+  label: "Sri lanka",
+  value: "sri lanka"
+ },
+ {
+  label: "Pakistan",
+  value: "pakistan"
+ },{
+  label: "Oman",
+  value: "oman"
+ },
+ {
+  label: "Maldieves",
+  value: "maldieves"
+ },{
+  label: "Uzbekistan",
+  value: "uzbekistan"
+ },
+ {
+  label: "Kuwait",
+  value: "kuwait"
+ },{
+  label: "Saudi Arabia",
+  value: "saudi arabia"
+ }]
 
 const [gradeVal, setGradeVal] = useState([0, 100]);
 const [ageVal, setAgeVal] = useState([0, 100]);
@@ -102,12 +187,41 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
   
 };
 
+const handleMultiOption=(value: {value: {}[]})=>{
+  const select_options=value.map((item)=>item.label)
+  setStoreOptions(select_options)
+   
+
+
+ }
+
+
+ const handleResidence=(value: {value: {}[]})=>{
+  const residence=value.map((item)=>item.label)
+  setStoreResidence(residence)
+   
+    
+
+ }
+
+ const handleCitizen=(value: {value: {}[]})=>{
+  const citizen=value.map((item)=>item.label)
+  setStoreCitizen(citizen)
+   
+    
+
+ }
+
+
+
+
+
   const { isModalOpen, onModalClose,selectedData } = useModal();
   const updateActivityMutation = useUpdateActivity(() => {
     onModalClose();
   });
 
-  console.log(selectedData)
+ 
 
 
   useEffect(()=>{
@@ -118,13 +232,22 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
     }
 },[selectedData])
 
+   
+useEffect(()=>{
+  setStoreOptions(selectedData?.application_requirement)
+  setStoreCitizen(selectedData?.only_open_to_citizens_of_these_countries)
+  setStoreResidence(selectedData?.only_open_to_residence_of_these_countries)
+},[])
+
+  
+
   return (
     <BaseModal
       hasHeader
       showHeaderCloseButton
       isOpen={isModalOpen && isOpen}
       modalWidth="max-w-[90%]"
-      title="View Activity"
+      title="Update Activity"
       onRequestClose={() => {
         onModalClose();
       }}
@@ -142,11 +265,20 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
             activity_start_date: selectedData?.activity_start_date,
             activity_end_date: selectedData?.activity_end_date,
             remarks: selectedData?.remarks,
-            last_update: selectedData?.created_by?.last_update
+            
           }}}
     
           onSubmit={(formData) =>
-            updateActivityMutation.mutate({ data: {...formData,age_range:ageVal,grade_range:gradeVal},id:selectedData?.id })
+            updateActivityMutation.mutate({ data: {
+              ...formData,
+              application_requirement:storeOptions,
+              age_range:ageVal,
+              grade_range:gradeVal,
+              only_open_to_citizens_of_these_countries: storeCitizen,
+              only_open_to_residence_of_these_countries: storeResidence,
+
+            },
+            id:selectedData?.id })
           }
          
     >
@@ -198,20 +330,24 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     >{item.option}</option>)}
                   </select>
                 </div>
-                <div className="mt-4 flex items-center">
+                <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">Application requirement</span>
-                  <select
-                    className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"
-                    {...register("application_requirement")}
-                    
+                 
+                   <Select 
                   
-                  >
-                    {applicationOptions.map((item,index)=><option key={index} 
-                    selected={selectedData?.application_requirement==item.option}
-                    >{item.option}</option>)}
-                  </select>
+                  className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"  
+                  isMulti 
+                  options={applicationOptions} 
+                  onChange={handleMultiOption}
+                  label="application_requirement"
+                  isSearchable={true}
+                  defaultValue={selectedData?.application_requirement?.map((item)=>{
+                    return {label: item};
+                  })}
+                  
+                  />
                 </div>
-                <div className="mt-4 flex items-center">
+                <div className="mt-8 flex items-center">
                   <span className="text-md font-bold">Location Type</span>
                   <select
                     className="relative ml-14 h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
@@ -232,7 +368,10 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     
                   >
                     <option>Select Country</option>
-                    <option selected>India</option>
+                   
+                    {countries.map((item,index)=>
+                      <option key={index}  selected={selectedData?.country_residence===item.label} >{item.label}</option>
+                    )}
                   </select>
                 </div>
                 <div className="mt-4 flex items-center">
@@ -360,32 +499,44 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <p className="text-md font-bold font-bold ">
                     Only open to residence of these countries
                   </p>
-                  <select
-                    className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
-                    {...register("only open to residence of these countries")}
-                    
-                    
-                  >
-                    <option>Select country</option>
-                    <option 
-                   selected
-                    >India</option>
-                  </select>
+                
+                   
+                   
+                    <Select 
+                  
+                  className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
+                  isMulti 
+                  options={countries} 
+                  onChange={handleResidence}
+                  label="only_open_to_residence_of_these_countries"
+                  isSearchable={true}
+                  defaultValue={selectedData?.only_open_to_residence_of_these_countries?.map((item)=>{
+                    return {label: item};
+                  
+                  }
+                  )}
+                  
+                  />
+                
                 </div>
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
                     Only open to citizens of these countries
                   </p>
-                  <select
-                    className="text-small font-small relative mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3"
-                    {...register("Only open to citizens of these countries")}
-                    
-                  >
-                    <option>Select country</option>
-                    <option 
-                    selected
-                    >India</option>
-                  </select>
+                  <Select 
+                  
+                  className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
+                  isMulti 
+                  options={countries} 
+                  onChange={handleCitizen}
+                  label="only_open_to_citizens_of_these_countries"
+                  isSearchable={true}
+                  defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.map((item)=>{
+                    return {label: item};
+                  
+                  }
+                  )} 
+                  />
                 </div>
                 <div className="mt-14">
                   <h1 className="text-lg text-[1.45rem] font-bold text-[#6F6F6F]">Remarks</h1>
@@ -399,9 +550,9 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <span className="text-md font-bold">Last Update Date</span>
                   <input
                     className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-                    {...register("last_update")}
-                    
-                    type="date"
+                    value={formatDate(selectedData?.updated_at)}
+                    disabled
+                    type="text"
                     
                   />
                   <br />

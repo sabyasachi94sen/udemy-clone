@@ -66,6 +66,17 @@ export class AepTrackerService {
                  }
 
 
+                 public static aepTrackerComplete(data
+                    ): CancelablePromise<void> {
+                         return __request({
+                             method: 'PUT',
+                             path: `/student/activity/track/`,
+                             body:data
+                         });
+                     }
+    
+
+
 
 
 

@@ -105,6 +105,7 @@ export function Select<
         </div>
       )}
       <ReactSelect
+         isMulti={isMulti}
         className={styles.select}
         classNamePrefix="custom-select"
         components={{}}
@@ -117,7 +118,7 @@ export function Select<
         styles={{ ...customStyles, ...overrideStyles }}
         value={
           isMulti
-            ? options.filter((c) => value.includes(c.value))
+            ? options.filter((c) => value?.includes(c.value))
             : options.find((c) => c.value === value)
         }
         onChange={(val) =>

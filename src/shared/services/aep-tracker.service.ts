@@ -43,6 +43,35 @@ export const useAepTracker = (
       );
 
 
+      export function useAepComplete(onSuccess?: () => void) {
+        const { refreshQuery } = useRefreshQuery();
+        const { displayErrorMessages } = useBackendErrors();
+      
+        return useMutation<
+          {
+            plan_id:number,
+            is_completed: boolean,
+
+          }
+        >((data) => AepTrackerService.aepTrackerComplete(data), {
+          onSuccess() {
+            // invalidate all the list queries
+          
+      
+            window.location.href="/aep-tracker"
+            onSuccess?.();
+          },
+      
+          onError(err) {
+            displayErrorMessages(err);
+          },
+        });
+      }
+  
+
+      
+
+
 
 
 
@@ -104,6 +133,24 @@ export const useAepTracker = (
           displayErrorMessages(err);
         },
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     }
+
+
+
+    
     
 

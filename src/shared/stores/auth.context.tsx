@@ -122,10 +122,7 @@ export function AuthGuard({
       setRedirect(router.route);
       router.push("/login");
     }
-    // show reset-pasword page in case user password is not varified
-    if (!isLoading && isAuthenticated && !user?.password_verification) {
-      router.push("reset-password");
-    }
+   
   }, [isAuthenticated, isLoading, router, user]);
 
   // show loading indicator while the auth provider is still initializing

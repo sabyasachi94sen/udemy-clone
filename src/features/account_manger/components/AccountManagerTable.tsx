@@ -6,7 +6,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useStoreData } from "@/shared/stores/modal.store";
 import { Account } from "@/api";
 import { BaseTable, IconButton,RowNavigate,StatusCell } from "@/shared/components";
-import { useAccountManager ,useAccountManagerActivities } from "@/shared/services/account-manager.service";
+
 import { formatDate } from "@/shared/utils";
 import { setLocalStorage } from "@/features/helpers";
 
@@ -20,13 +20,14 @@ interface AccountManagerTableProps {
 export function AccountManagerTable({
   onDelete,
   onUpdate,
+  accountManagerQuery,
+  page,
+  isSearch
   
 }: AccountManagerTableProps): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const accountManagerQuery = useAccountManager({ page });
 
-  const {setStoreData}=useStoreData()
+
+  const router = useRouter();
 
  
     
@@ -78,24 +79,35 @@ export function AccountManagerTable({
         id: "edit",
         header: "Edit",
         cell: (info) => (
+          <div className="pl-2">
           <IconButton
             toolTipText="Edit"
-            onClick={() => onUpdate(info.row.original)}
+            onClick={() => {onUpdate(info.row.original)
+            isSearch()
+            
+            }}
           >
             <FaUserEdit className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {
         id: "delete",
         header: "Delete",
         cell: (info) => (
+          <div className="pl-4">
           <IconButton
             toolTipText="Delete"
-            onClick={() => onDelete(info.row.original)}
+            onClick={() =>{ onDelete(info.row.original)
+            
+              isSearch()
+            
+            }}
           >
             <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
     ],
@@ -103,14 +115,7 @@ export function AccountManagerTable({
   );
 
 
-  const { storedData, setStoredData } = useStoreData();
 
-
-
-  useEffect(() => {
-    setStoredData({name:"sabya"});
-  }, []);
- 
   
 
   return (

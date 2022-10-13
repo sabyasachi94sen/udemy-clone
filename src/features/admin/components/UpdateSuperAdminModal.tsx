@@ -67,6 +67,7 @@ export function UpdateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
                     name="is_active"
                     render={({ field }) => (
                       <SelectDynamic
+                         
                         {...field}
                         label="Active Status"
                         options={[

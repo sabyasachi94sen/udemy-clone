@@ -4,9 +4,35 @@ import { Account } from "@/api";
 import { CreateStudentModal,DeleteStudentModal,StudentTable,UpdateStudentModal,ViewStudentModal} from "@/features/student";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { useStudent } from "@/shared/services/student.sevices";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function StudentPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
+  
+
+  const router = useRouter();
+  const { page, perPage } = router.query;
+  const studentQuery = useStudent({ page });
+  const [isSearch,setIsSearch]=useState(false)
+  const [studentList,setStudentList]=useState(null)
+ 
+  
+
+    const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+    const searchResults=studentQuery?.data?.filter((item)=>item.student_name.includes(staffName))
+
+    if(searchResults.length!=0){
+      setIsSearch(true)
+      setStudentList({isLoading: false, data:searchResults
+     
+    })
+  }
+ }
+
+
 
   return (
     <>
@@ -23,8 +49,12 @@ export default function StudentPage() {
             leftAddOn={<HiSearch />}
             placeholder="Search the staff member here"
             width="96"
+            onChange={searchStaff}
           />
-          <Button width="max" onClick={() => onModalOpen("createStudent")}>
+          <Button width="max" onClick={() => {onModalOpen("createStudent")
+          setIsSearch(false)
+        
+        }}>
             Add Student
           </Button>
         </div>
@@ -32,6 +62,9 @@ export default function StudentPage() {
           onDelete={(user) => onModalOpen("deleteStudent", user)}
           onUpdate={(user) => onModalOpen("updateStudent", user)}
           onView={(user)=>onModalOpen("viewStudent",user)}
+          studentQuery={!isSearch?studentQuery:studentList}
+          page={page}
+          isSearch={()=>setIsSearch(false)}
         />
       </div>
     </>

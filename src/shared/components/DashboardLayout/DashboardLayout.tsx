@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 import { HiBell, HiMenuAlt2, HiSearch, HiX } from "react-icons/hi";
+import { useUserDetails } from "@/shared/services/settings.service";
+
 
 import { useAuth } from "@/shared/stores/auth.context";
 
@@ -24,9 +26,18 @@ const userNavigation = [
 ];
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+  const { page, perPage } = router.query;
+  const userDetailsQuery=useUserDetails({ page })
+ const [sidebarOpen, setSidebarOpen] = useState(false);
+ const [bgColor,setBgColor]=useState("")
 
-  const router=useRouter()
+ //Generate random color
+
+
+
+
+  
 
   const { isMatchCurrentPath } = useCurrentPath();
 
@@ -55,6 +66,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     
     }
   }
+
+  useEffect(()=>{
+    const randomColor = String("#"+Math.floor(Math.random()*16777215).toString(16));
+    setBgColor(randomColor)
+  },[])
 
   return (
     <div>
@@ -222,15 +238,19 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               </button>
 
               {/* Profile dropdown */}
+
               <Menu as="div" className="relative ml-3">
                 <div>
                   <Menu.Button className="focus:ring-primary-500 flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-offset-2">
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      alt=""
-                      className="h-8 w-8 rounded-full"
-                      src="https://picsum.photos/200/300"
-                    />
+                    <div
+                      
+                      className={`h-10 w-10 rounded-full flex items-center text-[1.4rem] text-white justify-center`}
+                      style={{backgroundColor: bgColor}}
+                   
+                    >
+                      {userDetailsQuery?.data?.username[0]}
+                    </div>
                   </Menu.Button>
                 </div>
                 <Transition

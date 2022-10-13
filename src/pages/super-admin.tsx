@@ -1,4 +1,7 @@
 import { HiSearch } from "react-icons/hi";
+import { useState,useEffect, SyntheticEvent } from "react";
+import { useRouter } from "next/router";
+import { useSuperAdmins } from "@/shared/services/super-admin.service";
 
 import { Account } from "@/api";
 import {
@@ -12,6 +15,34 @@ import { ModalState, useModal } from "@/shared/stores/modal.store";
 
 export default function SuperAdminPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
+  const [searchData,setSearchData]=useState([])
+
+  const router = useRouter();
+  const { page, perPage } = router.query;
+  const superAdminsQuery = useSuperAdmins({ page });
+  const [superAdminList,setSuperAdminList]=useState(null)
+  const [isSearch,setIsSearch]=useState(false)
+  
+
+    
+   
+  
+
+  const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+    const searchResults=superAdminsQuery?.data?.results.filter((item)=>item.username.includes(staffName))
+    
+    if(searchResults.length!=0){
+      setIsSearch(true)
+      setSuperAdminList({isLoading: false, data:{
+      results: searchResults,
+      count: superAdminsQuery?.data?.count
+    }})
+  }
+ }
+
+
+ 
 
   return (
     <>
@@ -27,14 +58,21 @@ export default function SuperAdminPage() {
             leftAddOn={<HiSearch />}
             placeholder="Search the staff member here"
             width="96"
+            onChange={searchStaff}
+            name="staff_name"
           />
-          <Button width="max" onClick={() => onModalOpen("createSuperAdmin")}>
+          <Button width="max" onClick={() => {onModalOpen("createSuperAdmin")
+          setIsSearch(false)
+        }}>
             Add Staff
           </Button>
         </div>
         <SuperAdminTable
           onDelete={(user) => onModalOpen("deleteSuperAdmin", user)}
           onUpdate={(user) => onModalOpen("updateSuperAdmin", user)}
+          superAdminsQuery={!isSearch?superAdminsQuery: superAdminList}
+          page={page}
+          isSearch={()=> setIsSearch(false)}
         />
       </div>
     </>

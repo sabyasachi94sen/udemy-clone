@@ -4,9 +4,38 @@ import { Account } from "@/api";
 import { ActivityTable ,ActionMapModal,CreateActivityModal,ViewActivityModal,UpdateActivityModal,DeleteActivityModal } from "@/features/activitydb";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { useRouter } from "next/router";
+import { useActivityList } from "@/shared/services/activity.service";
+import { useState } from "react";
 
 export default function StudentPage() {
   const { currModalKey, onModalOpen,isModalOpen } = useModal() as ModalState<Account>;
+  const router = useRouter();
+  const { page, perPage } = router.query;
+  const activityListQuery = useActivityList({ page });
+  const [isSearch,setIsSearch]=useState(false)
+  const [activityList,setActivityList]=useState(null)
+ 
+  
+
+    const searchStaff=(e:SyntheticEvent)=>{
+    const staffName=e.target.value;
+    const searchResults=activityListQuery?.data?.results.filter((item)=>item.activity_name.includes(staffName))
+
+    if(searchResults.length!=0){
+      setIsSearch(true)
+      setActivityList({isLoading: false, data:{
+        results: searchResults
+      }
+     
+    })
+  }
+ }
+
+
+
+
+
 
   return (
     <>
@@ -26,8 +55,12 @@ export default function StudentPage() {
           leftAddOn={<HiSearch />}
           placeholder="Search the staff member here"
           width="96"
+          onChange={searchStaff}
           />
-          <Button width="max" onClick={() => onModalOpen("createActivity")}>
+          <Button width="max" onClick={() => {onModalOpen("createActivity")
+           setIsSearch(false)
+        
+        }}>
             Add Activity
           </Button>
         
@@ -37,6 +70,9 @@ export default function StudentPage() {
        onUpdateActivity={(user)=>onModalOpen("updateActivity",user)}
        onDeleteActivity={(user)=>onModalOpen("deleteActivity",user)}
        onViewActionMap={(user)=>onModalOpen("viewActionMap",user)}
+       activityListQuery={!isSearch?activityListQuery:activityList}
+       page={page}
+       isSearch={()=>setIsSearch(false)}
       
       />
     </div>

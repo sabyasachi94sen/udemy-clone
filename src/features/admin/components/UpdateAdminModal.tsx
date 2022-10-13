@@ -10,6 +10,7 @@ import {
 } from "@/shared/components";
 import { useUpdateAdmin } from "@/shared/services/admin.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { GetUserType } from "@/features/helpers";
 
 export function UpdateAdminModal({ isOpen }: { isOpen: boolean }) {
   // Ref: https://github.com/pmndrs/zustand/discussions/841
@@ -19,6 +20,8 @@ export function UpdateAdminModal({ isOpen }: { isOpen: boolean }) {
   const updateAdminMutation = useUpdateAdmin(() => {
     onModalClose();
   });
+
+  const userType=GetUserType()
 
   return (
     <BaseModal
@@ -77,7 +80,8 @@ export function UpdateAdminModal({ isOpen }: { isOpen: boolean }) {
                       />
                     )}
                   />
-
+                  
+                  
                   <Controller
                     control={control}
                     name="role"
@@ -92,7 +96,7 @@ export function UpdateAdminModal({ isOpen }: { isOpen: boolean }) {
                         ]}
                       />
                     )}
-                  />
+                  /> 
 
 
 

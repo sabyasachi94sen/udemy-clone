@@ -10,6 +10,7 @@ import {
 } from "@/shared/components";
 import { useUpdateAccountManager } from "@/shared/services/account-manager.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { GetUserType } from "@/features/helpers";
 
 
 export function UpdateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
@@ -20,6 +21,8 @@ export function UpdateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
   const updateAccountManagerMutation = useUpdateAccountManager(() => {
     onModalClose();
   });
+
+  const userType=GetUserType()
 
   return (
     <BaseModal
@@ -78,7 +81,7 @@ export function UpdateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
                       />
                     )}
                   />
-
+                   {userType=="super_admin"?
                   <Controller
                     control={control}
                     name="role"
@@ -93,7 +96,7 @@ export function UpdateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
                         ]}
                       />
                     )}
-                  />
+                  />: null}
 
 
 

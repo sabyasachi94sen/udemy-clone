@@ -6,7 +6,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { RowNavigate } from "@/shared/components";
 import { Account } from "@/api";
 import { BaseTable, IconButton, StatusCell ,ViewButton} from "@/shared/components";
-import { useStudent } from "@/shared/services/student.sevices";
+
 import { formatDate } from "@/shared/utils";
 
 
@@ -20,11 +20,11 @@ export function StudentTable({
   onDelete,
   onUpdate,
   onView,
+  studentQuery,
+  page,
+  isSearch
 }: StudentTableProps): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const studentQuery = useStudent({ page });
-  console.log(studentQuery)
+ 
 
   const columnHelper = createColumnHelper<Account>();
 
@@ -70,24 +70,33 @@ export function StudentTable({
         id: "edit",
         header: "Edit",
         cell: (info) => (
+          <div className="pl-2">
           <IconButton
             toolTipText="Edit"
-            onClick={() => onUpdate(info.row.original)}
+            onClick={() => {
+              onUpdate(info.row.original)
+              isSearch()
+            }}
           >
             <FaUserEdit className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {
         id: "delete",
         header: "Delete",
         cell: (info) => (
+          <div className="pl-4">
           <IconButton
             toolTipText="Delete"
-            onClick={() => onDelete(info.row.original)}
+            onClick={() => {onDelete(info.row.original)
+            isSearch()
+            }}
           >
             <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
     ],

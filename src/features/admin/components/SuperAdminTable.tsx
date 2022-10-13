@@ -1,28 +1,32 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import React, { useMemo,useState } from "react";
+import React, { memo, useCallback, useMemo,useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 
 import { MdDeleteOutline } from "react-icons/md";
 
 import { Account } from "@/api";
 import { BaseTable, IconButton, StatusCell } from "@/shared/components";
-import { useSuperAdmins } from "@/shared/services/super-admin.service";
+
 import { formatDate } from "@/shared/utils";
 
 interface SuperAdminTableProps {
   onDelete: (user: Account) => void;
   onUpdate: (user: Account) => void;
+  
 }
 
-export function SuperAdminTable({
+export const SuperAdminTable=(({
   onDelete,
   onUpdate,
-}: SuperAdminTableProps): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const superAdminsQuery = useSuperAdmins({ page });
-  const [superAdminList,setSuperAdminList]=useState([])
+  superAdminsQuery,
+  page,
+  isSearch
+}: SuperAdminTableProps) => {
+
+
+
+   console.log(isSearch)
 
   const columnHelper = createColumnHelper<Account>();
 
@@ -60,24 +64,33 @@ export function SuperAdminTable({
         id: "edit",
         header: "Edit",
         cell: (info) => (
+          <div className="pl-2">
           <IconButton
             toolTipText="Edit"
-            onClick={() => onUpdate(info.row.original)}
+            onClick={() => {
+              isSearch()
+              onUpdate(info.row.original)}}
           >
             <FaUserEdit className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {
         id: "delete",
         header: "Delete",
         cell: (info) => (
+          <div className="pl-4">
           <IconButton
             toolTipText="Delete"
-            onClick={() => onDelete(info.row.original)}
+            onClick={() => {
+              onDelete(info.row.original)
+              isSearch()
+            }}
           >
             <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
     ],
@@ -103,4 +116,4 @@ export function SuperAdminTable({
     />
     </>
   );
-}
+})

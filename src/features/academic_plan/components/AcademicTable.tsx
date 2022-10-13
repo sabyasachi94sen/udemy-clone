@@ -13,17 +13,18 @@ import {
   Input,
   RowNavigate,
 } from "@/shared/components";
-import { useAepList } from "@/shared/services/aep.service";
+
 import { formatDate } from "@/shared/utils";
 import { useStoreData } from "@/shared/stores/modal.store";
 
-export function AcademicTable({ onView }): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const AepListQuery = useAepList({ page });
+export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
+
+  console.log(AepListQuery)
+
   // const updateCompleteMutation = useUpdateComplete();
 
-  const { setStoredData } = useStoreData();
+    const router=useRouter()
+    
 
   const columnHelper = createColumnHelper<Account>();
 

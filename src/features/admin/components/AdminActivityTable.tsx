@@ -5,19 +5,13 @@ import React, { useMemo } from "react";
 import { Account } from "@/api";
 import { getLocalStorage } from "@/features/helpers";
 import { BaseTable, CompleteBar } from "@/shared/components";
-import { useAdminActivity } from "@/shared/services/admin.service";
+
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 
 
-export function AdminActivityTable(): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-
-
-  const adminId = getLocalStorage("adminInfo");
-
-  const adminActivity = useAdminActivity(adminId);
+export function AdminActivityTable({adminActivity,page}): JSX.Element {
+ 
 
   const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;

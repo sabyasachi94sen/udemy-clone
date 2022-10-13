@@ -16,19 +16,18 @@ import {
   StatusCell,
   Checkbox,
 } from "@/shared/components";
-import { useAepActivity } from "@/shared/services/aep.service";
+
 import { formatDate } from "@/shared/utils";
+
 
 interface AcademicActivityTableProps {
   onDelete: (user: Account) => void;
 }
 
-export function AcademicActivityTable({ onDelete }): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const aepId=getLocalStorage("studentId");
+export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch }): JSX.Element {
 
-  const aepActivityQuery = useAepActivity(aepId);
+  console.log(aepActivityQuery)
+ 
 
   const { isModalOpen, onModalClose } = useModal() as ModalState<Account>;
 
@@ -73,19 +72,24 @@ export function AcademicActivityTable({ onDelete }): JSX.Element {
       columnHelper.accessor((row) => row.id, {
         id: "is_complete",
         header: "Complete",
-        cell: (info) => <Checkbox size={"lg"} />,
+        cell: (info) => <div className="pl-6"><Checkbox size={"lg"} /></div>,
       }),
 
       columnHelper.accessor((row) => row.id, {
         id: "delete",
         header: "Delete",
         cell: (info) => (
+          <div className="pl-4">
           <IconButton
             toolTipText="Delete"
-            onClick={() => onDelete(info.row.original)}
+            onClick={() => {
+            onDelete(info.row.original)
+            isSearch()
+            }}
           >
             <MdDeleteOutline className="text-xl text-neutral text-opacity-80" />
           </IconButton>
+          </div>
         ),
       }),
     ],

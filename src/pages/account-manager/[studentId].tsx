@@ -6,13 +6,16 @@ import { AccountManagerActivityTable } from "@/features/account_manger"
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { getLocalStorage } from "@/features/helpers";
+import { useAccountManager ,useAccountManagerActivities } from "@/shared/services/account-manager.service";
 
 export default function AccountManagerPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
 
    const [managerName,setManagerName]=useState(null)
 
-   useEffect(()=>{
+
+
+useEffect(()=>{
     const manager_name=getLocalStorage("managerName")
       setManagerName(manager_name)
    },[])
@@ -29,11 +32,14 @@ export default function AccountManagerPage() {
             leftAddOn={<HiSearch />}
             placeholder="Search the staff member here"
             width="96"
+           
           />
           
         </div>
         
-          <AccountManagerActivityTable />
+          <AccountManagerActivityTable 
+         
+          />
       </div>
     </>
   );
