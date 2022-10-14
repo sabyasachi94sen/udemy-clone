@@ -20,7 +20,10 @@ export function AEPTrackerTable({
 
   // const updateCompleteMutation = useUpdateComplete();
   const date=new Date()
-  const curData=date.getFullYear()+"/"+date.getMonth()+1+"/"+date.getDay()
+  const year=date.getFullYear();
+  const month=date.getMonth()+1;
+  const day=date.getDate()
+  const curDate=year+"/"+month+"/"+day
 
 
 
@@ -77,7 +80,7 @@ export function AEPTrackerTable({
         cell: (info) => (
           <>
           {!info.row.original.is_completed?
-         <div className={`w-[10px] h-[10px] ml-4 ${formatDate(info.row.original.target_date)==curData?`bg-red-500`: `bg-gray-500`} rounded-lg`}></div>
+         <div className={`w-[10px] h-[10px] ml-4 ${formatDate(info.row.original.target_date)==curDate?`bg-red-500`: `bg-gray-500`} rounded-lg`}></div>
          : <div className={`w-[10px] h-[10px] ml-4 bg-green-500 rounded-lg`}></div>}
         </>
         

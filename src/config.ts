@@ -1,5 +1,5 @@
-// const APP_API_ENDPOINT = "https://pippams-dev.eoraa.com/api/"
-const APP_API_ENDPOINT="https://pippams-backend.essai.in/api/"
+
+const APP_API_ENDPOINT="https://pippams-dev.eoraa.com/api/"
 
 // process.env.NEXT_PUBLIC_APP_API_ENDPOINT;
 

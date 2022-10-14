@@ -70,10 +70,13 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
         id: "is_active",
         header: "Active",
         cell: (info) => (
+         
           <StatusCell
             rowValue={info.getValue() === true ? "Active" : "Inactive"}
             statusColor={info.getValue() === true ? "active" : "inactive"}
+            
           />
+          
         ),
       }),
     ],
