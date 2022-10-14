@@ -81,7 +81,8 @@ export function ActivityTable({
       columnHelper.accessor((row) => row.id, {
         id: "details",
         header: "Details",
-        cell: (info) => (<ViewButton onClick={()=>onViewActivity(info.row.original)}/>),
+        cell: (info) => (<img onClick={()=>onViewActivity(info.row.original)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] ml-4 cursor-pointer" />)
+        
       
       }),
 

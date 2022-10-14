@@ -59,10 +59,9 @@ export function StudentTable({
         id: "details",
         header: "Details",
         cell: (info) => (
-          <ViewButton
-          
-          onClick={() => onView(info.row.original)}
-        />
+  
+        <img onClick={() => onView(info.row.original)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] cursor-pointer ml-4" />
+        
         ),
       }),
 

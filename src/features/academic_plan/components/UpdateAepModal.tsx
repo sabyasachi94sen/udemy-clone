@@ -68,17 +68,14 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
         id: "remarks",
         header: "Remarks",
         cell: (info) => (
-        <Input className="bg-cyan-500 rounded-lg w-[60%] h-[6vh]" defaultValue={info.getValue()}  />
+        <Input className="bg-cyan-500 rounded-lg w-[100%] h-[6vh]" defaultValue={info.getValue()}  />
         ),
       }),
       columnHelper.accessor((row) => row?.id, {
         id: "details",
         header: "Details",
         cell: (info) => (
-          <ViewButton
-          
-          onClick={()=>onModalOpen("viewActivityDetails",info.row.original)}
-        />
+        <img onClick={()=>onModalOpen("viewActivityDetails",info.row.original)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] ml-4 cursor-pointer" />
         ),
       }),
 
