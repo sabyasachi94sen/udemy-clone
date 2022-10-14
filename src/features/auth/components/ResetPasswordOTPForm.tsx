@@ -42,7 +42,7 @@ export function ResetPasswordOTPForm() {
       }, 1000);
     },
 
-    onError: (err: ErrorVal,mutateObj) => {
+    onError: (err: ErrorVal) => {
      
       toast.error(err.data.Otp)
     },
@@ -52,8 +52,7 @@ export function ResetPasswordOTPForm() {
     
 
     const { email } = router.query;
-    if(email==null)
-    router.push("/login")
+   
 
     const mutateObj = {
       email,
@@ -65,7 +64,9 @@ export function ResetPasswordOTPForm() {
 
   useEffect(()=>{
     
-    handleOTP()
+    const {email}=router.query;
+    if(email==null)
+    router.push("/login")
 
   },[])
 
