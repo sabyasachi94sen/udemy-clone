@@ -7,6 +7,7 @@ import { SetAuthToken, SetUserType } from "@/features/helpers";
 import { Button, Checkbox, Form, Input } from "@/shared/components";
 import { useBackendErrors } from "@/shared/hooks/use-backend-errors";
 import { setToken } from "@/shared/utils";
+import toast from "react-hot-toast";
 
 type FormValues = {
   email: string;
@@ -41,12 +42,14 @@ export function LoginForm() {
       // todo: to be removed
       SetAuthToken(data.token);
       SetUserType(data.user_type);
+      toast.success("Login Successful")
 
       router.push({ pathname: "/home" });
     },
 
     onError: (error) => {
-      displayErrorMessages(error);
+      toast.error(error.data.errorType)
+      toast.error(error.data.errorMessage)
     },
   });
 
