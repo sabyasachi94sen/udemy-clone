@@ -31,7 +31,7 @@ export default function AccountManagerPage() {
  
  
      
-     if(searchResults.length!=0){
+     if(searchResults?.length!=0){
        setIsSearch(true)
        setManagerActivityList({isLoading: false, isSuccess: true, data:searchResults
       
@@ -39,6 +39,10 @@ export default function AccountManagerPage() {
    }
   }
   
+  useEffect(()=>{
+    if(getLocalStorage("token")==null)
+    router.push("/login")
+  },[])
  
 
    

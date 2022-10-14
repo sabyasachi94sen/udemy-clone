@@ -5,8 +5,9 @@ import { AcademicTable } from "@/features/academic_plan";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAepList } from "@/shared/services/aep.service";
+import { getLocalStorage } from "@/features/helpers";
 
 
 export default function StudentPage() {
@@ -37,6 +38,11 @@ export default function StudentPage() {
     })
   }
  }
+
+ useEffect(()=>{
+    if(getLocalStorage("token")==null)
+    router.push("/login")
+ },[])
 
   return (
     <>

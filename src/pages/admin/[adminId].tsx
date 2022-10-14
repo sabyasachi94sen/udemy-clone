@@ -32,7 +32,7 @@ export default function AdminPersonalPage() {
 
 
     
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setAdminStudentList({isLoading: false, isSuccess: true, data:searchResults
      
@@ -42,6 +42,9 @@ export default function AdminPersonalPage() {
 
 
   useEffect(()=>{
+    if(getLocalStorage("token")==null)
+    router.push("/login")
+
     const admin_name=getLocalStorage("adminName");
     setAdminName(admin_name)
 

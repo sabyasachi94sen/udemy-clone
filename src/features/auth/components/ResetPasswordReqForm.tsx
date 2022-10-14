@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { PasswordResetObj } from "@/features/api";
+import { useEffect } from "react";
 
 interface FormValues {
   password: string;
@@ -52,6 +53,12 @@ export function ResetPasswordReqForm() {
 
     mutate(mutateObj);
   };
+
+
+  useEffect(()=>{
+    if(email==null)
+    router.push("/login")
+  },[])
 
   return (
     <div className="relative z-10 ml-[2vw] h-auto w-[21%] rounded-lg bg-white  p-6 shadow-lg 2xl:left-[11%]">

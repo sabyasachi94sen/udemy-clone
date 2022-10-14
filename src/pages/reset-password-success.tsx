@@ -1,8 +1,14 @@
 
 
 import { ResetPasswordSuccessForm } from "@/features/auth";
+import { getLocalStorage } from "@/features/helpers";
+import router from "next/router";
+import { useEffect } from "react";
 
 function ResetPasswordSuccess() {
+
+
+
   return (
     <main className="bg-white-100 flex h-screen items-center justify-evenly">
       <div className="absolute top-0 left-0">

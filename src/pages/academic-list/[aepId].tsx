@@ -15,6 +15,7 @@ import { useAepActivity } from "@/shared/services/aep.service";
 import { useRouter } from "next/router";
 
 
+
 export default function AepActivityPage() {
   const { currModalKey, onModalOpen, isModalOpen } =
     useModal() as ModalState<Account>;
@@ -48,6 +49,9 @@ export default function AepActivityPage() {
 
 
   useEffect(() => {
+    if(getLocalStorage("token")==null)
+    router.push("/login")
+    
     const student_name = getLocalStorage("studentName");
     setStudentName(student_name);
     setIsLoading(true);

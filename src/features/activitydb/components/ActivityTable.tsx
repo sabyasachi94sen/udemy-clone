@@ -133,7 +133,7 @@ export function ActivityTable({
     <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={activityListQuery?.data?.results}
+      data={activityListQuery.isSuccess && activityListQuery?.data?.results}
       isLoading={activityListQuery?.isLoading}
       // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     

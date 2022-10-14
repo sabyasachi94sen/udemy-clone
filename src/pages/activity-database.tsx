@@ -6,7 +6,8 @@ import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useRouter } from "next/router";
 import { useActivityList } from "@/shared/services/activity.service";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { getLocalStorage } from "@/features/helpers";
 
 export default function StudentPage() {
   const { currModalKey, onModalOpen,isModalOpen } = useModal() as ModalState<Account>;
@@ -24,13 +25,19 @@ export default function StudentPage() {
 
     if(searchResults.length!=0){
       setIsSearch(true)
-      setActivityList({isLoading: false, data:{
+      setActivityList({isLoading: false, isSuccess:true, data:{
         results: searchResults
       }
      
     })
   }
  }
+
+ useEffect(()=>{
+  if(getLocalStorage("token")==null)
+  router.push("/login")
+
+},[])
 
 
 

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { PasswordResetObj } from "@/features/api";
+import { useEffect } from "react";
 
 interface FormValues {
   otp: string;
@@ -43,14 +44,20 @@ export function ResetPasswordOTPForm() {
       }, 1000);
     },
 
-    onError: (err: ErrorVal) => {
+    onError: (err: ErrorVal,mutateObj) => {
+     
       toast.error(err.data.Otp, {
         position: toast.POSITION.TOP_CENTER,
       });
     },
   });
   const handleOTP = (otp: FormValues) => {
+
+    
+
     const { email } = router.query;
+    if(email==null)
+    router.push("/login")
 
     const mutateObj = {
       email,
@@ -59,6 +66,12 @@ export function ResetPasswordOTPForm() {
 
     mutate(mutateObj);
   };
+
+  useEffect(()=>{
+    
+    handleOTP()
+
+  },[])
 
   return (
     <div className="relative z-10 ml-[16.5vw] mt-[3vh] h-auto w-[21%] rounded-lg bg-white p-6 shadow-lg 2xl:left-[7%]">

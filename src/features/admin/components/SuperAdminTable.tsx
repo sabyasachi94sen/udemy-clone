@@ -111,7 +111,7 @@ export const SuperAdminTable=(({
       <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={superAdminsQuery.data?.results}
+      data={superAdminsQuery?.data}
       isLoading={superAdminsQuery.isLoading}
       // totalPagesCount={10} // TODO: fix This once backend adds limit in query
       totalResultsCount={superAdminsQuery.data?.count || 0}

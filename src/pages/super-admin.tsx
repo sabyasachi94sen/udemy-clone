@@ -12,6 +12,7 @@ import {
 } from "@/features/admin";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { getLocalStorage } from "@/features/helpers";
 
 export default function SuperAdminPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
@@ -20,6 +21,7 @@ export default function SuperAdminPage() {
   const router = useRouter();
   const { page, perPage } = router.query;
   const superAdminsQuery = useSuperAdmins({ page });
+  console.log(superAdminsQuery)
   const [superAdminList,setSuperAdminList]=useState(null)
   const [isSearch,setIsSearch]=useState(false)
   
@@ -30,16 +32,19 @@ export default function SuperAdminPage() {
 
   const searchStaff=(e:SyntheticEvent)=>{
     const staffName=e.target.value;
-    const searchResults=superAdminsQuery?.data?.results.filter((item)=>item.username.includes(staffName))
+    const searchResults=superAdminsQuery?.data?.filter((item)=>item.username.includes(staffName))
     
     if(searchResults.length!=0){
       setIsSearch(true)
-      setSuperAdminList({isLoading: false, data:{
-      results: searchResults,
-      count: superAdminsQuery?.data?.count
-    }})
+      setSuperAdminList({isLoading: false, data:searchResults
+    })
   }
  }
+
+ useEffect(()=>{
+     if(getLocalStorage("token")==null)
+     router.push("/login")
+ },[])
 
 
  

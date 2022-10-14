@@ -1,5 +1,7 @@
 import { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
+import { getLocalStorage } from "@/features/helpers";
+import { useRouter } from "next/router";
 
 import { GetUserType } from "@/features/helpers";
 import {
@@ -19,8 +21,12 @@ interface HomeItemsVal {
 
 export default function HomePage() {
   const [homeItems, setHomeItems] = useState<HomeItemsVal[]>([]);
+  const router=useRouter()
 
   useEffect(() => {
+    if(getLocalStorage("token")==null)
+    router.push("/login")
+
     const userType = GetUserType();
 
     if (userType === "admin") setHomeItems(homeInfoAdmin);

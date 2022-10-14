@@ -116,6 +116,7 @@ export function AccountManagerTable({
     [],
   );
 
+  console.log(accountManagerQuery)
 
 
   
@@ -124,7 +125,7 @@ export function AccountManagerTable({
     <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={accountManagerQuery?.data}
+      data={accountManagerQuery?.isSuccess && accountManagerQuery?.data}
       isLoading={accountManagerQuery?.isLoading}
       // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     

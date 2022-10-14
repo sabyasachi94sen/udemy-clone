@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { HiSearch } from "react-icons/hi";
 import { useRouter } from "next/router";
 
@@ -7,6 +7,7 @@ import { AccountManagerActivityTable,AccountManagerTable,CreateAccountManagerMod
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useAccountManager ,useAccountManagerActivities } from "@/shared/services/account-manager.service";
+import { getLocalStorage } from "@/features/helpers";
 
 export default function AccountManagerPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
@@ -27,11 +28,16 @@ export default function AccountManagerPage() {
     
     if(searchResults.length!=0){
       setIsSearch(true)
-      setManagerList({isLoading: false, data:searchResults
+      setManagerList({isLoading: false, isSuccess:true,data:searchResults
      
     })
   }
  }
+
+ useEffect(()=>{
+  if(getLocalStorage("token")==null)
+  router.push("/login")
+ },[])
 
   
  

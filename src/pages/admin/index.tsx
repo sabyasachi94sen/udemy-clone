@@ -10,7 +10,8 @@ import {
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useAdmins } from "@/shared/services/admin.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getLocalStorage } from "@/features/helpers";
 
 export default function AdminPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
@@ -37,6 +38,12 @@ export default function AdminPage() {
     })
   }
  }
+
+ useEffect(()=>{
+   if(getLocalStorage("token")==null)
+   router.push("/login")
+
+ },[])
 
   return (
     <>

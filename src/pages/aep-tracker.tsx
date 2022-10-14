@@ -6,7 +6,8 @@ import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useAepTracker } from "@/shared/services/aep-tracker.service";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getLocalStorage } from "@/features/helpers";
 
 export default function StudentPage() {
   const { currModalKey, onModalOpen,isModalOpen } = useModal() as ModalState<Account>;
@@ -42,6 +43,13 @@ export default function StudentPage() {
     })
   }
  }
+
+
+ useEffect(()=>{
+
+  if(getLocalStorage("token")==null)
+   router.push("/login")
+ },[])
 
 
 
