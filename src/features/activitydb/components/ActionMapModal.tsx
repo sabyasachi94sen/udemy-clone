@@ -74,7 +74,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                     type="button"
                     onClick={() => {
                       onModalOpen("createActionStep");
-                      setActionMap(1);
+                      setActionMap("before_registration_open");
                       setActionMapPhase("Before registration open")
                     }}
                   >
@@ -141,7 +141,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                     type="button"
                     onClick={() => {
                       onModalOpen("createActionStep");
-                      setActionMap(2);
+                      setActionMap("after_registration_open");
                       setActionMapPhase("After registration open")
                     }}
                   >
@@ -207,7 +207,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                     type="button"
                     onClick={() => {
                       onModalOpen("createActionStep");
-                      setActionMap(3);
+                      setActionMap("before_application_deadline");
                       setActionMapPhase("Before application deadline")
                     }}
                   >
@@ -272,7 +272,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                     type="button"
                     onClick={() => {
                       onModalOpen("createActionStep");
-                      setActionMap(4);
+                      setActionMap("after_application_deadline");
                       setActionMapPhase("After application deadline")
                     }}
                   >
@@ -338,7 +338,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                     type="button"
                     onClick={() => {
                       onModalOpen("createActionStep");
-                      setActionMap(5);
+                      setActionMap("before_activity_start_date");
                       setActionMapPhase("Before activity start date")
                     }}
                   >

@@ -67,7 +67,7 @@ export const useActivityList = (
       },
       onError(err,data) {
 
-        displayErrorMessages(err);
+        toast.error(err.data.message);
       
       },
 });

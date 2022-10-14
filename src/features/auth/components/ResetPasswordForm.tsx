@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import { PasswordResetObj } from "@/features/api";
 
@@ -29,6 +29,8 @@ export function ResetPasswordForm() {
 
   const { mutate } = useMutation(PasswordResetObj.verify_email, {
     onSuccess: (res: ResponseVal, email: PayLoad) => {
+
+    
       toast.success(res.message, {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -43,6 +45,7 @@ export function ResetPasswordForm() {
     },
 
     onError: (err: ErrorVal) => {
+      console.log(err)
       toast.error(err.data.email, {
         position: toast.POSITION.TOP_CENTER,
       });
