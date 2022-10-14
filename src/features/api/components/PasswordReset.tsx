@@ -1,11 +1,13 @@
 
 import { handleMutation } from "@/shared/services/api-client";
 
-const verifyEmail = (email: object) => handleMutation({
+const verifyEmail = (email: object) => {
+  return handleMutation({
     resourceUrl: "forgot/password",
     method: "POST",
     reqBody: email,
   });
+}
 
 const verifyOTP = (mutateObj: object) => {
   const data = {

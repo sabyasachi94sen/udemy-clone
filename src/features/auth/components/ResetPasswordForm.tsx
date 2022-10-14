@@ -29,11 +29,10 @@ export function ResetPasswordForm() {
 
   const { mutate } = useMutation(PasswordResetObj.verify_email, {
     onSuccess: (res: ResponseVal, email: PayLoad) => {
-
+      
+      console.log(res)
     
-      toast.success(res.message, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.success(res.message)
       setTimeout(() => {
         router.push({
           pathname: "/reset-password-otp",
@@ -45,10 +44,9 @@ export function ResetPasswordForm() {
     },
 
     onError: (err: ErrorVal) => {
-      console.log(err)
-      toast.error(err.data.email, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      
+      toast.error(err.data.email)
+     
     },
   });
 

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import { PasswordResetObj } from "@/features/api";
 import { useEffect } from "react";
@@ -28,9 +28,7 @@ export function ResetPasswordReqForm() {
 
   const { mutate } = useMutation(PasswordResetObj.confirm_password, {
     onSuccess: (res: ResponseVal) => {
-      toast.success(res.password, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.success(res.password)
       setTimeout(() => {
         router.push({
           pathname: "/reset-password-success",
@@ -39,9 +37,7 @@ export function ResetPasswordReqForm() {
     },
 
     onError: (err: ErrorVal) => {
-      toast.error(err.data.password, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error(err.data.password)
     },
   });
 

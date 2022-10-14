@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import { PasswordResetObj } from "@/features/api";
 import { useEffect } from "react";
@@ -31,9 +31,7 @@ export function ResetPasswordOTPForm() {
 
   const { mutate } = useMutation(PasswordResetObj.verify_otp, {
     onSuccess: (res: ResponseVal, mutateObj: mutateVal) => {
-      toast.success(res.message, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.success(res.message)
       setTimeout(() => {
         router.push({
           pathname: "/reset-password-req",
@@ -46,9 +44,7 @@ export function ResetPasswordOTPForm() {
 
     onError: (err: ErrorVal,mutateObj) => {
      
-      toast.error(err.data.Otp, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.error(err.data.Otp)
     },
   });
   const handleOTP = (otp: FormValues) => {

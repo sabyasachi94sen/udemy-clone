@@ -14,7 +14,7 @@ export function ResetPasswordSuccessForm() {
         </div>
       </div>
       <div className="mx-auto mb-[8vh] flex justify-center">
-        <Link href="/">
+        <Link href="/login">
           <button
             className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500 2xl:mb-14"
             type="button"
