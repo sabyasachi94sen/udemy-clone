@@ -72,6 +72,8 @@ export function AuthProvider({
   const userResult = useQuery(["authUser"], () => fetchAuthUser(), {
     staleTime: Infinity, // never auto refetch this query, only through manual query fn
   });
+  console.log("userResults")
+  console.log(userResult)
 
   return (
     <AuthContext.Provider
@@ -115,6 +117,7 @@ export function AuthGuard({
   const router = useRouter();
 
   const { isAuthenticated, isLoading, user } = useAuth();
+  console.log(isAuthenticated)
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
