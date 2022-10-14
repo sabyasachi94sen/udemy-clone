@@ -89,7 +89,7 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
       currentPage={Number(page) || 1}
       data={AepListQuery?.data}
       isLoading={AepListQuery?.isLoading}
-      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     />
   );
 }

@@ -113,7 +113,7 @@ export const SuperAdminTable=(({
       currentPage={Number(page) || 1}
       data={superAdminsQuery.data?.results}
       isLoading={superAdminsQuery.isLoading}
-      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={10} // TODO: fix This once backend adds limit in query
       totalResultsCount={superAdminsQuery.data?.count || 0}
     />
     </>

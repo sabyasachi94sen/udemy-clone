@@ -102,7 +102,7 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
       currentPage={Number(page) || 1}
       data={aepActivityQuery?.isSuccess && aepActivityQuery?.data}
       isLoading={aepActivityQuery?.isLoading}
-      totalPagesCount={1} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={1} // TODO: fix This once backend adds limit in query
     />
   );
 }

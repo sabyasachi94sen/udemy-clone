@@ -114,7 +114,7 @@ export function AdminTable({
       currentPage={Number(page) || 1}
       data={AdminsQuery?.data}
       isLoading={AdminsQuery.isLoading}
-      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={10} // TODO: fix This once backend adds limit in query
       // totalResultsCount={AdminsQuery.data?.count || 0}
     />
   );

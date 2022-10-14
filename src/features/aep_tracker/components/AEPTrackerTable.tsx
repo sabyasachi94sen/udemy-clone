@@ -132,7 +132,7 @@ export function AEPTrackerTable({
       currentPage={Number(page) || 1}
       data={storeAepData}
       isLoading={AepTrackerQuery?.isLoading}
-      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     
     />
   );
