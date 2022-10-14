@@ -36,6 +36,9 @@ export const queryKeys = createQueryKeyStore({
   aep_activity: {
     list: (page?: number) => [page],
   },
+  aep_activity_choice: {
+    list: (page?: number) => [page],
+  },
   aep_activity_filter: {
     list: (page?: number) => [page],
   },

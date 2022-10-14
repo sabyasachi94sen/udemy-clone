@@ -37,6 +37,13 @@ export class AepService {
         });
     }
 
+    public static aepChoice(): CancelablePromise<any> {
+        return __request({
+            method: 'GET',
+            path: `/activity/choice_list/`,
+        });
+    }
+
     public static aepActivityAssignmentFilter({student_id,status,subject}): CancelablePromise<any> {
         return __request({
             method: 'GET',

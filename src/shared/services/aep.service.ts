@@ -43,6 +43,17 @@ export const useAepList = (
         
        );
 
+       export const useAepChoice = (
+      
+     ) =>
+       useQuery(
+         queryKeys.aep_activity_choice.list(1),
+     
+         () => AepService.aepChoice(),
+        
+       );
+
+
 
        
     export const useAepActivityFilter = (

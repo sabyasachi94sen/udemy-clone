@@ -418,6 +418,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
                   Eligibility Restrictions
                 </h1>
+                
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Range Type</span>
                   <select

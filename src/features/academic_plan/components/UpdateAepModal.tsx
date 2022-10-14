@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Account } from "@/api";
 import { BaseModal,BaseTable,Button,Form,Input} from "@/shared/components";
-import { useAepActivityAssignment, useAepActivityAssignmentFilter, useAepActivityFilter } from "@/shared/services/aep.service";
+import { useAepActivityAssignment, useAepActivityAssignmentFilter, useAepActivityFilter,useAepChoice } from "@/shared/services/aep.service";
 import { useModal } from "@/shared/stores/modal.store";
 import {useEffect, useMemo, useState} from "react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
@@ -25,9 +25,9 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
   const aepActivityAssignmentFilter=useAepActivityAssignmentFilter()
   const columnHelper = createColumnHelper<Account>();
 
+ const aepChoice=useAepChoice()
 
-
-
+console.log(aepChoice)
 
   
 
@@ -131,7 +131,9 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
                   className="relative left-3 h-[5vh] w-[60%] rounded-md bg-[#EEEE] outline-none"
           >
                   <option>Select Type</option>
-                  <option>Exam</option>
+                  {aepChoice?.data?.activity_type?.map((item,index)=>{
+                    return <option key={index}>{item}</option>
+                  })}
                 </select>
               </div>
 
@@ -142,8 +144,9 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
                   className="relative left-3 h-[5vh] w-[60%] rounded-md bg-[#EEEE] outline-none"
           >
                   <option>Select Subject</option>
-                  <option>Maths</option>
-                  <option>Olympiad</option>
+                  {aepChoice?.data?.activity_subject?.map((item,index)=>{
+                    return <option key={index}>{item}</option>
+                  })}
                 </select>
               </div>
             </div>
