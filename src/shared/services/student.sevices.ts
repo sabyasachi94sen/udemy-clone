@@ -74,8 +74,15 @@ export const useStudent = (
   
         onSuccess?.();
       },
-      onError(err) {
-        displayErrorMessages(err);
+      onError(err,data) {
+  
+        const checkCreds=checkProperties(data.data)
+      
+    
+        if(checkCreds)
+        toast.error("Please enter all fields")
+        else
+        toast.error("Account with this email already exists")
       },
     });
   }
@@ -104,8 +111,14 @@ export const useStudent = (
         onSuccess?.();
       },
   
-      onError(err) {
-        displayErrorMessages(err);
+      onError(err,data) {
+        const checkCreds=checkProperties(data.data)
+      
+    
+        if(checkCreds)
+        toast.error("Please enter all fields")
+        else
+        toast.error("Account with this email already exists")
       },
     });
   }
@@ -137,3 +150,13 @@ export const useStudent = (
       },
     });
   }
+
+
+  function checkProperties(obj) {
+    for (var key in obj) {
+        if (obj[key] == "")
+            return true;
+    }
+    return false;
+  }
+  

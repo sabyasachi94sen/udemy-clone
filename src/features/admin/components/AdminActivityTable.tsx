@@ -31,13 +31,13 @@ export function AdminActivityTable({adminActivity,page}): JSX.Element {
       columnHelper.accessor((row) => row.activity_count, {
         id: "activities",
         header: "Activities in AEP",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="pl-14">{info.getValue()}</div>,
       }),
 
       columnHelper.accessor((row) => row.last_update, {
         id: "last_update",
         header: "Last update",
-        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+        cell: (info) => (info.getValue() ? <div className="pl-2">{formatDate(info.getValue())}</div> : null),
       }),
       columnHelper.accessor((row) => row.completion_status, {
         id: "completion_status",
@@ -54,7 +54,7 @@ export function AdminActivityTable({adminActivity,page}): JSX.Element {
       currentPage={Number(page) || 1}
       data={adminActivity?.isSuccess && adminActivity?.data}
       isLoading={adminActivity?.isLoading}
-      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     />
   );
 }

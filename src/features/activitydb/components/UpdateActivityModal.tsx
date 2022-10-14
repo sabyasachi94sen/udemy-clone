@@ -293,7 +293,8 @@ useEffect(()=>{
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Name</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
+                   className="relative ml-[19.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                   
                     {...register("activity_name")}
                     // defaultValue={name!=="Add an activity to the database"?individualActivityInfo?.activity_name: null}
                     
@@ -304,7 +305,7 @@ useEffect(()=>{
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Type</span>
                   <select
-                    className="relative ml-12 h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative ml-[20.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("activity_type")}
                     
                     
@@ -320,7 +321,7 @@ useEffect(()=>{
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Subject</span>
                   <select
-                    className="relative ml-7 h-[5vh] w-[100%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative ml-[17%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("subject")}
                     
                   >
@@ -335,7 +336,7 @@ useEffect(()=>{
                  
                    <Select 
                   
-                  className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"  
+                  className="relative h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
                   isMulti 
                   options={applicationOptions} 
                   onChange={handleMultiOption}
@@ -350,7 +351,7 @@ useEffect(()=>{
                 <div className="mt-8 flex items-center">
                   <span className="text-md font-bold">Location Type</span>
                   <select
-                    className="relative ml-14 h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
+                  className="relative ml-[9%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("location_type")}
                     
                   >
@@ -377,7 +378,7 @@ useEffect(()=>{
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">City of Activity</span>
                   <input
-                    className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
+                        className="relative ml-12 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("country_citizenship")}
                     
                     
@@ -389,7 +390,7 @@ useEffect(()=>{
                 <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">URL</span>
                   <input
-                    className="relative ml-14 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
+                  className="relative ml-[22%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("url")}
                     // defaultValue={individualActivityInfo?.url}
                     
@@ -402,7 +403,7 @@ useEffect(()=>{
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Registration open</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
+                      className="relative ml-10 h-[5vh] w-[80%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     // defaultValue={individualActivityInfo?.registration_open}
                     
@@ -414,7 +415,7 @@ useEffect(()=>{
                 <div className="mt-4 mb-5 flex items-center">
                   <span className="text-md font-bold">Application Date</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+                className="relative ml-10 h-[5vh] w-[75%] rounded-md bg-[#EEEE]"
                     {...register("application_deadline")}
                     // defaultValue={moment(individualActivityInfo?.created_at).format("YYYY-MM-DD")}
                     
@@ -426,7 +427,7 @@ useEffect(()=>{
                 <div className="mb-6 flex items-center">
                   <span className="text-md font-bold">Activity Start</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
+                   className="relative ml-[10%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_start_date")}
                     // defaultValue={individualActivityInfo?.activity_start_date}
                     
@@ -438,7 +439,7 @@ useEffect(()=>{
                 <div className="mb-6 flex items-center">
                   <span className="text-md font-bold">Activity End</span>
                   <input
-                    className="relative ml-12 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
+                    className="relative ml-[12%] h-[5vh] w-[74%] rounded-md bg-[#EEEE]"
                     {...register("activity_end_date")}
                     // defaultValue={individualActivityInfo?.activity_end_date}
                     

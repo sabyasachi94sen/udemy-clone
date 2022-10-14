@@ -32,7 +32,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
  const [sidebarOpen, setSidebarOpen] = useState(false);
  const [bgColor,setBgColor]=useState("")
 
- //Generate random color
+ const date=new Date()
+ const year=date.getFullYear();
+ const month=date.getMonth()+1;
+ const day=date.getDate();
+ const currentDate=year+"/"+month+"/"+day;
 
 
 
@@ -68,6 +72,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(()=>{
+     //Generate random color
     const randomColor = String("#"+Math.floor(Math.random()*16777215).toString(16));
     setBgColor(randomColor)
   },[])
@@ -210,7 +215,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </button>
           <div className="flex flex-1 justify-between px-4">
             <div className="flex flex-1">
-              <form action="#" className="flex w-full md:ml-0" method="GET">
+              {/* <form action="#" className="flex w-full md:ml-0" method="GET">
                 <label className="sr-only" htmlFor="search-field">
                   Search
                 </label>
@@ -226,9 +231,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                     type="search"
                   />
                 </div>
-              </form>
+              </form> */}
             </div>
+            <div className="w-[10%] mt-3 h-[5vh] flex items-center font-bold text-gray-500">{currentDate}</div>
             <div className="ml-4 flex items-center md:ml-6">
+             
               <button
                 className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 type="button"

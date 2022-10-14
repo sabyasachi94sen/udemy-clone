@@ -16,6 +16,79 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
     },
   ];
 
+  const countries=[{
+    label: "India",
+    value: "india"
+   },{
+    label: "Japan",
+    value: "japan"
+   },
+   {
+    label: "China",
+    value: "china"
+   },{
+   label: "Indonesia",
+    value: "indonesia"
+   },
+   {
+    label: "Malaysia",
+    value: "malaysia"
+   },{
+    label: "Thailand",
+    value: "thailand"
+   },
+   {
+    label: "Singapore",
+    value: "singapore"
+   },{
+    label: "North Korea",
+    value: "north korea"
+   },
+   {
+    label: "Taiwan",
+    value: "taiwan"
+   },{
+    label: "Vietnam",
+    value: "vietnam"
+   },
+   {
+    label: "Mongolia",
+    value: "mongolia"
+   },{
+    label: "Myanmar",
+    value: "myanmar"
+   },
+   {
+    label: "Bangladesh",
+    value: "bangladesh"
+   },{
+    label: "Sri lanka",
+    value: "sri lanka"
+   },
+   {
+    label: "Pakistan",
+    value: "pakistan"
+   },{
+    label: "Oman",
+    value: "oman"
+   },
+   {
+    label: "Maldieves",
+    value: "maldieves"
+   },{
+    label: "Uzbekistan",
+    value: "uzbekistan"
+   },
+   {
+    label: "Kuwait",
+    value: "kuwait"
+   },{
+    label: "Saudi Arabia",
+    value: "saudi arabia"
+   }]
+  
+
+
 
   const router=useRouter()
   const { isModalOpen, onModalClose, selectedData } =
@@ -47,12 +120,12 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                     student_name: selectedData?.student_name,
                     date_of_birth: selectedData?.date_of_birth,
                     current_grade: selectedData?.current_grade,
-                    country_of_residence:selectedData?.student_city_residence[0]?.country_of_residence,
+                  
                     city_of_residence:selectedData?.student_city_residence[0]?.city_of_residence,
-                    country_of_citizenship: selectedData?.country_of_citizenship,
+                    
                     
                     is_active: selectedData?.is_active?"active":"inactive",
-                    country_of_boarding_school: selectedData?.country_of_boarding_school,
+                 
                     email:selectedData?.account?.email,
                     phone_number: selectedData?.phone_number,
                     remarks: selectedData?.remarks,
@@ -126,8 +199,9 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("country_of_residence")}
                     >
-                      <option>Select Country</option>
-                      <option>India</option>
+                       <option>Select Country</option>
+                    
+                    {countries.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item.label}>{item.label}</option>)}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -145,8 +219,9 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("country_of_citizenship")}
                     >
-                      <option>Select Country</option>
-                      <option>India</option>
+                     <option>Select Country</option>
+                    
+                    {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item.label}>{item.label}</option>)}
                     </select>
                   </div>
                 </div>
@@ -193,8 +268,7 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                       className="relative left-3 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"
                       {...register("country_of_boarding_school")}
                     >
-                      <option>Select Country of Boarding School</option>
-                      <option>India</option>
+                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item.label}>{item.label}</option>)}
                     </select>
                   </div>
                 </div>

@@ -111,7 +111,7 @@ export function AEPTrackerTable({
     
 
     if(AepTrackerQuery.isSuccess){
-      const tempArr=AepTrackerQuery?.data?.yet_to_be_completed.concat(AepTrackerQuery?.data?.completed)
+      const tempArr=AepTrackerQuery?.data?.todays_target_date.concat(AepTrackerQuery?.data?.yet_to_be_completed,AepTrackerQuery?.data?.completed)
       console.log(AepTrackerQuery)
       setStoreAepData(tempArr)
     }

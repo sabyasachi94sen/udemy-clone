@@ -36,7 +36,7 @@ export const useAccountManager = (
     
     // https://tanstack.com/query/v4/docs/guides/paginated-queries#better-paginated-queries-with-keeppreviousdata
    
-  ) =>{
+  ) =>
     
     useQuery(
    
@@ -45,7 +45,7 @@ export const useAccountManager = (
     
       
     );
-  }
+  
 
 
 
@@ -72,8 +72,15 @@ export function useCreateAccountManager(onSuccess?: () => void) {
 
       onSuccess?.();
     },
-    onError(err) {
-      displayErrorMessages(err);
+    onError(err,data) {
+      // displayErrorMessages(err);
+      const checkCreds=checkProperties(data.data)
+      
+    
+      if(checkCreds)
+      toast.error("Please enter all fields")
+      else
+      toast.error("Account with this email already exists")
     },
   });
 }
@@ -102,7 +109,8 @@ export function useUpdateAccountManager(onSuccess?: () => void) {
       },
   
       onError(err) {
-        displayErrorMessages(err);
+        // displayErrorMessages(err);
+        toast.error("Account with this email already exists")
       },
     });
   }
@@ -169,3 +177,15 @@ export function useUpdateAccountManager(onSuccess?: () => void) {
 //     },
 //   });
 // }
+
+
+function checkProperties(obj) {
+  for (var key in obj) {
+      if (obj[key] == "")
+          return true;
+  }
+  return false;
+}
+
+
+

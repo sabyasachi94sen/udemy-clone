@@ -65,8 +65,10 @@ export const useActivityList = (
   
         onSuccess?.();
       },
-      onError(err) {
+      onError(err,data) {
+
         displayErrorMessages(err);
+      
       },
 });
 
@@ -136,23 +138,7 @@ export function useDeleteActionMapStep(onSuccess?: () => void) {
   });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- export function useCreateActivity(onSuccess?: () => void) {
+export function useCreateActivity(onSuccess?: () => void) {
   const { refreshQuery } = useRefreshQuery();
   const { displayErrorMessages } = useBackendErrors();
 
@@ -175,35 +161,21 @@ export function useDeleteActionMapStep(onSuccess?: () => void) {
 
       onSuccess?.();
     },
-    onError(err) {
-      displayErrorMessages(err);
+    onError(err,data) {
+      const checkCreds=checkProperties(data.data)
+      
+    
+      if(checkCreds)
+      toast.error("Please enter all fields")
+      else
+      toast.error("Please enter a valid url ex: https://www.eoraa.com")
     },
 });
 
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- export function useUpdateActivity(onSuccess?: () => void) {
+export function useUpdateActivity(onSuccess?: () => void) {
     const { refreshQuery } = useRefreshQuery();
     const { displayErrorMessages } = useBackendErrors();
   
@@ -227,7 +199,7 @@ export function useDeleteActionMapStep(onSuccess?: () => void) {
         onSuccess?.();
       },
       onError(err) {
-        displayErrorMessages(err);
+        toast.error("Please enter a valid url ex: https://www.eoraa.com")
       },
 });
 
@@ -261,3 +233,16 @@ export function useDeleteActionMapStep(onSuccess?: () => void) {
       },
     });
   }
+
+
+  function checkProperties(obj) {
+    for (var key in obj) {
+        if (obj[key] == "")
+            return true;
+    }
+    return false;
+  }
+  
+
+
+  

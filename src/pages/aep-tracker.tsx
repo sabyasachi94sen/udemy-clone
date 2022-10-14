@@ -23,7 +23,7 @@ export default function StudentPage() {
     const searchStaff=(e:SyntheticEvent)=>{
     const staffName=e.target.value;
   
-    
+    const todays_target_date=AepTrackerQuery?.data?.todays_target_date.filter((item)=>item?.activity_assignment?.student?.student_name.includes(staffName))
     const not_completed=AepTrackerQuery?.data?.yet_to_be_completed.filter((item)=>item?.activity_assignment?.student?.student_name.includes(staffName))
     const completed=AepTrackerQuery?.data?.completed.filter((item)=>item?.activity_assignment?.student?.student_name.includes(staffName))
     
@@ -32,6 +32,7 @@ export default function StudentPage() {
     if(not_completed.length!=0 || completed.length!=0){
       setIsSearch(true)
       setAepTrackerList({isLoading: false, isSuccess:true, data:{
+        todays_target_date: todays_target_date,
         yet_to_be_completed : not_completed,
         completed: completed,
       }

@@ -8,26 +8,18 @@ import { us } from "@/shared/stores/modal.store";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 
 import { Account } from "@/api";
-import { BaseTable, IconButton,RowNavigate,StatusCell } from "@/shared/components";
-import { useAccountManagerActivities } from "@/shared/services/account-manager.service";
+import { BaseTable, CompleteBar, IconButton,RowNavigate,StatusCell } from "@/shared/components";
+
 import { formatDate } from "@/shared/utils";
 import {getLocalStorage} from "@/features/helpers"
 
 interface AccountManagerTableProps {
-  onDelete: (user: Account) => void;
-  onUpdate: (user: Account) => void;
-  showManagerActivities: ()=>void;
-  studentId: string
+   page: number;
+   accountManagerActivity: {}[];
 }
 
-export function AccountManagerActivityTable(): JSX.Element {
-  const router = useRouter();
-  const { page, perPage } = router.query;
-  const studentId=getLocalStorage("studentId");
- 
+export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX.Element {
 
-  const accountManagerActivity=useAccountManagerActivities(studentId)
-  
    const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
 
@@ -42,40 +34,33 @@ export function AccountManagerActivityTable(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
-      columnHelper.accessor((row) => row.student_name, {
+      columnHelper.accessor((row) => row.student, {
         id: "student_name",
         header: "Student Name",
-        cell: (info) => (<RowNavigate rowLink={showManagerActivities} rowValue={info.getValue()} />),
+        cell: (info) => (info.getValue()),
       }),
-      columnHelper.accessor((row) => row.manager_name, {
-        id: "student_name",
+      columnHelper.accessor((row) => row.activity_count, {
+        id: "activity_aep",
         header: "Activities in AEP",
-        cell: (info) => ( info.getValue()),
+        cell: (info) => <div className="pl-14">{info.getValue()}</div>,
       }),
      
       columnHelper.accessor((row) => row.last_update, {
         id: "last_update",
         header: "Last update",
-        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+        cell: (info) => (info.getValue() ? <div className="pl-2">{formatDate(info.getValue())}</div> : null),
       }),
-      columnHelper.accessor((row) => row.is_active, {
+      columnHelper.accessor((row) => row.completion_status, {
         id: "is_active",
         header: "Completion Status",
         cell: (info) => (
-          info.getValue()
+          <CompleteBar rowValue={info.getValue()}/>
         ),
       }),
      
     ],
     [],
   );
-  const {storedData}=useStoreData()
-
-  useEffect(()=>{
-    
- 
-    console.log(storedData)
-  },[])
 
 
   return (
@@ -84,7 +69,7 @@ export function AccountManagerActivityTable(): JSX.Element {
       currentPage={Number(page) || 1}
       data={accountManagerActivity?.data}
       isLoading={false}
-      totalPagesCount={10} // TODO: fix This once backend adds limit in query
+      // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     
     
     />

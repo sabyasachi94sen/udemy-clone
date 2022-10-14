@@ -57,16 +57,19 @@ export function AdminTable({
       columnHelper.accessor((row) => row.last_update, {
         id: "last_update",
         header: "Last update",
-        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+        cell: (info) => (info.getValue() ? <div className="pl-1">{formatDate(info.getValue())}</div> : null),
+      
       }),
       columnHelper.accessor((row) => row.is_active, {
         id: "is_active",
         header: "Active Status",
         cell: (info) => (
+          <div className="pl-2">
           <StatusCell
             rowValue={info.getValue() === true ? "Active" : "Inactive"}
             statusColor={info.getValue() === true ? "active" : "inactive"}
           />
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {

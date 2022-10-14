@@ -1,8 +1,9 @@
+import { useRouter } from "next/router";
+
 import { Account } from "@/api";
-import { BaseModal, Button, Form, Input } from "@/shared/components";
-import { useAccountManagerDropDownList} from "@/shared/services/student.sevices";
+import { BaseModal, Form } from "@/shared/components";
+import { useAccountManagerDropDownList } from "@/shared/services/student.sevices";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
-import {useRouter} from "next/router";
 
 export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
   const activeOptions = [
@@ -16,6 +17,79 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
     },
   ];
 
+  const countries=[{
+    label: "India",
+    value: "india"
+   },{
+    label: "Japan",
+    value: "japan"
+   },
+   {
+    label: "China",
+    value: "china"
+   },{
+   label: "Indonesia",
+    value: "indonesia"
+   },
+   {
+    label: "Malaysia",
+    value: "malaysia"
+   },{
+    label: "Thailand",
+    value: "thailand"
+   },
+   {
+    label: "Singapore",
+    value: "singapore"
+   },{
+    label: "North Korea",
+    value: "north korea"
+   },
+   {
+    label: "Taiwan",
+    value: "taiwan"
+   },{
+    label: "Vietnam",
+    value: "vietnam"
+   },
+   {
+    label: "Mongolia",
+    value: "mongolia"
+   },{
+    label: "Myanmar",
+    value: "myanmar"
+   },
+   {
+    label: "Bangladesh",
+    value: "bangladesh"
+   },{
+    label: "Sri lanka",
+    value: "sri lanka"
+   },
+   {
+    label: "Pakistan",
+    value: "pakistan"
+   },{
+    label: "Oman",
+    value: "oman"
+   },
+   {
+    label: "Maldieves",
+    value: "maldieves"
+   },{
+    label: "Uzbekistan",
+    value: "uzbekistan"
+   },
+   {
+    label: "Kuwait",
+    value: "kuwait"
+   },{
+    label: "Saudi Arabia",
+    value: "saudi arabia"
+   }]
+  
+
+
 
   const router=useRouter()
   const { isModalOpen, onModalClose, selectedData } =
@@ -23,7 +97,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
   const { page, perPage } = router.query;
 
  
-  const accountManagerDropDownList=useAccountManagerDropDownList({page})
+  const accountManagerDropDownList=useAccountManagerDropDownList({ page })
   
 
   return (
@@ -31,25 +105,25 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
       hasHeader
       showHeaderCloseButton
       isOpen={isModalOpen && isOpen}
-      title="View a student to the roster"
       modalWidth="max-w-[90%]"
+      title="View a student to the roster"
       onRequestClose={() => {
         onModalClose();
       }}
     >
       <div className="m-auto h-[80vh] w-full overflow-y-scroll p-8">
         <Form<Account>
-             form={{
+          form={{
                 defaultValues: {
                     student_name: selectedData?.student_name,
                     date_of_birth: selectedData?.date_of_birth,
                     current_grade: selectedData?.current_grade,
-                    country_of_residence:selectedData?.student_city_residence[0]?.country_of_residence,
+                    
                     city_of_residence:selectedData?.student_city_residence[0]?.city_of_residence,
-                    country_of_citizenship: selectedData?.country_of_citizenship,
+                    
                    
                     is_active: selectedData?.is_active?"active":"inactive",
-                    country_of_boarding_school: selectedData?.country_of_boarding_school,
+                   
                     email:selectedData?.account?.email,
                     phone_number: selectedData?.phone_number,
                     remarks: selectedData?.remarks,
@@ -127,7 +201,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       disabled
                     >
                       <option>Select Country</option>
-                      <option>India</option>
+                    
+                      {countries.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item.label}>{item.label}</option>)}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -135,8 +210,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     <input
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                       {...register("city_of_residence")}
-                      type="text"
                       disabled
+                      type="text"
                     />
                   </div>
 
@@ -148,7 +223,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       disabled
                     >
                       <option>Select Country</option>
-                      <option>India</option>
+                    
+                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item.label}>{item.label}</option>)}
                     </select>
                   </div>
                 </div>
@@ -166,7 +242,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       <option>Select account manager</option>
                       {accountManagerDropDownList &&
                         accountManagerDropDownList?.data.map((item, index) => (
-                          <option key={index} value={item.id} selected={selectedData?.student_assignment[0]?.account_manager?.username===item?.username?true:false}>
+                          <option key={index} selected={selectedData?.student_assignment[0]?.account_manager?.username===item?.username} value={item.id}>
                             {item && item?.username}
                           </option>
                         ))}
@@ -176,8 +252,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     <p className="ml-8">Active Status</p>
                     <select
                       {...register("is_active")}
+                      disabled
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
-                       disabled
                     >
                       <option>Select Status</option>
                       {activeOptions.map((item, index) => (
@@ -198,8 +274,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       {...register("country_of_boarding_school")}
                       disabled
                     >
-                      <option>Select Country of Boarding School</option>
-                      <option>India</option>
+                      
+                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item.label}>{item.label}</option>)}
                     </select>
                   </div>
                 </div>

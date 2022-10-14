@@ -44,8 +44,8 @@ export function AccountManagerTable({
         header: "Name",
         cell: (info) => (
         <RowNavigate rowLink={(row)=>{
-          router.push(`/account-manager/${info.row.original.id}`)
-          setLocalStorage("studentId",info.row.original.id)
+          router.push(`/account-manager/${info.row.original.account.id}`)
+          setLocalStorage("studentId",info.row.original.account.id)
           setLocalStorage("managerName",info.getValue())
         }
         } 
@@ -55,22 +55,24 @@ export function AccountManagerTable({
       columnHelper.accessor((row) => row.last_update, {
         id: "last_update",
         header: "Last update",
-        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+        cell: (info) => (info.getValue() ? <div className="pl-1">{formatDate(info.getValue())}</div> : null)
       }),
       columnHelper.accessor((row) => row.is_active, {
         id: "is_active",
         header: "Active Status",
         cell: (info) => (
+          <div className="pl-2">
           <StatusCell
             rowValue={info.getValue() === true ? "Active" : "Inactive"}
             statusColor={info.getValue() === true ? "active" : "inactive"}
           />
+          </div>
         ),
       }),
       columnHelper.accessor((row) => row.student_count, {
         id: "student_count",
         header: "Students",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="pl-7">{info.getValue()}</div>,
       
       }),
 

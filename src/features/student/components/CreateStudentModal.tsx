@@ -16,6 +16,80 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
     },
   ];
 
+  const countries=[{
+    label: "India",
+    value: "india"
+   },{
+    label: "Japan",
+    value: "japan"
+   },
+   {
+    label: "China",
+    value: "china"
+   },{
+   label: "Indonesia",
+    value: "indonesia"
+   },
+   {
+    label: "Malaysia",
+    value: "malaysia"
+   },{
+    label: "Thailand",
+    value: "thailand"
+   },
+   {
+    label: "Singapore",
+    value: "singapore"
+   },{
+    label: "North Korea",
+    value: "north korea"
+   },
+   {
+    label: "Taiwan",
+    value: "taiwan"
+   },{
+    label: "Vietnam",
+    value: "vietnam"
+   },
+   {
+    label: "Mongolia",
+    value: "mongolia"
+   },{
+    label: "Myanmar",
+    value: "myanmar"
+   },
+   {
+    label: "Bangladesh",
+    value: "bangladesh"
+   },{
+    label: "Sri lanka",
+    value: "sri lanka"
+   },
+   {
+    label: "Pakistan",
+    value: "pakistan"
+   },{
+    label: "Oman",
+    value: "oman"
+   },
+   {
+    label: "Maldieves",
+    value: "maldieves"
+   },{
+    label: "Uzbekistan",
+    value: "uzbekistan"
+   },
+   {
+    label: "Kuwait",
+    value: "kuwait"
+   },{
+    label: "Saudi Arabia",
+    value: "saudi arabia"
+   }]
+  
+
+
+
   const data = [];
   const router=useRouter()
   const { isModalOpen, onModalClose } = useModal();
@@ -113,7 +187,9 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                       {...register("country_of_residence")}
                     >
                       <option>Select Country</option>
-                      <option>India</option>
+                      {countries.map((item,index)=>{
+                        return <option key={index}>{item.label}</option>
+                      })}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -132,7 +208,10 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                       {...register("country_of_citizenship")}
                     >
                       <option>Select Country</option>
-                      <option>India</option>
+                    
+                      {countries.map((item,index)=>{
+                        return <option key={index}>{item.label}</option>
+                      })}
                     </select>
                   </div>
                 </div>
@@ -179,8 +258,10 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                       className="relative left-3 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"
                       {...register("country_of_boarding_school")}
                     >
-                      <option>Select Country of Boarding School</option>
-                      <option>India</option>
+                     <option>Select Country</option>
+                      {countries.map((item,index)=>{
+                        return <option key={index}>{item.label}</option>
+                      })}
                     </select>
                   </div>
                 </div>
@@ -190,7 +271,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
 
               <div className="mx-auto mt-16 h-[20vh] w-[50%] text-center text-lg font-bold">
                 <p>Remarks</p>
-                <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" />
+                <textarea className="mx-auto mt-4 h-[15vh] w-[90%] bg-[#EEEEEE]" {...register("remarks")} />
               </div>
 
               <div className="mx-auto pt-6 flex justify-center">
