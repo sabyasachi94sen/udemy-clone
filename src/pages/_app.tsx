@@ -14,6 +14,7 @@ import "@/shared/styles/globals.css";
 import { DashboardLayout } from "@/shared/components";
 import { Head, TWResponsiveIndicator } from "@/shared/components/libs";
 import { AppProviders } from "@/shared/stores/app-providers";
+import { AuthGuard, AuthProvider } from "@/shared/stores/auth.context";
 
 // Pages are by default, checked for protected
 // Ones with publicRoute true are public pages
@@ -43,20 +44,21 @@ export default function MyApp(props: AppProps): JSX.Element {
             stopDelayMs={200}
           />
           <AppProviders>
-            {/* <AuthProvider> */}
-            <TWResponsiveIndicator />
-            {Component.isPublicRoute ? (
-              // public page
-              <Component {...pageProps} />
-            ) : (
-              // Do auth check for the protected routes
-              // <AuthGuard>
-              <DashboardLayout>
+            <AuthProvider>
+              {/* <AuthProvider> */}
+              <TWResponsiveIndicator />
+              {Component.isPublicRoute ? (
+                // public page
                 <Component {...pageProps} />
-              </DashboardLayout>
-              // </AuthGuard>
-            )}
-            {/* </AuthProvider> */}
+              ) : (
+                // Do auth check for the protected routes
+                <AuthGuard>
+                  <DashboardLayout>
+                    <Component {...pageProps} />
+                  </DashboardLayout>
+                </AuthGuard>
+              )}
+            </AuthProvider>
           </AppProviders>
         </Hydrate>
       </QueryClientProvider>

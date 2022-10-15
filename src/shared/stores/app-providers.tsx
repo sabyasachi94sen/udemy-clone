@@ -29,7 +29,6 @@ function Providers({ children }: AppProvidersProps): JSX.Element {
           duration: 5000,
         }}
       />
-      {/* <AuthProvider>{children}</AuthProvider> */}
       {children}
     </>
   );

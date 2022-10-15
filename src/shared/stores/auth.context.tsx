@@ -72,8 +72,6 @@ export function AuthProvider({
   const userResult = useQuery(["authUser"], () => fetchAuthUser(), {
     staleTime: Infinity, // never auto refetch this query, only through manual query fn
   });
-  console.log("userResults")
-  console.log(userResult)
 
   return (
     <AuthContext.Provider
@@ -117,7 +115,6 @@ export function AuthGuard({
   const router = useRouter();
 
   const { isAuthenticated, isLoading, user } = useAuth();
-  console.log(isAuthenticated)
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -125,7 +122,6 @@ export function AuthGuard({
       setRedirect(router.route);
       router.push("/login");
     }
-   
   }, [isAuthenticated, isLoading, router, user]);
 
   // show loading indicator while the auth provider is still initializing
