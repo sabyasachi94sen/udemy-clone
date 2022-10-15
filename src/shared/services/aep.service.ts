@@ -164,7 +164,8 @@ export function useAepActivityAssignment(onSuccess?: () => void) {
       },
   
       onError(err) {
-        displayErrorMessages(err);
+       
+        toast.error("Selected Activity doesnt contains proper action maps. Please refer Activity Database")
       },
     });
 
