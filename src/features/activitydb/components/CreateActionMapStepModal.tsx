@@ -32,7 +32,7 @@ export function CreateActionMapStepModal({
       <Form<Account>
         onSubmit={(formData) =>
           createActionMapStepMutation.mutate({
-            data: { ...formData, action_map, activity: storedData.activity_id },
+            data: { ...formData, action_map, activity: Number(storedData.activity_id) ,deadline_days: Number(formData.deadline_days)},
           })
         }
       >
