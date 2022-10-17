@@ -87,7 +87,7 @@ export const useAepList = (
           },
       
           onError(err) {
-            displayErrorMessages(err);
+            toast.error("No Data Found")
           },
         });
     }
