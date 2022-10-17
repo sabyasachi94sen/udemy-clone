@@ -68,7 +68,7 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
 
       columnHelper.accessor((row) => row?.is_active, {
         id: "is_active",
-        header: "Active",
+        header: <span className="relative left-3">Active</span>,
         cell: (info) => (
          
           <StatusCell
