@@ -7,6 +7,7 @@ import { HiBell, HiMenuAlt2, HiSearch, HiX } from "react-icons/hi";
 import { useUserDetails } from "@/shared/services/settings.service";
 
 
+
 import { useAuth } from "@/shared/stores/auth.context";
 
 
@@ -37,6 +38,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
  const month=date.getMonth()+1;
  const day=date.getDate();
  const currentDate=year+"/"+month+"/"+day;
+ const userDetails=useUserDetails()
 
 
 
@@ -71,11 +73,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     }
   }
 
-  useEffect(()=>{
-     //Generate random color
-    const randomColor = String("#"+Math.floor(Math.random()*16777215).toString(16));
-    setBgColor(randomColor)
-  },[])
+ 
 
   return (
     <div>
@@ -252,8 +250,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                     <span className="sr-only">Open user menu</span>
                     <div
                       
-                      className={`h-10 w-10 rounded-full flex items-center text-[1.4rem] text-white justify-center`}
-                      style={{backgroundColor: bgColor}}
+                      className={`h-10 w-10 rounded-full flex items-center text-[1.4rem] text-white justify-center ${userDetails?.data?.avatar_color==="#fffff"?`text-black`:`text-white`}`}
+                      style={{backgroundColor: userDetails?.data?.avatar_color}}
                    
                     >
                       {userDetailsQuery?.data?.username[0]}
