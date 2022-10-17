@@ -38,7 +38,9 @@ export function UpdateActionMapStepModal({
         }}
         onSubmit={(formData) =>
           updateActionMapStepMutation.mutate({
-            data: { ...formData },
+            data: { ...formData,
+            deadline_days: Number(formData.deadline_days) },
+           
             action_step_id,
           })
         }
