@@ -56,7 +56,7 @@ export const homeInfoSuperAdmin = [
     {
       activityname: "AEP Status Tracker",
       activitystatus: "View and update AEP status",
-      url: "/home",
+      url: "/aep-tracker",
       image: statusTracker,
 
       id: 7,
@@ -66,7 +66,7 @@ export const homeInfoSuperAdmin = [
       activityname: "Analytics",
       activitystatus: "View analytics for students and staff",
       image: analytics,
-      url: "/home",
+      url: "/analytics",
       id: 8,
     },
   ];

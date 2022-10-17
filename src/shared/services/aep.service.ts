@@ -79,8 +79,11 @@ export const useAepList = (
             id: number;
           }
         >((data) => AepService.aepActivityAssignmentFilter(data), {
-          onSuccess() {
+          onSuccess(data) {
             // invalidate all the list queries
+
+            if(data.length===0)
+            toast.error("No Data Found")
            
            
             onSuccess?.();

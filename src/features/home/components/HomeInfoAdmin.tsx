@@ -52,7 +52,7 @@ export const homeInfoAdmin = [
       activityname: "Analytics",
       activitystatus: "View analytics for students and staff",
       image: analytics,
-      url: "/home",
+      url: "/analytics",
       id: 6,
     },
   ];
