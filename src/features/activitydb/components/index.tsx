@@ -3,9 +3,7 @@ export { ViewActivityModal } from "./ViewActivityModal";
 export { UpdateActivityModal } from "./UpdateActivityModal"
 export { DeleteActivityModal } from "./DeleteActivityModal"
 export { ActivityTable } from "./ActivityTable"
-export { ActivityDataBasePersonalTable } from "./ActivityDataBasePersonalTable"
-export { activityinfo } from "./ActivityInfo"
-export { activitypersonalinfo } from "./ActivityPersonalInfo"
+
 export { ActionMapModal } from "./ActionMapModal"
 export { CreateActionMapStepModal } from "./CreateActionMapStepModal"
 export { UpdateActionMapStepModal } from "./UpdateActionMapStepModal"

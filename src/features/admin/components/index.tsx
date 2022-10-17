@@ -9,4 +9,4 @@ export { DeleteAdminModal } from "./DeleteAdminModal";
 export { UpdateAdminModal } from "./UpdateAdminModal";
 export { AdminActivityTable } from "./AdminActivityTable"
 
-export { admininfo } from "./AdminInfo";
+
