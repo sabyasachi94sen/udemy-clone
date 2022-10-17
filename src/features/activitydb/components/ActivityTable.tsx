@@ -74,7 +74,7 @@ export function ActivityTable({
 
       columnHelper.accessor((row) => row.id, {
         id: "action_map",
-        header: "Action Map",
+        header: <span className="relative left-3">Action Map</span>,
         cell: (info) => (<Button width="w-[90%]" className="h-[7vh] bg-cyan-500 rounded-lg hover:bg-blue-500" onClick={()=>onViewActionMap(info.row.original)}>See action map</Button>),
       
       }),

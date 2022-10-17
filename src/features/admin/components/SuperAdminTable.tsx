@@ -100,10 +100,6 @@ export const SuperAdminTable=(({
   );
 
 
-  // useEffect(()=>{
-  //   setSuperAdminList(superAdminsQuery)
-
-  // },[superAdminsQuery.isSuccess])
 
   return (
     <>
