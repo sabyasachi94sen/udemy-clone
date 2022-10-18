@@ -8,6 +8,7 @@ import { useBackendErrors } from "@/shared/hooks/use-backend-errors";
 import { useRefreshQuery } from "@/shared/hooks/use-refresh-query";
 
 import { queryKeys } from "./query-keys";
+import ToastStories from "../components/libs/Toast/Toast.stories";
 
 export interface AccountManagerResp {
   count: number;
@@ -108,8 +109,12 @@ export function useUpdateAccountManager(onSuccess?: () => void) {
         onSuccess?.();
       },
   
-      onError(err) {
-        // displayErrorMessages(err);
+      onError(err,data) {
+        //
+
+        if(data.student_count>0 && !data.data.is_active)
+        toast.error("Can't Make the Staff Inactive. First re-assign the assigned students")
+        else
         toast.error("Account with this email already exists")
       },
     });

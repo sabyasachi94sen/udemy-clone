@@ -59,14 +59,14 @@ export function ActivityTable({
         id: "subject",
         header: "Subject",
         cell: (info) => (
-           info.getValue()
+           <span className="ml-1">{info.getValue()}</span>
         ),
       }),
       columnHelper.accessor((row) => row.application_deadline, {
         id: "application_deadline",
         header: "Application Deadline",
         cell: (info) => (
-           info.getValue()
+           <span className="ml-1">{info.getValue()}</span>
         ),
       }),
 

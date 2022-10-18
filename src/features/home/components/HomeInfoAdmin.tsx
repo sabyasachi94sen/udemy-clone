@@ -20,7 +20,7 @@ export const homeInfoAdmin = [
       activityname: "Student Roster",
       activitystatus: "View and update roster of students",
       image: roaster,
-      url: "/student-roaster",
+      url: "/student-roster",
       id: 2,
     },
     {

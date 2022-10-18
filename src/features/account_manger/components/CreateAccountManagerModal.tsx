@@ -35,12 +35,17 @@ export function CreateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
                 <Input
                   label="Name"
                   {...register("manager_name")}
+                  isRequired={true}
                   // TODO: to be used with form vadlidation library
                   // isInvalid
                   // showErrorIcon
                   // invalidText="Invalid email"
                 />
-                <Input label="Email" {...register("email")} />
+               
+                <Input label="Email" {...register("email")}
+                isRequired={true} 
+                />
+              
               </div>
 
               <div className="mx-auto flex justify-center">
@@ -48,6 +53,7 @@ export function CreateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
                   isLoading={createAccountManagerMutation.isLoading}
                   type="submit"
                   width="full"
+                  
                 >
                   Submit
                 </Button>

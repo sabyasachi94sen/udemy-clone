@@ -49,12 +49,13 @@ export default function AccountManagerPage() {
       <DeleteAccountManagerModal isOpen={currModalKey === "deleteAccountManager"} />
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">
-          Essai Account Manager Roster
+          Account Manager Roster
         </h1>
+        <p className="font-bold mt-1">Click on name to view assigned students</p>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}
-            placeholder="Search the staff member here"
+            placeholder="Search for a staff member here"
             width="96"
             onChange={searchStaff}
           />

@@ -52,9 +52,9 @@ export function AccountManagerTable({
         rowValue={info.getValue()} />),
       }),
      
-      columnHelper.accessor((row) => row.last_update, {
-        id: "last_update",
-        header: "Last update",
+      columnHelper.accessor((row) => row.account?.last_login, {
+        id: "last_login",
+        header: "Last Login",
         cell: (info) => (info.getValue() ? <div className="pl-1">{formatDate(info.getValue())}</div> : null)
       }),
       columnHelper.accessor((row) => row.is_active, {
@@ -116,7 +116,7 @@ export function AccountManagerTable({
     [],
   );
 
-  console.log(accountManagerQuery)
+
 
 
   

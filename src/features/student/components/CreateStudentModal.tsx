@@ -127,7 +127,8 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
               <div className="">
                 <div className="relative flex h-[12vh] w-[90%] justify-between">
                   <div className="flex w-[45%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Name</p>
+                    <p className="ml-8">Name <span className="text-red-500 ml-1">*</span></p>
+                    
                     <input
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Student name"
@@ -136,7 +137,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     />
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Date of Birth</p>
+                    <p className="ml-8">Date of Birth <span className="text-red-500 ml-1">*</span></p>
                     <input
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                       placeholder="Date of Birth"
@@ -146,7 +147,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                   </div>
 
                   <div className="ml-20 flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Grade at Enrollment</p>
+                    <p className="ml-8">Grade at Enrollment <span className="text-red-500 ml-1">*</span></p>
                     <input
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Grade"
@@ -157,9 +158,9 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                 </div>
               </div>
 
-              <div className="relative mt-6 flex h-[12vh] w-[70%] justify-between">
-                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
-                  <p className="ml-8">Email</p>
+              <div className="relative mt-6 flex h-[12vh] w-[73%] justify-between">
+                <div className="flex w-[76%] flex-col items-start text-lg font-bold">
+                  <p className="ml-8">Email <span className="text-red-500 ml-1">*</span></p>
                   <input
                     className="text-small relative left-8 mt-4 h-[5vh] w-[93%] rounded-md bg-[#EEEE] pl-3 font-medium"
                     placeholder="Email"
@@ -167,8 +168,8 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     {...register("email")}
                   />
                 </div>
-                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
-                  <p className="ml-8">Phone Number</p>
+                <div className="flex w-[80%] ml-6 flex-col items-start text-lg font-bold">
+                  <p className="ml-8">Phone Number <span className="text-red-500 ml-1">*</span></p>
                   <input
                     className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                     placeholder="Phone Number"
@@ -181,7 +182,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
               <div>
                 <div className="relative mt-10 flex h-[12vh] w-[90%] justify-between">
                   <div className="flex w-[45%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Country of Permanent Residence</p>
+                    <p className="ml-8">Country of Permanent Residence <span className="text-red-500 ml-1">*</span></p>
                     <select
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("country_of_residence")}
@@ -193,7 +194,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">City of Permanent Residence</p>
+                    <p className="ml-8">City of Permanent Residence <span className="text-red-500 ml-1">*</span></p>
                     <input
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                       {...register("city_of_residence")}
@@ -202,7 +203,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                   </div>
 
                   <div className="ml-20 flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Country of Citizenship</p>
+                    <p className="ml-8">Country of Citizenship <span className="text-red-500 ml-1">*</span></p>
                     <select
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("country_of_citizenship")}
@@ -220,12 +221,12 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
               <div>
                 <div className="relative mt-10 flex h-[12vh] w-[95%] justify-between">
                   <div className="flex w-[55%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Assisgned Account Manager</p>
+                    <p className="ml-8">Assisgned Staff <span className="text-red-500 ml-1">*</span></p>
                     <select
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("account_manager")}
                     >
-                      <option>Select account manager</option>
+                      <option>Select Staff</option>
                       {accountManagerDropDownList &&
                         accountManagerDropDownList?.data.map((item, index) => (
                           <option key={index} value={item.id}>
@@ -235,7 +236,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     </select>
                   </div>
                   <div className="flex w-[37%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Active Status</p>
+                    <p className="ml-8">Active Status <span className="text-red-500 ml-1">*</span></p>
                     <select
                       {...register("is_active")}
                       className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
@@ -253,6 +254,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     <p className="ml-2">
                       If attends boarding school in a country other than
                       permanent residence
+                      <span className="text-red-500 ml-1">*</span>
                     </p>
                     <select
                       className="relative left-3 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"

@@ -49,6 +49,7 @@ export function UpdateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
             updateAccountManagerMutation.mutate({
               id: selectedData?.id,
               data: formData,
+              student_count: selectedData?.student_count
             })
           }
         >

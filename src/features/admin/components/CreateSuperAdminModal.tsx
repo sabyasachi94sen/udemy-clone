@@ -37,8 +37,11 @@ export function CreateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
                   // isInvalid
                   // showErrorIcon
                   // invalidText="Invalid email"
+                  isRequired={true}
                 />
-                <Input label="Email" {...register("email")} />
+                <Input label="Email" {...register("email")} 
+                 isRequired={true}
+                />
               </div>
 
               <div className="mx-auto flex justify-center">

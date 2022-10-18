@@ -56,12 +56,12 @@ export default function SuperAdminPage() {
       <DeleteSuperAdminModal isOpen={currModalKey === "deleteSuperAdmin"} />
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="font-sans text-3xl font-bold">
-          Essai Super Admin Roster
+        Super Admin Roster
         </h1>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}
-            placeholder="Search the staff member here"
+            placeholder="Search for a staff member here"
             width="96"
             onChange={searchStaff}
             name="staff_name"

@@ -231,7 +231,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 </div>
               </form> */}
             </div>
-            <div className="w-[10%] mt-3 h-[5vh] flex items-center font-bold text-gray-500">{currentDate}</div>
+            <div className="w-[30%] mt-3 h-[5vh] flex items-center font-bold text-gray-500 flex items-center justify-around">
+              <div className="w-[auto] h-[5vh] flex items-center text-black">Hello, {userDetails?.data?.username}</div>
+              {currentDate}</div>
+
             <div className="ml-4 flex items-center md:ml-6">
              
               <button

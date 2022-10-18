@@ -25,7 +25,7 @@ export function UpdateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
       hasHeader
       showHeaderCloseButton
       isOpen={isModalOpen && isOpen}
-      title="Edit Super Admin"
+      title="Edit Super Admin Details"
       modalWidth="max-w-md"
       onRequestClose={() => {
         onModalClose();

@@ -21,7 +21,7 @@ declare module "nextjs-routes" {
     | { pathname: "/reset-password-success"; query?: Query | undefined }
     | { pathname: "/reset-password"; query?: Query | undefined }
     | { pathname: "/setting"; query?: Query | undefined }
-    | { pathname: "/student-roaster"; query?: Query | undefined }
+    | { pathname: "/student-roster"; query?: Query | undefined }
     | { pathname: "/style"; query?: Query | undefined }
     | { pathname: "/super-admin"; query?: Query | undefined };
 

@@ -25,7 +25,7 @@ export const MenuInfoAdmin = [
     name: "Student Roster",
     icon: FaUserGraduate,
     imageType: "hat-icon",
-    url: "/student-roaster",
+    url: "/student-roster",
     id: 3,
   },
 

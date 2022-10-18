@@ -36,9 +36,7 @@ export default function HomePage() {
 
   return (
     <div className="py-6">
-      {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-      </div> */}
+     
       <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-12 gap-6 rounded-md bg-white ">
           {homeItems.map((item) => (
@@ -47,19 +45,6 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-    // <div>
-    //   <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-    //     <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-    //   </div>
-    //   {/* <Navbar /> */}
-    //   <div className="flex items-center">
-    //     {/* <MenuBar /> */}
-    //     <div className="flex h-screen w-[90%] flex-wrap justify-center rounded-md bg-white">
-    //       {homeItems.map((item) => (
-    //         <HomeItems key={item.id} {...item} />
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
+  
   );
 }

@@ -106,7 +106,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
       showHeaderCloseButton
       isOpen={isModalOpen && isOpen}
       modalWidth="max-w-[90%]"
-      title="View a student to the roster"
+      title="View student details"
       onRequestClose={() => {
         onModalClose();
       }}
@@ -168,8 +168,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                   </div>
                 </div>
               </div>
-              <div className="relative mt-10 flex h-[12vh] w-[70%] justify-between">
-                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
+              <div className="relative mt-6 flex h-[12vh] w-[73%] justify-between">
+                <div className="flex w-[76%] flex-col items-start text-lg font-bold">
                   <p className="ml-8">Email</p>
                   <input
                     className="text-small relative left-8 mt-4 h-[5vh] w-[93%] rounded-md bg-[#EEEE] pl-3 font-medium"
@@ -179,7 +179,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     disabled
                   />
                 </div>
-                <div className="flex w-[80%] flex-col items-start text-lg font-bold">
+                <div className="flex w-[80%] ml-6 flex-col items-start text-lg font-bold">
                   <p className="ml-8">Phone Number</p>
                   <input
                     className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"

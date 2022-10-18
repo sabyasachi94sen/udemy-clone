@@ -80,14 +80,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             htmlFor={name}
           >
             {label}
+            <>
+            {isRequired && (
+            <span className="text-red-500 ml-2">*</span>)}
+            </>
           </label>
+         
           {cornerText && (
             <span className="text-sm text-gray-500">{cornerText}</span>
           )}
 
-          {isRequired && (
-            <span className="text-sm text-secondary">required</span>
-          )}
+          {/* {isRequired && (
+            <span className="text-sm text-secondary">Required</span>
+          )} */}
         </div>
       )}
 

@@ -55,12 +55,12 @@ export default function StudentPage() {
    
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <h1 className="font-sans text-3xl font-bold">
-      Essai Activity Database
+      Activity Database
       </h1>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}
-          placeholder="Search the staff member here"
+          placeholder="Search for an activity here"
           width="96"
           onChange={searchStaff}
           />
