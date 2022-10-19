@@ -24,8 +24,9 @@ export default function HomePage() {
   const router=useRouter()
 
   useEffect(() => {
-    if(getLocalStorage("token")==null)
-    router.push("/login")
+    // if(getLocalStorage("token")==null)
+    // router.push("/login")
+   
 
     const userType = GetUserType();
 

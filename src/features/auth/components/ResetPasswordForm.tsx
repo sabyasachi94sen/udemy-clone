@@ -30,7 +30,7 @@ export function ResetPasswordForm() {
   const { mutate } = useMutation(PasswordResetObj.verify_email, {
     onSuccess: (res: ResponseVal, email: PayLoad) => {
       
-      console.log(res)
+   
     
       toast.success(res.message)
       setTimeout(() => {
@@ -55,7 +55,7 @@ export function ResetPasswordForm() {
   };
 
   return (
-    <div className="relative z-10 ml-[13.7vw]  mt-5 h-auto rounded-lg bg-white p-6 shadow-lg lg:w-[27%] xl:w-[30%] 2xl:left-[8%] 2xl:w-[21%]">
+    <div className="relative z-10 h-[60vh] w-[24rem] rounded-lg bg-white p-6 py-12 shadow-lg mr-24 border-4 border-[#012060]">
       <form onSubmit={handleSubmit(handleEmail)}>
         <h1 className="mb-4 text-center font-bold text-[#0ea5e9] lg:text-3xl xl:text-4xl 2xl:text-3xl">
           PIPPAMS

@@ -60,7 +60,7 @@ export function LoginForm() {
   return (
     <Form<FormValues> onSubmit={onSubmit}>
       {({ register }) => (
-        <div className=" relative z-10 h-auto w-[24rem] rounded-lg bg-white p-6 py-12  shadow-lg lg:left-[35%] xl:left-[45%] 2xl:left-[60%]">
+        <div className="relative z-10 h-auto w-[24rem] rounded-lg bg-white p-6 py-12 shadow-lg mr-24 border-4 border-[#012060]">
           <h1 className="mb-4 text-center text-3xl font-bold  tracking-wide text-primary xl:text-3xl 2xl:text-3xl">
             PIPPAMS
           </h1>
