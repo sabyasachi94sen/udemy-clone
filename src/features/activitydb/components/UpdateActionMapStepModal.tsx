@@ -48,12 +48,13 @@ export function UpdateActionMapStepModal({
         {({ register }) => (
           <div className="relative z-30 h-[60vh] w-full rounded-xl bg-white pb-20 overflow-y-scroll">
             <div className="w-[50%] mx-auto h-auto">
-            <h1 className="mt-4 mr-48 text-3xl font-bold text-[#6F6F6F]">
+            <h1 className="mt-4 text-3xl text-black text-center font-bold text-[#6F6F6F]">
               {storedData?.activity_name}
             </h1>
-            <h1 className="mt-6 text-3xl font-bold text-[#6F6F6F]">
+            <h1 className="mt-6 text-xl text-black text-center font-bold text-[#6F6F6F]">
               {action_map_phase}
             </h1>
+           
             </div>
             <div className="mx-auto w-[70%]">
               <div className="mt-16 flex items-center">

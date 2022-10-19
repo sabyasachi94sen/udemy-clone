@@ -50,24 +50,24 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
       }),
       columnHelper.accessor((row) => row?.activity?.subject, {
         id: "subject",
-        header: "Subject",
-        cell: (info) => info.getValue(),
+        header: <div className="w-[167%] text-center">Subject &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.application_requirement, {
         id: "application_requirement",
-        header: "Application of Requirement",
-        cell: (info) => info.getValue(),
+        header: <div className="w-[100%] text-center">Application of Requirement</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.application_deadline, {
         id: "application_deadline",
-        header: "Application Deadline",
-        cell: (info) => info.getValue(),
+        header: <div className="text-center">Application Deadline</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
 
       columnHelper.accessor((row) => row?.activity?.activity_start_date, {
         id: "activity_start_date",
-        header: "Activity Start Date",
-        cell: (info) => info.getValue(),
+        header: <div className="text-center">Activity Start Date</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.id, {
         id: "is_complete",

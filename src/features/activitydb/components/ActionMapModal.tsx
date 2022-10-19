@@ -33,6 +33,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
   const actionMapLisQuery = useActionMapList(selectedData?.id);
   const deleteActionMapStepMutation = useDeleteActionMapStep();
   const data = actionMapLisQuery?.data;
+  
 
   return (
     <>
@@ -53,7 +54,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
         showHeaderCloseButton
         isOpen={isModalOpen && isOpen}
         modalWidth="max-w-[60%]"
-        title="Add Action Map"
+        title="View/edit Action Map"
         onRequestClose={() => {
           onModalClose();
         }}
@@ -67,7 +68,8 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
               <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0] ">
                 <div className="flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10">
                   <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
-                    Before registration open
+                  Before registration opens
+
                   </h1>
                   <button
                     className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
@@ -134,7 +136,8 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                 <div className="flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10">
                   <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
                     {" "}
-                    After registration open
+                    After registration opens
+
                   </h1>
                   <button
                     className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
@@ -387,6 +390,200 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                           }
                         >
                           Delete{" "}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+
+                  
+              </div>
+              <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0]">
+                <div className="mx-auto flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10 ">
+                  <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
+                    After activity start date
+                  </h1>
+                  <button
+                    className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+                    type="button"
+                    onClick={() => {
+                      onModalOpen("createActionStep");
+                      setActionMap("after_activity_start_date");
+                      setActionMapPhase("After Activity Start Date")
+                    }}
+                  >
+                    Add step&nbsp;{" "}
+                    <img alt="plus-icon" src="/images/plus.png" />{" "}
+                  </button>
+                </div>
+                {data &&
+                  data[5] &&
+                  data[5]?.after_activity_start_date.map((item, index) => (
+                    <div key={index} className="mt-2 flex h-[8vh] w-full">
+                      <div className="flex h-[7vh] w-[69%] items-center justify-between justify-around text-xl">
+                        <p>
+                          Action:{" "}
+                          <span className="font-bold">
+                            {item && item?.action}
+                          </span>
+                        </p>
+                        <p>
+                          Number of days:{" "}
+                          <span className="font-bold">
+                            {item && item?.deadline_days}
+                          </span>
+                        </p>
+                      </div>
+                      <div className="flex h-[7vh] w-[30%] items-center justify-around">
+                        <button
+                          className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+                          type="button"
+                          onClick={() => {
+                            onModalOpen("updateActionStep");
+                            setStepId(item && item?.id);
+                            setStepData(item);
+                            setActionMapPhase("After Activity Start Date")
+                          }}
+                        >
+                          Edit{" "}
+                        </button>
+                        <button
+                          className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-[#6F6F6F] text-center text-[18px] text-white hover:bg-blue-600"
+                          type="button"
+                          onClick={() =>
+                            deleteActionMapStepMutation.mutate({
+                              id: item && item?.id,
+                            })
+                          }
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0]">
+                <div className="mx-auto flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10 ">
+                  <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
+                    Before activity end date
+                  </h1>
+                  <button
+                    className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+                    type="button"
+                    onClick={() => {
+                      onModalOpen("createActionStep");
+                      setActionMap("before_activity_end_date");
+                      setActionMapPhase("Before Activity End Date")
+                    }}
+                  >
+                    Add step&nbsp;{" "}
+                    <img alt="plus-icon" src="/images/plus.png" />{" "}
+                  </button>
+                </div>
+                {data &&
+                  data[6]?.before_activity_end_date &&
+                  data[6].before_activity_end_date.map((item, index) => (
+                    <div key={index} className="mt-2 flex h-[8vh] w-full">
+                      <div className="flex h-[7vh] w-[69%] items-center justify-between justify-around text-xl">
+                        <p>
+                          Action:{" "}
+                          <span className="font-bold">
+                            {item && item?.action}
+                          </span>
+                        </p>
+                        <p>
+                          Number of days:{" "}
+                          <span className="font-bold">
+                            {item && item?.deadline_days}
+                          </span>
+                        </p>
+                      </div>
+                      <div className="flex h-[7vh] w-[30%] items-center justify-around">
+                        <button
+                          className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+                          type="button"
+                          onClick={() => {
+                            onModalOpen("updateActionStep");
+                            setStepId(item && item?.id);
+                            setStepData(item);
+                            setActionMapPhase("Before Activity End Date")
+                          }}
+                        >
+                          Edit{" "}
+                        </button>
+                        <button
+                          className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-[#6F6F6F] text-center text-[18px] text-white hover:bg-blue-600"
+                          type="button"
+                          onClick={() =>
+                            deleteActionMapStepMutation.mutate({
+                              id: item && item?.id,
+                            })
+                          }
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0]">
+                <div className="mx-auto flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10 ">
+                  <h1 className="text-center text-2xl font-bold text-[#6F6F6F]">
+                    After activity end date
+                  </h1>
+                  <button
+                    className="flex h-[6vh] w-[20%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+                    type="button"
+                    onClick={() => {
+                      onModalOpen("createActionStep");
+                      setActionMap("after_activity_end_date");
+                      setActionMapPhase("After Activity End Date")
+                    }}
+                  >
+                    Add step&nbsp;{" "}
+                    <img alt="plus-icon" src="/images/plus.png" />{" "}
+                  </button>
+                </div>
+                {data &&
+                  data[7]?.after_activity_end_date &&
+                  data[7].after_activity_end_date.map((item, index) => (
+                    <div key={index} className="mt-2 flex h-[8vh] w-full">
+                      <div className="flex h-[7vh] w-[69%] items-center justify-between justify-around text-xl">
+                        <p>
+                          Action:{" "}
+                          <span className="font-bold">
+                            {item && item?.action}
+                          </span>
+                        </p>
+                        <p>
+                          Number of days:{" "}
+                          <span className="font-bold">
+                            {item && item?.deadline_days}
+                          </span>
+                        </p>
+                      </div>
+                      <div className="flex h-[7vh] w-[30%] items-center justify-around">
+                        <button
+                          className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-cyan-500 text-center text-[18px] text-white hover:bg-blue-600"
+                          type="button"
+                          onClick={() => {
+                            onModalOpen("updateActionStep");
+                            setStepId(item && item?.id);
+                            setStepData(item);
+                            setActionMapPhase("After Activity End Date")
+                          }}
+                        >
+                          Edit{" "}
+                        </button>
+                        <button
+                          className="flex h-[5vh] w-[40%] items-center justify-center rounded-md bg-[#6F6F6F] text-center text-[18px] text-white hover:bg-blue-600"
+                          type="button"
+                          onClick={() =>
+                            deleteActionMapStepMutation.mutate({
+                              id: item && item?.id,
+                            })
+                          }
+                        >
+                          Delete
                         </button>
                       </div>
                     </div>

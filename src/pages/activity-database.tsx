@@ -48,9 +48,12 @@ export default function StudentPage() {
     <>
     {isModalOpen?
     <ActionMapModal isOpen={currModalKey === "viewActionMap"} />:null}
-    <CreateActivityModal isOpen={currModalKey==="createActivity"} />
-    <ViewActivityModal isOpen={currModalKey==="viewActivity"} />
-    <UpdateActivityModal isOpen={currModalKey==="updateActivity"} />
+    {isModalOpen?
+    <CreateActivityModal isOpen={currModalKey==="createActivity"} />: null}
+    {isModalOpen?
+    <ViewActivityModal isOpen={currModalKey==="viewActivity"} />: null}
+    {isModalOpen?
+    <UpdateActivityModal isOpen={currModalKey==="updateActivity"} />: null}
     <DeleteActivityModal isOpen={currModalKey==="deleteActivity"} />
    
     <div className="px-4 py-6 sm:px-6 lg:px-8">

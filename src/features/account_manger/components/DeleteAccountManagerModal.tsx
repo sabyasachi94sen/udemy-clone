@@ -31,7 +31,7 @@ export function DeleteAccountManagerModal({ isOpen }: { isOpen: boolean }) {
           variant="secondary"
           width="max"
           onClick={() =>
-            deleteAccountManagerMutation.mutate({ id: selectedData?.id })
+            deleteAccountManagerMutation.mutate({ id: selectedData?.id ,student_count:selectedData?.student_count})
           }
         >
           Delete

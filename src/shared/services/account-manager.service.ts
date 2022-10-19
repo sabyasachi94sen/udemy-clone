@@ -143,8 +143,9 @@ export function useUpdateAccountManager(onSuccess?: () => void) {
         onSuccess?.();
       },
   
-      onError(err) {
-        displayErrorMessages(err);
+      onError(err,data) {
+        if(data.student_count>0)
+        toast.error("Can't Delete the Staff Person. First re-assign the assigned students")
       },
     });
   }

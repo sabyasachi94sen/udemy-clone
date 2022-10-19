@@ -199,7 +199,7 @@ export function useUpdateActivity(onSuccess?: () => void) {
         onSuccess?.();
       },
       onError(err) {
-        toast.error("Please enter a valid url ex: https://www.eoraa.com")
+        toast.error("Please enter a valid url")
       },
 });
 

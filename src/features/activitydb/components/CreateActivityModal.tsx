@@ -2,7 +2,7 @@ import { Account } from "@/api";
 import { BaseModal, Button, Form, Input } from "@/shared/components";
 import { useCreateActivity } from "@/shared/services/activity.service";
 import { useModal } from "@/shared/stores/modal.store";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Slider } from "@material-ui/core";
 import Select from "react-select";
 
@@ -10,6 +10,26 @@ export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
   const [storeOptions,setStoreOptions]=useState(null)
   const [storeResidence,setStoreResidence]=useState(null)
   const [storeCitizen,setStoreCitizen]=useState(null)
+  const [rangeType,setRangeType]=useState(null)
+
+  const [keyDates,setKeyDates]=useState({
+     registration_open:{
+        is_active: false,
+        date: null,
+     },
+    ra_deadline: {
+      is_active: false,
+      date: null
+    },
+    activity_start: {
+      is_active: false,
+      date: null,
+    },
+    activity_end:{
+      is_active: false,
+      date: null
+    }
+  })
 
   const activityTypeOptions = [
     {
@@ -48,12 +68,8 @@ export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
     {
       option: "Chemistry",
     },
-    {
-      option: "Physics",
-    },
-    {
-      option: "Chemistry",
-    },
+   
+ 
     {
       option: "Biology",
     },
@@ -66,12 +82,8 @@ export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
     {
       option: "Economics/Business/Finance",
     },
-    {
-      option: "General Science",
-    },
-    {
-      option: "Economics/Business/Finance",
-    },
+    
+   
     {
       option: "English",
     },
@@ -86,7 +98,15 @@ export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
     },
   ];
 
-  const countries=[{
+  const countries=[
+    {
+      label: "OPEN",
+      value: "open"
+    },
+    
+    
+    {
+
     label: "India",
     value: "india"
    },{
@@ -206,8 +226,8 @@ const handleMultiOption = (value: { value: {}[] }) => {
     },
   ];
 
-  const [gradeVal, setGradeVal] = useState([0, 100]);
-  const [ageVal, setAgeVal] = useState([0, 100]);
+  const [gradeVal, setGradeVal] = useState([0, 16]);
+  const [ageVal, setAgeVal] = useState([0, 25]);
 
   const handleGradeVal = (e: SyntheticEvent, data: number[]) => {
     setGradeVal(data);
@@ -242,6 +262,8 @@ const handleMultiOption = (value: { value: {}[] }) => {
  }
 
 
+
+
   return (
     <BaseModal
       hasHeader
@@ -258,6 +280,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
           createActivityMutation.mutate({
             data: {
               ...formData,
+              url: formData.url.includes("https")?formData.url: "https://"+formData.url,
               application_requirement: storeOptions,
               age_range: ageVal,
               grade_range: gradeVal,
@@ -275,7 +298,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   Activity Information
                 </h1>
                 <div className="mt-2 flex items-center">
-                  <span className="text-md font-bold">Name</span>
+                  <span className="text-md font-bold">Name<span className="text-red-500 ml-1">*</span></span>
                   <input
                     className="relative ml-[19.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_name")}
@@ -284,7 +307,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   <br />
                 </div>
                 <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Type</span>
+                  <span className="text-md font-bold">Type<span className="text-red-500 ml-1">*</span></span>
                   <select
                     className="relative ml-[20.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("activity_type")}
@@ -296,7 +319,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   </select>
                 </div>
                 <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Subject</span>
+                  <span className="text-md font-bold">Subject<span className="text-red-500 ml-1">*</span></span>
                   <select
                     className="relative ml-[17%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("subject")}
@@ -313,7 +336,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   </span>
 
                   <Select
-                    className="relative h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[78%] rounded-md outline-none"
                     isMulti
                     options={applicationOptions}
                     label="application_requirement"
@@ -324,7 +347,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Location Type</span>
                   <select
-                    className="relative ml-[9%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative ml-[11%] h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
                     {...register("location_type")}
                   >
                     <option>Location Type</option>
@@ -334,12 +357,13 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   </select>
                 </div>
                 <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Country of Activity</span>
+                  <span className="text-md font-bold">Country of Activity<span className="text-red-500 ml-1">*</span></span>
                   <select
                     className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
                     {...register("country_residence")}
                   >
                     <option>Select Country</option>
+                  
                     {countries.map((item,index)=>
                       <option key={index}>{item.label}</option>
                     )}
@@ -348,7 +372,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">City of Activity</span>
                   <input
-                    className="relative ml-12 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative ml-16 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("country_citizenship")}
                     type="text"
                   />
@@ -356,7 +380,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 </div>
 
                 <div className="mt-6 flex items-center">
-                  <span className="text-md font-bold">URL</span>
+                  <span className="text-md font-bold">URL<span className="text-red-500 ml-1">*</span></span>
                   <input
                     className="relative ml-[22%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("url")}
@@ -369,41 +393,136 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   Key Dates
                 </h1>
                 <div className="mt-2 flex items-center">
-                  <span className="text-md font-bold">Registration open</span>
+                  <span className="text-md font-bold">Registration Open</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[80%] rounded-md bg-[#EEEE]"
+                    className="relative ml-12 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     type="date"
+                    max={keyDates.ra_deadline.date}
+                    onChange={(e)=>{
+                      setKeyDates({
+                        registration_open:{
+                           is_active: true,
+                           date: e.target.value,
+                        },
+                       ra_deadline: {
+                         is_active: false,
+                         date: null
+                       },
+                       activity_start: {
+                         is_active: false,
+                         date: null,
+                       },
+                       activity_end:{
+                         is_active: false,
+                         date: null
+                       }
+                     })
+                    }}
+                
                   />
                   <br />
                 </div>
-
+               
                 <div className="mt-4 mb-5 flex items-center">
-                  <span className="text-md font-bold">Application Date</span>
+                  <div className="w-[21%] break-words">
+                  <span className="text-md font-bold">R/A/S deadline<span className="text-red-500 ml-1">*</span></span>
+                  <p className="text-sm text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
+                  </div>
                   <input
-                    className="relative ml-10 h-[5vh] w-[75%] rounded-md bg-[#EEEE]"
+                    className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
                     {...register("application_deadline")}
                     type="date"
+                    min={keyDates.registration_open.date}
+                    max={keyDates.activity_start.date}
+                    disabled={!keyDates.registration_open.is_active?true:false}
+                    onChange={
+                       (e)=> {
+                        setKeyDates({
+                          registration_open:{
+                             is_active: true,
+                             date: keyDates.registration_open.date,
+                          },
+                         ra_deadline: {
+                           is_active: true,
+                           date: e.target.value
+                         },
+                         activity_start: {
+                           is_active: false,
+                           date: null,
+                         },
+                         activity_end:{
+                           is_active: false,
+                           date: null
+                         }
+                       })
+                       }
+                    }
                   />
                   <br />
                 </div>
 
                 <div className="mb-6 flex items-center">
-                  <span className="text-md font-bold">Activity Start</span>
+                  <span className="text-md font-bold">Activity Start<span className="text-red-500 ml-1">*</span></span>
                   <input
                     className="relative ml-[10%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_start_date")}
                     type="date"
+                    min={keyDates.ra_deadline.date}
+                    max={keyDates.activity_end.date}
+                    disabled={!keyDates.ra_deadline.is_active?true:false}
+                    onChange={(e)=>{
+                      setKeyDates({
+                        registration_open:{
+                           is_active: true,
+                           date: keyDates.registration_open.date,
+                        },
+                       ra_deadline: {
+                         is_active: true,
+                         date: keyDates.ra_deadline.date
+                       },
+                       activity_start: {
+                         is_active: true,
+                         date: e.target.value,
+                       },
+                       activity_end:{
+                         is_active: false,
+                         date: null
+                       }
+                      })
+                    }}
                   />
                   <br />
                 </div>
 
                 <div className="mb-6 flex items-center">
-                  <span className="text-md font-bold">Activity End</span>
+                  <span className="text-md font-bold">Activity End<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative ml-[12%] h-[5vh] w-[74%] rounded-md bg-[#EEEE]"
+                    className="relative ml-[11.5%] h-[5vh] w-[74%] rounded-md bg-[#EEEE]"
                     {...register("activity_end_date")}
                     type="date"
+                    min={keyDates.activity_start.date}
+                    disabled={!keyDates.activity_start.is_active?true:false}
+                    onChange={(e)=>{
+                       setKeyDates({
+                        registration_open:{
+                           is_active: true,
+                           date: keyDates.registration_open.date,
+                        },
+                       ra_deadline: {
+                         is_active: true,
+                         date: keyDates.ra_deadline.date
+                       },
+                       activity_start: {
+                         is_active: true,
+                         date: keyDates.activity_start.date,
+                       },
+                       activity_end:{
+                         is_active: true,
+                         date: e.target.value
+                       }
+                      })
+                    }}
                   />
                   <br />
                 </div>
@@ -412,18 +531,23 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
                   Eligibility Restrictions
                 </h1>
-                <div className="mt-2 flex items-center">
+                <p className="text-sm text-gray-700 -mt-6">In this section, please indicate whether this activity has eligibility based on student grade, age, residence, or citizenship. If there are no such restrictions, please enter nothing</p>
+              
+                <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">Range Type</span>
                   <select
                     className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
                     {...register("range_type")}
+                    onChange={(e)=>setRangeType(e.target.value)}
                   >
                     <option>Select range type</option>
-                    <option>Grade range</option>
-                    <option>Age range </option>
+                    <option value="grade_range">Grade range</option>
+                    <option value="age_range">Age range </option>
+                    <option value="both">Both</option>
                   </select>
                 </div>
 
+             {rangeType==="grade_range" || rangeType==="both"?
                 <div className="mt-4 flex w-[100%] items-center justify-between">
                   <span className="text-md font-bold">Grade Range</span>
 
@@ -437,6 +561,8 @@ const handleMultiOption = (value: { value: {}[] }) => {
                     <Slider
                       className="mt-2"
                       value={gradeVal}
+                      min={0}
+                      max={16}
                       onChange={handleGradeVal}
                     />
                   </div>
@@ -446,8 +572,11 @@ const handleMultiOption = (value: { value: {}[] }) => {
                     className="h-[3vh] w-[8%]"
                     type="text"
                     value={gradeVal[1]}
+                 
                   />
-                </div>
+                </div>: null}
+
+                {rangeType==="age_range" || rangeType==="both"?
 
                 <div className="mt-4 flex w-[100%] items-center justify-between">
                   <span className="text-md font-bold">Age Range</span>
@@ -464,6 +593,8 @@ const handleMultiOption = (value: { value: {}[] }) => {
                       className="relative left-[2%] mt-2"
                       value={ageVal}
                       onChange={handleAgeVal}
+                      min={0}
+                      max={25}
                     />
                   </div>
 
@@ -474,6 +605,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                     value={ageVal[1]}
                   />
                 </div>
+                :null}
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
                     Only open to residence of these countries

@@ -11,6 +11,7 @@ import Select from "react-select"
 export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
 
   const [storeOptions,setStoreOptions]=useState(null)
+  const [rangeType,setRangeType]=useState(null)
 
   
   const activityTypeOptions=[{
@@ -30,40 +31,48 @@ export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
   }]
 
 
-  const subjectOptions=[{
-    option: "Maths"
-  },{
-    option: "Computer"
-  },{
-    option: "Physics"
-  },{
-    option: "Chemistry"
-  },{
-    option: "Physics"
-  },{
-    option: "Chemistry"
-  },{
-    option: "Biology"
-  },{
-    option: "Environmental Science"
-  },{
-    option: "General Science"
-  },{
-    option:"Economics/Business/Finance"
-  },{
-    option: "General Science"
-  },{
-    option:"Economics/Business/Finance"
-  },{
-    option: "English"
-  },{
-    option: "Political Science"
-  },{
-    option: "Psychology"
-  },{
-    option: "Other"
-  }]
-
+  const subjectOptions = [
+    {
+      option: "Maths",
+    },
+    {
+      option: "Computer",
+    },
+    {
+      option: "Physics",
+    },
+    {
+      option: "Chemistry",
+    },
+   
+ 
+    {
+      option: "Biology",
+    },
+    {
+      option: "Environmental Science",
+    },
+    {
+      option: "General Science",
+    },
+    {
+      option: "Economics/Business/Finance",
+    },
+    
+   
+    {
+      option: "English",
+    },
+    {
+      option: "Political Science",
+    },
+    {
+      option: "Psychology",
+    },
+    {
+      option: "Other",
+    },
+  ];
   
 
 
@@ -189,8 +198,8 @@ const countries=[{
 
 
 
-const [gradeVal, setGradeVal] = useState([0, 100]);
-const [ageVal, setAgeVal] = useState([0, 100]);
+const [gradeVal, setGradeVal] = useState([0, 16]);
+const [ageVal, setAgeVal] = useState([0, 25]);
 
 const handleGradeVal = (e: SyntheticEvent, data: number[]) => {
   setGradeVal(data);
@@ -217,6 +226,12 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
     }
 },[selectedData])
 
+useEffect(()=>{
+  setRangeType(selectedData?.range_type)
+},[])
+
+
+
   return (
     <BaseModal
       hasHeader
@@ -241,6 +256,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
             activity_start_date: selectedData?.activity_start_date,
             activity_end_date: selectedData?.activity_end_date,
             remarks: selectedData?.remarks,
+            range_type: selectedData?.range_type.toLowerCase()
            
           
            
@@ -379,7 +395,10 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 </div>
       
                 <div className="mt-4 mb-5 flex items-center">
-                  <span className="text-md font-bold">Application Date</span>
+                <div className="w-[21%] break-words">
+                  <span className="text-md font-bold">R/A/S deadline</span>
+                  <p className="text-sm text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
+                  </div>
                   <input
                       className="relative ml-10 h-[5vh] w-[75%] rounded-md bg-[#EEEE]"
                     {...register("application_deadline")}
@@ -427,21 +446,28 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                     disabled
                   >
                     <option>Select range type</option>
-                    <option>Grade range</option>
-                    <option>Age range </option>
+                    <option value="grade_range">Grade range</option>
+                    <option value="age_range">Age range </option>
+                    <option value="both">Both</option>
                   </select>
                 </div>
-      
+              
+              {rangeType===("grade_range") || rangeType===("both") ||  rangeType===(null || "Select range type") ?
                 <div className="mt-4 flex w-[100%] items-center justify-between">
                   <span className="text-md font-bold">Grade Range</span>
                 
                   <input {...register("grade_low")} className="w-[8%] h-[3vh] relative left-[4%]" type="text" value={gradeVal[0]} />
                   <div className="w-[50%]">
-                    <Slider className="mt-2" value={gradeVal} onChange={handleGradeVal}  />
+                    <Slider className="mt-2" value={gradeVal} onChange={handleGradeVal} 
+                     min={0}
+                     max={16}
+                    />
                   </div>
       
                   <input {...register("grade_high")} className="w-[8%] h-[3vh]" type="text" value={gradeVal[1]} />
-                </div>
+                </div>:null}
+
+                {rangeType===("age_range") || rangeType===("both") ||  rangeType===(null || "Select range type")?
       
                 <div className="mt-4 flex w-[100%] items-center justify-between">
                   <span className="text-md font-bold">Age Range</span>
@@ -450,11 +476,14 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <input className="w-[8%] relative left-[6%]" type="text" {...register("age_low")} value={ageVal[0]} />
       
                   <div className="w-[50%]">
-                    <Slider className="mt-2 relative left-[2%]" value={ageVal} onChange={handleAgeVal} />
+                    <Slider className="mt-2 relative left-[2%]" value={ageVal} onChange={handleAgeVal}
+                     min={0}
+                     max={25}
+                    />
                   </div>
       
                   <input {...register("age_high")} className="w-[8%] relative" type="text" value={ageVal[1]} />
-                </div>
+                </div>:null}
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
                     Only open to residence of these countries
