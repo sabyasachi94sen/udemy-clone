@@ -3,6 +3,8 @@ import { BaseModal, Button, Form, Input } from "@/shared/components";
 import { useAccountManagerDropDownList, useUpdateStudent} from "@/shared/services/student.sevices";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import {useRouter} from "next/router";
+import { useQuery } from "@tanstack/react-query";
+import { CountryListObj } from "@/features/api";
 
 export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
   const activeOptions = [
@@ -16,78 +18,8 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
     },
   ];
 
-  const countries=[{
-    label: "India",
-    value: "india"
-   },{
-    label: "Japan",
-    value: "japan"
-   },
-   {
-    label: "China",
-    value: "china"
-   },{
-   label: "Indonesia",
-    value: "indonesia"
-   },
-   {
-    label: "Malaysia",
-    value: "malaysia"
-   },{
-    label: "Thailand",
-    value: "thailand"
-   },
-   {
-    label: "Singapore",
-    value: "singapore"
-   },{
-    label: "North Korea",
-    value: "north korea"
-   },
-   {
-    label: "Taiwan",
-    value: "taiwan"
-   },{
-    label: "Vietnam",
-    value: "vietnam"
-   },
-   {
-    label: "Mongolia",
-    value: "mongolia"
-   },{
-    label: "Myanmar",
-    value: "myanmar"
-   },
-   {
-    label: "Bangladesh",
-    value: "bangladesh"
-   },{
-    label: "Sri lanka",
-    value: "sri lanka"
-   },
-   {
-    label: "Pakistan",
-    value: "pakistan"
-   },{
-    label: "Oman",
-    value: "oman"
-   },
-   {
-    label: "Maldieves",
-    value: "maldieves"
-   },{
-    label: "Uzbekistan",
-    value: "uzbekistan"
-   },
-   {
-    label: "Kuwait",
-    value: "kuwait"
-   },{
-    label: "Saudi Arabia",
-    value: "saudi arabia"
-   }]
-  
-
+  const { data }=useQuery(["country_list"],()=> CountryListObj.country_list())
+  const countries=data?.data
 
 
   const router=useRouter()
@@ -141,7 +73,7 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                   <div className="flex w-[45%] flex-col items-start text-lg font-bold">
                     <p className="ml-8">Name <span className="text-red-500 ml-1">*</span></p>
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                       className="text-small relative left-8 mt-4 h-[5vh] w-[60%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Student name"
                       type="text"
                       {...register("student_name")}
@@ -157,10 +89,11 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                     />
                   </div>
 
-                  <div className="ml-20 flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Grade at Enrollment <span className="text-red-500 ml-1">*</span></p>
+                  <div className="ml-20 flex w-[30%] h-[30vh] flex-col items-start text-lg font-bold">
+                  <p className="ml-8">Grade at PIPPAMS Registration</p>
+                    <p className="text-sm text-gray-700 ml-8 mt-2">Please enter the student’s grade as of September 1 of the current academic year of registration, with academic year generally defined as Aug/Sept to May/June</p>
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                      className="text-small relative left-8 mt-[6vh] h-[5vh] w-[92%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Grade"
                       type="number"
                       {...register("current_grade")}
@@ -170,19 +103,19 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
               </div>
 
               <div className="relative mt-6 flex h-[12vh] w-[73%] justify-between">
-                <div className="flex w-[76%] flex-col items-start text-lg font-bold">
+                <div className="flex w-[53%] flex-col items-start text-lg font-bold">
                   <p className="ml-8">Email <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[93%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                    className="text-small relative left-8 mt-4 h-[5vh] w-[62%] rounded-md bg-[#EEEE] pl-3 font-medium"
                     placeholder="Email"
                     type="email"
                     {...register("email")}
                   />
                 </div>
-                <div className="flex w-[80%] ml-6 flex-col items-start text-lg font-bold">
-                  <p className="ml-8">Phone Number <span className="text-red-500 ml-1">*</span></p>
+                <div className="flex w-[58%] flex-col items-start text-lg font-bold">
+                  <p className="ml-14">Phone Number <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                    className="text-small relative left-14 mt-4 h-[5vh] w-[56%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                     placeholder="Phone Number"
                     type="tel"
                     {...register("phone_number")}
@@ -196,12 +129,13 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                   <div className="flex w-[45%] flex-col items-start text-lg font-bold">
                     <p className="ml-8">Country of Permanent Residence <span className="text-red-500 ml-1">*</span></p>
                     <select
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                       className="text-small relative left-8 mt-4 h-[5vh] w-[60%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("country_of_residence")}
                     >
                        <option>Select Country</option>
+                       <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
                     
-                    {countries.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item.label}>{item.label}</option>)}
+                    {countries.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item.name.common}>{item.name.common}</option>)}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -220,8 +154,9 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                       {...register("country_of_citizenship")}
                     >
                      <option>Select Country</option>
+                     <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
                     
-                    {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item.label}>{item.label}</option>)}
+                    {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item.name.common}>{item.name.common}</option>)}
                     </select>
                   </div>
                 </div>
@@ -230,9 +165,9 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
               <div>
                 <div className="relative mt-10 flex h-[12vh] w-[95%] justify-between">
                   <div className="flex w-[55%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Assisgned Account Manager <span className="text-red-500 ml-1">*</span></p>
+                    <p className="ml-8">Assigned Account Manager <span className="text-red-500 ml-1">*</span></p>
                     <select
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                      className="text-small relative left-8 mt-4 h-[5vh] w-[60%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("account_manager")}
                     >
                       <option>Select account manager</option>
@@ -261,15 +196,16 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
 
                   <div className="relative ml-28 flex h-[24vh] w-[42%] flex-col items-start text-[1rem] font-bold">
                     <p className="ml-2">
-                      If attends boarding school in a country other than
-                      permanent residence
+                       Country of boarding school (if applicable)
                       <span className="text-red-500 ml-1">*</span>
                     </p>
                     <select
-                      className="relative left-3 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"
+                      className="relative left-3 mt-4 h-[5vh] w-[78%] rounded-md bg-[#EEEE] pl-3 text-[1.1rem] font-medium"
                       {...register("country_of_boarding_school")}
                     >
-                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item.label}>{item.label}</option>)}
+                      <option>Select Country</option>
+                      <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
+                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item.name.common}>{item.name.common}</option>)}
                     </select>
                   </div>
                 </div>

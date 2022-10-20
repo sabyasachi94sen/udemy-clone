@@ -70,10 +70,13 @@ export default function AepActivityPage() {
         <h1 className="font-sans text-3xl font-bold">
           Academic Enrichment Plan (student)
         </h1>
+        <p className="font-bold mt-1 italic">This shows the roster of students assigned to you.</p>
+        <p className="font-bold mt-1 italic">Click on “View AEP Status Tracker (student) to view and update the AEP status. Click on “Update AEP” to update or change the student’s plan.</p>
         <div className="mt-8 flex justify-between">
+
           <Input
             leftAddOn={<HiSearch />}
-            placeholder="Search the staff member here"
+            placeholder="Search for activities in AEP here"
             width="96"
             onChange={searchStaff}
           />
@@ -85,23 +88,23 @@ export default function AepActivityPage() {
             <span className="text-xl font-medium" />
           </p>
           <div
-            className="ml-2 flex h-[7vh] w-[60%] justify-around text-white
+            className="ml-2 flex h-[7vh] w-[46%] justify-evenly text-white
              "
           >
             <Link href="/aep-tracker">
               <Button
-                className="h-[6vh] rounded-md bg-cyan-500 text-white hover:bg-blue-500"
+                className="h-[6vh] rounded-md font-bolder bg-cyan-500 text-white hover:bg-blue-500"
                 type="button"
-                width="w-[46%]"
+                width="w-[50%]"
               >
                 View AEP Status Tracker (student)
               </Button>
             </Link>
             {isLoading ? (
               <Button
-                className={`h-[6vh] rounded-md  bg-cyan-500 text-white hover:bg-blue-500`}
+                className={`h-[6vh] rounded-md font-bolder bg-cyan-500 text-white hover:bg-blue-500`}
                 type="button"
-                width="w-[46%]"
+                width="w-[40%]"
                 onClick={() => {onModalOpen("updateAepActivity")
                 setIsSearch(false)
               }}

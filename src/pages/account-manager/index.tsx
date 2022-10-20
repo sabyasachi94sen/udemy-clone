@@ -51,7 +51,7 @@ export default function AccountManagerPage() {
         <h1 className="font-sans text-3xl font-bold">
           Account Manager Roster
         </h1>
-        <p className="font-bold mt-1">Click on name to view assigned students</p>
+        <p className="font-bold mt-1 italic">Click on name to view assigned students</p>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}

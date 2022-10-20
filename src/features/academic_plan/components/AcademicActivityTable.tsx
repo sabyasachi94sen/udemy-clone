@@ -55,7 +55,7 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
       }),
       columnHelper.accessor((row) => row?.activity?.application_requirement, {
         id: "application_requirement",
-        header: <div className="w-[100%] text-center">Application of Requirement</div>,
+        header: <div className="w-[100%] text-center">Application Requirements</div>,
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.application_deadline, {

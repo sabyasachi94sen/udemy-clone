@@ -3,7 +3,7 @@ import router, { useRouter } from "next/router";
 import React, { useMemo } from "react";
 
 import { Account } from "@/api";
-import { getLocalStorage } from "@/features/helpers";
+import { getLocalStorage, setLocalStorage } from "@/features/helpers";
 import { BaseTable, CompleteBar } from "@/shared/components";
 
 import { ModalState, useModal } from "@/shared/stores/modal.store";
@@ -27,7 +27,9 @@ export function AdminActivityTable({adminActivity,page}): JSX.Element {
         id: "student_name",
         header: "Student Name",
         cell: (info) => <div className="hover:underline cursor-pointer" onClick={()=>{
-          router.push(``)
+          router.push(`/academic-list/${info.row.original.student.id}`)
+          setLocalStorage("studentId",info.row.original.student.id)
+          setLocalStorage("studentName",info.row.original.student.student_name)
         }}>{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.activity_count, {

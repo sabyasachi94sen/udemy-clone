@@ -51,16 +51,10 @@ export function useCreateSuperAdmin(onSuccess?: () => void) {
 
       onSuccess?.();
     },
-    onError(err,data) {
+    onError(err) {
       
-     
-      const checkCreds=checkProperties(data.data)
-      
-    
-      if(checkCreds)
-      toast.error("Please enter all fields")
-      else
-      toast.error("Account with this email already exists")
+       if(err?.body?.errorType==="email")
+       toast.error("account with this email already exists")
       
     },
   });
@@ -90,7 +84,11 @@ export function useUpdateSuperAdmin(onSuccess?: () => void) {
     },
 
     onError(err) {
-     toast.error("Account with this email already exists")
+      
+        
+       if(Array.isArray(err?.body?.email))
+       toast.error(err?.body?.email[0])
+     
      
     },
   });
@@ -124,10 +122,10 @@ export function useDeleteSuperAdmin(onSuccess?: () => void) {
   });
 }
 
-function checkProperties(obj) {
-  for (var key in obj) {
-      if (obj[key] == "")
-          return true;
-  }
-  return false;
-}
+// function checkProperties(obj) {
+//   for (var key in obj) {
+//       if (obj[key] == "")
+//           return true;
+//   }
+//   return false;
+// }

@@ -8,6 +8,8 @@ import { useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 import Select from "react-select";
 import { nullable } from "zod";
+import { CountryListObj } from "@/features/api";
+import { useQuery } from "@tanstack/react-query";
 
 export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
   const [storeOptions, setStoreOptions] = useState(null);
@@ -62,7 +64,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
       option: "Maths",
     },
     {
-      option: "Computer",
+      option: "Computer Science",
     },
     {
       option: "Physics",
@@ -143,89 +145,16 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
     },
   ];
 
-  const countries = [
-    {
-      label: "India",
-      value: "india",
-    },
-    {
-      label: "Japan",
-      value: "japan",
-    },
-    {
-      label: "China",
-      value: "china",
-    },
-    {
-      label: "Indonesia",
-      value: "indonesia",
-    },
-    {
-      label: "Malaysia",
-      value: "malaysia",
-    },
-    {
-      label: "Thailand",
-      value: "thailand",
-    },
-    {
-      label: "Singapore",
-      value: "singapore",
-    },
-    {
-      label: "North Korea",
-      value: "north korea",
-    },
-    {
-      label: "Taiwan",
-      value: "taiwan",
-    },
-    {
-      label: "Vietnam",
-      value: "vietnam",
-    },
-    {
-      label: "Mongolia",
-      value: "mongolia",
-    },
-    {
-      label: "Myanmar",
-      value: "myanmar",
-    },
-    {
-      label: "Bangladesh",
-      value: "bangladesh",
-    },
-    {
-      label: "Sri lanka",
-      value: "sri lanka",
-    },
-    {
-      label: "Pakistan",
-      value: "pakistan",
-    },
-    {
-      label: "Oman",
-      value: "oman",
-    },
-    {
-      label: "Maldieves",
-      value: "maldieves",
-    },
-    {
-      label: "Uzbekistan",
-      value: "uzbekistan",
-    },
-    {
-      label: "Kuwait",
-      value: "kuwait",
-    },
-    {
-      label: "Saudi Arabia",
-      value: "saudi arabia",
-    },
-  ];
-
+  const {data}=useQuery(["country_list"],()=> CountryListObj.country_list())
+  const countries=[{label:"OPEN",value: "open"}].concat(data?.data?.map((item)=>{
+   
+   return {
+     label: item.name.common,
+     value: item.name.common.toLowerCase()
+   }
+ 
+ }))
+ 
   const [gradeVal, setGradeVal] = useState([0, 16]);
   const [ageVal, setAgeVal] = useState([0, 25]);
 
@@ -290,7 +219,6 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
    setRangeType(selectedData?.range_type?.toLowerCase())
   }, []);
 
-  console.log(rangeType)
 
   return (
     <BaseModal
@@ -443,10 +371,10 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                       <option
                         key={index}
                         selected={
-                          selectedData?.country_residence === item.label
+                          selectedData?.country_residence === item?.label
                         }
                       >
-                        {item.label}
+                        {item?.label}
                       </option>
                     ))}
                   </select>
@@ -699,7 +627,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 </div>:null}
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
-                    Only open to residence of these countries
+                    Only open to residents of these countries
                   </p>
 
                   <Select

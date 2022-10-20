@@ -59,12 +59,12 @@ export default function StudentPage() {
     <StatusTableModal isOpen={currModalKey === "viewStatusTable"} />: null}
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <h1 className="font-sans text-3xl font-bold">
-        AEP Status Tracker Roster
+        AEP Status Tracker
       </h1>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}
-          placeholder="Search for a staff member here"
+          placeholder="Search for a student here"
           width="96"
           onChange={searchStaff}
           />

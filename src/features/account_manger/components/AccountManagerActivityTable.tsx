@@ -6,6 +6,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { us } from "@/shared/stores/modal.store";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { setLocalStorage } from "@/features/helpers";
 
 import { Account } from "@/api";
 import { BaseTable, CompleteBar, IconButton,RowNavigate,StatusCell } from "@/shared/components";
@@ -23,7 +24,7 @@ export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX
    const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
 
-
+  const router=useRouter()
     
 
   
@@ -37,7 +38,11 @@ export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX
       columnHelper.accessor((row) => row?.student?.student_name, {
         id: "student_name",
         header: "Student Name",
-        cell: (info) => (info.getValue()),
+        cell: (info) => <div className="hover:underline cursor-pointer" onClick={()=>{
+          router.push(`/academic-list/${info.row.original.student.id}`)
+          setLocalStorage("studentId",info.row.original.student.id)
+          setLocalStorage("studentName",info.row.original.student.student_name)
+        }}>{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.activity_count, {
         id: "activity_aep",

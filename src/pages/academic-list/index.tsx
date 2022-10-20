@@ -10,7 +10,7 @@ import { useAepList } from "@/shared/services/aep.service";
 import { getLocalStorage } from "@/features/helpers";
 
 
-export default function StudentPage() {
+export default function AcademicPage() {
   const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
   const [aepList,setAepList]=useState(null)
   const [isSearch,setIsSearch]=useState(false)
@@ -50,11 +50,13 @@ export default function StudentPage() {
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <h1 className="font-sans text-3xl font-bold">
       Academic Enrichment Plan Summary
+     
       </h1>
+      <p className="font-bold mt-1 italic">Click on a student’s name to view/edit their AEP</p>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}
-          placeholder="Search for a staff member here"
+          placeholder="Search for students here"
           width="96"
           onChange={searchStaff}
           />

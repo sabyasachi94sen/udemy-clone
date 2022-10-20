@@ -54,12 +54,12 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
       columnHelper.accessor((row) => row.student?.date_of_birth, {
         id: "date_of_birth",
         header: "Date of Birth",
-        cell: (info) => info.getValue()!=null?formatDate(info.getValue()): null,
+        cell: (info) => <div className="pl-3">{info.getValue()!=null?formatDate(info.getValue()): null}</div>,
       }),
       columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
         id: "country",
         header: "Country of residence",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="pl-14">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.account_manager?.username, {
         id: "manager_name",

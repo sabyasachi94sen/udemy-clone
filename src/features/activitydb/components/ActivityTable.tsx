@@ -57,9 +57,9 @@ export function ActivityTable({
       }),
       columnHelper.accessor((row) => row.subject, {
         id: "subject",
-        header: "Subject",
+        header: <div className="w-[360%] text-center">Subject</div>,
         cell: (info) => (
-           <span className="ml-1">{info.getValue()}</span>
+           <span className="text-center text-center block">{info.getValue()}</span>
         ),
       }),
       columnHelper.accessor((row) => row.application_deadline, {
@@ -74,8 +74,8 @@ export function ActivityTable({
 
       columnHelper.accessor((row) => row.id, {
         id: "action_map",
-        header: <span className="relative left-3">Action Map</span>,
-        cell: (info) => (<Button width="w-[90%]" className="h-[7vh] bg-cyan-500 rounded-lg hover:bg-blue-500" onClick={()=>onViewActionMap(info.row.original)}>See action map</Button>),
+        header: <span className="relative left-10">Action Map</span>,
+        cell: (info) => (<Button width="w-[90%]" className="h-[5vh] bg-cyan-500 rounded-lg hover:bg-blue-500 font-bolder" onClick={()=>onViewActionMap(info.row.original)}>View/edit action map</Button>),
       
       }),
       columnHelper.accessor((row) => row.id, {

@@ -54,7 +54,7 @@ export default function StudentPage() {
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}
-            placeholder="Search for a staff member here"
+            placeholder="Search for a student here"
             width="96"
             onChange={searchStaff}
           />

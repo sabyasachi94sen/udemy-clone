@@ -7,6 +7,8 @@ import { useCreateActivity } from "@/shared/services/activity.service";
 import { useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 import Select from "react-select"
+import { CountryListObj } from "@/features/api";
+import { useQuery } from "@tanstack/react-query";
 
 export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
 
@@ -36,7 +38,7 @@ export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
       option: "Maths",
     },
     {
-      option: "Computer",
+      option: "Computer Science",
     },
     {
       option: "Physics",
@@ -120,79 +122,6 @@ const locationTypeOptions=[{
 }]
 
 
-const countries=[{
-  label: "India",
-  value: "india"
- },{
-  label: "Japan",
-  value: "japan"
- },
- {
-  label: "China",
-  value: "china"
- },{
- label: "Indonesia",
-  value: "indonesia"
- },
- {
-  label: "Malaysia",
-  value: "malaysia"
- },{
-  label: "Thailand",
-  value: "thailand"
- },
- {
-  label: "Singapore",
-  value: "singapore"
- },{
-  label: "North Korea",
-  value: "north korea"
- },
- {
-  label: "Taiwan",
-  value: "taiwan"
- },{
-  label: "Vietnam",
-  value: "vietnam"
- },
- {
-  label: "Mongolia",
-  value: "mongolia"
- },{
-  label: "Myanmar",
-  value: "myanmar"
- },
- {
-  label: "Bangladesh",
-  value: "bangladesh"
- },{
-  label: "Sri lanka",
-  value: "sri lanka"
- },
- {
-  label: "Pakistan",
-  value: "pakistan"
- },{
-  label: "Oman",
-  value: "oman"
- },
- {
-  label: "Maldieves",
-  value: "maldieves"
- },{
-  label: "Uzbekistan",
-  value: "uzbekistan"
- },
- {
-  label: "Kuwait",
-  value: "kuwait"
- },{
-  label: "Saudi Arabia",
-  value: "saudi arabia"
- }]
-
-
-
 
 
 
@@ -229,6 +158,16 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
 useEffect(()=>{
   setRangeType(selectedData?.range_type)
 },[])
+
+const {data}=useQuery(["country_list"],()=> CountryListObj.country_list())
+const countries=[{label:"OPEN",value: "open"}].concat(data?.data?.map((item)=>{
+ 
+ return {
+   label: item.name.common,
+   value: item.name.common.toLowerCase()
+ }
+
+}))
 
 
 
@@ -353,7 +292,7 @@ useEffect(()=>{
                   >
                     <option>Select Country</option>
                     {countries.map((item,index)=>
-                      <option key={index} selected={selectedData?.country_residence===item.label}>{item.label}</option>
+                      <option key={index} selected={selectedData?.country_residence===item?.label}>{item?.label}</option>
                     )}>
                   </select>
                 </div>
@@ -486,7 +425,7 @@ useEffect(()=>{
                 </div>:null}
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
-                    Only open to residence of these countries
+                    Only open to residents of these countries
                   </p>
                  
                   <Select 

@@ -33,7 +33,7 @@ export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
   const subjectOptions=[{
     option: "Maths"
   },{
-    option: "Computer"
+    option: "Computer Science"
   },{
     option: "Physics"
   },{
@@ -456,7 +456,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 </div>
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
-                    Only open to residence of these countries
+                    Only open to residents of these countries
                   </p>
                  
                   <Select 

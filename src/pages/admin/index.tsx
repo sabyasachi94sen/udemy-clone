@@ -54,7 +54,7 @@ export default function AdminPage() {
         <h1 className="font-sans text-3xl font-bold">
         Admin Roster
         </h1>
-        <p className="text-small font-bold mt-1">Click on name to view assigned students</p>
+        <p className="text-small font-bold mt-1 italic">Click on name to view assigned students</p>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}

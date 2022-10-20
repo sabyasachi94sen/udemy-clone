@@ -2,6 +2,8 @@ import { Account } from "@/api";
 import { BaseModal, Button, Form, Input } from "@/shared/components";
 import { useCreateSuperAdmin } from "@/shared/services/super-admin.service";
 import { useModal } from "@/shared/stores/modal.store";
+import {adminCreateValid} from "@/features/helpers/validations"
+import { toast } from "react-hot-toast";
 
 export function CreateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose } = useModal();
@@ -23,8 +25,17 @@ export function CreateSuperAdminModal({ isOpen }: { isOpen: boolean }) {
     >
       <div className="m-auto min-w-[20rem] max-w-6xl p-8 sm:p-4 sm:py-8">
         <Form<Account>
-          onSubmit={(formData) =>
-            createSuperAdminMutaton.mutate({ data: formData })
+          onSubmit={(formData) =>{
+          adminCreateValid.validate(formData,{abortEarly: false}).then((res)=>{
+              createSuperAdminMutaton.mutate({ data: formData })
+            }).catch((err)=>{
+              err.inner.map((item)=>{
+                toast.error(item.message)
+              })
+            })
+            
+           
+          }
           }
         >
           {({ register }) => (
