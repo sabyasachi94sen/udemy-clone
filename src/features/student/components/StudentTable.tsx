@@ -41,18 +41,18 @@ export function StudentTable({
       columnHelper.accessor((row) => row.date_of_birth, {
         id: "date_of_birth",
         header: "Date of Birth",
-        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+        cell: (info) => (<div className="pl-3">{info.getValue() ? formatDate(info.getValue()) : null}</div>),
       }),
       columnHelper.accessor((row) => row?.student_city_residence[0]?.country_of_residence, {
         id: "country",
-        header: "Country of Residence",
-        cell: (info) => (info.getValue()),
+        header: <div className="pl-12">Country of Residence</div>,
+        cell: (info) => (<div className="text-center">{info.getValue()}</div>),
       }),
       columnHelper.accessor((row) => row?.student_assignment[0]?.account_manager?.username, {
         id: "account_manager",
-        header: "Account Manager",
+        header: <div className="pl-16">Assigned Staff</div>,
         cell: (info) => (
-          info.getValue()
+          <div className="text-center">{info.getValue()}</div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {

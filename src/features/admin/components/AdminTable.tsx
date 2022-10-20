@@ -49,17 +49,14 @@ export function AdminTable({
           />
         ),
       }),
-      columnHelper.accessor((row) => row.email, {
-        id: "email",
-        header: "Email",
-        cell: (info) => info.getValue(),
-      }),
+      
       columnHelper.accessor((row) => row.last_login, {
         id: "last_login",
         header: "Last Login",
         cell: (info) => (info.getValue() ? <div className="pl-1">{formatDate(info.getValue())}</div> : null),
       
       }),
+    
       columnHelper.accessor((row) => row.is_active, {
         id: "is_active",
         header: "Active Status",
@@ -71,6 +68,12 @@ export function AdminTable({
           />
           </div>
         ),
+      }),
+      columnHelper.accessor((row) => row.student_count, {
+        id: "students",
+        header: "Students",
+        cell: (info) => (<div className="pl-8">{info.getValue()}</div>),
+      
       }),
       columnHelper.accessor((row) => row.id, {
         id: "edit",
