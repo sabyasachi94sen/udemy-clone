@@ -67,7 +67,7 @@ export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX
     <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={accountManagerActivity && accountManagerActivity?.data}
+      data={accountManagerActivity?.isSuccess && accountManagerActivity?.data}
       isLoading={accountManagerActivity?.isLoading}
       // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     
