@@ -40,18 +40,18 @@ console.log(aepChoice)
       }),
       columnHelper.accessor((row) => row?.activity_type, {
         id: "activity_type",
-        header: "Type",
-        cell: (info) => info.getValue(),
+        header: <div className="w-[14vw] text-center">Type</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.subject, {
         id: "subject",
-        header: "Subject",
-        cell: (info) => info.getValue(),
+        header: <div className="w-[11vw] text-center">Subject</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.application_requirement, {
         id: "application_requirement",
-        header: "Application of Requirement",
-        cell: (info) => info.getValue(),
+        header: "Application of Requirements",
+        cell: (info) =><div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.application_deadline, {
         id: "application_deadline",
@@ -125,7 +125,7 @@ console.log(aepChoice)
 
             <div className="mt-8 flex h-[8vh] w-full justify-between">
               <div className="w-[70%] pl-5">
-                <span className="text-md font-bold">Active Type</span>
+                <span className="text-md font-bold">Activity Type</span>
                 <select
                   {...register("activity_status")}
                   className="relative left-3 h-[5vh] w-[60%] rounded-md bg-[#EEEE] outline-none"

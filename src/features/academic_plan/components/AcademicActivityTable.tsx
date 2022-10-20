@@ -41,12 +41,12 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
       columnHelper.accessor((row) => row?.activity?.activity_name, {
         id: "activity_name",
         header: "Activity Name",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.activity_type, {
         id: "activity_type",
-        header: "Type",
-        cell: (info) => info.getValue(),
+        header: <div className="w-[14vw] text-center">Type</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.subject, {
         id: "subject",

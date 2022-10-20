@@ -45,23 +45,23 @@ export function AEPTrackerTable({
       columnHelper.accessor((row) => row.activity_assignment?.activity?.activity_name, {
         id: "activity_name",
         header: "Activity Name",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.activity_assignment?.activity?.activity_type, {
         id: "activity_type",
-        header: "Activity Type",
-        cell: (info) => (info.getValue()),
+        header: <div className="w-[14vw] text-center">Activity Type</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) =>row.activity_assignment?.activity?.subject, {
         id: "subject",
-        header: "Subject",
-        cell: (info) => (
-         info.getValue()
-        ),
+        header: <div className="text-center w-[14vw]">Subject</div>,
+        cell: (info) => 
+        <div className="text-center">{info.getValue()}</div>
+        ,
       }),
       columnHelper.accessor((row) => row.action_map?.action, {
         id: "task",
-        header: "Task",
+        header: <div className="w-[140%] text-center">Task</div>,
         cell: (info) => (
          info.getValue()
         ),
@@ -70,7 +70,7 @@ export function AEPTrackerTable({
         id: "target_date",
         header: "Target Date",
         cell: (info) => (
-          info.getValue() ? formatDate(info.getValue()) : null
+          <div className="text-center">{info.getValue() ? formatDate(info.getValue()) : null}</div>
         ),
       }),
 
