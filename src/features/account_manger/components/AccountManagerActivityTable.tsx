@@ -34,7 +34,7 @@ export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
-      columnHelper.accessor((row) => row.student, {
+      columnHelper.accessor((row) => row?.student?.student_name, {
         id: "student_name",
         header: "Student Name",
         cell: (info) => (info.getValue()),
@@ -67,8 +67,8 @@ export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX
     <BaseTable<Account>
       columns={columns}
       currentPage={Number(page) || 1}
-      data={accountManagerActivity?.data}
-      isLoading={false}
+      data={accountManagerActivity && accountManagerActivity?.data}
+      isLoading={accountManagerActivity?.isLoading}
       // totalPagesCount={10} // TODO: fix This once backend adds limit in query
     
     

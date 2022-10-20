@@ -2,7 +2,8 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
-import {setLocalStorage} from "@/features/helpers"
+import {setLocalStorage} from "@/features/helpers";
+
 
 import { Account } from "@/api";
 import {
@@ -53,7 +54,7 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
       columnHelper.accessor((row) => row.student?.date_of_birth, {
         id: "date_of_birth",
         header: "Date of Birth",
-        cell: (info) => info.getValue(),
+        cell: (info) => info.getValue()!=null?formatDate(info.getValue()): null,
       }),
       columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
         id: "country",

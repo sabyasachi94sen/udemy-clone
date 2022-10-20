@@ -66,7 +66,7 @@ export function ActivityTable({
         id: "application_deadline",
         header: "Application Deadline",
         cell: (info) => (
-           <span className="ml-1">{info.getValue()}</span>
+           <span className="ml-1">{info.getValue()!=null?formatDate(info.getValue()): null}</span>
         ),
       }),
 

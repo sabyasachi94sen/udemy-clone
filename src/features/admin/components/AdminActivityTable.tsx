@@ -1,5 +1,5 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import React, { useMemo } from "react";
 
 import { Account } from "@/api";
@@ -23,10 +23,12 @@ export function AdminActivityTable({adminActivity,page}): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
-      columnHelper.accessor((row) => row.student, {
+      columnHelper.accessor((row) => row?.student?.student_name, {
         id: "student_name",
         header: "Student Name",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="hover:underline cursor-pointer" onClick={()=>{
+          router.push(``)
+        }}>{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.activity_count, {
         id: "activities",
