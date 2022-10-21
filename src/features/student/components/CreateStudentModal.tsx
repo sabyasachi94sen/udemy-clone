@@ -128,7 +128,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     >
                       <option>Select Country</option>
                       <option>N/A</option>
-                      {countries.map((item,index)=><option key={index}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index}>{item.name.common}</option>)}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">

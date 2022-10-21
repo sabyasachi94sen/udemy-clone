@@ -8,6 +8,8 @@ import { useUserDetails } from "@/shared/services/settings.service";
 
 
 
+
+
 import { useAuth } from "@/shared/stores/auth.context";
 
 
@@ -40,6 +42,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
  const currentDate=year+"/"+month+"/"+day;
  const userDetails=useUserDetails()
 
+ const { refetchAuthUser } = useAuth();
+
 
 
 
@@ -68,6 +72,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     if(menuName==="Sign out"){
    
     removeToken()
+    refetchAuthUser()
     router.push("/login")
     
     }

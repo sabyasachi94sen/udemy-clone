@@ -2,6 +2,8 @@ import { Account } from "@/api";
 import { BaseModal, Button, Form, Input } from "@/shared/components";
 import { useCreateAdmin } from "@/shared/services/admin.service";
 import { useModal } from "@/shared/stores/modal.store";
+import { adminCreateValid } from "@/features/helpers/validations";
+import { toast } from "react-hot-toast";
 
 
 export function CreateAdminModal({ isOpen }: { isOpen: boolean }) {
@@ -27,7 +29,13 @@ export function CreateAdminModal({ isOpen }: { isOpen: boolean }) {
       <div className="m-auto min-w-[20rem] max-w-6xl p-8 sm:p-4 sm:py-8">
         <Form<Account>
           onSubmit={(formData) =>
-            createAdminMutaton.mutate({ data: formData })
+            adminCreateValid.validate(formData,{abortEarly:false}).then((res)=>{
+              createAdminMutaton.mutate({ data: formData })
+            }).catch((err)=>{
+              err.inner.map((item)=>{
+                toast.error(item.message)
+              })
+            })
           }
         >
           {({ register }) => (

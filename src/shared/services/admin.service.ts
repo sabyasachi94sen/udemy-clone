@@ -103,8 +103,10 @@ export function useUpdateAdmin(onSuccess?: () => void) {
 
     onError(err) {
       // displayErrorMessages(err);
+
+      
      
-      toast.error("Account with this email already exists")
+      toast.error(err?.body?.message)
     },
   });
 }

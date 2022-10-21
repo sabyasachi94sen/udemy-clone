@@ -9,6 +9,7 @@ import { useRefreshQuery } from "@/shared/hooks/use-refresh-query";
 
 import { queryKeys } from "./query-keys";
 import ToastStories from "../components/libs/Toast/Toast.stories";
+import isArray from "lodash-es/isArray";
 
 export interface AccountManagerResp {
   count: number;
@@ -111,11 +112,12 @@ export function useUpdateAccountManager(onSuccess?: () => void) {
   
       onError(err,data) {
         //
-
-        if(data.student_count>0 && !data.data.is_active)
-        toast.error("Can't Make the Staff Inactive. First re-assign the assigned students")
-        else
-        toast.error("Account with this email already exists")
+         
+      
+        if(err?.body["message"]!=undefined)
+        toast.error(err?.body?.message)
+        else if(Array.isArray(err?.body?.email))
+        toast.error(err?.body?.email[0])
       },
     });
   }

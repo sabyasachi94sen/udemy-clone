@@ -1,4 +1,6 @@
 import { Controller } from "react-hook-form";
+import { adminUpdateValid } from "@/features/helpers/validations";
+import { toast } from "react-hot-toast";
 
 import { Account } from "@/api";
 import {
@@ -44,11 +46,20 @@ export function UpdateAdminModal({ isOpen }: { isOpen: boolean }) {
               role: selectedData?.is_admin?"admin": null || selectedData?.is_account_manager?"accountmanager": null || selectedData?.is_super_admin?"superadmin": null,
             },
           }}
-          onSubmit={(formData) =>
-            updateAdminMutation.mutate({
-              id: selectedData?.id,
-              data: formData,
+          onSubmit={(formData) =>{
+           
+
+            adminUpdateValid.validate(formData,{abortEarly: false}).then((res)=>{
+              updateAdminMutation.mutate({
+                id: selectedData?.id,
+                data: formData,
+              })
+            }).catch((err)=>{
+              err.inner.map((item)=>{
+                 toast.error(item.message)
+              })
             })
+          }
           }
         >
           {({ register, control, watch }) => {

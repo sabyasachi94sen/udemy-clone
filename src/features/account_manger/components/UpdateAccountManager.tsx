@@ -1,4 +1,6 @@
 import { Controller } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { managerUpdateValid } from "@/features/helpers/validations";
 
 import { Account } from "@/api";
 import {
@@ -45,12 +47,19 @@ export function UpdateAccountManagerModal({ isOpen }: { isOpen: boolean }) {
               role: selectedData?.account?.is_admin?"admin": null || selectedData?.account?.is_account_manager?"accountmanager": null || selectedData?.account?.is_super_admin?"superadmin": null,
             },
           }}
-          onSubmit={(formData) =>
-            updateAccountManagerMutation.mutate({
-              id: selectedData?.id,
-              data: formData,
-              student_count: selectedData?.student_count
-            })
+          onSubmit={(formData) =>{
+             managerUpdateValid.validate(formData,{abortEarly: false}).then((res)=>{
+              updateAccountManagerMutation.mutate({
+                id: selectedData?.id,
+                data: formData,
+                student_count: selectedData?.student_count
+              })
+             }).catch((err)=>{
+                err.inner.map((item)=>{
+                  toast.error(item.message)
+                })
+             })
+          }
           }
         >
           {({ register, control, watch }) => {
