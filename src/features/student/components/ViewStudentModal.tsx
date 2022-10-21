@@ -137,7 +137,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     >
                       <option>Select Country</option>
                       <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
-                      {countries.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item.name.common}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item?.name?.common}>{item?.name?.common}</option>)}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -159,7 +159,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     >
                       <option>Select Country</option>
                       <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
-                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item.name.common}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item?.name?.common}>{item?.name?.common}</option>)}
                     </select>
                   </div>
                 </div>
@@ -209,7 +209,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       disabled
                     >
                       <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
-                      {countries.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item.name.common}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item?.name?.common}>{item?.name?.common}</option>)}
                     </select>
                   </div>
                 </div>

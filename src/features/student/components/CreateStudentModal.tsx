@@ -85,7 +85,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                   </div>
 
                   <div className="ml-20 flex w-[30%] h-[30vh] flex-col items-start text-lg font-bold">
-                  <p className="ml-8">Grade at PIPPAMS Registration</p>
+                  <p className="ml-8">Grade at PIPPAMS Registration<span className="text-red-500 ml-1">*</span></p>
                     <p className="text-sm text-gray-700 ml-8 mt-2">Please enter the student’s grade as of September 1 of the current academic year of registration, with academic year generally defined as Aug/Sept to May/June</p>
                     <input
                       className="text-small relative left-8 mt-[6vh] h-[5vh] w-[92%] rounded-md bg-[#EEEE] pl-3 font-medium"
@@ -128,7 +128,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     >
                       <option>Select Country</option>
                       <option>N/A</option>
-                      {countries?.map((item,index)=><option key={index}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index}>{item?.name?.common}</option>)}
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -148,7 +148,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     >
                       <option>Select Country</option>
                       <option>N/A</option>
-                      {countries.map((item,index)=><option key={index}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index}>{item?.name?.common}</option>)}
                     </select>
                   </div>
                 </div>
@@ -197,7 +197,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     >
                       <option>Select Country</option>
                       <option>N/A</option>
-                      {countries.map((item,index)=><option key={index}>{item.name.common}</option>)}
+                      {countries?.map((item,index)=><option key={index}>{item?.name?.common}</option>)}
                     </select>
                   </div>
                 </div>

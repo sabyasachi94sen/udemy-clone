@@ -149,8 +149,8 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
   const countries=[{label:"OPEN",value: "open"}].concat(data?.data?.map((item)=>{
    
    return {
-     label: item.name.common,
-     value: item.name.common.toLowerCase()
+     label: item?.name?.common,
+     value: item?.name?.common?.toLowerCase()
    }
  
  }))
