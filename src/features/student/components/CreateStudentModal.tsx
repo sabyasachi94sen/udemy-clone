@@ -61,7 +61,14 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                 },
               }}
           onSubmit={(formData) =>{ 
-            studentValid.validate(formData,{abortEarly:false}).then((res)=>{
+            studentValid.validate({...formData,
+              country_of_residence:formData.country_of_residence==="Select Country"?"":formData.country_of_residence,
+              country_of_citizenship:formData.country_of_citizenship==="Select Country"?"":formData.country_of_citizenship,
+              country_of_boarding_school:formData.country_of_boarding_school==="Select Country"?"":formData.country_of_boarding_school,
+              account_manager:formData.account_manager==="Select Country"?"":formData.account_manager,
+              is_active:formData.is_active==="Select Status"?"":formData.is_active,
+            
+            },{abortEarly:false}).then((res)=>{
               createStudentMutaton.mutate({ data: formData })
             }).catch((err)=>{
               err.inner.map((item)=>{
