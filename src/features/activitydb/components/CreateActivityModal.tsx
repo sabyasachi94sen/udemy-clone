@@ -7,6 +7,8 @@ import { Slider } from "@material-ui/core";
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import { CountryListObj } from "@/features/api";
+import { activityValid } from "@/features/helpers/validations";
+import { toast } from "react-hot-toast";
 
 export function CreateActivityModal({ isOpen }: { isOpen: boolean }) {
   const [storeOptions,setStoreOptions]=useState(null)
@@ -212,18 +214,31 @@ const handleMultiOption = (value: { value: {}[] }) => {
       }}
     >
       <Form<Account>
-        onSubmit={(formData) =>
-          createActivityMutation.mutate({
-            data: {
-              ...formData,
-              url: formData.url.includes("https")?formData.url: "https://"+formData.url,
-              application_requirement: storeOptions,
-              age_range: ageVal,
-              grade_range: gradeVal,
-              only_open_to_citizens_of_these_countries: storeCitizen,
-              only_open_to_residence_of_these_countries: storeResidence,
-            },
+        onSubmit={(formData) =>{
+
+          activityValid.validate(formData,{abortEarly:false}).then((res)=>{
+            createActivityMutation.mutate({
+              data: {
+                ...formData,
+                url: formData.url.includes("https")?formData.url: "https://"+formData.url,
+                application_requirement: storeOptions,
+                age_range: ageVal,
+                grade_range: gradeVal,
+                only_open_to_citizens_of_these_countries: storeCitizen,
+                only_open_to_residence_of_these_countries: storeResidence,
+              },
+            })
+          }).catch((err)=>{
+            err.inner.map((item)=>{
+              toast.error(item.message)
+            })
           })
+     
+
+
+
+        }
+         
         }
       >
         {({ register }) => (
@@ -295,7 +310,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Country of Activity<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative ml-6 h-[5vh] w-[78%] rounded-md bg-[#EEEE] outline-none"
                     {...register("country_residence")}
                   >
                     <option>Select Country</option>
@@ -308,7 +323,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">City of Activity</span>
                   <input
-                    className="relative ml-16 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative ml-16 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
                     {...register("country_citizenship")}
                     type="text"
                   />
@@ -318,7 +333,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                 <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">URL<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative ml-[22%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative ml-[22%] h-[5vh] w-[70%] rounded-md bg-[#EEEE]"
                     {...register("url")}
                     type="text"
                   />
@@ -329,9 +344,9 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   Key Dates
                 </h1>
                 <div className="mt-2 flex items-center">
-                  <span className="text-md font-bold">Registration Open</span>
+                  <span className="text-md font-bold">Registration Open<span className="ml-1 text-red-500">*</span></span>
                   <input
-                    className="relative ml-12 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
+                    className="relative ml-7 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     type="date"
                     max={keyDates.ra_deadline.date}

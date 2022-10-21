@@ -3,12 +3,14 @@ import { BaseModal, Form, Button } from "@/shared/components";
 import { useUpdateActionMapStep } from "@/shared/services/activity.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useStoreData } from "@/shared/stores/modal.store";
+import { toast } from "react-hot-toast";
+import { actionMapValid } from "@/features/helpers/validations";
 
 export function UpdateActionMapStepModal({
   isOpen,
   action_step_id,
   action_step_data,
-  action_map_phase
+  action_map_phase,
 }: {
   isOpen: boolean;
 }) {
@@ -36,25 +38,33 @@ export function UpdateActionMapStepModal({
             deadline_days: action_step_data?.deadline_days,
           },
         }}
-        onSubmit={(formData) =>
-          updateActionMapStepMutation.mutate({
-            data: { ...formData,
-            deadline_days: Number(formData.deadline_days) },
-           
-            action_step_id,
-          })
-        }
+        onSubmit={(formData) => {
+          actionMapValid.validate(formData,{abortEarly:false}).then((res) => {
+              updateActionMapStepMutation.mutate({
+                data: {
+                  ...formData,
+                  deadline_days: Number(formData.deadline_days),
+                },
+
+                action_step_id,
+              });
+            })
+            .catch((err) => {
+              err.inner.map((item)=>{
+                toast.error(item.message)
+               })
+            });
+        }}
       >
         {({ register }) => (
-          <div className="relative z-30 h-[60vh] w-full rounded-xl bg-white pb-20 overflow-y-scroll">
-            <div className="w-[50%] mx-auto h-auto">
-            <h1 className="mt-4 text-3xl text-black text-center font-bold text-[#6F6F6F]">
-              {storedData?.activity_name}
-            </h1>
-            <h1 className="mt-6 text-xl text-black text-center font-bold text-[#6F6F6F]">
-              {action_map_phase}
-            </h1>
-           
+          <div className="relative z-30 h-[60vh] w-full overflow-y-scroll rounded-xl bg-white pb-20">
+            <div className="mx-auto h-auto w-[50%]">
+              <h1 className="mt-4 text-center text-3xl font-bold text-black text-[#6F6F6F]">
+                {storedData?.activity_name}
+              </h1>
+              <h1 className="mt-6 text-center text-xl font-bold text-black text-[#6F6F6F]">
+                {action_map_phase}
+              </h1>
             </div>
             <div className="mx-auto w-[70%]">
               <div className="mt-16 flex items-center">

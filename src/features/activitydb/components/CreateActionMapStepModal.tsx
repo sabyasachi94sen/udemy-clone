@@ -3,6 +3,8 @@ import { BaseModal, Form, Button } from "@/shared/components";
 import { useCreateActionMapStep } from "@/shared/services/activity.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useStoreData } from "@/shared/stores/modal.store";
+import { toast } from "react-hot-toast";
+import { actionMapValid } from "@/features/helpers/validations";
 
 export function CreateActionMapStepModal({
   isOpen,
@@ -31,9 +33,15 @@ export function CreateActionMapStepModal({
     >
       <Form<Account>
         onSubmit={(formData) =>
+         actionMapValid.validate(formData,{abortEarly:false}).then((res)=>{
           createActionMapStepMutation.mutate({
             data: { ...formData, action_map, activity: Number(storedData.activity_id) ,deadline_days: Number(formData.deadline_days)},
           })
+         }).catch((err)=>{
+           err.inner.map((item)=>{
+            toast.error(item.message)
+           })
+         })
         }
       >
         {({ register }) => (
