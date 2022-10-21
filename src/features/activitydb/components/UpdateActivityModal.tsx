@@ -367,7 +367,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                   >
                     <option>Select Country</option>
 
-                    {countries.map((item, index) => (
+                    {countries?.map((item, index) => (
                       <option
                         key={index}
                         selected={

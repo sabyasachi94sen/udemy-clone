@@ -291,7 +291,7 @@ const countries=[{label:"OPEN",value: "open"}].concat(data?.data?.map((item)=>{
                     disabled
                   >
                     <option>Select Country</option>
-                    {countries.map((item,index)=>
+                    {countries?.map((item,index)=>
                       <option key={index} selected={selectedData?.country_residence===item?.label}>{item?.label}</option>
                     )}>
                   </select>
