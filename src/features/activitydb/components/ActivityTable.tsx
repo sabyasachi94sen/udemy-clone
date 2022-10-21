@@ -59,14 +59,14 @@ export function ActivityTable({
         id: "subject",
         header: <div className="w-[360%] text-center">Subject</div>,
         cell: (info) => (
-           <span className="text-center text-center block">{info.getValue()}</span>
+           <span className="text-center block mx-auto w-[110%]">{info.getValue()}</span>
         ),
       }),
       columnHelper.accessor((row) => row.application_deadline, {
         id: "application_deadline",
-        header: "Application Deadline",
+        header: <div className="w-[130%] text-center">Application Deadline</div>,
         cell: (info) => (
-           <span className="">{info.getValue()!=null?formatDate(info.getValue()): null}</span>
+           <span className="w-[130%] mx-auto block text-center">{info.getValue()!=null?formatDate(info.getValue()): null}</span>
         ),
       }),
 

@@ -83,14 +83,14 @@ export const useAepList = (
             // invalidate all the list queries
 
             if(data.length===0)
-            toast.error("No Data Found")
+            toast.error("No activities in the database meet these search criteria")
            
            
             onSuccess?.();
           },
       
           onError(err) {
-            toast.error("No Data Found")
+            toast.error("No activities in the database meet these search criteria")
           },
         });
     }
