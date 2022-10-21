@@ -5,6 +5,8 @@ import { ModalState, useModal } from "@/shared/stores/modal.store";
 import {useRouter} from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import { CountryListObj } from "@/features/api";
+import { studentValid } from "@/features/helpers/validations";
+import { toast } from "react-hot-toast";
 
 export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
   const activeOptions = [
@@ -63,8 +65,30 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                     remarks: selectedData?.remarks,
                 },
               }}
-          onSubmit={(formData) => updateStudentMutaton.mutate({ id: selectedData?.id,
-            data: formData, })}
+          onSubmit={(formData) => {
+            studentValid.validate({...formData,
+              country_of_residence:formData.country_of_residence==="Select Country"?"":formData.country_of_residence,
+              country_of_citizenship:formData.country_of_citizenship==="Select Country"?"":formData.country_of_citizenship,
+              country_of_boarding_school:formData.country_of_boarding_school==="Select Country"?"":formData.country_of_boarding_school,
+              account_manager:formData.account_manager==="Select Staff"?"":formData.account_manager,
+              is_active:formData.is_active==="Select Status"?"":formData.is_active,
+            
+            },{abortEarly:false}).then((res)=>{
+              updateStudentMutaton.mutate({ id: selectedData?.id,
+                data: formData, })
+            }).catch((err)=>{
+              err.inner.map((item)=>{
+             
+                  toast.error(item.message)
+              
+              })
+            })
+
+
+
+          
+          }
+          }
         >
           {({ register }) => (
             <div>
@@ -170,7 +194,7 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                       className="text-small relative left-8 mt-4 h-[5vh] w-[60%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       {...register("account_manager")}
                     >
-                      <option>Select account manager</option>
+                      <option>Select Staff</option>
                       {accountManagerDropDownList &&
                         accountManagerDropDownList?.data.map((item, index) => (
                           <option key={index} value={item.id} selected={selectedData?.student_assignment[0]?.account_manager?.username===item?.username?true:false}>

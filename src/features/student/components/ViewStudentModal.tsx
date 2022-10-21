@@ -174,7 +174,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       {...register("account_manager")}
                       disabled
                     >
-                      <option>Select account manager</option>
+                      <option>Select Staff</option>
                       {accountManagerDropDownList &&
                         accountManagerDropDownList?.data.map((item, index) => (
                           <option key={index} selected={selectedData?.student_assignment[0]?.account_manager?.username===item?.username} value={item.id}>
