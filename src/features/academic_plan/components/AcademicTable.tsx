@@ -58,8 +58,8 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
       }),
       columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
         id: "country",
-        header: "Country of residence",
-        cell: (info) => <div className="">{info.getValue()}</div>,
+        header: <div className="w-[235%] text-center">Country of residence</div>,
+        cell: (info) => <div className="w-[105%] text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.account_manager?.username, {
         id: "manager_name",
