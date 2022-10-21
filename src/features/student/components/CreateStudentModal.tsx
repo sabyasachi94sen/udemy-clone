@@ -60,7 +60,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     student_name: ""
                 },
               }}
-          onSubmit={({...formData}) =>{ 
+          onSubmit={(formData) =>{ 
             studentValid.validate(formData,{abortEarly:false}).then((res)=>{
               createStudentMutaton.mutate({ data: formData })
             }).catch((err)=>{
