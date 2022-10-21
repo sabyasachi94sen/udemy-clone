@@ -238,10 +238,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="w-[30%] mt-3 h-[5vh] flex items-center font-bold text-gray-500 flex items-center justify-around">
               <div className="w-[auto] h-[5vh] flex items-center text-black">Hello, {userDetails?.data?.username}</div>
-              {currentDate}</div>
-
-            <div className="ml-4 flex items-center md:ml-6">
              
+              </div>
+
+            <div className="ml-4 w-[17%] justify-around flex items-center md:ml-6">
+            <div className="font-bold text-gray-500">{currentDate}</div>
               <button
                 className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 type="button"
