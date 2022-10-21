@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { studentValid } from "@/features/helpers/validations";
+import { toast } from "react-hot-toast";
 
 import { Account } from "@/api";
 import { CountryListObj } from "@/features/api";
@@ -58,7 +60,18 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     student_name: ""
                 },
               }}
-          onSubmit={(formData) => createStudentMutaton.mutate({ data: formData })}
+          onSubmit={({...formData}) =>{ 
+            studentValid.validate(formData,{abortEarly:false}).then((res)=>{
+              createStudentMutaton.mutate({ data: formData })
+            }).catch((err)=>{
+              err.inner.map((item)=>{
+             
+                  toast.error(item.message)
+              
+              })
+            })
+            }
+          }
         >
           {({ register }) => (
             <div>
@@ -97,20 +110,20 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                 </div>
               </div>
 
-              <div className="relative mt-6 flex h-[12vh] w-[73%] justify-between">
+              <div className="relative mt-6 flex h-[12vh] w-[65%] justify-between">
                 <div className="flex w-[76%] flex-col items-start text-lg font-bold">
                   <p className="ml-8">Email <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[62%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                    className="text-small relative left-8 mt-4 h-[5vh] w-[70%] rounded-md bg-[#EEEE] pl-3 font-medium"
                     placeholder="Email"
                     type="email"
                     {...register("email")}
                   />
                 </div>
-                <div className="flex w-[80%] ml-6 flex-col items-start text-lg font-bold">
+                <div className="flex w-[80%] ml-6 relative left-12 flex-col items-start text-lg font-bold">
                   <p className="ml-8">Phone Number <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-6 mt-4 h-[5vh] xl:h-[]  w-[58%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                    className="text-small relative left-6 mt-4 h-[5vh] w-[65%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                     placeholder="Phone Number"
                     type="tel"
                     {...register("phone_number")}

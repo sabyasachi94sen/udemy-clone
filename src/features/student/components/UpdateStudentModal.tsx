@@ -102,20 +102,20 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                 </div>
               </div>
 
-              <div className="relative mt-6 flex h-[12vh] w-[73%] justify-between">
+              <div className="relative mt-6 flex h-[12vh] w-[67%] justify-between">
                 <div className="flex w-[53%] flex-col items-start text-lg font-bold">
                   <p className="ml-8">Email <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[62%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                    className="text-small relative left-8 mt-4 h-[5vh] w-[68%] rounded-md bg-[#EEEE] pl-3 font-medium"
                     placeholder="Email"
                     type="email"
                     {...register("email")}
                   />
                 </div>
-                <div className="flex w-[58%] flex-col items-start text-lg font-bold">
+                <div className="flex w-[58%] relative left-9 flex-col items-start text-lg font-bold">
                   <p className="ml-14">Phone Number <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-12 mt-4 h-[5vh] w-[56%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                    className="text-small relative left-12 mt-4 h-[5vh] w-[62%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                     placeholder="Phone Number"
                     type="tel"
                     {...register("phone_number")}

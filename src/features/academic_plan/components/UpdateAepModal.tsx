@@ -130,7 +130,7 @@ console.log(aepChoice)
                   {...register("activity_status")}
                   className="relative left-3 h-[5vh] w-[60%] rounded-md bg-[#EEEE] outline-none"
           >
-                  <option>Select Type</option>
+                  <option>All</option>
                   {aepChoice?.data?.activity_type?.map((item,index)=>{
                     return <option key={index}>{item}</option>
                   })}
@@ -143,7 +143,7 @@ console.log(aepChoice)
                   {...register("activity_subject")}
                   className="relative left-3 h-[5vh] w-[60%] rounded-md bg-[#EEEE] outline-none"
           >
-                  <option>Select Subject</option>
+                  <option>All</option>
                   {aepChoice?.data?.activity_subject?.map((item,index)=>{
                     return <option key={index}>{item}</option>
                   })}
