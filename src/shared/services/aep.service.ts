@@ -32,6 +32,36 @@ export const useAepList = (
       },
     );
 
+    
+       export function useAepActivityComplete(onSuccess?: () => void) {
+        const { refreshQuery } = useRefreshQuery();
+        const { displayErrorMessages } = useBackendErrors();
+      
+        return useMutation<
+          void,
+          ApiError,
+          {
+            activity_id:number,
+            student_id:number
+          }
+        >((data) => AepService.aepActivityComplete(data), {
+          onSuccess(data) {
+            // invalidate all the list queries
+         
+
+              window.location.href=`/academic-list/${data?.student?.id}`
+           
+           
+            onSuccess?.();
+          },
+      
+          onError(err) {
+             toast.error("Internal server error")
+          },
+        })
+
+      }
+
 
     export const useAepActivity = (
         studentId
@@ -65,6 +95,11 @@ export const useAepList = (
          () => AepService.aepActivityFilter(studentId),
         
        );
+
+      
+
+
+
 
      
 

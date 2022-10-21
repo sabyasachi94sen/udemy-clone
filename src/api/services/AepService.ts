@@ -18,10 +18,21 @@ export class AepService {
         });
     }
 
+    
+
     public static aepActivityAssignment(data): CancelablePromise<void> {
         return __request({
             method: 'POST',
             path: "/activity_assignment_api/",
+            body: data
+        });
+    }
+
+    
+    public static aepActivityComplete(data): CancelablePromise<void> {
+        return __request({
+            method: 'PUT',
+            path: "/aep/activity/student/",
             body: data
         });
     }

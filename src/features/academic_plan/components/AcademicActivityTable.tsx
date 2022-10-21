@@ -7,6 +7,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { us } from "@/shared/stores/modal.store";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { getLocalStorage } from "@/features/helpers";
+import { useAepActivityComplete } from "@/shared/services/aep.service";
 
 import { Account } from "@/api";
 import {
@@ -26,7 +27,8 @@ interface AcademicActivityTableProps {
 
 export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch }): JSX.Element {
 
-  console.log(aepActivityQuery)
+   const aepActivityCompleteQuery=useAepActivityComplete()
+   const student_id=getLocalStorage("studentId")
  
 
   const { isModalOpen, onModalClose } = useModal() as ModalState<Account>;
@@ -69,10 +71,19 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
         header: <div className="text-center">Activity Start Date</div>,
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
-      columnHelper.accessor((row) => row.id, {
+      columnHelper.accessor((row) => row.is_completed, {
         id: "is_complete",
         header: "Complete",
-        cell: (info) => <div className="pl-6"><Checkbox size={"lg"} /></div>,
+        cell: (info) => <div className="pl-6"><Checkbox 
+        size={"lg"} 
+        isChecked={info.getValue()}
+        onClick={()=>{
+         aepActivityCompleteQuery.mutate({
+          student_id:Number(student_id),
+          activity_id: info.row.original.activity.id
+         })
+        }} />
+        </div>,
       }),
 
       columnHelper.accessor((row) => row.id, {
