@@ -68,27 +68,27 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                     <p className="ml-8">Name <span className="text-red-500 ml-1">*</span></p>
                     
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[60%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                      className="text-small relative left-8 mt-4 h-[5vh] w-[64%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Student name"
                       type="text"
                       {...register("student_name")}
                     />
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Date of Birth <span className="text-red-500 ml-1">*</span></p>
+                    <p className="ml-14">Date of Birth <span className="text-red-500 ml-1">*</span></p>
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[89%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                      className="text-small relative left-14 mt-4 h-[5vh] w-[94%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                       placeholder="Date of Birth"
                       type="date"
                       {...register("date_of_birth")}
                     />
                   </div>
 
-                  <div className="ml-20 flex w-[30%] h-[30vh] flex-col items-start text-lg font-bold">
+                  <div className="ml-20 relative left-12 flex w-[36%] h-[30vh] flex-col items-start text-lg font-bold">
                   <p className="ml-8">Grade at PIPPAMS Registration<span className="text-red-500 ml-1">*</span></p>
                     <p className="text-sm text-gray-700 ml-8 mt-2">Please enter the student’s grade as of September 1 of the current academic year of registration, with academic year generally defined as Aug/Sept to May/June</p>
                     <input
-                      className="text-small relative left-8 mt-[6vh] h-[5vh] w-[92%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                      className="text-small relative left-8 mt-[6vh] h-[5vh] w-[81%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Grade"
                       type="number"
                       {...register("current_grade")}
@@ -110,7 +110,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                 <div className="flex w-[80%] ml-6 flex-col items-start text-lg font-bold">
                   <p className="ml-8">Phone Number <span className="text-red-500 ml-1">*</span></p>
                   <input
-                    className="text-small relative left-8 mt-4 h-[5vh] w-[58%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                    className="text-small relative left-6 mt-4 h-[5vh] xl:h-[]  w-[58%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                     placeholder="Phone Number"
                     type="tel"
                     {...register("phone_number")}
@@ -134,7 +134,7 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
                     <p className="ml-8">City of Permanent Residence <span className="text-red-500 ml-1">*</span></p>
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[88%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                      className="text-small relative left-7 mt-4 h-[5vh] w-[88%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                       {...register("city_of_residence")}
                       type="text"
                     />

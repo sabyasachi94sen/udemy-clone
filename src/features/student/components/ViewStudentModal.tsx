@@ -72,7 +72,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                   <div className="flex w-[45%] flex-col items-start text-lg font-bold">
                     <p className="ml-8">Name</p>
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[60%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                      className="text-small relative left-8 mt-4 h-[5vh] w-[63%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Student name"
                       type="text"
                       {...register("student_name")}
@@ -80,9 +80,9 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     />
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
-                    <p className="ml-8">Date of Birth</p>
+                  <p className="ml-14">Date of Birth</p>
                     <input
-                      className="text-small relative left-8 mt-4 h-[5vh] w-[90%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
+                      className="text-small relative left-14 mt-4 h-[5vh] w-[96%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
                       placeholder="Date of Birth"
                       type="date"
                       {...register("date_of_birth")}
@@ -90,11 +90,11 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     />
                   </div>
 
-                  <div className="ml-20 flex w-[30%] h-[30vh] flex-col items-start text-lg font-bold">
+                  <div className="ml-20 relative left-12 flex w-[36%] h-[30vh] flex-col items-sta*rt text-lg font-bold">
                   <p className="ml-8">Grade at PIPPAMS Registration</p>
                     <p className="text-sm text-gray-700 ml-8 mt-2">Please enter the student’s grade as of September 1 of the current academic year of registration, with academic year generally defined as Aug/Sept to May/June</p>
                     <input
-                      className="text-small relative left-8 mt-[6vh] h-[5vh] w-[92%] rounded-md bg-[#EEEE] pl-3 font-medium"
+                      className="text-small relative left-8 mt-[6vh] h-[5vh] w-[78%] rounded-md bg-[#EEEE] pl-3 font-medium"
                       placeholder="Grade"
                       type="number"
                       {...register("current_grade")}
@@ -114,7 +114,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     disabled
                   />
                 </div>
-                <div className="flex w-[80%] ml-6 flex-col items-start text-lg font-bold">
+                <div className="flex w-[80%] ml-1 flex-col items-start text-lg font-bold">
                   <p className="ml-8">Phone Number</p>
                   <input
                     className="text-small relative left-8 mt-4 h-[5vh] w-[58%] rounded-md bg-[#EEEE] pl-3 text-xl font-bold font-medium"
