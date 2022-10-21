@@ -51,7 +51,7 @@ console.log(aepChoice)
       columnHelper.accessor((row) => row?.application_requirement, {
         id: "application_requirement",
         header: <div className="pl-3">Application of Requirements</div>,
-        cell: (info) =><div className="text-center">{info.getValue()}</div>,
+        cell: (info) =><div className="text-center">{info.getValue()?.join(", ")}</div>,
       }),
       columnHelper.accessor((row) => row?.application_deadline, {
         id: "application_deadline",
