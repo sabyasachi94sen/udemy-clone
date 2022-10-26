@@ -38,6 +38,7 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
   });
 
   const accountManagerDropDownList=useAccountManagerDropDownList({page})
+  console.log(selectedData)
   
 
   return (
@@ -232,7 +233,7 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
                       {...register("country_of_boarding_school")}
                     >
                       <option>Select Country</option>
-                      <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
+                      <option selected={selectedData?.country_of_boarding_school==="N/A"}>N/A</option>
                       {countries?.map((item,index)=><option key={index} selected={selectedData?.country_of_boarding_school===item?.name?.common}>{item?.name?.common}</option>)}
                     </select>
                   </div>
