@@ -25,7 +25,7 @@ interface AcademicActivityTableProps {
   onDelete: (user: Account) => void;
 }
 
-export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch }): JSX.Element {
+export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch,onViewActivity }): JSX.Element {
 
    const aepActivityCompleteQuery=useAepActivityComplete()
    const student_id=getLocalStorage("studentId")
@@ -70,6 +70,13 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
         id: "activity_start_date",
         header: <div className="text-center">Activity Start Date</div>,
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
+      }),
+      columnHelper.accessor((row) => row.id, {
+        id: "details",
+        header: "Details",
+        cell: (info) => (<img onClick={()=>onViewActivity(info.row.original.activity)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] ml-4 cursor-pointer" />)
+        
+      
       }),
       columnHelper.accessor((row) => row.is_completed, {
         id: "is_complete",

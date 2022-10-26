@@ -6,6 +6,7 @@ import {
   AcademicActivityTable,
   DeleteAepTrackerModal,
   UpdateAepModal,
+  ViewActivityModal
 } from "@/features/academic_plan";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
@@ -59,6 +60,10 @@ export default function AepActivityPage() {
 
   return (
     <>
+    <ViewActivityModal 
+    isOpen={currModalKey==="viewActivity"} 
+    />
+    
       <DeleteAepTrackerModal
         isOpen={currModalKey === "deleteAepStudentActivity"}
       />
@@ -117,6 +122,7 @@ export default function AepActivityPage() {
 
         <AcademicActivityTable
           onDelete={(user) => onModalOpen("deleteAepStudentActivity", user)}
+          onViewActivity={(user)=> onModalOpen("viewActivity",user)}
           aepActivityQuery={!isSearch?aepActivityQuery: aepActivityList}
           page={page}
           isSearch={()=>setIsSearch(false)}

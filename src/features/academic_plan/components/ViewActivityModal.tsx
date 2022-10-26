@@ -7,10 +7,13 @@ import { useCreateActivity } from "@/shared/services/activity.service";
 import { useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 import Select from "react-select"
+import { CountryListObj } from "@/features/api";
+import { useQuery } from "@tanstack/react-query";
 
 export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
 
   const [storeOptions,setStoreOptions]=useState(null)
+  const [rangeType,setRangeType]=useState(null)
 
   
   const activityTypeOptions=[{
@@ -30,40 +33,48 @@ export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
   }]
 
 
-  const subjectOptions=[{
-    option: "Maths"
-  },{
-    option: "Computer Science"
-  },{
-    option: "Physics"
-  },{
-    option: "Chemistry"
-  },{
-    option: "Physics"
-  },{
-    option: "Chemistry"
-  },{
-    option: "Biology"
-  },{
-    option: "Environmental Science"
-  },{
-    option: "General Science"
-  },{
-    option:"Economics/Business/Finance"
-  },{
-    option: "General Science"
-  },{
-    option:"Economics/Business/Finance"
-  },{
-    option: "English"
-  },{
-    option: "Political Science"
-  },{
-    option: "Psychology"
-  },{
-    option: "Other"
-  }]
-
+  const subjectOptions = [
+    {
+      option: "Maths",
+    },
+    {
+      option: "Computer Science",
+    },
+    {
+      option: "Physics",
+    },
+    {
+      option: "Chemistry",
+    },
+   
+ 
+    {
+      option: "Biology",
+    },
+    {
+      option: "Environmental Science",
+    },
+    {
+      option: "General Science",
+    },
+    {
+      option: "Economics/Business/Finance",
+    },
+    
+   
+    {
+      option: "English",
+    },
+    {
+      option: "Political Science",
+    },
+    {
+      option: "Psychology",
+    },
+    {
+      option: "Other",
+    },
+  ];
   
 
 
@@ -111,86 +122,13 @@ const locationTypeOptions=[{
 }]
 
 
-const countries=[{
-  label: "India",
-  value: "india"
- },{
-  label: "Japan",
-  value: "japan"
- },
- {
-  label: "China",
-  value: "china"
- },{
- label: "Indonesia",
-  value: "indonesia"
- },
- {
-  label: "Malaysia",
-  value: "malaysia"
- },{
-  label: "Thailand",
-  value: "thailand"
- },
- {
-  label: "Singapore",
-  value: "singapore"
- },{
-  label: "North Korea",
-  value: "north korea"
- },
- {
-  label: "Taiwan",
-  value: "taiwan"
- },{
-  label: "Vietnam",
-  value: "vietnam"
- },
- {
-  label: "Mongolia",
-  value: "mongolia"
- },{
-  label: "Myanmar",
-  value: "myanmar"
- },
- {
-  label: "Bangladesh",
-  value: "bangladesh"
- },{
-  label: "Sri lanka",
-  value: "sri lanka"
- },
- {
-  label: "Pakistan",
-  value: "pakistan"
- },{
-  label: "Oman",
-  value: "oman"
- },
- {
-  label: "Maldieves",
-  value: "maldieves"
- },{
-  label: "Uzbekistan",
-  value: "uzbekistan"
- },
- {
-  label: "Kuwait",
-  value: "kuwait"
- },{
-  label: "Saudi Arabia",
-  value: "saudi arabia"
- }]
 
 
 
 
 
-
-
-
-const [gradeVal, setGradeVal] = useState([0, 100]);
-const [ageVal, setAgeVal] = useState([0, 100]);
+const [gradeVal, setGradeVal] = useState([0, 16]);
+const [ageVal, setAgeVal] = useState([0, 25]);
 
 const handleGradeVal = (e: SyntheticEvent, data: number[]) => {
   setGradeVal(data);
@@ -217,6 +155,22 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
     }
 },[selectedData])
 
+useEffect(()=>{
+  setRangeType(selectedData?.range_type)
+},[])
+
+const {data}=useQuery(["country_list"],()=> CountryListObj.country_list())
+const countries=[{label:"OPEN",value: "open"}].concat(data?.data?.map((item)=>{
+ 
+ return {
+   label: item?.name?.common,
+   value: item?.name?.common?.toLowerCase()
+ }
+
+}))
+
+
+
   return (
     <BaseModal
       hasHeader
@@ -241,6 +195,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
             activity_start_date: selectedData?.activity_start_date,
             activity_end_date: selectedData?.activity_end_date,
             remarks: selectedData?.remarks,
+            range_type: selectedData?.range_type.toLowerCase()
            
           
            
@@ -259,7 +214,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Name</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
+                    className="relative ml-[19.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_name")}
                     // defaultValue={name!=="Add an activity to the database"?individualActivityInfo?.activity_name: null}
                     disabled
@@ -270,7 +225,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Type</span>
                   <select
-                    className="relative ml-12 h-[5vh] w-[85%] rounded-md bg-[#EEEE] outline-none"
+                      className="relative ml-[20.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("activity_type")}
                     
                     disabled
@@ -286,7 +241,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Subject</span>
                   <select
-                    className="relative ml-7 h-[5vh] w-[100%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative ml-[17%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("subject")}
                     disabled
                   >
@@ -302,7 +257,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
 
                  <Select 
                   
-                  className="relative h-[5vh] w-[82%] rounded-md bg-[#EEEE] outline-none"  
+                  className="relative h-[5vh] w-[84%] rounded-md bg-[#EEEE] outline-none"  
                   isMulti 
                   options={applicationOptions} 
                   onChange={handleMultiOption}
@@ -318,7 +273,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Location Type</span>
                   <select
-                    className="relative ml-14 h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative ml-[9%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("location_type")}
                     disabled
                   >
@@ -331,20 +286,20 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">Country of Activity</span>
                   <select
-                    className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative ml-6 h-[5vh] w-[76%] rounded-md bg-[#EEEE] outline-none"
                     {...register("country_residence")}
                     disabled
                   >
                     <option>Select Country</option>
-                    {countries.map((item,index)=>
-                      <option key={index} selected={selectedData?.country_residence===item.label}>{item.label}</option>
+                    {countries?.map((item,index)=>
+                      <option key={index} selected={selectedData?.country_residence===item?.label}>{item?.label}</option>
                     )}>
                   </select>
                 </div>
                 <div className="mt-4 flex items-center">
                   <span className="text-md font-bold">City of Activity</span>
                   <input
-                    className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
+               className="relative ml-12 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("country_citizenship")}
                     
                     disabled
@@ -356,7 +311,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">URL</span>
                   <input
-                    className="relative ml-14 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
+                  className="relative ml-[22%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("url")}
                     // defaultValue={individualActivityInfo?.url}
                     disabled
@@ -369,7 +324,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Registration open</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[85%] rounded-md bg-[#EEEE]"
+                       className="relative ml-10 h-[5vh] w-[80%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     // defaultValue={individualActivityInfo?.registration_open}
                     disabled
@@ -379,9 +334,12 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 </div>
       
                 <div className="mt-4 mb-5 flex items-center">
-                  <span className="text-md font-bold">Application Date</span>
+                <div className="w-[21%] break-words">
+                  <span className="text-md font-bold">R/A/S deadline</span>
+                  <p className="text-sm text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
+                  </div>
                   <input
-                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+                      className="relative ml-10 h-[5vh] w-[75%] rounded-md bg-[#EEEE]"
                     {...register("application_deadline")}
                 
                     disabled
@@ -393,7 +351,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mb-6 flex items-center">
                   <span className="text-md font-bold">Activity Start</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
+                    className="relative ml-[10%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_start_date")}
                    
                     disabled
@@ -405,7 +363,7 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <div className="mb-6 flex items-center">
                   <span className="text-md font-bold">Activity End</span>
                   <input
-                    className="relative ml-12 h-[5vh] w-[66%] rounded-md bg-[#EEEE]"
+                       className="relative ml-[12%] h-[5vh] w-[74%] rounded-md bg-[#EEEE]"
                     {...register("activity_end_date")}
                    
                     disabled
@@ -418,29 +376,37 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                 <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
                   Eligibility Restrictions
                 </h1>
+                
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Range Type</span>
                   <select
-                    className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
                     {...register("range_type")}
                     disabled
                   >
                     <option>Select range type</option>
-                    <option>Grade range</option>
-                    <option>Age range </option>
+                    <option value="grade_range">Grade range</option>
+                    <option value="age_range">Age range </option>
+                    <option value="both">Both</option>
                   </select>
                 </div>
-      
+              
+              {rangeType===("grade_range") || rangeType===("both") ||  rangeType===(null || "Select range type") ?
                 <div className="mt-4 flex w-[100%] items-center justify-between">
                   <span className="text-md font-bold">Grade Range</span>
                 
                   <input {...register("grade_low")} className="w-[8%] h-[3vh] relative left-[4%]" type="text" value={gradeVal[0]} />
                   <div className="w-[50%]">
-                    <Slider className="mt-2" value={gradeVal} onChange={handleGradeVal}  />
+                    <Slider className="mt-2" value={gradeVal} onChange={handleGradeVal} 
+                     min={0}
+                     max={16}
+                    />
                   </div>
       
                   <input {...register("grade_high")} className="w-[8%] h-[3vh]" type="text" value={gradeVal[1]} />
-                </div>
+                </div>:null}
+
+                {rangeType===("age_range") || rangeType===("both") ||  rangeType===(null || "Select range type")?
       
                 <div className="mt-4 flex w-[100%] items-center justify-between">
                   <span className="text-md font-bold">Age Range</span>
@@ -449,11 +415,14 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
                   <input className="w-[8%] relative left-[6%]" type="text" {...register("age_low")} value={ageVal[0]} />
       
                   <div className="w-[50%]">
-                    <Slider className="mt-2 relative left-[2%]" value={ageVal} onChange={handleAgeVal} />
+                    <Slider className="mt-2 relative left-[2%]" value={ageVal} onChange={handleAgeVal}
+                     min={0}
+                     max={25}
+                    />
                   </div>
       
                   <input {...register("age_high")} className="w-[8%] relative" type="text" value={ageVal[1]} />
-                </div>
+                </div>:null}
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
                     Only open to residents of these countries
