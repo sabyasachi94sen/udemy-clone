@@ -44,7 +44,7 @@ export function StudentTable({
       columnHelper.accessor((row) => row.date_of_birth, {
         id: "date_of_birth",
         header: "Date of Birth",
-        cell: (info) => (<div className="pl-3">{info.getValue() ? formatDate(info.getValue()) : null}</div>),
+        cell: (info) => (<div className="w-[120%]">{info.getValue() ? formatDate(info.getValue()) : null}</div>),
       }),
       columnHelper.accessor((row) => row?.student_city_residence[0]?.country_of_residence, {
         id: "country",

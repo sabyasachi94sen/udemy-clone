@@ -23,7 +23,7 @@ export function AEPTrackerTable({
   const year=date.getFullYear();
   const month=date.getMonth()+1;
   const day=date.getDate()
-  const curDate=year+"/"+month+"/"+day
+  const curDate=day+"/"+month+"/"+year
 
 
 
@@ -63,7 +63,7 @@ export function AEPTrackerTable({
         id: "task",
         header: <div className="w-[140%] text-center">Task</div>,
         cell: (info) => (
-         info.getValue()
+         <div className="text-center">{info.getValue()}</div>
         ),
       }),
       columnHelper.accessor((row) => row.target_date, {
