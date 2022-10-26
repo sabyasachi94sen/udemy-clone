@@ -223,11 +223,19 @@ const handleMultiOption = (value: { value: {}[] }) => {
       <Form<Account>
         onSubmit={(formData) =>{
 
-          activityValid.validate(formData,{abortEarly:false}).then((res)=>{
+          activityValid.validate({
+            ...formData,
+              activity_type:formData.activity_type==="Select Type"?"":formData.activity_type,
+              subject:formData.subject==="Select Subject"?"":formData.subject,
+              country_residence:formData.country_residence==="Select Country"?"":formData.country_residence,
+
+          
+          },{abortEarly:false}).then((res)=>{
             createActivityMutation.mutate({
               data: {
                 ...formData,
                 url: formData.url.includes("https")?formData.url: "https://"+formData.url,
+                
                 application_requirement: storeOptions,
                 age_range: ageVal,
                 grade_range: gradeVal,

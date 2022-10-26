@@ -251,7 +251,14 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
         }}
         onSubmit={(formData) => {
           activityValid
-            .validate(formData, { abortEarly: false })
+            .validate({
+              ...formData,
+                activity_type:formData.activity_type==="Select Type"?"":formData.activity_type,
+                subject:formData.subject==="Select Subject"?"":formData.subject,
+                country_residence:formData.country_residence==="Select Country"?"":formData.country_residence,
+  
+            
+            }, { abortEarly: false })
             .then((res) => {
               updateActivityMutation.mutate({
                 data: {
