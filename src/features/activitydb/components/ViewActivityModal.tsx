@@ -160,14 +160,18 @@ useEffect(()=>{
 },[])
 
 const {data}=useQuery(["country_list"],()=> CountryListObj.country_list())
-const countries=[{label:"OPEN",value: "open"}].concat(data?.data?.map((item)=>{
+const countries=data?.data?.map((item)=>{
  
  return {
    label: item?.name?.common,
    value: item?.name?.common?.toLowerCase()
  }
+}).sort((a,b)=>{
 
-}))
+ return a.label.localeCompare(b.label)
+})
+
+countries?.unshift({label:"OPEN",value: "open"})
 
 
 

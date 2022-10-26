@@ -38,7 +38,12 @@ export function CreateStudentModal({ isOpen }: { isOpen: boolean }) {
   const accountManagerDropDownList=useAccountManagerDropDownList({ page })
 
   const { data }=useQuery(["country_list"],()=> CountryListObj.country_list())
-  const countries=data?.data;
+  
+  const countries=data?.data?.sort((a,b)=>{
+   
+    return a.name.common.localeCompare(b.name.common)
+   })   
+
 
   
 

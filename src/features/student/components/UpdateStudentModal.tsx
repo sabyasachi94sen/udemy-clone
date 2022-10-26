@@ -21,7 +21,11 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
   ];
 
   const { data }=useQuery(["country_list"],()=> CountryListObj.country_list())
-  const countries=data?.data
+  
+  const countries=data?.data?.sort((a,b)=>{
+   
+    return a.name.common.localeCompare(b.name.common)
+   })   
 
 
   const router=useRouter()
