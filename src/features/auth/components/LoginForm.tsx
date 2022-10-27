@@ -37,14 +37,16 @@ export function LoginForm() {
   const loginMutation = useMutation(loginObj.login, {
     onSuccess: (data) => {
       setToken("auth", data.token);
+      window.location.href="/home";
       setToken("userType", data.user_type);
+
 
       // todo: to be removed
       SetAuthToken(data.token);
       SetUserType(data.user_type);
       toast.success("Login Successful")
 
-      router.push({ pathname: "/home" });
+      // router.push({ pathname: "/home" });
     },
 
     onError: (error) => {
