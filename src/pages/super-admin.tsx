@@ -58,6 +58,7 @@ export default function SuperAdminPage() {
         <h1 className="font-sans text-3xl font-bold">
         Super Admin Roster
         </h1>
+        <p className="italic text-black mt-1">Add/edit/delete super admins here</p>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}

@@ -60,6 +60,7 @@ export default function StudentPage() {
       <h1 className="font-sans text-3xl font-bold">
       Activity Database
       </h1>
+      <p className="mt-1 italic">Add/edit/delete activities and action maps here</p>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}

@@ -62,7 +62,7 @@ useEffect(()=>{
         <h1 className="font-sans text-3xl font-bold">
           Assigned Student Details
         </h1>
-        <h3 className="font-bold mt-1">Staff name: {managerName}</h3>
+        <h3 className="italic mt-1">Staff name: {managerName}</h3>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}

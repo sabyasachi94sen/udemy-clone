@@ -61,6 +61,7 @@ export default function StudentPage() {
       <h1 className="font-sans text-3xl font-bold">
         AEP Status Tracker
       </h1>
+      <p className="mt-1 italic">Update student AEP progress here</p>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}

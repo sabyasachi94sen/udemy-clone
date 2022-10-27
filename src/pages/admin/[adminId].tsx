@@ -57,7 +57,7 @@ export default function AdminPersonalPage() {
       <div className="px-4 py-6 sm:px-6 lg:px-8">
        
         <h1 id="admin_name" className="font-sans text-3xl font-bold">Assigned Student Details</h1>
-        <h3 className="font-bold mt-1">Staff name: {adminName}</h3>
+        <h3 className="italic mt-1">Staff name: {adminName}</h3>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}

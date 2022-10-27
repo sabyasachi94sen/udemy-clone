@@ -52,7 +52,7 @@ export default function AcademicPage() {
       Academic Enrichment Plan Summary
      
       </h1>
-      <p className="font-bold mt-1 italic">Click on a student’s name to view/edit their AEP</p>
+      <p className="mt-1 italic">Click on a student’s name to view/edit their AEP</p>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}
