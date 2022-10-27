@@ -53,6 +53,7 @@ export default function StudentPage() {
         <h1 className="font-sans text-3xl font-bold">
           Student Roster
         </h1>
+        <p className="italic mt-1">Add/edit/delete students from the roster here</p>
         <div className="mt-8 flex justify-between">
           <Input
             leftAddOn={<HiSearch />}
