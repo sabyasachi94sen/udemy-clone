@@ -22,7 +22,7 @@ import { isGeneratorFunction } from "util/types";
 
 export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
 
-
+  
   const [zoomVal,setZoomVal]=useState(Math.round(window.devicePixelRatio*100))
  
 

@@ -4,22 +4,26 @@ import { HiSearch } from "react-icons/hi";
 import { Account } from "@/api";
 import {
   AcademicActivityTable,
-  DeleteAepTrackerModal,
+  DeleteActivityModal,
   UpdateAepModal,
   ViewActivityModal
 } from "@/features/academic_plan";
 import { Button, Input } from "@/shared/components";
-import { ModalState, useModal } from "@/shared/stores/modal.store";
+import { ModalState, useModal ,useStoreData} from "@/shared/stores/modal.store";
 import { getLocalStorage } from "@/features/helpers";
 import { useEffect, useState } from "react";
 import { useAepActivity } from "@/shared/services/aep.service";
 import { useRouter } from "next/router";
+import { useStore } from "zustand";
 
 
 
 export default function AepActivityPage() {
   const { currModalKey, onModalOpen, isModalOpen } =
     useModal() as ModalState<Account>;
+
+
+  const {setStoredData,storedData}=useStoreData()
   const [studentName, setStudentName] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [aepActivityList,setAepActivityList]=useState(null)
@@ -27,8 +31,10 @@ export default function AepActivityPage() {
   const router = useRouter();
   const { page, perPage } = router.query;
   const aepId=getLocalStorage("studentId");
+  const [openAepModal,setAepModal]=useState(false)
 
   const aepActivityQuery = useAepActivity(aepId);
+ 
 
   
 
@@ -36,7 +42,7 @@ export default function AepActivityPage() {
    const searchStaff=(e:SyntheticEvent)=>{
     const staffName=e.target.value;
     const searchResults=aepActivityQuery?.data?.filter((item)=>item?.activity?.activity_name.includes(staffName))
-    console.log(searchResults)
+
 
 
     
@@ -56,19 +62,30 @@ export default function AepActivityPage() {
     const student_name = getLocalStorage("studentName");
     setStudentName(student_name);
     setIsLoading(true);
+    setStoredData(false)
   }, []);
+
+
+  useEffect(()=>{
+    
+    if(storedData)
+    onModalOpen("updateAepActivity")
+
+  },[isModalOpen])
+
 
   return (
     <>
+    {isModalOpen?
     <ViewActivityModal 
     isOpen={currModalKey==="viewActivity"} 
-    />
+    />:null}
     
-      <DeleteAepTrackerModal
+      <DeleteActivityModal
         isOpen={currModalKey === "deleteAepStudentActivity"}
       />
 
-      {isModalOpen ? (
+      {isModalOpen? (
         <UpdateAepModal isOpen={currModalKey === "updateAepActivity"} />
       ) : null}
       <div className="px-4 py-6 sm:px-6 lg:px-8">
@@ -110,7 +127,8 @@ export default function AepActivityPage() {
                 className={`h-[6vh] rounded-md font-bolder bg-cyan-500 text-white hover:bg-blue-500`}
                 type="button"
                 width="w-[40%]"
-                onClick={() => {onModalOpen("updateAepActivity")
+                onClick={() => {
+                onModalOpen("updateAepActivity")
                 setIsSearch(false)
               }}
               >

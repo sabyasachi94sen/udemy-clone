@@ -3,7 +3,7 @@ import { BaseModal, Button } from "@/shared/components";
 import { useDeleteAepActivity } from "@/shared/services/aep.service";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 
-export function DeleteAepTrackerModal({ isOpen }: { isOpen: boolean }) {
+export function DeleteActivityModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } =
     useModal() as ModalState<Account>;
 

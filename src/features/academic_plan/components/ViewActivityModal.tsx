@@ -199,7 +199,7 @@ const countries=data?.data?.map((item)=>{
             activity_start_date: selectedData?.activity_start_date,
             activity_end_date: selectedData?.activity_end_date,
             remarks: selectedData?.remarks,
-            range_type: selectedData?.range_type.toLowerCase()
+            range_type: selectedData?.range_type!=undefined?selectedData?.range_type.toLowerCase():null
            
           
            

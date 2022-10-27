@@ -2,12 +2,13 @@ import { useRouter } from "next/router";
 import { Account } from "@/api";
 import { BaseModal,BaseTable,Button,Form,Input} from "@/shared/components";
 import { useAepActivityAssignment, useAepActivityAssignmentFilter, useAepActivityFilter,useAepChoice } from "@/shared/services/aep.service";
-import { useModal } from "@/shared/stores/modal.store";
+import { useModal,useStoreData } from "@/shared/stores/modal.store";
 import {useEffect, useMemo, useState} from "react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { queryKeys } from "@/shared/services";
 import { ViewButton } from "@/shared/components";
 import { ViewActivityModal } from "./ViewActivityModal";
+
 
 
 
@@ -24,10 +25,10 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
   const aepActivityAssignment=useAepActivityAssignment()
   const aepActivityAssignmentFilter=useAepActivityAssignmentFilter()
   const columnHelper = createColumnHelper<Account>();
+  const {setStoredData}=useStoreData()
 
  const aepChoice=useAepChoice()
 
-console.log(aepChoice)
 
   
 
@@ -75,7 +76,12 @@ console.log(aepChoice)
         id: "details",
         header: "Details",
         cell: (info) => (
-        <img onClick={()=>onModalOpen("viewActivityDetails",info.row.original)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] ml-4 cursor-pointer" />
+        <img onClick={()=>{
+          onModalOpen("viewActivityDetails",info.row.original)
+          setStoredData(true)
+        }
+        
+        } src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] ml-4 cursor-pointer" />
         ),
       }),
 
@@ -97,7 +103,6 @@ console.log(aepChoice)
 
 
 
-  
 
   return (
     <>
@@ -110,6 +115,7 @@ console.log(aepChoice)
       title="Add activity to Academic Enrichment Plan (Student)"
       onRequestClose={() => {
         onModalClose();
+        setStoredData(false)
       }}
     >
        <div className="h-[80vh]">
