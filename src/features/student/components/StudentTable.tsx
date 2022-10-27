@@ -27,7 +27,7 @@ export function StudentTable({
 }: StudentTableProps): JSX.Element {
 
 
- 
+ console.log(studentQuery)
 
   const columnHelper = createColumnHelper<Account>();
 
@@ -41,15 +41,23 @@ export function StudentTable({
         header: "Name",
         cell: (info)=>info.getValue(),
       }),
-      columnHelper.accessor((row) => row.date_of_birth, {
-        id: "date_of_birth",
-        header: "Date of Birth",
-        cell: (info) => (<div className="w-[120%]">{info.getValue() ? formatDate(info.getValue()) : null}</div>),
-      }),
-      columnHelper.accessor((row) => row?.student_city_residence[0]?.country_of_residence, {
-        id: "country",
-        header: <div className="pl-12">Country of Residence</div>,
-        cell: (info) => (<div className="text-center">{info.getValue()}</div>),
+      // columnHelper.accessor((row) => row.date_of_birth, {
+      //   id: "date_of_birth",
+      //   header: "Date of Birth",
+      //   cell: (info) => (<div className="w-[120%]">{info.getValue() ? formatDate(info.getValue()) : null}</div>),
+      // }),
+      // columnHelper.accessor((row) => row?.student_city_residence[0]?.country_of_residence, {
+      //   id: "country",
+      //   header: <div className="pl-12">Country of Residence</div>,
+      //   cell: (info) => (<div className="text-center">{info.getValue()}</div>),
+      // }),
+
+      columnHelper.accessor((row) => row?.activity_count, {
+        id: "activity_count",
+        header: "No of Activities",
+        cell: (info) => (
+          <div className="pl-14">{info.getValue()}</div>
+        ),
       }),
       columnHelper.accessor((row) => row?.student_assignment[0]?.account_manager?.username, {
         id: "account_manager",
