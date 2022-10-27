@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { getLocalStorage } from "@/features/helpers";
 
 export default function StudentPage() {
-  const { currModalKey, onModalOpen } = useModal() as ModalState<Account>;
+  const { currModalKey, onModalOpen,isModalOpen } = useModal() as ModalState<Account>;
   
 
   const router = useRouter();
@@ -43,8 +43,10 @@ export default function StudentPage() {
 
   return (
     <>
-      <CreateStudentModal isOpen={currModalKey === "createStudent"} />
-      <UpdateStudentModal isOpen={currModalKey === "updateStudent"} />
+     {isModalOpen?
+      <CreateStudentModal isOpen={currModalKey === "createStudent"} />:null}
+      {isModalOpen?
+      <UpdateStudentModal isOpen={currModalKey === "updateStudent"} />:null}
       <DeleteStudentModal isOpen={currModalKey === "deleteStudent"} />
       <ViewStudentModal isOpen={currModalKey=== "viewStudent"} />
       <div className="px-4 py-6 sm:px-6 lg:px-8">

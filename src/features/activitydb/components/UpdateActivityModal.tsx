@@ -158,7 +158,13 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
     return a.label.localeCompare(b.label)
   })
   
-   countries?.unshift({label:"OPEN",value: "open"})
+  countries?.map((item,i,countries)=>{
+    if(item?.label==="India")
+    countries?.splice(i,1)
+  })
+  countries?.unshift({label:"India" ,value: "india"})
+  countries?.unshift({label:"OPEN",value: "open"})
+  
   
   const [gradeVal, setGradeVal] = useState([0, 16]);
   const [ageVal, setAgeVal] = useState([0, 25]);
@@ -179,6 +185,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
   const handleResidence = (value: { value: {}[] }) => {
     const residence = value.map((item) => item.label);
     setStoreResidence(residence);
+
   };
 
   const handleCitizen = (value: { value: {}[] }) => {
@@ -672,13 +679,14 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     isMulti
                     options={countries}
                     onChange={handleResidence}
+                    hideSelectedOptions
                     label="only_open_to_residence_of_these_countries"
                     isSearchable={true}
-                    defaultValue={selectedData?.only_open_to_residence_of_these_countries?.map(
+                    defaultValue={selectedData?.only_open_to_residence_of_these_countries?.length!=0?selectedData?.only_open_to_residence_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
-                    )}
+                    ): {label: "OPEN"}}
                   />
                 </div>
                 <div className="text-md mt-5 flex w-[60%] flex-col">
@@ -689,14 +697,15 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     className="text-small font-small mt-4 block h-auto w-[100%] rounded-md"
                     isMulti
                     options={countries}
+                    hideSelectedOptions
                     onChange={handleCitizen}
                     label="only_open_to_citizens_of_these_countries"
                     isSearchable={true}
-                    defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.map(
+                    defaultValue={selectedData?.only_open_to_citizens_of_these_countries.length!=0?selectedData?.only_open_to_citizens_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
-                    )}
+                    ): {label: "OPEN"}}
                   />
                 </div>
                 <div className="mt-14">

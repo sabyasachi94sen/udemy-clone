@@ -25,7 +25,12 @@ export function UpdateStudentModal({ isOpen }: { isOpen: boolean }) {
   const countries=data?.data?.sort((a,b)=>{
    
     return a.name.common.localeCompare(b.name.common)
-   })   
+   })  
+   countries?.map((item,i,countries)=>{
+    if(item?.name?.common==="India")
+    countries.splice(i,1)
+  })
+  countries?.unshift({name: {common: "India"}}) 
 
 
   const router=useRouter()

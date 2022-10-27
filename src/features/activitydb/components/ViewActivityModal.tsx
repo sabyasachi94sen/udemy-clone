@@ -171,7 +171,13 @@ const countries=data?.data?.map((item)=>{
  return a.label.localeCompare(b.label)
 })
 
+countries?.map((item,i,countries)=>{
+  if(item?.label==="India")
+  countries.splice(i,1)
+})
+countries?.unshift({label:"India" ,value: "india"})
 countries?.unshift({label:"OPEN",value: "open"})
+
 
 
 

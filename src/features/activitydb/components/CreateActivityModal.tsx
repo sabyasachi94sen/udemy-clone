@@ -190,17 +190,27 @@ const handleMultiOption = (value: { value: {}[] }) => {
 
  const {data}=useQuery(["country_list"],()=> CountryListObj.country_list())
  const countries=data?.data?.map((item)=>{
+    
+  
   
   return {
     label: item?.name?.common,
     value: item?.name?.common?.toLowerCase()
-  }
+  
+}
+
 }).sort((a,b)=>{
 
   return a.label.localeCompare(b.label)
 })
 
- countries?.unshift({label:"OPEN",value: "open"})
+countries?.map((item,i,countries)=>{
+  if(item?.label==="India")
+  countries.splice(i,1)
+})
+countries?.unshift({label:"India" ,value: "india"})
+countries?.unshift({label:"OPEN",value: "open"})
+
 
 
 
@@ -582,6 +592,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
                   isMulti 
                   options={countries} 
+                  hideSelectedOptions
                   onChange={handleResidence}
                   label="only_open_to_residence_of_these_countries"
                   isSearchable={true}
@@ -601,6 +612,7 @@ const handleMultiOption = (value: { value: {}[] }) => {
                   className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
                   isMulti 
                   options={countries} 
+                  hideSelectedOptions
                   onChange={handleCitizen}
                   label="only_open_to_citizens_of_these_countries"
                   isSearchable={true}
