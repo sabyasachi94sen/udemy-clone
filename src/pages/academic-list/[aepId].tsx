@@ -92,8 +92,8 @@ export default function AepActivityPage() {
         <h1 className="font-sans text-3xl font-bold">
           Academic Enrichment Plan (student)
         </h1>
-        <p className="font-bold mt-1 italic">This shows the roster of students assigned to you.</p>
-        <p className="font-bold mt-1 italic">Click on “View AEP Status Tracker (student) to view and update the AEP status. Click on “Update AEP” to update or change the student’s plan.</p>
+        <p className="mt-1 italic">This shows the roster of students assigned to you.</p>
+        <p className="mt-1 italic">Click on “View AEP Status Tracker (student) to view and update the AEP status. Click on “Update AEP” to update or change the student’s plan.</p>
         <div className="mt-8 flex justify-between">
 
           <Input
