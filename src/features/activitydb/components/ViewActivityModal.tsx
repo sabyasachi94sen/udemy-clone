@@ -444,11 +444,12 @@ countries?.unshift({label:"OPEN",value: "open"})
                   isDisabled={true}
                   label="only_open_to_residence_of_these_countries"
                   isSearchable={true}
-                  defaultValue={selectedData?.only_open_to_residence_of_these_countries?.map((item)=>{
-                    return {label: item};
-                  
-                  }
-                  )}
+                 
+                  defaultValue={selectedData?.only_open_to_residence_of_these_countries?.length!=0?selectedData?.only_open_to_residence_of_these_countries?.map(
+                    (item) => {
+                      return { label: item };
+                    },
+                  ): {label: "OPEN"}}
                   
                   />
                     
@@ -466,11 +467,12 @@ countries?.unshift({label:"OPEN",value: "open"})
                   isDisabled={true}
                   label="only_open_to_citizens_of_these_countries"
                   isSearchable={true}
-                  defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.map((item)=>{
-                    return {label: item};
-                  
-                  }
-                  )} 
+                 
+                  defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.length!=0?selectedData?.only_open_to_citizens_of_these_countries?.map(
+                    (item) => {
+                      return { label: item };
+                    },
+                  ): {label: "OPEN"}}
                   />
                 </div>
                 <div className="mt-14">

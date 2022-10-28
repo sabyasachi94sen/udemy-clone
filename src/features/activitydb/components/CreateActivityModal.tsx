@@ -374,6 +374,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                     className="relative ml-7 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     type="date"
+                    
                     max={keyDates.ra_deadline.date}
                     onChange={(e)=>{
                       setKeyDates({

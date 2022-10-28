@@ -441,6 +441,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     {...register("registration_open")}
                     // defaultValue={individualActivityInfo?.registration_open}
                     max={keyDates.ra_deadline.date}
+                    
                     onChange={(e) => {
                       setKeyDates({
                         registration_open: {
