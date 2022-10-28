@@ -1,7 +1,7 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { us } from "@/shared/stores/modal.store";
@@ -29,6 +29,17 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
 
    const aepActivityCompleteQuery=useAepActivityComplete()
    const student_id=getLocalStorage("studentId")
+   const [deviceWidth,setDeviceWidth]=useState(window.screen.width)
+   window.onresize=function(){
+      setDeviceWidth(window.screen.width)
+   }
+
+   const getActivityHeader=()=>{
+    if(deviceWidth>=1656)
+    return <div className="pl-3">Activity Name</div>
+    else
+    return <div className="">Activity Name</div>
+   }
  
 
   const { isModalOpen, onModalClose } = useModal() as ModalState<Account>;
@@ -42,7 +53,7 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
     () => [
       columnHelper.accessor((row) => row?.activity?.activity_name, {
         id: "activity_name",
-        header: "Activity Name",
+        header: getActivityHeader(),
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.activity_type, {
@@ -52,7 +63,7 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
       }),
       columnHelper.accessor((row) => row?.activity?.subject, {
         id: "subject",
-        header: <div className="w-[167%] text-center">Subject &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;</div>,
+        header: <div className="">Subject</div>,
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row?.activity?.application_requirement, {
@@ -111,7 +122,7 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
         ),
       }),
     ],
-    [],
+    [deviceWidth],
   );
 
   return (

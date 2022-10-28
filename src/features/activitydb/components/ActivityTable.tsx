@@ -52,12 +52,12 @@ export function ActivityTable({
      
       columnHelper.accessor((row) => row.activity_type, {
         id: "activity_type",
-        header: "Type",
-        cell: (info) => (info.getValue()),
+        header: <div className="pl-8">Type</div>,
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.subject, {
         id: "subject",
-        header: <div className="w-[20vw] relative left-6 text-center">Subject</div>,
+        header: <div className="pl-20">Subject</div>,
         cell: (info) => (
            <span className="text-center block mx-auto w-[110%]">{info.getValue()}</span>
         ),

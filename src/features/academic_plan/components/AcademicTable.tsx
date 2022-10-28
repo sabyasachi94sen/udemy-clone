@@ -23,13 +23,49 @@ import { isGeneratorFunction } from "util/types";
 export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
 
   
+  const [deviceWidth,setDeviceWidth]=useState(window.screen.width);
   const [zoomVal,setZoomVal]=useState(Math.round(window.devicePixelRatio*100))
  
 
   window.onresize=function(){
     console.log(Math.round(window.devicePixelRatio*100))
+    setDeviceWidth(Math.round(window.screen.width))
     setZoomVal(Math.round(window.devicePixelRatio*100))
   
+  }
+
+  const getManagerHeader=()=>{
+      
+   
+    if(deviceWidth>=1656)
+    return <div className="w-[190%] text-center">Account Manager</div>
+
+    else if(deviceWidth>=1600 && deviceWidth<1656)
+    return <div className="w-[180%] text-center">Account Manager</div>
+
+    if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
+    return <div className="w-[160%] text-center">Account Manager</div>
+
+    else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[190%] text-center">Account Manager</div>
+
+    else if(zoomVal===100 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[230%] text-center">Account Manager</div>
+
+    else if(zoomVal===138 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[140%] text-center">Account Manager</div>
+
+    else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[250%] text-center">Account Manager</div>
+
+    else if(deviceWidth>=1349 && deviceWidth<1536)
+    return <div className="w-[140%] text-center">Account Manager</div>
+
+    else if(deviceWidth>=1300 && deviceWidth<1349)
+    return <div className="w-[140%] text-center">Account Manager</div>
+
+    else
+    return <div className="">Account Manager</div>
   }
 
   // const updateCompleteMutation = useUpdateComplete();
@@ -41,31 +77,41 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
 
   const [storeAepData, setStoreAepData] = useState([]);
 
-  const getCountry=()=>{
+  const getCountryHeader=()=>{
 
-    if(zoomVal==113)
-    return <div className={`w-[250%] text-center`}>Country of residence</div>
-    else if(zoomVal==100)
-    return <div className={`w-[300%] text-center`}>Country of residence</div>
-    else if(zoomVal==138)
-    return <div className={`w-[185%] text-center`}>Country of residence</div>
+    if(deviceWidth>=1656)
+    return <div className="w-[250%] text-center">Country of residence</div>
+
+    else if(deviceWidth>=1600 && deviceWidth<1656)
+    return <div className="w-[240%] text-center">Country of residence</div>
+
+    if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
+    return <div className="w-[210%] text-center">Country of residence</div>
+
+    else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[255%] text-center">Country of residence</div>
+
+    else if(zoomVal===100 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[290%] text-center">Country of residence</div>
+
+    else if(zoomVal===138 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[200%] text-center">Country of residence</div>
+
+    else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[330%] text-center">Country of residence</div>
+
+    else if(deviceWidth>=1349 && deviceWidth<1536)
+    return <div className="w-[180%] text-center">Country of residence</div>
+
+    else if(deviceWidth>=1300 && deviceWidth<1349)
+    return <div className="w-[190%] text-center">Country of residence</div>
+
     else
-    return <div className={`w-[225%] text-center`}>Country of residence</div>
+    return <div className="">Country of residence</div>
   }
 
 
-  const getManager=()=>{
-   
-    if(zoomVal==113)
-    return <div className="w-[190%] text-center">Account Manager</div>
-    else if(zoomVal==100)
-    return <div className="w-[230%] text-center">Account Manager</div>
-    else if(zoomVal==138)
-    return <div className="w-[130%] text-center">Account Manager</div>
-    else
-    return <div className="w-[160%] text-center">Account Manager</div>
 
-  }
 
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
@@ -95,12 +141,12 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
       columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
         id: "country",
         
-        header: getCountry(),
+        header: getCountryHeader(),
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.account_manager?.username, {
         id: "manager_name",
-        header: getManager(),
+        header: getManagerHeader(),
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
 
@@ -118,7 +164,7 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
         ),
       }),
     ],
-    [zoomVal],
+    [zoomVal,deviceWidth],
   );
 
   return (
