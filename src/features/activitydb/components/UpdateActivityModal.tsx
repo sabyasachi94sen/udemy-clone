@@ -658,7 +658,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                         value={ageVal}
                         onChange={handleAgeVal}
                         min={0}
-                        max={16}
+                        max={25}
                       />
                     </div>
                     <input
