@@ -701,7 +701,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     onChange={handleCitizen}
                     label="only_open_to_citizens_of_these_countries"
                     isSearchable={true}
-                    defaultValue={selectedData?.only_open_to_citizens_of_these_countries.length!=0?selectedData?.only_open_to_citizens_of_these_countries?.map(
+                    defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.length!=0?selectedData?.only_open_to_citizens_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
