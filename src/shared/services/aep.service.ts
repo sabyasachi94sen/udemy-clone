@@ -119,6 +119,8 @@ export const useAepList = (
 
             if(data.length===0)
             toast.error("No activities in the database meet these search criteria")
+            else
+            toast.success("Activity found successful")
            
            
             onSuccess?.();
