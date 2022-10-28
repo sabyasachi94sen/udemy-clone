@@ -24,6 +24,7 @@ export function AEPTrackerTable({
   const month=date.getMonth()+1;
   const day=date.getDate()
   const curDate=day+"/"+month+"/"+year
+  console.log(AepTrackerQuery)
 
 
 
@@ -114,7 +115,7 @@ export function AEPTrackerTable({
     
 
     if(AepTrackerQuery.isSuccess){
-      const tempArr=AepTrackerQuery?.data?.todays_target_date.concat(AepTrackerQuery?.data?.yet_to_be_completed,AepTrackerQuery?.data?.completed)
+      const tempArr=AepTrackerQuery?.data?.before_target_date.concat(AepTrackerQuery?.data?.todays_target_date,AepTrackerQuery?.data?.after_target_date,AepTrackerQuery?.data?.completed)
       console.log(AepTrackerQuery)
       setStoreAepData(tempArr)
     }
