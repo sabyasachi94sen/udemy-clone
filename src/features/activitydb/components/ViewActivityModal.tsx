@@ -152,12 +152,10 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
     if(selectedData!=null){
     setAgeVal(selectedData?.age_range)
      setGradeVal(selectedData?.grade_range)
+     setRangeType(selectedData?.range_type)
     }
 },[selectedData])
 
-useEffect(()=>{
-  setRangeType(selectedData?.range_type)
-},[])
 
 const {data}=useQuery(["country_list"],()=> CountryListObj.country_list())
 const countries=data?.data?.map((item)=>{

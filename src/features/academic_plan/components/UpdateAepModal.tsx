@@ -106,7 +106,8 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
 
   return (
     <>
-    <ViewActivityModal isOpen={currModalKey==="viewActivityDetails"} />
+    {isModalOpen?
+    <ViewActivityModal isOpen={currModalKey==="viewActivityDetails"} />:null}
     <BaseModal
       hasHeader
       showHeaderCloseButton
