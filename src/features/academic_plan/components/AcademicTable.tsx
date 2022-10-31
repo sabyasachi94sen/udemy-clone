@@ -57,8 +57,10 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
 
     else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
     return <div className="w-[250%] text-center">Account Manager</div>
+    else if(zoomVal===125 && deviceWidth>=1500 && deviceWidth<1536)
+    return <div className="w-[160%] text-center">Account Manager</div>
 
-    else if(deviceWidth>=1349 && deviceWidth<1536)
+    else if(deviceWidth>=1349 && deviceWidth<1500)
     return <div className="w-[140%] text-center">Account Manager</div>
 
     else if(deviceWidth>=1300 && deviceWidth<1349)
@@ -88,6 +90,8 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
     if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
     return <div className="w-[210%] text-center">Country of residence</div>
 
+
+
     else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
     return <div className="w-[255%] text-center">Country of residence</div>
 
@@ -99,8 +103,12 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
 
     else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
     return <div className="w-[330%] text-center">Country of residence</div>
+     
+  
+    else if(deviceWidth>=1500 && deviceWidth<1536 && zoomVal===125)
+    return <div className="w-[230%] text-center">Country of residence</div>
 
-    else if(deviceWidth>=1349 && deviceWidth<1536)
+    else if(deviceWidth>=1349 && deviceWidth<1500)
     return <div className="w-[180%] text-center">Country of residence</div>
 
     else if(deviceWidth>=1300 && deviceWidth<1349)

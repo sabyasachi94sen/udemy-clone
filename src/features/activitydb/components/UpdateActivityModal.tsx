@@ -231,6 +231,9 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
     setRangeType(selectedData?.range_type?.toLowerCase());
   }, []);
 
+
+  console.log(selectedData)
+
   return (
     <BaseModal
       hasHeader
@@ -683,13 +686,17 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     hideSelectedOptions
                     label="only_open_to_residence_of_these_countries"
                     isSearchable={true}
-                    defaultValue={selectedData?.only_open_to_residence_of_these_countries?.length!=0?selectedData?.only_open_to_residence_of_these_countries?.map(
+                    defaultValue={(selectedData?.only_open_to_residence_of_these_countries?.length!=0 || selectedData?.only_open_to_residence_of_these_countries!=null)?selectedData?.only_open_to_residence_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
+
+                      
                     ): {label: "OPEN"}}
                   />
                 </div>
+   
+                   
                 <div className="text-md mt-5 flex w-[60%] flex-col">
                   <p className="text-md font-bold font-bold ">
                     Only open to citizens of these countries
@@ -702,7 +709,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     onChange={handleCitizen}
                     label="only_open_to_citizens_of_these_countries"
                     isSearchable={true}
-                    defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.length!=0?selectedData?.only_open_to_citizens_of_these_countries?.map(
+                    defaultValue={(selectedData?.only_open_to_citizens_of_these_countries?.length!=0 || selectedData?.only_open_to_citizens_of_these_countries!=null) ?selectedData?.only_open_to_citizens_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
