@@ -273,19 +273,19 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <h1 className="mb-6 text-[1.4rem] font-bold text-[#6F6F6F]">
                   Activity Information
                 </h1>
-                <div className="mt-2 flex items-center">
-                  <span className="text-md font-bold">Name<span className="text-red-500 ml-1">*</span></span>
+                <div className="mt-2 flex items-center justify-around">
+                  <span className="text-md w-[23%] block font-bold pl-2">Name<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative ml-[19.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_name")}
                     type="text"
                   />
                   <br />
                 </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Type<span className="text-red-500 ml-1">*</span></span>
+                <div className="mt-4 flex items-center justify-around">
+                  <span className="text-md font-bold block w-[20%]">Type<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative ml-[20.5%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("activity_type")}
                   >
                     <option>Select Type</option>
@@ -294,10 +294,10 @@ countries?.unshift({label:"OPEN",value: "open"})
                     ))}
                   </select>
                 </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Subject<span className="text-red-500 ml-1">*</span></span>
+                <div className="mt-4 flex items-center justify-around">
+                  <span className="text-md font-bold block w-[20%]">Subject<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative ml-[17%] h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("subject")}
                   >
                     <option>Select Subject</option>
@@ -306,13 +306,13 @@ countries?.unshift({label:"OPEN",value: "open"})
                     ))}
                   </select>
                 </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">
+                <div className="mt-4 flex items-center justify-around">
+                  <span className="text-md font-bold w-[20%] block">
                     Application requirement
                   </span>
 
                   <Select
-                    className="relative h-[5vh] w-[78%] rounded-md outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md outline-none ml-1"
                     isMulti
                     options={applicationOptions}
                     label="application_requirement"
@@ -320,10 +320,10 @@ countries?.unshift({label:"OPEN",value: "open"})
                     label="application_requirement"
                   />
                 </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Location Type</span>
+                <div className="mt-4 flex items-center justify-around">
+                  <span className="text-md font-bold w-[20%] block">Location Type</span>
                   <select
-                    className="relative ml-[11%] h-[5vh] w-[71%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("location_type")}
                   >
                     <option>Location Type</option>
@@ -332,10 +332,10 @@ countries?.unshift({label:"OPEN",value: "open"})
                     ))}
                   </select>
                 </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">Country of Activity<span className="text-red-500 ml-1">*</span></span>
+                <div className="mt-4 flex items-center justify-around">
+                  <span className="text-md font-bold block w-[20%]">Country of Activity<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative ml-6 h-[5vh] w-[78%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("country_residence")}
                   >
                     <option>Select Country</option>
@@ -345,20 +345,20 @@ countries?.unshift({label:"OPEN",value: "open"})
                     )}
                   </select>
                 </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-md font-bold">City of Activity</span>
+                <div className="mt-4 flex items-center justify-around">
+                  <span className="text-md font-bold block w-[23%] pl-1">City of Activity</span>
                   <input
-                    className="relative ml-16 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
                     {...register("country_citizenship")}
                     type="text"
                   />
                   <br />
                 </div>
 
-                <div className="mt-6 flex items-center">
-                  <span className="text-md font-bold">URL<span className="text-red-500 ml-1">*</span></span>
+                <div className="mt-6 flex items-center justify-around">
+                  <span className="text-md font-bold block w-[23%] pl-2">URL<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative ml-[22%] h-[5vh] w-[70%] rounded-md bg-[#EEEE]"
+                    className="relative  h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("url")}
                     type="text"
                   />
@@ -368,10 +368,10 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <h1 className="mt-6 mb-4 text-lg text-[1.45rem] font-bold text-[#6F6F6F]">
                   Key Dates
                 </h1>
-                <div className="mt-2 flex items-center">
-                  <span className="text-md font-bold">Registration Open<span className="ml-1 text-red-500">*</span></span>
+                <div className="mt-2 flex items-center justify-around">
+                  <span className="text-md font-bold w-[20%] block">Registration Open<span className="ml-1 text-red-500">*</span></span>
                   <input
-                    className="relative ml-7 h-[5vh] w-[78%] rounded-md bg-[#EEEE]"
+                    className="relative ml-7 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("registration_open")}
                     type="date"
                     
@@ -401,13 +401,13 @@ countries?.unshift({label:"OPEN",value: "open"})
                   <br />
                 </div>
                
-                <div className="mt-4 mb-5 flex items-center">
-                  <div className="w-[21%] break-words">
-                  <span className="text-md font-bold">R/A/S deadline<span className="text-red-500 ml-1">*</span></span>
-                  <p className="text-sm text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
+                <div className="mt-4 mb-5 flex items-center justify-around">
+                  <div className="w-[25%] break-words">
+                  <span className="text-md font-bold block w-[100%]">R/A/S deadline<span className="text-red-500 ml-1">*</span></span>
+                  <p className="text-[0.8rem] text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
                   </div>
                   <input
-                    className="relative ml-12 h-[5vh] w-[71%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("application_deadline")}
                     type="date"
                     min={keyDates.registration_open.date}
@@ -439,10 +439,10 @@ countries?.unshift({label:"OPEN",value: "open"})
                   <br />
                 </div>
 
-                <div className="mb-6 flex items-center">
-                  <span className="text-md font-bold">Activity Start<span className="text-red-500 ml-1">*</span></span>
+                <div className="mb-6 flex items-center justify-around">
+                  <span className="text-md font-bold w-[25%] block">Activity Start<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative ml-[10%] h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_start_date")}
                     type="date"
                     min={keyDates.ra_deadline.date}
@@ -472,10 +472,10 @@ countries?.unshift({label:"OPEN",value: "open"})
                   <br />
                 </div>
 
-                <div className="mb-6 flex items-center">
-                  <span className="text-md font-bold">Activity End<span className="text-red-500 ml-1">*</span></span>
+                <div className="mb-6 flex items-center justify-around">
+                  <span className="text-md font-bold block w-[25%]">Activity End<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative ml-[11.5%] h-[5vh] w-[74%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
                     {...register("activity_end_date")}
                     type="date"
                     min={keyDates.activity_start.date}
