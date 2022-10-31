@@ -18,6 +18,12 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
   const [storeResidence, setStoreResidence] = useState(null);
   const [storeCitizen, setStoreCitizen] = useState(null);
   const [rangeType, setRangeType] = useState(null);
+  const [isLoading,setIsLoading]=useState(false)
+  const [validCountries,setValidCountries]=useState({
+    residence:false,
+    citizen:false,
+   
+  })
   const [keyDates, setKeyDates] = useState({
     registration_open: {
       is_active: false,
@@ -229,9 +235,44 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
     });
 
     setRangeType(selectedData?.range_type?.toLowerCase());
+    
+    
+    if(selectedData?.only_open_to_citizens_of_these_countries==null && selectedData?.only_open_to_residence_of_these_countries==null){
+
+      console.log("hi")
+    if(selectedData?.only_open_to_residence_of_these_countries==null && selectedData?.only_open_to_citizens_of_these_countries!=null)
+      setValidCountries({residence:false,citizen:true})
+      else if(selectedData?.only_open_to_residence_of_these_countries!=null && selectedData?.only_open_to_citizens_of_these_countries==null)
+       setValidCountries({residence:true,citizen:false})
+       else if(selectedData?.only_open_to_residence_of_these_countries!=null && selectedData?.only_open_to_citizens_of_these_countries!=null)
+       setValidCountries({residence:true,citizen:true})
+    }else{
+       
+       if(selectedData?.only_open_to_residence_of_these_countries?.length!=0 && selectedData?.only_open_to_citizens_of_these_countries?.length==0){
+      setValidCountries({residence:true,citizen:false})
+      
+        }
+      else if(selectedData?.only_open_to_residence_of_these_countries?.length==0 && selectedData?.only_open_to_citizens_of_these_countries?.length!=0){
+       setValidCountries({residence:false,citizen:true})
+       
+      }
+       else if(selectedData?.only_open_to_residence_of_these_countries?.length!=0 && selectedData?.only_open_to_citizens_of_these_countries?.length!=0)
+       setValidCountries({residence:true,citizen:true})
+    }
+
+
+
+
+
+
+       setIsLoading(true)
+
+
   }, []);
 
 
+
+  console.log(validCountries)
   console.log(selectedData)
 
   return (
@@ -677,6 +718,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                   <p className="text-md font-bold font-bold ">
                     Only open to residents of these countries
                   </p>
+                  {isLoading?
 
                   <Select
                     className="text-small font-small mt-4 block h-auto w-[100%] rounded-md"
@@ -686,14 +728,14 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     hideSelectedOptions
                     label="only_open_to_residence_of_these_countries"
                     isSearchable={true}
-                    defaultValue={(selectedData?.only_open_to_residence_of_these_countries?.length!=0 || selectedData?.only_open_to_residence_of_these_countries!=null)?selectedData?.only_open_to_residence_of_these_countries?.map(
+                    defaultValue={validCountries?.residence?selectedData?.only_open_to_residence_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
 
                       
                     ): {label: "OPEN"}}
-                  />
+                  />:null}
                 </div>
    
                    
@@ -701,6 +743,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                   <p className="text-md font-bold font-bold ">
                     Only open to citizens of these countries
                   </p>
+                  {isLoading?
                   <Select
                     className="text-small font-small mt-4 block h-auto w-[100%] rounded-md"
                     isMulti
@@ -709,12 +752,12 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     onChange={handleCitizen}
                     label="only_open_to_citizens_of_these_countries"
                     isSearchable={true}
-                    defaultValue={(selectedData?.only_open_to_citizens_of_these_countries?.length!=0 || selectedData?.only_open_to_citizens_of_these_countries!=null) ?selectedData?.only_open_to_citizens_of_these_countries?.map(
+                    defaultValue={validCountries?.citizen?selectedData?.only_open_to_citizens_of_these_countries?.map(
                       (item) => {
                         return { label: item };
                       },
                     ): {label: "OPEN"}}
-                  />
+                  />:null}
                 </div>
                 <div className="mt-14">
                   <h1 className="text-lg text-[1.45rem] font-bold text-[#6F6F6F]">

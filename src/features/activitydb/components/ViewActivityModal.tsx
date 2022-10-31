@@ -13,7 +13,13 @@ import { useQuery } from "@tanstack/react-query";
 export function ViewActivityModal({ isOpen }: { isOpen: boolean }) {
 
   const [storeOptions,setStoreOptions]=useState(null)
+  const [validCountries,setValidCountries]=useState({
+    residence:false,
+    citizen:false,
+   
+  })
   const [rangeType,setRangeType]=useState(null)
+  const [isLoading,setIsLoading]=useState(false)
 
   
   const activityTypeOptions=[{
@@ -154,6 +160,37 @@ const handleAgeVal = (e: SyntheticEvent, data: number[]) => {
      setGradeVal(selectedData?.grade_range)
      setRangeType(selectedData?.range_type)
     }
+
+    if(selectedData?.only_open_to_citizens_of_these_countries==null && selectedData?.only_open_to_residence_of_these_countries==null){
+
+      console.log("hi")
+    if(selectedData?.only_open_to_residence_of_these_countries==null && selectedData?.only_open_to_citizens_of_these_countries!=null)
+      setValidCountries({residence:false,citizen:true})
+      else if(selectedData?.only_open_to_residence_of_these_countries!=null && selectedData?.only_open_to_citizens_of_these_countries==null)
+       setValidCountries({residence:true,citizen:false})
+       else if(selectedData?.only_open_to_residence_of_these_countries!=null && selectedData?.only_open_to_citizens_of_these_countries!=null)
+       setValidCountries({residence:true,citizen:true})
+    }else{
+       
+       if(selectedData?.only_open_to_residence_of_these_countries?.length!=0 && selectedData?.only_open_to_citizens_of_these_countries?.length==0){
+      setValidCountries({residence:true,citizen:false})
+      
+        }
+      else if(selectedData?.only_open_to_residence_of_these_countries?.length==0 && selectedData?.only_open_to_citizens_of_these_countries?.length!=0){
+       setValidCountries({residence:false,citizen:true})
+       
+      }
+       else if(selectedData?.only_open_to_residence_of_these_countries?.length!=0 && selectedData?.only_open_to_citizens_of_these_countries?.length!=0)
+       setValidCountries({residence:true,citizen:true})
+    }
+
+
+
+
+
+
+       setIsLoading(true)
+
 },[selectedData])
 
 
@@ -435,7 +472,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                   <p className="text-md font-bold font-bold ">
                     Only open to residents of these countries
                   </p>
-                 
+                 {isLoading?
                   <Select 
                   
                   className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
@@ -445,13 +482,13 @@ countries?.unshift({label:"OPEN",value: "open"})
                   label="only_open_to_residence_of_these_countries"
                   isSearchable={true}
                  
-                  defaultValue={selectedData?.only_open_to_residence_of_these_countries?.length!=0?selectedData?.only_open_to_residence_of_these_countries?.map(
+                  defaultValue={validCountries?.residence?selectedData?.only_open_to_residence_of_these_countries?.map(
                     (item) => {
                       return { label: item };
                     },
                   ): {label: "OPEN"}}
                   
-                  />
+                  />:null}
                     
                
                 </div>
@@ -459,6 +496,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                   <p className="text-md font-bold font-bold ">
                     Only open to citizens of these countries
                   </p>
+                  {isLoading?
                   <Select 
                   
                   className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
@@ -468,12 +506,12 @@ countries?.unshift({label:"OPEN",value: "open"})
                   label="only_open_to_citizens_of_these_countries"
                   isSearchable={true}
                  
-                  defaultValue={selectedData?.only_open_to_citizens_of_these_countries?.length!=0?selectedData?.only_open_to_citizens_of_these_countries?.map(
+                  defaultValue={validCountries?.citizen?selectedData?.only_open_to_citizens_of_these_countries?.map(
                     (item) => {
                       return { label: item };
                     },
                   ): {label: "OPEN"}}
-                  />
+                  />:null}
                 </div>
                 <div className="mt-14">
                   <h1 className="text-lg text-[1.45rem] font-bold text-[#6F6F6F]">Remarks</h1>
