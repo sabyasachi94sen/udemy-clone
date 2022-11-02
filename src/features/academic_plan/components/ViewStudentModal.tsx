@@ -36,6 +36,8 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
    
     return a.name.common.localeCompare(b.name.common)
    })   
+
+   console.log(selectedData)
   
 
   return (
@@ -163,9 +165,9 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       disabled
                     >
                       <option>Select Country</option>
-                      {/* <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
+                      <option selected={selectedData?.country_of_citizenship==="N/A"}>N/A</option>
                       {countries?.map((item,index)=><option key={index} selected={selectedData?.country_of_citizenship===item?.name?.common}>{item?.name?.common}</option>)}
-                     */}
+                    
                     
                     
                     </select>
