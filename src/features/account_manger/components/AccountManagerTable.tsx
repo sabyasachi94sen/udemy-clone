@@ -41,7 +41,7 @@ export function AccountManagerTable({
     () => [
       columnHelper.accessor((row) => row.manager_name, {
         id: "manager_name",
-        header: "Name",
+        header: "Staff Name",
         cell: (info) => (
         <RowNavigate rowLink={(row)=>{
           router.push(`/account-manager/${info.row.original.account.id}`)

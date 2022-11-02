@@ -37,7 +37,7 @@ export const SuperAdminTable=(({
     () => [
       columnHelper.accessor((row) => row.username, {
         id: "username",
-        header: "Name",
+        header: "Staff Name",
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor((row) => row.email, {

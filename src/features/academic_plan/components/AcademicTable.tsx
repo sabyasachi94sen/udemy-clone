@@ -128,7 +128,7 @@ export function AcademicTable({ onView,AepListQuery,page,viewStudent }): JSX.Ele
     () => [
       columnHelper.accessor((row) => row.student?.student_name, {
         id: "student_name",
-        header: "Name",
+        header: "Student Name",
         cell: (info) => (
           <RowNavigate
             onClick={() => storeStudentName(info.getValue())}

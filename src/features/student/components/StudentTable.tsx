@@ -79,7 +79,7 @@ export function StudentTable({
     () => [
       columnHelper.accessor((row) => row.student_name, {
         id: "student_name",
-        header: "Name",
+        header: "Student Name",
         cell: (info)=>info.getValue(),
       }),
    

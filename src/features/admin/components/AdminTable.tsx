@@ -36,7 +36,7 @@ export function AdminTable({
     () => [
       columnHelper.accessor((row) => row.username, {
         id: "username",
-        header: "Name",
+        header: "Staff Name",
         cell: (info) => (
           <RowNavigate
             rowLink={() => {
