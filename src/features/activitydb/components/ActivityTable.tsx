@@ -46,13 +46,13 @@ export function ActivityTable({
     () => [
       columnHelper.accessor((row) => row.activity_name, {
         id: "activity_name",
-        header: "Name",
+        header: "Activity Name",
         cell: (info) => (info.getValue()),
       }),
      
       columnHelper.accessor((row) => row.activity_type, {
         id: "activity_type",
-        header: <div className="pl-8">Type</div>,
+        header: <div className="pl-24">Type</div>,
         cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.subject, {

@@ -51,7 +51,7 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
       }),
       columnHelper.accessor((row) => row?.application_requirement, {
         id: "application_requirement",
-        header: <div className="pl-3">Application of Requirements</div>,
+        header: <div className="pl-3">Application Requirements</div>,
         cell: (info) =><div className="text-center">{info.getValue()?.join(", ")}</div>,
       }),
       columnHelper.accessor((row) => row?.application_deadline, {
