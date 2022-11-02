@@ -38,6 +38,13 @@ export function AEPTrackerTable({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
+      columnHelper.accessor((row) => row.action_map?.action, {
+        id: "action_area",
+        header: <div className="">Action Area</div>,
+        cell: (info) => (
+         <div className="">AEP</div>
+        ),
+      }),
       columnHelper.accessor((row) => row.activity_assignment?.student?.student_name, {
         id: "student_name",
         header: "Student Name",
@@ -46,32 +53,39 @@ export function AEPTrackerTable({
       columnHelper.accessor((row) => row.activity_assignment?.activity?.activity_name, {
         id: "activity_name",
         header: "Activity Name",
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
+        cell: (info) => <div className="">{info.getValue()}</div>,
       }),
-      columnHelper.accessor((row) => row.activity_assignment?.activity?.activity_type, {
-        id: "activity_type",
-        header: <div className="w-[14vw] text-center">Activity Type</div>,
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
-      }),
-      columnHelper.accessor((row) =>row.activity_assignment?.activity?.subject, {
-        id: "subject",
-        header: <div className="text-center w-[14vw]">Subject</div>,
-        cell: (info) => 
-        <div className="text-center">{info.getValue()}</div>
-        ,
-      }),
+      // columnHelper.accessor((row) => row.activity_assignment?.activity?.activity_type, {
+      //   id: "activity_type",
+      //   header: <div className="w-[14vw] text-center">Activity Type</div>,
+      //   cell: (info) => <div className="text-center">{info.getValue()}</div>,
+      // }),
+      // columnHelper.accessor((row) =>row.activity_assignment?.activity?.subject, {
+      //   id: "subject",
+      //   header: <div className="text-center w-[14vw]">Subject</div>,
+      //   cell: (info) => 
+      //   <div className="text-center">{info.getValue()}</div>
+      //   ,
+      // }),
       columnHelper.accessor((row) => row.action_map?.action, {
         id: "task",
-        header: <div className="w-[140%] text-center">Task</div>,
+        header: <div className="">Task</div>,
         cell: (info) => (
-         <div className="text-center">{info.getValue()}</div>
+         <div className="">{info.getValue()}</div>
+        ),
+      }),
+      columnHelper.accessor((row) => row.activity_assignment?.assigned_by?.username, {
+        id: "manager",
+        header: <div className="">Assigned staff</div>,
+        cell: (info) => (
+         <div className="">{info.getValue()}</div>
         ),
       }),
       columnHelper.accessor((row) => row.target_date, {
         id: "target_date",
         header: "Target Date",
         cell: (info) => (
-          <div className="text-center">{info.getValue() ? formatDate(info.getValue()) : null}</div>
+          <div className="">{info.getValue() ? formatDate(info.getValue()) : null}</div>
         ),
       }),
 

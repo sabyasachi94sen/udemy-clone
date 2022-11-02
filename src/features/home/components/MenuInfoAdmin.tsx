@@ -45,7 +45,7 @@ export const MenuInfoAdmin = [
   },
 
   {
-    name: "AEP Status Tracker",
+    name: "Action Tracker",
     icon: BiStats,
     imageType: "bars-icon",
     url: "/aep-tracker",

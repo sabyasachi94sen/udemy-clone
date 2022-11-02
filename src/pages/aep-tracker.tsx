@@ -61,9 +61,9 @@ export default function StudentPage() {
     <StatusTableModal isOpen={currModalKey === "viewStatusTable"} />: null}
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <h1 className="font-sans text-3xl font-bold">
-        AEP Status Tracker
+        Action Tracker
       </h1>
-      <p className="mt-1 italic">Update student AEP progress here</p>
+      <p className="mt-1 italic">Update student progress here</p>
       <div className="mt-8 flex justify-between">
         <Input
           leftAddOn={<HiSearch />}

@@ -20,7 +20,7 @@ export const MenuInfoAccountManager = [
   },
 
   {
-    name: "AEP Status Tracker",
+    name: "AEP Tracker",
     icon: BiStats,
     imageType: "bars-icon",
     url: "/aep-tracker",

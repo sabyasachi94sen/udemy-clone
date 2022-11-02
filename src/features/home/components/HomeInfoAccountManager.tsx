@@ -17,7 +17,7 @@ export const homeInfoAccountManager = [
     },
 
     {
-      activityname: "AEP Status Tracker",
+      activityname: "Action Tracker",
       activitystatus: "View and update AEP status",
       url: "/aep-tracker",
       image: statusTracker,
