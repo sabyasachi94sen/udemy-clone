@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAepList } from "@/shared/services/aep.service";
 import { getLocalStorage } from "@/features/helpers";
+import {ViewStudentModal} from "@/features/academic_plan"
 
 
 export default function AcademicPage() {
@@ -46,6 +47,8 @@ export default function AcademicPage() {
 
   return (
     <>
+     
+    <ViewStudentModal isOpen={currModalKey==="viewStudent"} />
 
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <h1 className="font-sans text-3xl font-bold">
@@ -65,6 +68,7 @@ export default function AcademicPage() {
       <AcademicTable onView={(user)=>onModalOpen("viewStatusTable",user)} 
         AepListQuery={!isSearch?AepListQuery: aepList}
         page={page}
+        viewStudent={(user)=>onModalOpen("viewStudent",user)}
       
       />
     </div>

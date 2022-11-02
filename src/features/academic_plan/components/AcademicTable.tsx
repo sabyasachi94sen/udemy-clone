@@ -20,7 +20,7 @@ import { useStoreData } from "@/shared/stores/modal.store";
 import { FaWindowRestore } from "react-icons/fa";
 import { isGeneratorFunction } from "util/types";
 
-export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
+export function AcademicTable({ onView,AepListQuery,page,viewStudent }): JSX.Element {
 
   
   const [deviceWidth,setDeviceWidth]=useState(window.screen.width);
@@ -141,21 +141,39 @@ export function AcademicTable({ onView,AepListQuery,page }): JSX.Element {
           />
         ),
       }),
-      columnHelper.accessor((row) => row.student?.date_of_birth, {
-        id: "date_of_birth",
-        header: "Date of Birth",
-        cell: (info) => <div className="pl-3">{info.getValue()!=null?formatDate(info.getValue()): null}</div>,
+columnHelper.accessor((row) => row.student?.date_of_birth, {
+        id: "activity_count",
+        header: "No of Activity",
+        cell: (info) => <div className="pl-12">0</div>,
       }),
-      columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
-        id: "country",
+
+
+
+
+      // columnHelper.accessor((row) => row.student?.date_of_birth, {
+      //   id: "date_of_birth",
+      //   header: "Date of Birth",
+      //   cell: (info) => <div className="pl-3">{info.getValue()!=null?formatDate(info.getValue()): null}</div>,
+      // }),
+      // columnHelper.accessor((row) => row?.student?.country_of_citizenship, {
+      //   id: "country",
         
-        header: getCountryHeader(),
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
-      }),
+      //   header: getCountryHeader(),
+      //   cell: (info) => <div className="text-center">{info.getValue()}</div>,
+      // }),
       columnHelper.accessor((row) => row.account_manager?.username, {
         id: "manager_name",
-        header: getManagerHeader(),
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
+        header: "Assigned Staff" ,
+        cell: (info) => <div className="">{info.getValue()}</div>,
+      }),
+      columnHelper.accessor((row) => row.id, {
+        id: "details",
+        header: "Details",
+        cell: (info) => (
+  
+        <img onClick={() => viewStudent(info.row.original.student)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] cursor-pointer ml-4" />
+        
+        ),
       }),
 
       columnHelper.accessor((row) => row?.is_active, {
