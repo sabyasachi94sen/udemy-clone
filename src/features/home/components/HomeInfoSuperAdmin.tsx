@@ -55,7 +55,7 @@ export const homeInfoSuperAdmin = [
 
     {
       activityname: "Action Tracker",
-      activitystatus: "View and update AEP status",
+      activitystatus: "View and update student progress",
       url: "/aep-tracker",
       image: statusTracker,
 
