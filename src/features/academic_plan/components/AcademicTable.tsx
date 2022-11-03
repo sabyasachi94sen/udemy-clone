@@ -143,7 +143,7 @@ export function AcademicTable({ onView,AepListQuery,page,viewStudent }): JSX.Ele
       }),
 columnHelper.accessor((row) => row.student?.date_of_birth, {
         id: "activity_count",
-        header: "No of Activity",
+        header: "No. of Activity",
         cell: (info) => <div className="pl-12">0</div>,
       }),
 
