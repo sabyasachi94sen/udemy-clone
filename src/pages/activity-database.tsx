@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useActivityList } from "@/shared/services/activity.service";
 import { useState,useEffect } from "react";
 import { getLocalStorage } from "@/features/helpers";
+import { useViewMap } from "@/shared/stores/modal.store";
 
 export default function StudentPage() {
   const { currModalKey, onModalOpen,isModalOpen } = useModal() as ModalState<Account>;
@@ -16,7 +17,8 @@ export default function StudentPage() {
   const activityListQuery = useActivityList({ page });
   const [isSearch,setIsSearch]=useState(false)
   const [activityList,setActivityList]=useState(null)
- 
+  const {viewMap,setViewMap}=useViewMap()
+
   
 
     const searchStaff=(e:SyntheticEvent)=>{
@@ -36,8 +38,16 @@ export default function StudentPage() {
  useEffect(()=>{
   if(getLocalStorage("token")==null)
   router.push("/login")
+  setViewMap(false)
 
 },[])
+
+
+useEffect(()=>{
+ 
+  if(viewMap)
+  onModalOpen("viewActionMap")
+},[isModalOpen])
 
 
 

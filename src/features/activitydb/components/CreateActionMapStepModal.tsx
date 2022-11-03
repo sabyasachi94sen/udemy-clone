@@ -5,6 +5,7 @@ import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useStoreData } from "@/shared/stores/modal.store";
 import { toast } from "react-hot-toast";
 import { actionMapValid } from "@/features/helpers/validations";
+import { useState } from "react";
 
 export function CreateActionMapStepModal({
   isOpen,
@@ -13,12 +14,13 @@ export function CreateActionMapStepModal({
 }: {
   isOpen: boolean;
 }) {
-  const { storedData } = useStoreData();
+  const { storedData,setStoredData } = useStoreData();
 
   const createActionMapStepMutation = useCreateActionMapStep(() => {
     onModalClose();
   });
   const { isModalOpen, onModalClose, currModalKey, onModalOpen } = useModal();
+
 
   return (
     <BaseModal

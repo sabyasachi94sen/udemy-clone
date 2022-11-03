@@ -62,5 +62,14 @@ export const useStoreData = create()((set) => ({
   },
 }));
 
+export const useViewMap = create()((set) => ({
+  viewMap: null,
+  setViewMap: (data) => {
+    set({ viewMap: data });
+  },
+}));
+
+
+
 
 

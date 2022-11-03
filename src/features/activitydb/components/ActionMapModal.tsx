@@ -11,7 +11,7 @@ import {
 } from "@/features/activitydb";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useStoreData } from "@/shared/stores/modal.store";
+import { useStoreData,useViewMap } from "@/shared/stores/modal.store";
 
 export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
   const [actionMap, setActionMap] = useState(null);
@@ -23,7 +23,8 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
     useModal();
   const router = useRouter();
 
-  const { setStoredData } = useStoreData();
+  const {viewMap,setViewMap}=useViewMap()
+  const {storedData,setStoredData}=useStoreData()
 
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
         title="View/edit Action Map"
         onRequestClose={() => {
           onModalClose();
+          setViewMap(false)
         }}
       >
         <Form<Account>>
@@ -78,6 +80,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("before_registration_open");
                       setActionMapPhase("Before registration open")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -112,6 +115,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("Before registration open")
+                            setViewMap(true)
                           }}
                         >
                           Edit
@@ -146,6 +150,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("after_registration_open");
                       setActionMapPhase("After registration open")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -180,6 +185,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("After registration open")
+                            setViewMap(true)
                           }}
                         >
                           Edit{" "}
@@ -212,6 +218,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("before_application_deadline");
                       setActionMapPhase("Before application deadline")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -245,6 +252,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("Before application deadline")
+                            setViewMap(true)
                           }}
                         >
                           Edit{" "}
@@ -277,6 +285,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("after_application_deadline");
                       setActionMapPhase("After application deadline")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -311,6 +320,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("After application deadline")
+                            setViewMap(true)
                           }}
                         >
                           Edit
@@ -343,6 +353,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("before_activity_start_date");
                       setActionMapPhase("Before activity start date")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -376,6 +387,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("Before activity start date")
+                            setViewMap(true)
                           }}
                         >
                           Edit
@@ -409,6 +421,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("after_activity_start_date");
                       setActionMapPhase("After Activity Start Date")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -442,6 +455,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("After Activity Start Date")
+                            setViewMap(true)
                           }}
                         >
                           Edit{" "}
@@ -473,6 +487,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("before_activity_end_date");
                       setActionMapPhase("Before Activity End Date")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -506,6 +521,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("Before Activity End Date")
+                            setViewMap(true)
                           }}
                         >
                           Edit{" "}
@@ -537,6 +553,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                       onModalOpen("createActionStep");
                       setActionMap("after_activity_end_date");
                       setActionMapPhase("After Activity End Date")
+                      setViewMap(true)
                     }}
                   >
                     Add step&nbsp;{" "}
@@ -570,6 +587,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
                             setStepId(item && item?.id);
                             setStepData(item);
                             setActionMapPhase("After Activity End Date")
+                            setViewMap(true)
                           }}
                         >
                           Edit{" "}
