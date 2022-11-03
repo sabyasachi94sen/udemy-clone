@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState} from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { useAepComplete} from "@/shared/services/aep-tracker.service";
+import moment from "moment"
 
 import { Account } from "@/api";
 import { BaseTable, IconButton ,StatusCell,Checkbox,Input,RowNavigate} from "@/shared/components";
@@ -20,11 +21,8 @@ export function AEPTrackerTable({
 
   // const updateCompleteMutation = useUpdateComplete();
   const date=new Date()
-  const year=date.getFullYear();
-  const month=date.getMonth()+1;
-  const day=date.getDate()
-  const curDate=day+"/"+month+"/"+year
-  console.log(AepTrackerQuery)
+
+  
 
 
 
@@ -95,7 +93,7 @@ export function AEPTrackerTable({
         cell: (info) => (
           <>
           {!info.row.original.is_completed?
-         <div className={`w-[10px] h-[10px] ml-4 ${formatDate(info.row.original.target_date)<=curDate?`bg-red-500`: `bg-gray-500`} rounded-lg`}></div>
+         <div className={`w-[10px] h-[10px] ml-4 ${new Date(info.row.original.target_date).getTime()<=date.getTime()?`bg-red-500`: `bg-gray-500`} rounded-lg`}></div>
          : <div className={`w-[10px] h-[10px] ml-4 bg-green-500 rounded-lg`}></div>}
         </>
         
