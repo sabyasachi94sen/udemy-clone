@@ -59,7 +59,7 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                     date_of_birth: selectedData?.date_of_birth,
                     current_grade: selectedData?.current_grade,
                     
-                    // city_of_residence:selectedData?.student_city_residence[0]?.city_of_residence,
+                    city_of_residence:selectedData?.student_city_residence[0]?.city_of_residence,
                     
                    
                     is_active: selectedData?.is_active?"active":"inactive",
@@ -142,9 +142,9 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       disabled
                     >
                       <option>Select Country</option>
-                      {/* <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
+                      <option selected={selectedData?.student_city_residence[0]?.country_of_residence==="N/A"}>N/A</option>
                       {countries?.map((item,index)=><option key={index} selected={selectedData?.student_city_residence[0]?.country_of_residence===item?.name?.common}>{item?.name?.common}</option>)}
-                    */}
+                   
                     </select>
                   </div>
                   <div className="flex w-[30%] flex-col items-start text-lg font-bold">
@@ -186,12 +186,12 @@ export function ViewStudentModal({ isOpen }: { isOpen: boolean }) {
                       disabled
                     >
                       <option>Select Staff</option>
-                      {/* {accountManagerDropDownList &&
+                      {accountManagerDropDownList &&
                         accountManagerDropDownList?.data.map((item, index) => (
-                          <option key={index} selected={selectedData?.student_assignment[0]?.account_manager?.username===item?.username} value={item.id}>
+                          <option key={index} selected={selectedData?.account_manager?.username===item?.username} value={item.id}>
                             {item && item?.username}
                           </option>
-                        ))} */}
+                        ))}
                     </select>
                   </div>
                   <div className="flex w-[37%] flex-col items-start text-lg font-bold">

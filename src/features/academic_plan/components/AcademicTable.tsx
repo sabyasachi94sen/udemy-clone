@@ -171,7 +171,7 @@ columnHelper.accessor((row) => row.student?.date_of_birth, {
         header: "Details",
         cell: (info) => (
   
-        <img onClick={() => viewStudent(info.row.original.student)} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] cursor-pointer ml-4" />
+        <img onClick={() => viewStudent({...info.row.original.student,account_manager:{...info.row.original.account_manager}})} src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] cursor-pointer ml-4" />
         
         ),
       }),
