@@ -11,7 +11,7 @@ import { formatDate } from "@/shared/utils";
 export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } = useModal();
 
-
+  console.log(selectedData)
 
   const columnHelper = createColumnHelper<Account>();
   const router = useRouter();
@@ -66,8 +66,9 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
         cell: (info) => (
           <Checkbox
             isDisabled
-            isChecked={selectedData?.is_complete}
+            isChecked={info.row.original.is_completed}
             size="lg"
+            
           />
         ),
       }),
