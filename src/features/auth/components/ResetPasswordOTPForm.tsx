@@ -64,9 +64,9 @@ export function ResetPasswordOTPForm() {
 
   useEffect(()=>{
     
-    const {email}=router.query;
-    if(email==null)
-    router.push("/login")
+    // const {email}=router.query;
+    // if(email==null)
+    // router.push("/login")
 
   },[])
 
