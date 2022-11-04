@@ -57,7 +57,7 @@ export function ResetPasswordReqForm() {
   },[])
 
   return (
-    <div className="relative z-10 h-[60vh] w-[24rem] rounded-lg bg-white p-6 py-12 shadow-lg border-4 border-[#012060]">
+    <div className="relative z-10 h-auto w-[24rem] rounded-lg bg-white p-6 py-12 shadow-lg border-4 border-[#012060]">
       <form onSubmit={handleSubmit(handleConfirmPassword)}>
         <h1 className="mb-4 text-center text-3xl font-bold text-[#0ea5e9]">
           PIPPAMS
