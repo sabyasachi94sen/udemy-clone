@@ -6,6 +6,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useStoreData } from "@/shared/stores/modal.store";
 import { Account } from "@/api";
 import { BaseTable, Button, IconButton,RowNavigate,StatusCell,ViewButton } from "@/shared/components";
+import { setLocalStorage } from "@/features/helpers";
 
 
 
@@ -76,7 +77,15 @@ export function ActivityTable({
       columnHelper.accessor((row) => row.id, {
         id: "action_map",
         header: <span className="relative left-10">Action Map</span>,
-        cell: (info) => (<Button width="w-[90%]" className="h-[5vh] bg-cyan-500 rounded-lg hover:bg-blue-500 font-bolder" onClick={()=>onViewActionMap(info.row.original)}>View/edit action map</Button>),
+        cell: (info) => (<Button width="w-[90%]" className="h-[5vh] bg-cyan-500 rounded-lg hover:bg-blue-500 font-bolder"
+         onClick={()=>{
+          
+          onViewActionMap(info.row.original)
+          setLocalStorage("activityName",info.row.original.activity_name)
+        }}
+        
+          >
+            View/edit action map</Button>),
       
       }),
       columnHelper.accessor((row) => row.id, {

@@ -12,6 +12,7 @@ import {
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useStoreData,useViewMap } from "@/shared/stores/modal.store";
+import { getLocalStorage } from "@/features/helpers";
 
 export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
   const [actionMap, setActionMap] = useState(null);
@@ -34,6 +35,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
   const actionMapLisQuery = useActionMapList(selectedData?.id);
   const deleteActionMapStepMutation = useDeleteActionMapStep();
   const data = actionMapLisQuery?.data;
+  const activityName=getLocalStorage("activityName")
   
 
   return (
@@ -65,7 +67,7 @@ export function ActionMapModal({ isOpen }: { isOpen: boolean }) {
           {({ register }) => (
             <div className="h-[80vh] overflow-y-scroll pb-6">
               <h1 className="mt-4 text-center text-2xl font-bold text-[#6F6F6F]">
-                Activity Name: {selectedData?.activity_name}
+                Activity Name: {activityName}
               </h1>
               <div className="mx-auto mt-10 h-auto  w-[90%] rounded-lg bg-[#F2F0F0] ">
                 <div className="flex h-[10vh] w-[100%] items-center justify-between pl-10 pr-10">
