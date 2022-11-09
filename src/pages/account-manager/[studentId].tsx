@@ -26,7 +26,7 @@ export default function AccountManagerPage() {
 
     const searchStaff=(e:SyntheticEvent)=>{
      const staffName=e.target.value;
-     const searchResults=accountManagerActivity?.data?.filter((item)=>item?.student.includes(staffName))
+     const searchResults=accountManagerActivity?.data?.filter((item)=>item?.student?.student_name?.includes(staffName))
      
  
  
