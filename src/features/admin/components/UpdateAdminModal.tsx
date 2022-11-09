@@ -101,8 +101,8 @@ export function UpdateAdminModal({ isOpen }: { isOpen: boolean }) {
                         {...field}
                         label="Change Role"
                         options={[
-                          { value: "admin", label: "Admin" },
                           { value: "superadmin", label: "Super Admin" },
+                          { value: "admin", label: "Admin" },
                           { value: "accountmanager", label: "Account Manager" },
                         ]}
                       />
