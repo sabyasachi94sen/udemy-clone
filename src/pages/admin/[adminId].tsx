@@ -27,9 +27,9 @@ export default function AdminPersonalPage() {
 
   const searchStaff=(e:SyntheticEvent)=>{
     const staffName=e.target.value;
-    console.log(adminActivity)
+
     const searchResults=adminActivity?.data?.filter((item)=>item?.student?.student_name?.includes(staffName))
-    console.log(searchResults)
+  
 
 
     

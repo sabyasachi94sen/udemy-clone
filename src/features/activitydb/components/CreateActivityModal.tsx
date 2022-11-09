@@ -249,8 +249,8 @@ countries?.unshift({label:"OPEN",value: "open"})
                 application_requirement: storeOptions,
                 age_range: ageVal,
                 grade_range: gradeVal,
-                only_open_to_citizens_of_these_countries: storeCitizen,
-                only_open_to_residence_of_these_countries: storeResidence,
+                only_open_to_citizens_of_these_countries: storeCitizen?.length!=0?storeCitizen:["Open"],
+                only_open_to_residence_of_these_countries: storeResidence?.length!=0?storeResidence:["Open"],
               },
             })
           }).catch((err)=>{

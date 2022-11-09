@@ -170,6 +170,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
   })
   countries?.unshift({label:"India" ,value: "india"})
   countries?.unshift({label:"OPEN",value: "open"})
+  countries?.unshift({label: "Select Country",value:"select country"})
   
   
   const [gradeVal, setGradeVal] = useState([0, 16]);
@@ -273,6 +274,9 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
 
 
 
+
+
+
   return (
     <BaseModal
       hasHeader
@@ -299,6 +303,8 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
           },
         }}
         onSubmit={(formData) => {
+    
+          console.log(formData)
           activityValid
             .validate({
               ...formData,
@@ -318,8 +324,8 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                   application_requirement: storeOptions,
                   age_range: ageVal,
                   grade_range: gradeVal,
-                  only_open_to_citizens_of_these_countries: storeCitizen,
-                  only_open_to_residence_of_these_countries: storeResidence,
+                  only_open_to_citizens_of_these_countries: storeCitizen?.length!=0?storeCitizen:["Open"],
+                  only_open_to_residence_of_these_countries: storeResidence?.length!=0?storeResidence:["Open"],
                 },
                 id: selectedData?.id,
               });
@@ -430,11 +436,12 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     Country of Activity
                     <span className="ml-1 text-red-500">*</span>
                   </span>
+              
                   <select
                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
-                    {...register("country_residence")}
+                    {...register("country_residence",{required:true})}
                   >
-                    <option>Select Country</option>
+                  
 
                     {countries?.map((item, index) => (
                       <option
