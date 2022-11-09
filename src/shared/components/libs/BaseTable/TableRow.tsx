@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import ProgressBar from "@ramonak/react-progress-bar"
+import ProgressBar from "@ramonak/react-progress-bar";
+
+
 
 
 export function TableRowCell({
@@ -45,13 +47,13 @@ export function StatusCell({
 
 export function CompleteBar({ rowValue }: { rowValue: string }): JSX.Element {
 
- 
+  
 
   return (
     
          <div className="flex w-[100%] justify-between">
            <span>{rowValue}%&nbsp;</span>
-          <ProgressBar completed={rowValue} className="w-[90%]" />
+          <ProgressBar completed={rowValue} className="w-[90%]" bgColor="#0ea5e9"/>
           </div>
           
         
