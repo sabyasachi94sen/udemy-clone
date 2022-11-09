@@ -46,7 +46,7 @@ export function AdminActivityTable({adminActivity,page}): JSX.Element {
       columnHelper.accessor((row) => row.completion_status, {
         id: "completion_status",
         header: "Completion Status",
-        cell: (info) => <CompleteBar rowValue={info.getValue()} />,
+        cell: (info) => <CompleteBar rowValue={info.getValue()*100} />,
       }),
     ],
     [],

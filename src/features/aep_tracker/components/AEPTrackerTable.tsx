@@ -21,13 +21,7 @@ export function AEPTrackerTable({
 
   // const updateCompleteMutation = useUpdateComplete();
   const date=new Date()
-
-  
-
-
-
   const columnHelper = createColumnHelper<Account>();
-
   const [storeAepData,setStoreAepData]=useState([])
   const aepComplete=useAepComplete()
 
@@ -128,7 +122,7 @@ export function AEPTrackerTable({
 
     if(AepTrackerQuery.isSuccess){
       const tempArr=AepTrackerQuery?.data?.before_target_date.concat(AepTrackerQuery?.data?.todays_target_date,AepTrackerQuery?.data?.after_target_date,AepTrackerQuery?.data?.completed)
-      console.log(AepTrackerQuery)
+      
       setStoreAepData(tempArr)
     }
      
@@ -136,6 +130,9 @@ export function AEPTrackerTable({
 
 
   },[AepTrackerQuery])
+
+
+  console.log(storeAepData)
 
   
 

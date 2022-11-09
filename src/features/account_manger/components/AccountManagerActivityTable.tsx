@@ -56,10 +56,10 @@ export function AccountManagerActivityTable({ accountManagerActivity,page}): JSX
         cell: (info) => (info.getValue() ? <div className="pl-2">{formatDate(info.getValue())}</div> : null),
       }),
       columnHelper.accessor((row) => row.completion_status, {
-        id: "is_active",
+        id: "is_complete",
         header: "Completion Status",
         cell: (info) => (
-          <CompleteBar rowValue={info.getValue()}/>
+          <CompleteBar rowValue={info.getValue()*100}/>
         ),
       }),
      
