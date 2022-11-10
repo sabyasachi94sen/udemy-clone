@@ -90,7 +90,8 @@ export function ActivityTable({
       
       }),
       columnHelper.accessor((row) => row.action_maps, {
-        id: "action_map",
+        id: "action_map_exist",
+        header: "Action map setting",
        
         cell: (info) => (<CheckActionMap actionMap={info.getValue()} />)
         
