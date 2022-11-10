@@ -7,6 +7,7 @@ import { useStoreData } from "@/shared/stores/modal.store";
 import { Account } from "@/api";
 import { BaseTable, Button, IconButton,RowNavigate,StatusCell,ViewButton } from "@/shared/components";
 import { setLocalStorage } from "@/features/helpers";
+import { CheckActionMap } from "@/shared/components/libs/BaseTable/TableRow";
 
 
 
@@ -86,6 +87,14 @@ export function ActivityTable({
         
           >
             View/edit action map</Button>),
+      
+      }),
+      columnHelper.accessor((row) => row.action_maps, {
+        id: "action_map",
+       
+        cell: (info) => (<CheckActionMap actionMap={info.getValue()} />)
+        
+         
       
       }),
       columnHelper.accessor((row) => row.id, {

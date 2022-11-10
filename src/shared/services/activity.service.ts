@@ -60,6 +60,11 @@ export const useActivityList = (
           // eslint-disable-next-line no-underscore-dangle
           queryKey: queryKeys.activity_action_map.list._def,
         });
+        refreshQuery({
+          // eslint-disable-next-line no-underscore-dangle
+          queryKey: queryKeys.activity.list._def,
+        });
+
   
         toast.success("Action Map created successfully");
   
@@ -126,6 +131,10 @@ export function useDeleteActionMapStep(onSuccess?: () => void) {
       refreshQuery({
         // eslint-disable-next-line no-underscore-dangle
         queryKey: queryKeys.activity_action_map.list._def,
+      });
+      refreshQuery({
+        // eslint-disable-next-line no-underscore-dangle
+        queryKey: queryKeys.activity.list._def,
       });
 
       toast.success("Action step deleted successfully");
