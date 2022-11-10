@@ -324,8 +324,8 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                   application_requirement: storeOptions,
                   age_range: ageVal,
                   grade_range: gradeVal,
-                  only_open_to_citizens_of_these_countries: storeCitizen?.length!=0?storeCitizen:["Open"],
-                  only_open_to_residence_of_these_countries: storeResidence?.length!=0?storeResidence:["Open"],
+                  only_open_to_citizens_of_these_countries: storeCitizen?.length!=0?storeCitizen:["OPEN"],
+                  only_open_to_residence_of_these_countries: storeResidence?.length!=0?storeResidence:["OPEN"],
                 },
                 id: selectedData?.id,
               });

@@ -55,7 +55,7 @@ export function CompleteBar({ rowValue }: { rowValue: string }): JSX.Element {
            <span>{rowValue}%&nbsp;</span>
           <ProgressBar completed={rowValue} className="w-[90%]" bgColor="#0ea5e9"/>
           </div>
-          
+    
         
     
   );
