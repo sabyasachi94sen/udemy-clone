@@ -96,9 +96,9 @@ export function ResetPasswordReqForm() {
           </label>
         </div>
 
-        <div className="mx-auto mb-16 flex justify-center">
+        <div className="mx-auto flex justify-center">
           <input
-            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500 2xl:mb-16"
+            className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500 2xl:mb-6"
             type="submit"
             value="Submit"
           />

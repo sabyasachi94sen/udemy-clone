@@ -76,7 +76,7 @@ export function ResetPasswordForm() {
             {...register("email")}
           />
         </div>
-        <div className="mx-auto flex  justify-center  lg:mb-14 xl:mb-28 2xl:mb-28">
+        <div className="mx-auto flex  justify-center  lg:mb-14 xl:mb-28 2xl:mb-6">
           <input
             className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500 xl:h-[7vh] xl:w-[90%] xl:text-xl 2xl:h-[5vh] 2xl:w-[60%] 2xl:text-sm"
             type="submit"

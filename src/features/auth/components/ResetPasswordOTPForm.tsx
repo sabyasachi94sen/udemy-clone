@@ -89,7 +89,7 @@ export function ResetPasswordOTPForm() {
             {...register("otp")}
           />
         </div>
-        <div className="mx-auto flex justify-center 2xl:mb-32">
+        <div className="mx-auto flex justify-center 2xl:mb-6">
           <input
             className="w-[80%] cursor-pointer rounded bg-[#0ea5e9] py-2 font-bold text-white hover:bg-blue-500"
             type="submit"
