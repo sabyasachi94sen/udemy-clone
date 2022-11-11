@@ -5,6 +5,7 @@ import { AEPTrackerTable,StatusTableModal  } from "@/features/aep_tracker";
 import { Button, Input } from "@/shared/components";
 import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { useAepTracker } from "@/shared/services/aep-tracker.service";
+import { useStoreData } from "@/shared/stores/modal.store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getLocalStorage } from "@/features/helpers";
@@ -52,6 +53,8 @@ export default function StudentPage() {
   if(getLocalStorage("token")==null)
    router.push("/login")
  },[])
+
+
 
 
 

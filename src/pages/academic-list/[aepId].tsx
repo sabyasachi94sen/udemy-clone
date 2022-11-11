@@ -18,6 +18,7 @@ import { useStore } from "zustand";
 
 
 
+
 export default function AepActivityPage() {
   const { currModalKey, onModalOpen, isModalOpen } =
     useModal() as ModalState<Account>;
@@ -74,6 +75,9 @@ export default function AepActivityPage() {
   },[isModalOpen])
 
 
+
+
+
   return (
     <>
     {isModalOpen?
@@ -115,16 +119,19 @@ export default function AepActivityPage() {
           >
             <Link href="/aep-tracker">
               <Button
-                className="h-[6vh] rounded-md font-bolder bg-cyan-500 text-white hover:bg-blue-500"
+                className="h-[6vh] rounded-md font-bolder bg-cyan-500 text-white text-[1.12rem] hover:bg-blue-500"
                 type="button"
                 width="w-[50%]"
+                onClick={()=>
+                  setStoredData(studentName)
+                }
               >
                 View AEP Status Tracker (student)
               </Button>
             </Link>
             {isLoading ? (
               <Button
-                className={`h-[6vh] rounded-md font-bolder bg-cyan-500 text-white hover:bg-blue-500`}
+                className={`h-[6vh] rounded-md font-bolder bg-cyan-500 text-[1.12rem] text-white hover:bg-blue-500`}
                 type="button"
                 width="w-[40%]"
                 onClick={() => {

@@ -9,6 +9,7 @@ import { ModalState, useModal } from "@/shared/stores/modal.store";
 import { getLocalStorage } from "@/features/helpers";
 import { useAepActivityComplete } from "@/shared/services/aep.service";
 
+import { useStoreData } from "@/shared/stores/modal.store";
 import { Account } from "@/api";
 import {
   BaseTable,
@@ -33,6 +34,8 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
    window.onresize=function(){
       setDeviceWidth(window.screen.width)
    }
+
+
 
    const getActivityHeader=()=>{
     if(deviceWidth>=1656)

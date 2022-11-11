@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useState} from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { useAepComplete} from "@/shared/services/aep-tracker.service";
 import moment from "moment"
+import { useStoreData } from "@/shared/stores/modal.store";
+import { useModal } from "@/shared/stores/modal.store";
 
 import { Account } from "@/api";
 import { BaseTable, IconButton ,StatusCell,Checkbox,Input,RowNavigate} from "@/shared/components";
@@ -24,6 +26,8 @@ export function AEPTrackerTable({
   const columnHelper = createColumnHelper<Account>();
   const [storeAepData,setStoreAepData]=useState([])
   const aepComplete=useAepComplete()
+  const {storedData,setStoredData}=useStoreData()
+  const { onModalOpen } = useModal();
 
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
@@ -121,10 +125,16 @@ export function AEPTrackerTable({
     
 
     if(AepTrackerQuery.isSuccess){
-      const tempArr=AepTrackerQuery?.data?.before_target_date.concat(AepTrackerQuery?.data?.todays_target_date,AepTrackerQuery?.data?.after_target_date,AepTrackerQuery?.data?.completed)
-      
+      var tempArr=AepTrackerQuery?.data?.before_target_date.concat(AepTrackerQuery?.data?.todays_target_date,AepTrackerQuery?.data?.after_target_date,AepTrackerQuery?.data?.completed)
+       
       setStoreAepData(tempArr)
+
+     
     }
+
+ 
+
+    
      
 
 
@@ -132,7 +142,21 @@ export function AEPTrackerTable({
   },[AepTrackerQuery])
 
 
-  console.log(storeAepData)
+  useEffect(()=>{
+    if(storedData!=null){
+      storeAepData?.map((item)=>{
+        
+      
+        if(item?.activity_assignment?.student?.student_name===storedData)
+        onModalOpen("viewStatusTable",item)
+        setStoredData(null)
+      })
+  
+    }
+  })
+
+
+
 
   
 
