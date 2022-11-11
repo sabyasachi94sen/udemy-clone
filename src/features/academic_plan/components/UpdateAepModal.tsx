@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Account } from "@/api";
-import { BaseModal,BaseTable,Button,Form,Input} from "@/shared/components";
+import { BaseModal,BaseTable,Button,Form,Input, RowNavigate} from "@/shared/components";
 import { useAepActivityAssignment, useAepActivityAssignmentFilter, useAepActivityFilter,useAepChoice } from "@/shared/services/aep.service";
 import { useModal,useStoreData } from "@/shared/stores/modal.store";
 import {useEffect, useMemo, useState} from "react";
@@ -8,7 +8,7 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { queryKeys } from "@/shared/services";
 import { ViewButton } from "@/shared/components";
 import { ViewActivityModal } from "./ViewActivityModal";
-
+import ReactTooltip from 'react-tooltip';
 
 
 
@@ -69,7 +69,12 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
         id: "remarks",
         header: "Remarks",
         cell: (info) => (
-        <Input className="bg-cyan-500 rounded-lg w-[100%] h-[6vh]" defaultValue={info.getValue()}  />
+          <>
+          
+        <Input data-tip={info.getValue()} data-for="pop-up" className="bg-cyan-500 rounded-lg w-[100%] h-[6vh]" defaultValue={info.getValue()}  />
+        <ReactTooltip id="pop-up" className="w-[10%] h-auto text-center" />
+         
+        </>
         ),
       }),
       columnHelper.accessor((row) => row?.id, {

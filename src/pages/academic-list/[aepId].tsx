@@ -119,7 +119,7 @@ export default function AepActivityPage() {
           >
             <Link href="/aep-tracker">
               <Button
-                className="h-[6vh] rounded-md font-bolder bg-cyan-500 text-white text-[1.12rem] hover:bg-blue-500"
+                className="h-[6vh] rounded-md font-bolder bg-cyan-500 text-white text-[1.12rem] font-extrabold hover:bg-blue-500"
                 type="button"
                 width="w-[50%]"
                 onClick={()=>
@@ -131,7 +131,7 @@ export default function AepActivityPage() {
             </Link>
             {isLoading ? (
               <Button
-                className={`h-[6vh] rounded-md font-bolder bg-cyan-500 text-[1.12rem] text-white hover:bg-blue-500`}
+                className={`h-[6vh] rounded-md font-bolder bg-cyan-500 text-[1.12rem] font-extrabold text-white hover:bg-blue-500`}
                 type="button"
                 width="w-[40%]"
                 onClick={() => {
