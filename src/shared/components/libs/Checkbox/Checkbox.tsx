@@ -34,7 +34,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "form-checkbox rounded border-gray-300 text-primary focus:ring-primary",
             SIZE_MAPS[size],
           )}
-          disabled={isChecked}
+          disabled={isChecked || label==="action_tracker"}
           id={name}
           name={name}
           type="checkbox"
@@ -45,7 +45,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </div>
       <div className="ml-3 text-sm">
         <label className="font-medium text-gray-700" htmlFor={name}>
-          {label}
+          {/* {label} */}
         </label>
         {optionalText && (
           <p className="text-gray-500" id={`${name}-description`}>

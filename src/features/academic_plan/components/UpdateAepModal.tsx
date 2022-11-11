@@ -72,7 +72,7 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
           <>
           
         <Input data-tip={info.getValue()} data-for="pop-up" className="bg-cyan-500 rounded-lg w-[100%] h-[6vh]" defaultValue={info.getValue()}  />
-        <ReactTooltip id="pop-up" className="w-[10%] h-auto text-center" />
+        <ReactTooltip id="pop-up" className="w-auto h-auto text-center" />
          
         </>
         ),

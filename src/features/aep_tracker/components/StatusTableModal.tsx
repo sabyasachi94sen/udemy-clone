@@ -65,9 +65,10 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
         header: "Complete",
         cell: (info) => (
           <Checkbox
-            isDisabled
+            
             isChecked={info.row.original.is_completed}
             size="lg"
+            label="action_tracker"
             
           />
         ),
