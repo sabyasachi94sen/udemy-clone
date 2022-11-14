@@ -87,8 +87,8 @@ export function CheckActionMap({actionMap}){
     <>
     {[].concat(actionMap[0]?.before_registration_open,actionMap[1]?.after_registration_open,actionMap[2]?.before_application_deadline,actionMap[3]?.after_application_deadline,actionMap[4]?.before_activity_start_date,actionMap[5]?.after_activity_start_date,actionMap[6]?.before_activity_end_date,actionMap[7]?.after_activity_end_date)?.length>0?
       
-    <span className="text-green-500 text-[2rem] font-extrabold pl-5">&#10003;</span>:
-    <span className="text-red-500 text-[2rem] font-extrabold pl-5">&#x2715;</span>}
+    <img src="/images/correct.png" className="pl-4 w-[90%]" alt="correct-icon"/>:
+    <img src="/images/wrong.png" className="pl-4 w-[90%]" alt="wrong-icon"/>}
     </>
   )
 }
