@@ -31,6 +31,7 @@ type ModalKey =
   | "updateActionStep"
   | "deleteActionStep"
   | "viewActivityDetails"
+  | "viewRemark"
 
 
 

@@ -9,6 +9,7 @@ import { queryKeys } from "@/shared/services";
 import { ViewButton } from "@/shared/components";
 import { ViewActivityModal } from "./ViewActivityModal";
 import ReactTooltip from 'react-tooltip';
+import { RemarkModal } from "./RemarkModal";
 
 
 
@@ -29,6 +30,7 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
 
  const aepChoice=useAepChoice()
 
+  
 
   
 
@@ -70,9 +72,15 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
         header: "Remarks",
         cell: (info) => (
           <>
-          
-        <Input data-tip={info.getValue()} data-for="pop-up" className="bg-cyan-500 rounded-lg w-[100%] h-[6vh]" defaultValue={info.getValue()}  />
-        <ReactTooltip id="pop-up" className="w-auto h-auto text-center" />
+            <img src="/images/remark-icon.png" alt="remark-icon" className="w-[80%] cursor-pointer pl-5"
+             onClick={()=>{
+              onModalOpen("viewRemark",info.row.original.remarks)
+              setStoredData(true)
+             }
+             }
+            
+            />
+       
          
         </>
         ),
@@ -113,6 +121,11 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
     <>
     {isModalOpen?
     <ViewActivityModal isOpen={currModalKey==="viewActivityDetails"} />:null}
+    
+      
+      {isModalOpen?
+     <RemarkModal isOpen={currModalKey==="viewRemark"} />:null}
+
     <BaseModal
       hasHeader
       showHeaderCloseButton
