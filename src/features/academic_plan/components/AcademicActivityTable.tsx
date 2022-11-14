@@ -97,6 +97,7 @@ export function AcademicActivityTable({ onDelete,aepActivityQuery,page ,isSearch
         header: "Complete",
         cell: (info) => <div className="pl-6"><Checkbox 
         size={"lg"} 
+        label={"academic_plan"}
         isChecked={info.getValue()}
         onClick={()=>{
          aepActivityCompleteQuery.mutate({

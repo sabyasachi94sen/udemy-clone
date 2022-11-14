@@ -34,7 +34,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "form-checkbox rounded border-gray-300 text-primary focus:ring-primary",
             SIZE_MAPS[size],
           )}
-          disabled={isChecked || label==="action_tracker"}
+          disabled={isChecked || label==="action_tracker" || label==="academic_plan"}
           id={name}
           name={name}
           type="checkbox"
