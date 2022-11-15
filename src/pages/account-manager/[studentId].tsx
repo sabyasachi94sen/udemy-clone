@@ -19,8 +19,9 @@ export default function AccountManagerPage() {
    const [isSearch,setIsSearch]=useState(false)
    const router = useRouter();
    const { page, perPage } = router.query;
-   const studentId=getLocalStorage("studentId");
+   const studentId=getLocalStorage("student_id");
    const accountManagerActivity=useAccountManagerActivities(studentId)
+   console.log(studentId)
 
 
 

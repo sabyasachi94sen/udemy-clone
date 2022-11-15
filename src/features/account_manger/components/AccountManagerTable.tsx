@@ -45,7 +45,7 @@ export function AccountManagerTable({
         cell: (info) => (
         <RowNavigate rowLink={(row)=>{
           router.push(`/account-manager/${info.row.original.account.id}`)
-          setLocalStorage("studentId",info.row.original.account.id)
+          setLocalStorage("student_id",info.row.original.account.id)
           setLocalStorage("managerName",info.getValue())
         }
         } 
