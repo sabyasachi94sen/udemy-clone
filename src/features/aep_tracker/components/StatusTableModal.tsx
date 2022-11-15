@@ -1,12 +1,13 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { Account } from "@/api";
 import { BaseModal, BaseTable, Checkbox } from "@/shared/components";
 import { useAepTrackerStatus } from "@/shared/services/aep-tracker.service";
 import { useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
+import id from "date-fns/esm/locale/id/index.js";
 
 export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } = useModal();
@@ -77,7 +78,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
     [],
   );
 
-  console.log(selectedData)
+
 
   return (
     <BaseModal
@@ -98,7 +99,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
       <BaseTable<Account>
         columns={columns}
         currentPage={Number(page) || 1}
-        data={aepTrackerStatusQuery.isSuccess && aepTrackerStatusQuery?.data?.length!=0?aepTrackerStatusQuery?.data:[]}
+        data={aepTrackerStatusQuery.isFetchedAfterMount && aepTrackerStatusQuery?.isSuccess && aepTrackerStatusQuery?.data?.length!=0?aepTrackerStatusQuery?.data:[]}
         isLoading={aepTrackerStatusQuery?.isLoading}
         // totalPagesCount={10} // TODO: fix This once backend adds limit in query
       />
