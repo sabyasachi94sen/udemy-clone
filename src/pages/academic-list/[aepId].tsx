@@ -122,8 +122,15 @@ export default function AepActivityPage() {
                 className="h-[6vh] rounded-md font-bolder bg-cyan-500 text-white text-[1.12rem] font-extrabold hover:bg-blue-500"
                 type="button"
                 width="w-[50%]"
-                onClick={()=>
-                  setStoredData(studentName)
+                onClick={()=>{
+                  aepActivityQuery?.data?.map((item) => {
+                    if(item?.student?.student_name===studentName)
+                    setStoredData({activity_assignment:{
+                      student:item?.student
+                    }})
+                  })
+               
+                }
                 }
               >
                 View AEP Status Tracker (student)

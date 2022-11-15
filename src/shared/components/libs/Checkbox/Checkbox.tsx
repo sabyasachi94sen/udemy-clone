@@ -1,5 +1,6 @@
 import cx from "clsx";
-import { forwardRef } from "react";
+import { forwardRef,useState,useEffect} from "react";
+
 
 const SIZE_MAPS: Record<string, string> = {
   sm: "w-4 h-4 sm:text-xs",
@@ -24,7 +25,18 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     { size = "sm", label, optionalText, onInputChange, isDisabled, name,isChecked,onClick },
     ref,
-  ) => (
+  ) => {
+
+    const [isLoading,setIsLoading]=useState(false)
+    useEffect(()=>{
+       setIsLoading(true)
+    },[])
+
+    
+   
+    return (
+      <>
+      {isLoading?
     <div className="relative flex items-start">
       <div className="flex h-5 items-center disabled:cursor-not-allowed">
         <input
@@ -53,6 +65,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </p>
         )}
       </div>
-    </div>
-  ),
+    </div>:null}
+    </>
+  )},
+        
 );

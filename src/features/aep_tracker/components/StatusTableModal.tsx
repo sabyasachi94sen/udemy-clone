@@ -96,7 +96,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
       <BaseTable<Account>
         columns={columns}
         currentPage={Number(page) || 1}
-        data={aepTrackerStatusQuery?.data}
+        data={aepTrackerStatusQuery.isSuccess && aepTrackerStatusQuery?.data?.length!=0?aepTrackerStatusQuery?.data:[]}
         isLoading={aepTrackerStatusQuery?.isLoading}
         // totalPagesCount={10} // TODO: fix This once backend adds limit in query
       />

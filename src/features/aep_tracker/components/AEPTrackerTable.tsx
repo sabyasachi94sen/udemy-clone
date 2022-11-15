@@ -154,11 +154,10 @@ export function AEPTrackerTable({
 
   useEffect(() => {
     if (storedData != null) {
-      storeAepData?.map((item) => {
-        if (item?.activity_assignment?.student?.student_name === storedData)
-          onModalOpen("viewStatusTable", item);
+  
+        onModalOpen("viewStatusTable", storedData);
         setStoredData(null);
-      });
+      
     }
   });
 
