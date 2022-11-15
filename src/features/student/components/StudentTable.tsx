@@ -7,6 +7,8 @@ import { RowNavigate } from "@/shared/components";
 import { Account } from "@/api";
 import { BaseTable, IconButton, StatusCell ,ViewButton} from "@/shared/components";
 import { useState } from "react";
+import { setLocalStorage } from "@/features/helpers";
+
 
 
 import { formatDate } from "@/shared/utils";
@@ -30,6 +32,7 @@ export function StudentTable({
 
   const [deviceWidth,setDeviceWidth]=useState(window.screen.width);
   const [zoomVal,setZoomVal]=useState(Math.round(window.devicePixelRatio*100))
+  const router=useRouter()
  
 
   window.onresize=function(){
@@ -77,10 +80,20 @@ export function StudentTable({
  
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
-      columnHelper.accessor((row) => row.student_name, {
+      columnHelper.accessor((row) => row?.student_name, {
         id: "student_name",
         header: "Student Name",
-        cell: (info)=>info.getValue(),
+        cell: (info) => (
+          <RowNavigate
+            onClick={() => storeStudentName(info.getValue())}
+            rowLink={() => {
+              router.push(`/academic-list/${info.row.original?.id}`);
+              setLocalStorage("studentName",info.getValue())
+              setLocalStorage("studentId",info.row.original?.id)
+            }}
+            rowValue={info.getValue()}
+          />
+        ),
       }),
    
       columnHelper.accessor((row) => row?.activity_count, {
