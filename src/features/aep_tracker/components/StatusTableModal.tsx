@@ -12,8 +12,6 @@ import id from "date-fns/esm/locale/id/index.js";
 export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } = useModal();
 
-
-
   const columnHelper = createColumnHelper<Account>();
   const router = useRouter();
   const { page, perPage } = router.query;
@@ -21,8 +19,6 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const aepTrackerStatusQuery = useAepTrackerStatus(
     selectedData?.activity_assignment?.student?.id,
   );
-
-
 
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
@@ -66,19 +62,15 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
         header: "Complete",
         cell: (info) => (
           <Checkbox
-            
             isChecked={info.row.original.is_completed}
             size="lg"
             label="action_tracker"
-            
           />
         ),
       }),
     ],
     [],
   );
-
-
 
   return (
     <BaseModal
@@ -99,7 +91,13 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
       <BaseTable<Account>
         columns={columns}
         currentPage={Number(page) || 1}
-        data={aepTrackerStatusQuery.isFetchedAfterMount && aepTrackerStatusQuery?.isSuccess && aepTrackerStatusQuery?.data?.length!=0?aepTrackerStatusQuery?.data:[]}
+        data={
+          aepTrackerStatusQuery?.isFetchedAfterMount &&
+          aepTrackerStatusQuery?.isSuccess &&
+          aepTrackerStatusQuery?.data?.length != 0
+            ? aepTrackerStatusQuery?.data
+            : []
+        }
         isLoading={aepTrackerStatusQuery?.isLoading}
         // totalPagesCount={10} // TODO: fix This once backend adds limit in query
       />
