@@ -11,7 +11,7 @@ import { formatDate } from "@/shared/utils";
 export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } = useModal();
 
-  console.log(selectedData)
+
 
   const columnHelper = createColumnHelper<Account>();
   const router = useRouter();
@@ -21,7 +21,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
     selectedData?.activity_assignment?.student?.id,
   );
 
-  console.log(aepTrackerStatusQuery);
+
 
   const columns = useMemo<ColumnDef<Account, any>[]>(
     () => [
@@ -76,6 +76,8 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
     ],
     [],
   );
+
+  console.log(selectedData)
 
   return (
     <BaseModal

@@ -64,6 +64,7 @@ export default function AepActivityPage() {
     setStudentName(student_name);
     setIsLoading(true);
     setStoredData(false)
+    
   }, []);
 
 
@@ -123,10 +124,22 @@ export default function AepActivityPage() {
                 type="button"
                 width="w-[50%]"
                 onClick={()=>{
+
+                  setStoredData({
+                    activity_assignment:{
+                      student:{
+                        student_name:studentName
+                      }
+                    }
+                  })
+
                   aepActivityQuery?.data?.map((item) => {
                     if(item?.student?.student_name===studentName)
                     setStoredData({activity_assignment:{
-                      student:item?.student
+                      student:{
+                        ...item?.student,
+                        
+                      }
                     }})
                   })
                
