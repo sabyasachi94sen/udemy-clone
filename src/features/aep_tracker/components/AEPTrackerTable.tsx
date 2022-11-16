@@ -10,6 +10,7 @@ import {
 import { useAepComplete } from "@/shared/services/aep-tracker.service";
 import { useModal , useStoreData } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
+import moment from "moment"
 
 export function AEPTrackerTable({
   onView,
@@ -24,6 +25,9 @@ export function AEPTrackerTable({
   const aepComplete = useAepComplete();
   const { storedData, setStoredData } = useStoreData();
   const { onModalOpen } = useModal();
+
+
+  
 
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
@@ -86,7 +90,7 @@ export function AEPTrackerTable({
         header: "Target Date",
         cell: (info) => (
           <div className="">
-            {info.getValue() ? formatDate(info.getValue()) : null}
+            {info.getValue() ? moment(info.getValue()).utc().format("DD-MM-YYYY"): null}
           </div>
         ),
       }),
