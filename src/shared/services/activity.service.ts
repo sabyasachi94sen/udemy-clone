@@ -142,7 +142,8 @@ export function useDeleteActionMapStep(onSuccess?: () => void) {
     },
 
     onError(err) {
-      displayErrorMessages(err);
+     
+      toast.error(err?.body?.message)
     },
   });
 }
