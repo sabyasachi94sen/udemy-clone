@@ -1,26 +1,20 @@
-
-
 import { ResetPasswordSuccessForm } from "@/features/auth";
 import { getLocalStorage } from "@/features/helpers";
 import router from "next/router";
 import { useEffect } from "react";
 
 function ResetPasswordSuccess() {
-
-
-
   return (
-    <main className="bg-white-100 flex h-screen items-center justify-between bg-[#3ab0fb]">
-  
-  <div className="relative w-[50%] h-[100vh] bg-[#012060] flex items-center justify-center">
-   <img src="/images/ESSAI.png" className="w-[20%] h-[80vh]"/>
+    <>
+      <img
+        src="/images/home-page.png"
+        className="z-0 w-[100%]"
+        alt="home_page"
+      />
+      <div className="z-2 relative mt-[-125vh] ml-[65%]">
+        <ResetPasswordSuccessForm />
       </div>
-      <div className="w-[50%] flex justify-center">
-      <ResetPasswordSuccessForm />
-      </div>
-     
-
-    </main>
+    </>
   );
 }
 

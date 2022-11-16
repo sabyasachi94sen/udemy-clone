@@ -62,7 +62,7 @@ export function LoginForm() {
   return (
     <Form<FormValues> onSubmit={onSubmit}>
       {({ register }) => (
-        <div className="relative z-10 h-auto w-[24rem] rounded-lg bg-white p-6 py-12 shadow-lg border-4 border-[#012060]">
+        <div className="relative z-10 h-auto w-[28rem] rounded-lg bg-white p-6 py-12 shadow-lg border-4 border-[#012060]">
           <h1 className="mb-4 text-center text-3xl font-bold  tracking-wide text-primary xl:text-3xl 2xl:text-3xl">
             PIPPAMS
           </h1>
@@ -90,7 +90,7 @@ export function LoginForm() {
             </Link>
           </div>
 
-          <div className="mx-auto flex justify-center">
+          <div className="mx-auto flex justify-center mb-7">
             <Button
               isLoading={loginMutation.isLoading}
               type="submit"
