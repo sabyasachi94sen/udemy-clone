@@ -157,9 +157,13 @@ export function AEPTrackerTable({
   }, [AepTrackerQuery]);
 
   useEffect(() => {
-    if (storedData != null) {
-  
+
+    console.log(storedData)
+    if (storedData != null && storedData?.flag) {
+          
+
         onModalOpen("viewStatusTable", storedData);
+
         setStoredData(null);
       
     }

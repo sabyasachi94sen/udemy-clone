@@ -130,7 +130,8 @@ export default function AepActivityPage() {
                       student:{
                         student_name:studentName
                       }
-                    }
+                    },
+               
                   })
 
                   aepActivityQuery?.data?.map((item) => {
@@ -140,7 +141,10 @@ export default function AepActivityPage() {
                         ...item?.student,
                         
                       }
-                    }})
+                    },
+                   flag:true
+                  
+                  })
                   })
                
                 }
