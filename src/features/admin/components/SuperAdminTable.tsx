@@ -39,35 +39,35 @@ export const SuperAdminTable=(({
   const getEmail=()=>{
       
     if(deviceWidth>=2560)
-    return <div className="w-[1400%] bg-green-500 text-center">Email</div>
+    return <div className="w-[1400%] text-center">Email</div>
     if(deviceWidth>=1920 && deviceWidth<2560)
-    return <div className="w-[950%] bg-blue-500 text-center">Email</div>
+    return <div className="w-[950%] text-center">Email</div>
    else if(deviceWidth>=1656 && deviceWidth<1920)
-    return <div className="w-[800%] bg-red-300 text-center">Email</div>
+    return <div className="w-[800%] text-center">Email</div>
 
     else if(deviceWidth>=1600 && deviceWidth<1656)
-    return <div className="w-[700%] bg-yellow-500 text-center">Email</div>
+    return <div className="w-[700%] text-center">Email</div>
 
     if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
-    return <div className="w-[600%] bg-pink-500 text-center">Email</div>
+    return <div className="w-[600%] text-center">Email</div>
 
     else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
-    return <div className="w-[700%] bg-blue-500 text-center">Email</div>
+    return <div className="w-[700%] text-center">Email</div>
 
     else if(zoomVal===100 && deviceWidth>=1536 && deviceWidth<1600)
-    return <div className="w-[850%] bg-orange-500 text-center">Email</div>
+    return <div className="w-[850%] text-center">Email</div>
 
     else if(zoomVal===138 && deviceWidth>=1536 && deviceWidth<1600)
-    return <div className="w-[500%] bg-cyan-500 text-center">Email</div>
+    return <div className="w-[500%] text-center">Email</div>
 
     else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
-    return <div className="w-[390%] bg-red-500 text-center">Email</div>
+    return <div className="w-[390%] text-center">Email</div>
 
     else if(deviceWidth>=1349 && deviceWidth<1536)
-    return <div className="w-[600%] bg-black text-center">Email</div>
+    return <div className="w-[600%] text-center">Email</div>
 
     else if(deviceWidth>=1300 && deviceWidth<1349)
-    return <div className="w-[500%] bg-green-200 text-center">Email</div>
+    return <div className="w-[500%] text-center">Email</div>
 
     else
     return <div className="">Email</div>
