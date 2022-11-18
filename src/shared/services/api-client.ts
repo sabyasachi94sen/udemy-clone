@@ -85,9 +85,9 @@ export const handleMutation = async <TResponse, TBody,TQuery>(config: {
       url: `${APP_API_ENDPOINT}${config.resourceUrl}/`,
       ...(config.queryParams && { params: { ...config.queryParams } }),
       ...(config.reqBody && { data: config.reqBody }),
-      headers: {
-        Authorization: GetAuthToken()
-      }
+      // headers: {
+      //   Authorization: GetAuthToken()
+      // }
     });
 
     return await Promise.resolve(response.data);
