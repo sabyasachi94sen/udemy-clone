@@ -38,12 +38,13 @@ export const SuperAdminTable=(({
 
   const getEmail=()=>{
       
-   
-    if(deviceWidth>=1656)
-    return <div className="w-[310%] text-center">Email</div>
+    if(deviceWidth>=1920)
+    return <div className="w-[1400%] text-center">Email</div>
+   else if(deviceWidth>=1656 && deviceWidth<1920)
+    return <div className="w-[800%] text-center">Email</div>
 
     else if(deviceWidth>=1600 && deviceWidth<1656)
-    return <div className="w-[290%] text-center">Email</div>
+    return <div className="w-[700%] text-center">Email</div>
 
     if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
     return <div className="w-[600%] text-center">Email</div>
@@ -61,10 +62,10 @@ export const SuperAdminTable=(({
     return <div className="w-[390%] bh-blue-500 text-center">Email</div>
 
     else if(deviceWidth>=1349 && deviceWidth<1536)
-    return <div className="w-[300%] text-center">Email</div>
+    return <div className="w-[600%] text-center">Email</div>
 
     else if(deviceWidth>=1300 && deviceWidth<1349)
-    return <div className="w-[220%] text-center">Email</div>
+    return <div className="w-[500%] text-center">Email</div>
 
     else
     return <div className="">Email</div>
