@@ -8,6 +8,7 @@ import { useAepTrackerStatus } from "@/shared/services/aep-tracker.service";
 import { useModal } from "@/shared/stores/modal.store";
 import { formatDate } from "@/shared/utils";
 import id from "date-fns/esm/locale/id/index.js";
+import moment from "moment"
 
 export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
   const { isModalOpen, onModalClose, selectedData } = useModal();
@@ -54,7 +55,7 @@ export function StatusTableModal({ isOpen }: { isOpen: boolean }) {
       columnHelper.accessor((row) => row?.target_date, {
         id: "target_date",
         header: "Target Date",
-        cell: (info) => (info.getValue() ? formatDate(info.getValue()) : null),
+        cell: (info) => (info.getValue() ? moment(info.getValue()).utc().format("DD-MM-YYYY") : null),
       }),
 
       columnHelper.accessor((row) => row.id, {
