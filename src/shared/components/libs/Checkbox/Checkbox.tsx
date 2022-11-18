@@ -57,7 +57,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </div>
       <div className="ml-3 text-sm">
         <label className="font-medium text-gray-700" htmlFor={name}>
-          {/* {label} */}
+          {label==="Remember me"?label:null}
         </label>
         {optionalText && (
           <p className="text-gray-500" id={`${name}-description`}>
