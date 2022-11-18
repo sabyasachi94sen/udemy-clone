@@ -89,13 +89,13 @@ export function CheckActionMap({ actionMap }) {
       )?.length > 0 ? (
         <img
           src="/images/correct.png"
-          className="w-[78%] pl-5"
+          className="w-[70%] pl-4"
           alt="correct-icon"
         />
       ) : (
         <img
           src="/images/wrong.png"
-          className="w-[78%] pl-5"
+          className="w-[70%] pl-4"
           alt="wrong-icon"
         />
       )}

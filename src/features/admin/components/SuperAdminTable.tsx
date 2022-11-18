@@ -26,7 +26,49 @@ export const SuperAdminTable=(({
 
 
 
-   console.log(isSearch)
+  const [deviceWidth,setDeviceWidth]=useState(window.screen.width);
+  const [zoomVal,setZoomVal]=useState(Math.round(window.devicePixelRatio*100))
+
+  window.onresize=function(){
+    console.log(Math.round(window.devicePixelRatio*100))
+    setDeviceWidth(Math.round(window.screen.width))
+    setZoomVal(Math.round(window.devicePixelRatio*100))
+  
+  }
+
+  const getEmail=()=>{
+      
+   
+    if(deviceWidth>=1656)
+    return <div className="w-[310%] text-center">Email</div>
+
+    else if(deviceWidth>=1600 && deviceWidth<1656)
+    return <div className="w-[290%] text-center">Email</div>
+
+    if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
+    return <div className="w-[600%] text-center">Email</div>
+
+    else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[700%] text-center">Email</div>
+
+    else if(zoomVal===100 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[850%] text-center">Email</div>
+
+    else if(zoomVal===138 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[500%] text-center">Email</div>
+
+    else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[390%] bh-blue-500 text-center">Email</div>
+
+    else if(deviceWidth>=1349 && deviceWidth<1536)
+    return <div className="w-[300%] text-center">Email</div>
+
+    else if(deviceWidth>=1300 && deviceWidth<1349)
+    return <div className="w-[220%] text-center">Email</div>
+
+    else
+    return <div className="">Email</div>
+  }
 
   const columnHelper = createColumnHelper<Account>();
 
@@ -42,8 +84,8 @@ export const SuperAdminTable=(({
       }),
       columnHelper.accessor((row) => row.email, {
         id: "email",
-        header: "Email",
-        cell: (info) => info.getValue(),
+        header: getEmail(),
+        cell: (info) => <div className="text-center">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.last_login, {
         id: "last_login",
@@ -96,7 +138,7 @@ export const SuperAdminTable=(({
         ),
       }),
     ],
-    [],
+    [deviceWidth,zoomVal],
   );
 
 
