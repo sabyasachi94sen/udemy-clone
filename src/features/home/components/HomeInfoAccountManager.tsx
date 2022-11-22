@@ -1,6 +1,7 @@
 
-import aep from "public/images/aep.png";
-import statusTracker from "public/images/statustracker.png";
+import aep from "public/images/aeps.png";
+
+import statusTracker from "public/images/action-tracker.png";
 
 
 

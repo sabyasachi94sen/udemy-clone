@@ -17,15 +17,16 @@ export function HomeItems({
 }: HomeItemsProps) {
   return (
     <Link href={url}>
-      <div className="col-span-6 flex cursor-pointer justify-between rounded-md bg-primary bg-opacity-50 px-4 py-6 transition-all hover:bg-opacity-80 hover:shadow-lg">
-        <div>
-          <h1 className="font-sans text-lg font-extrabold">{activityname}</h1>
-          <h4 className="mt-1 font-sans text-sm">{activitystatus}</h4>
+      <div className="col-span-6 flex cursor-pointer justify-around rounded-md bg-[#55aaff]  text-white px-6 py-6 transition-all hover:bg-opacity-80 hover:shadow-lg rounded-[30vw]">
+      <div className="bg-white w-[150px] h-[150px] flex items-center justify-center rounded-[50%]">
+          <Image className="w-[5vw] h-[10vh] relative items-center" src={image} />
+        </div>
+        <div className="w-[35%] mt-3">
+          <h1 className="font-sans text-2xl font-extrabold text-white">{activityname}</h1>
+          <h4 className="mt-1 font-sans text-lg break-words">{activitystatus}</h4>
           {/* <button className="w-[50%] h-[5vh] text-cyan-400 bg-white rounded-lg mt-5 cursor-pointer">Know more</button> */}
         </div>
-        <div className="mt-6 ">
-          <Image className="drop-shadow-md" src={image} />
-        </div>
+        
       </div>
     </Link>
   );

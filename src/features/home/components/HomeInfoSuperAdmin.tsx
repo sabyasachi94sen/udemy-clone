@@ -1,11 +1,11 @@
-import activityDB from "public/images/activity.png";
-import admin from "public/images/admin.png";
-import aep from "public/images/aep.png";
+import activityDB from "public/images/activities.png";
+import admin from "public/images/admins.png";
+import aep from "public/images/aeps.png";
 import analytics from "public/images/analytics.png";
-import manager from "public/images/manager.png";
-import roaster from "public/images/roaster.png";
-import statusTracker from "public/images/statustracker.png";
-import superAdmin from "public/images/superadmin.png";
+import manager from "public/images/account-manager.png";
+import roaster from "public/images/students.png";
+import statusTracker from "public/images/action-tracker.png";
+import superAdmin from "public/images/super-admin.png";
 
 
 export const homeInfoSuperAdmin = [

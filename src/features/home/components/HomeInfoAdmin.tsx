@@ -1,9 +1,11 @@
-import activityDB from "public/images/activity.png";
-import aep from "public/images/aep.png";
+import activityDB from "public/images/activities.png";
+
+import aep from "public/images/aeps.png";
 import analytics from "public/images/analytics.png";
-import manager from "public/images/manager.png";
-import roaster from "public/images/roaster.png";
-import statusTracker from "public/images/statustracker.png";
+import manager from "public/images/account-manager.png";
+import roaster from "public/images/students.png";
+import statusTracker from "public/images/action-tracker.png";
+
 
 
 
