@@ -73,9 +73,11 @@ export function UpdateAepModal({ isOpen }: { isOpen: boolean }) {
         cell: (info) => (
           <>
             <img src="/images/remark-icon.png" alt="remark-icon" className="w-[80%] cursor-pointer pl-5"
-             onClick={()=>{
-              onModalOpen("viewRemark",info.row.original.remarks)
+            
+             onMouseEnter={()=>{
+              onModalOpen("viewRemark",{remarks:info?.row?.original?.remarks,activity_name:info?.row?.original?.activity_name})
               setStoredData(true)
+            
              }
              }
             
