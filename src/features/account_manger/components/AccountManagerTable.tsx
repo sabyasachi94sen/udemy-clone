@@ -9,6 +9,7 @@ import { BaseTable, IconButton,RowNavigate,StatusCell } from "@/shared/component
 
 import { formatDate } from "@/shared/utils";
 import { setLocalStorage } from "@/features/helpers";
+import moment from "moment"
 
 
 interface AccountManagerTableProps {
@@ -55,7 +56,7 @@ export function AccountManagerTable({
       columnHelper.accessor((row) => row.account?.last_login, {
         id: "last_login",
         header: "Last Login",
-        cell: (info) => (info.getValue() ? <div className="pl-1">{formatDate(info.getValue())}</div> : null)
+        cell: (info) => (info.getValue() ? <div className="pl-1">{moment(info.getValue()).utc().format("DD/MM/YYYY")}</div> : null)
       }),
       columnHelper.accessor((row) => row.is_active, {
         id: "is_active",

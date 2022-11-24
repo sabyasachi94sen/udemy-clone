@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-
+import moment from "moment";
 
 import { Account } from "@/api";
 import { setLocalStorage } from "@/features/helpers"
@@ -54,7 +54,7 @@ export function AdminTable({
       columnHelper.accessor((row) => row.last_login, {
         id: "last_login",
         header: "Last Login",
-        cell: (info) => (info.getValue() ? <div className="pl-1">{formatDate(info.getValue())}</div> : null),
+        cell: (info) => (info.getValue() ? <div className="pl-1">{moment(info.getValue()).utc().format("DD/MM/YYYY")}</div> : null),
       
       }),
     
