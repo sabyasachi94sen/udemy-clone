@@ -25,8 +25,8 @@ export function SettingsForm() {
 
  const userType=GetUserType()
 
-//  const userDetailsQuery=useUserDetails({ page })
-//  const userDetailsMutation=useUpdateDetails()
+ const userDetailsQuery=useUserDetails({ page })
+ const userDetailsMutation=useUpdateDetails()
 
 
 
