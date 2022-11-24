@@ -89,16 +89,16 @@ export const SuperAdminTable=(({
     return <div className="w-[380%] text-center">Staff name</div>
 
     if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
-    return <div className="w-[600%] text-center">Staff name</div>
+    return <div className="w-[350%] text-center">Staff name</div>
 
     else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
-    return <div className="w-[700%] text-center">Staff name</div>
+    return <div className="w-[400%] text-center">Staff name</div>
 
     else if(zoomVal===100 && deviceWidth>=1536 && deviceWidth<1600)
     return <div className="w-[470%] text-center">Staff name</div>
 
     else if(zoomVal===138 && deviceWidth>=1536 && deviceWidth<1600)
-    return <div className="w-[500%] text-center">Staff name</div>
+    return <div className="w-[300%] text-center">Staff name</div>
 
     else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
     return <div className="w-[390%] text-center">Staff name</div>
