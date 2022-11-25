@@ -21,7 +21,7 @@ export function HomeItems({
       <div className="bg-white w-[80px] h-[80px] flex items-center justify-center rounded-[50%]">
           <Image className="w-[3vw] h-[6vh] relative items-center" src={image} />
         </div>
-        <div className="w-[35%] mt-3">
+        <div className="w-[35%] mt-1">
           <h1 className="font-sans text-sm font-extrabold text-white">{activityname}</h1>
           <h4 className="mt-1 font-sans text-sm break-words">{activitystatus}</h4>
           {/* <button className="w-[50%] h-[5vh] text-cyan-400 bg-white rounded-lg mt-5 cursor-pointer">Know more</button> */}
