@@ -21,6 +21,7 @@ export function BaseModal({
   description,
   children,
   title,
+  remarks,
   modalWidth,
   hasFooter = false,
   hasHeader = true,
@@ -74,8 +75,11 @@ export function BaseModal({
                 {title?.includes("View")?<img src={"https://thumbs.dreamstime.com/b/info-icon-information-sign-speech-bubble-symbol-i-letter-vector-illustration-125540368.jpg"} className="w-[1.5rem] h-[1.5rem] mr-2" />: null}
 
                 {title}
+                
+                {remarks && <div className="mx-auto relative right-10">{remarks}</div>}
               </DialogPrimitive.Title>
             )}
+           
             {description && (
               <DialogPrimitive.Description className="mt-2 font-normal text-neutral">
                 {description}
