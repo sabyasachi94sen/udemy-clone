@@ -18,8 +18,8 @@ export function HomeItems({
   return (
     <Link href={url}>
       <div className="col-span-6 flex cursor-pointer justify-around rounded-md bg-[#55aaff]  text-white px-6 py-6 transition-all hover:bg-opacity-80 hover:shadow-lg rounded-[30vw]">
-      <div className="bg-white w-[150px] h-[150px] flex items-center justify-center rounded-[50%]">
-          <Image className="w-[5vw] h-[10vh] relative items-center" src={image} />
+      <div className="bg-white w-[80px] h-[80px] flex items-center justify-center rounded-[50%]">
+          <Image className="w-[3vw] h-[6vh] relative items-center" src={image} />
         </div>
         <div className="w-[35%] mt-3">
           <h1 className="font-sans text-sm font-extrabold text-white">{activityname}</h1>
