@@ -24,7 +24,7 @@ export function RemarkModal({ isOpen }: { isOpen: boolean }) {
       hasHeader
       showHeaderCloseButton
       isOpen={isModalOpen && isOpen}
-      modalWidth="max-w-[50%]"
+      modalWidth="max-w-[35%]"
       title={`Remarks`}
       remarks={selectedData?.activity_name}
       onRequestClose={() => {
