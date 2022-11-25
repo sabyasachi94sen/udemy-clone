@@ -76,7 +76,7 @@ export function BaseModal({
 
                 {title}
                 
-                {remarks && <div className="mx-auto relative right-10">{remarks}</div>}
+                {remarks && <div className="mx-auto relative right-14 text-[1.4rem]">{remarks}</div>}
               </DialogPrimitive.Title>
             )}
            
