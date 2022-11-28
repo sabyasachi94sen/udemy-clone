@@ -49,11 +49,18 @@ export function CompleteBar({ rowValue }: { rowValue: string }): JSX.Element {
   );
 }
 
-export function RowNavigate({ rowLink, rowValue, onClick }): JSX.Element {
+export function RowNavigate({ rowLink, rowValue, onClick,title }): JSX.Element {
   return (
+    <>
+    {title!="admin"?
     <div className="cursor-pointer hover:underline" onClick={rowLink}>
       {rowValue}
-    </div>
+    </div>:
+     <div className="cursor-pointer hover:underline text-center" onClick={rowLink}>
+     {rowValue}
+   </div>}
+
+    </>
   );
 }
 

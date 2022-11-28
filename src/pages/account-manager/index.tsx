@@ -24,9 +24,9 @@ export default function AccountManagerPage() {
     const staffName=e.target.value;
     const searchResults=accountManagerQuery?.data?.filter((item)=>item.manager_name.includes(staffName))
 
-    console.log(searchResults)
+   
     
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setManagerList({isLoading: false, isSuccess:true,data:searchResults
      

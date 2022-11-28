@@ -47,7 +47,7 @@ export default function AepActivityPage() {
 
 
     
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setAepActivityList({isLoading: false, isSuccess: true, data:searchResults
      

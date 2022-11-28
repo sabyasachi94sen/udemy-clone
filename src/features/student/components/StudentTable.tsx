@@ -67,7 +67,7 @@ export function StudentTable({
     return <div className="w-[390%] text-center">Assigned Staff</div>
 
     else if(deviceWidth>=1349 && deviceWidth<1536)
-    return <div className="w-[220%] text-center">Assigned Staff</div>
+    return <div className="w-[235%] text-center">Assigned Staff</div>
 
     else if(deviceWidth>=1300 && deviceWidth<1349)
     return <div className="w-[220%] text-center">Assigned Staff</div>

@@ -34,7 +34,7 @@ export default function SuperAdminPage() {
     const staffName=e.target.value;
     const searchResults=superAdminsQuery?.data?.filter((item)=>item.username.includes(staffName))
     
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setSuperAdminList({isLoading: false, data:searchResults
     })

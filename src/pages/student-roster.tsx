@@ -25,7 +25,7 @@ export default function StudentPage() {
     const staffName=e.target.value;
     const searchResults=studentQuery?.data?.filter((item)=>item.student_name.includes(staffName))
 
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setStudentList({isLoading: false, data:searchResults
      

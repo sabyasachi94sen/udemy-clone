@@ -23,9 +23,9 @@ export default function StudentPage() {
 
     const searchStaff=(e:SyntheticEvent)=>{
     const staffName=e.target.value;
-    const searchResults=activityListQuery?.data?.results.filter((item)=>item.activity_name.includes(staffName))
+    const searchResults=activityListQuery?.data?.results.filter((item)=>item?.activity_name.includes(staffName))
 
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setActivityList({isLoading: false, isSuccess:true, data:{
         results: searchResults

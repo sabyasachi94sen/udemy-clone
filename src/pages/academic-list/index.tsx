@@ -32,7 +32,7 @@ export default function AcademicPage() {
    
 
     
-    if(searchResults.length!=0){
+    if(searchResults?.length!=0){
       setIsSearch(true)
       setAepList({isLoading: false, data:searchResults
      

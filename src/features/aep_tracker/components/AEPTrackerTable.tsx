@@ -75,14 +75,16 @@ export function AEPTrackerTable({
       columnHelper.accessor((row) => row.action_map?.action, {
         id: "task",
         header: <div className="">Task</div>,
-        cell: (info) => <div className="">{info.getValue()}</div>,
+        
+        cell: (info) => <div className="whitespace-pre-wrap">{info.getValue()}</div>,
       }),
       columnHelper.accessor(
         (row) => row.activity_assignment?.assigned_by?.username,
         {
           id: "manager",
           header: <div className="">Assigned staff</div>,
-          cell: (info) => <div className="">{info.getValue()}</div>,
+         
+          cell: (info) => <div>{info.getValue()}</div>,
         },
       ),
       columnHelper.accessor((row) => row.target_date, {

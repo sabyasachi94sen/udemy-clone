@@ -1,8 +1,9 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useMemo ,useState} from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+
 import moment from "moment";
 
 import { Account } from "@/api";
@@ -29,6 +30,57 @@ export function AdminTable({
   const columnHelper = createColumnHelper<Account>();
   const router=useRouter()
 
+  const [deviceWidth,setDeviceWidth]=useState(window.screen.width);
+  const [zoomVal,setZoomVal]=useState(Math.round(window.devicePixelRatio*100))
+
+  window.onresize=function(){
+    console.log(Math.round(window.devicePixelRatio*100))
+    setDeviceWidth(Math.round(window.screen.width))
+   
+    setZoomVal(Math.round(window.devicePixelRatio*100))
+  
+  }
+
+  const getName=()=>{
+      
+    if(deviceWidth>=2560)
+    return <div className="w-[450%] text-center">Staff name</div>
+    if(deviceWidth>=1920 && deviceWidth<2560)
+    return <div className="w-[310%] text-center">Staff name</div>
+   else if(deviceWidth>=1656 && deviceWidth<1920)
+    return <div className="w-[270%] text-center">Staff name</div>
+
+    else if(deviceWidth>=1600 && deviceWidth<1656)
+    return <div className="w-[380%] text-center">Staff name</div>
+
+    if(deviceWidth>=1536 && deviceWidth<1600 && zoomVal===125)
+    return <div className="w-[220%] text-center">Staff name</div>
+
+    else if(zoomVal===113 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[260%] text-center">Staff name</div>
+
+    else if(zoomVal===100 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[310%] text-center">Staff name</div>
+
+    else if(zoomVal===138 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[190%] text-center">Staff name</div>
+
+    else if(zoomVal===94 && deviceWidth>=1536 && deviceWidth<1600)
+    return <div className="w-[390%] text-center">Staff name</div>
+
+    else if(deviceWidth>=1349 && deviceWidth<1500)
+    return <div className="w-[190%] text-center">Staff name</div>
+
+    else if(deviceWidth>=1349 && deviceWidth<1536)
+    return <div className="w-[220%] text-center">Staff name</div>
+
+    else if(deviceWidth>=1300 && deviceWidth<1349)
+    return <div className="w-[180%] text-center">Staff name</div>
+
+    else
+    return <div className="">Staff name</div>
+  }
+
   // REF: https://github.com/TanStack/table/issues/4241
   // to prevent this we're using any here
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,7 +88,7 @@ export function AdminTable({
     () => [
       columnHelper.accessor((row) => row.username, {
         id: "username",
-        header: "Staff Name",
+        header: getName(),
         cell: (info) => (
           <RowNavigate
             rowLink={() => {
@@ -45,6 +97,7 @@ export function AdminTable({
              setLocalStorage("adminName",info.getValue())
             }}
             rowValue={info.getValue()}
+            title={"admin"}
           
             
           />
@@ -109,7 +162,7 @@ export function AdminTable({
         ),
       }),
     ],
-    [],
+    [zoomVal,deviceWidth],
   );
 
   return (
