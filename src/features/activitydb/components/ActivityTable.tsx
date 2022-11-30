@@ -54,21 +54,21 @@ export function ActivityTable({
      
       columnHelper.accessor((row) => row.activity_type, {
         id: "activity_type",
-        header: <div className="pl-24">Type</div>,
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
+        header: <div className="">Type</div>,
+        cell: (info) => <div className="">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.subject, {
         id: "subject",
-        header: <div className="pl-20">Subject</div>,
+        header: <div className="">Subject</div>,
         cell: (info) => (
-           <span className="text-center block mx-auto w-[110%]">{info.getValue()}</span>
+           <span className="">{info.getValue()}</span>
         ),
       }),
       columnHelper.accessor((row) => row.application_deadline, {
         id: "application_deadline",
-        header: <div className="w-[130%] xl:w-[150%] text-center">Application Deadline</div>,
+        header: <div className="">Application Deadline</div>,
         cell: (info) => (
-           <span className="w-[130%] mx-auto block text-center">{info.getValue()!=null?formatDate(info.getValue()): null}</span>
+           <span className="pl-2">{info.getValue()!=null?formatDate(info.getValue()): null}</span>
         ),
       }),
 
@@ -76,7 +76,7 @@ export function ActivityTable({
 
       columnHelper.accessor((row) => row.id, {
         id: "action_map",
-        header: <span className="relative left-10">Action Map</span>,
+        header: <span className="pl-8">Action Map</span>,
         cell: (info) => (<Button width="w-[90%]" className="h-[5vh] bg-cyan-500 rounded-lg hover:bg-blue-500 font-bolder"
          onClick={()=>{
           

@@ -123,13 +123,13 @@ export const SuperAdminTable=(({
     () => [
       columnHelper.accessor((row) => row.username, {
         id: "username",
-        header: getName(),
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
+        header: "staff name",
+        cell: (info) => <div className="">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.email, {
         id: "email",
-        header: getEmail(),
-        cell: (info) => <div className="text-center">{info.getValue()}</div>,
+        header: "email",
+        cell: (info) => <div className="">{info.getValue()}</div>,
       }),
       columnHelper.accessor((row) => row.last_login, {
         id: "last_login",

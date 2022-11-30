@@ -89,7 +89,7 @@ export function AEPTrackerTable({
       ),
       columnHelper.accessor((row) => row.target_date, {
         id: "target_date",
-        header: "Target Date",
+        header: <div className="pl-3">Target Date</div>,
         cell: (info) => (
           <div className="">
             {info.getValue() ? moment(info.getValue()).utc().format("DD-MM-YYYY"): null}

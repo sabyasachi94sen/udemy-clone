@@ -142,6 +142,14 @@ export function AcademicTable({ onView,AepListQuery,page,viewStudent }): JSX.Ele
           />
         ),
       }),
+      columnHelper.accessor((row) => row.account_manager?.username, {
+        id: "manager_name",
+        header: <div>Assigned Staff</div> ,
+        cell: (info) => <div className="whitespace-pre-wrap">{info.getValue()}</div>,
+      }),
+
+
+
 columnHelper.accessor((row) => row.activity_count, {
         id: "activity_count",
         header: "No. of Activity",
@@ -162,11 +170,7 @@ columnHelper.accessor((row) => row.activity_count, {
       //   header: getCountryHeader(),
       //   cell: (info) => <div className="text-center">{info.getValue()}</div>,
       // }),
-      columnHelper.accessor((row) => row.account_manager?.username, {
-        id: "manager_name",
-        header: "Assigned Staff" ,
-        cell: (info) => <div className="">{info.getValue()}</div>,
-      }),
+     
       columnHelper.accessor((row) => row.id, {
         id: "details",
         header: "Details",

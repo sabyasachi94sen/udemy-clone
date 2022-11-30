@@ -88,7 +88,7 @@ export function AdminTable({
     () => [
       columnHelper.accessor((row) => row.username, {
         id: "username",
-        header: getName(),
+        header: "staff name",
         cell: (info) => (
           <RowNavigate
             rowLink={() => {
@@ -97,7 +97,7 @@ export function AdminTable({
              setLocalStorage("adminName",info.getValue())
             }}
             rowValue={info.getValue()}
-            title={"admin"}
+            
           
             
           />
