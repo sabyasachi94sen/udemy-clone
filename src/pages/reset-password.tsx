@@ -4,11 +4,11 @@ function ResetPassword() {
   return (
     <>
       <img
-        src="/images/home-page.png"
+        src="/images/Home.png"
         className="z-0 w-[100%] h-[100vh]"
         alt="home_page"
       />
-      <div className="z-2 relative h-[100vh] -mt-[100vh] pr-[5%] pt-[5%]">
+      <div className="z-2 relative h-[100vh] -mt-[100vh] flex justify-center items-center ml-[60%]">
         <ResetPasswordForm />
       </div>
     </>
