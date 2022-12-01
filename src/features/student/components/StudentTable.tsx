@@ -96,18 +96,19 @@ export function StudentTable({
         ),
       }),
    
+    
+      columnHelper.accessor((row) => row?.student_assignment[0]?.account_manager?.username, {
+        id: "account_manager",
+        header: "Asssigned staff",
+        cell: (info) => (
+          <div className="">{info.getValue()}</div>
+        ),
+      }),
       columnHelper.accessor((row) => row?.activity_count, {
         id: "activity_count",
         header: "No of Activities",
         cell: (info) => (
           <div className="pl-14">{info.getValue()}</div>
-        ),
-      }),
-      columnHelper.accessor((row) => row?.student_assignment[0]?.account_manager?.username, {
-        id: "account_manager",
-        header: getStaffHeader(),
-        cell: (info) => (
-          <div className="w-[100%] text-center">{info.getValue()}</div>
         ),
       }),
       columnHelper.accessor((row) => row.id, {
