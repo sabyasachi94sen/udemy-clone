@@ -304,7 +304,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
         }}
         onSubmit={(formData) => {
     
-          console.log(formData)
+          
           activityValid
             .validate({
               ...formData,
@@ -349,7 +349,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     Name<span className="ml-1 text-red-500">*</span>
                   </span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_name")}
                     // defaultValue={name!=="Add an activity to the database"?individualActivityInfo?.activity_name: null}
 
@@ -362,7 +362,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     Type<span className="ml-1 text-red-500">*</span>
                   </span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("activity_type")}
                   >
                     <option>Select Type</option>
@@ -381,7 +381,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     Subject<span className="ml-1 text-red-500">*</span>
                   </span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("subject")}
                   >
                     <option>Select Subject</option>
@@ -417,7 +417,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mt-8 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Location Type</span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("location_type")}
                   >
                     <option>Location Type</option>
@@ -438,7 +438,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                   </span>
               
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("country_residence",{required:true})}
                   >
                   
@@ -458,7 +458,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[24%] pl-2">City of Activity</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("country_citizenship")}
                     type="text"
                   />
@@ -468,7 +468,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mt-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[24%] pl-2">URL</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("url")}
                     // defaultValue={individualActivityInfo?.url}
 
@@ -486,7 +486,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     <span className="ml-1 text-red-500">*</span>
                   </span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("registration_open")}
                     // defaultValue={individualActivityInfo?.registration_open}
                     max={keyDates.ra_deadline.date}
@@ -527,7 +527,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     </p>
                   </div>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("application_deadline")}
                     // defaultValue={moment(individualActivityInfo?.created_at).format("YYYY-MM-DD")}
                     min={keyDates.registration_open.date}
@@ -563,7 +563,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mb-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[25%]">Activity Start</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_start_date")}
                     // defaultValue={individualActivityInfo?.activity_start_date}
                     min={keyDates.ra_deadline.date}
@@ -597,7 +597,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mb-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[25%]">Activity End</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_end_date")}
                     // defaultValue={individualActivityInfo?.activity_end_date}
                     min={keyDates.activity_start.date}
@@ -643,7 +643,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">Range Type</span>
                   <select
-                    className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("range_type")}
                     onChange={(e) => setRangeType(e.target.value)}
                   >
@@ -661,7 +661,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
 
                     <input
                       {...register("grade_low")}
-                      className="relative left-[4%] h-[3vh] w-[8%]"
+                      className="relative left-[4%] h-[3vh] w-[8%] pl-2"
                       type="text"
                       value={gradeVal[0]}
                     />
@@ -677,7 +677,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
 
                     <input
                       {...register("grade_high")}
-                      className="h-[3vh] w-[8%]"
+                      className="h-[3vh] w-[8%] pl-2"
                       type="text"
                       value={gradeVal[1]}
                     />
@@ -696,7 +696,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     </div> */}
 
                     <input
-                      className="relative left-[6%] w-[8%]"
+                      className="relative left-[6%] w-[8%] pl-2"
                       type="text"
                       {...register("age_low")}
                       value={ageVal[0]}
@@ -713,7 +713,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     </div>
                     <input
                       {...register("age_high")}
-                      className="relative w-[8%]"
+                      className="relative w-[8%] pl-2"
                       type="text"
                       value={ageVal[1]}
                     />
@@ -769,7 +769,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                     Remarks
                   </h1>
                   <textarea
-                    className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]"
+                    className="mt-5 h-[15vh] w-[70%] bg-[#EEEE] pl-2"
                     {...register("remarks")}
                   />
                 </div>
@@ -777,7 +777,7 @@ export function UpdateActivityModal({ isOpen }: { isOpen: boolean }) {
                 <div className="mt-20 mb-10 flex items-center">
                   <span className="text-md font-bold">Last Update Date</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE] pl-2"
                     value={formatDate(selectedData?.updated_at)}
                     disabled
                     type="text"

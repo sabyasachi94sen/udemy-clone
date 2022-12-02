@@ -276,7 +276,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-2 flex items-center justify-around">
                   <span className="text-md w-[23%] block font-bold pl-2">Name<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_name")}
                     type="text"
                   />
@@ -285,7 +285,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Type<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("activity_type")}
                   >
                     <option>Select Type</option>
@@ -297,7 +297,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Subject<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("subject")}
                   >
                     <option>Select Subject</option>
@@ -323,7 +323,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold w-[20%] block">Location Type</span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("location_type")}
                   >
                     <option>Location Type</option>
@@ -335,7 +335,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Country of Activity<span className="text-red-500 ml-1">*</span></span>
                   <select
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("country_residence")}
                   >
                     <option>Select Country</option>
@@ -348,7 +348,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[23%] pl-1">City of Activity</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-2"
                     {...register("country_citizenship")}
                     type="text"
                   />
@@ -358,7 +358,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[23%] pl-2">URL<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative  h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative  h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("url")}
                     type="text"
                   />
@@ -371,7 +371,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-2 flex items-center justify-around">
                   <span className="text-md font-bold w-[20%] block">Registration Open<span className="ml-1 text-red-500">*</span></span>
                   <input
-                    className="relative ml-7 h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative ml-7 h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("registration_open")}
                     type="date"
                     
@@ -407,7 +407,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                   <p className="text-[0.8rem] text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
                   </div>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("application_deadline")}
                     type="date"
                     min={keyDates.registration_open.date}
@@ -442,7 +442,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mb-6 flex items-center justify-around">
                   <span className="text-md font-bold w-[25%] block">Activity Start<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_start_date")}
                     type="date"
                     min={keyDates.ra_deadline.date}
@@ -475,7 +475,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mb-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[25%]">Activity End<span className="text-red-500 ml-1">*</span></span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_end_date")}
                     type="date"
                     min={keyDates.activity_start.date}
@@ -513,7 +513,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                 <div className="mt-6 flex items-center">
                   <span className="text-md font-bold">Range Type</span>
                   <select
-                    className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
+                    className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none pl-2"
                     {...register("range_type")}
                     onChange={(e)=>setRangeType(e.target.value)}
                   >
@@ -530,7 +530,7 @@ countries?.unshift({label:"OPEN",value: "open"})
 
                   <input
                     {...register("grade_low")}
-                    className="relative left-[4%] h-[3vh] w-[8%]"
+                    className="relative left-[4%] h-[3vh] w-[8%] pl-2"
                     type="text"
                     value={gradeVal[0]}
                   />
@@ -546,7 +546,7 @@ countries?.unshift({label:"OPEN",value: "open"})
 
                   <input
                     {...register("grade_high")}
-                    className="h-[3vh] w-[8%]"
+                    className="h-[3vh] w-[8%] pl-2"
                     type="text"
                     value={gradeVal[1]}
                  
@@ -610,7 +610,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                   </p>
                   <Select 
                   
-                  className="text-small font-small block mt-4 h-auto w-[100%] rounded-md"
+                  className="text-small font-small block mt-4 h-auto w-[100%] rounded-md pl-2"
                   isMulti 
                   options={countries} 
                   hideSelectedOptions
@@ -625,7 +625,7 @@ countries?.unshift({label:"OPEN",value: "open"})
                     Remarks
                   </h1>
                   <textarea
-                    className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]"
+                    className="mt-5 h-[15vh] w-[70%] bg-[#EEEE] pl-2"
                     {...register("remarks")}
                   />
                 </div>

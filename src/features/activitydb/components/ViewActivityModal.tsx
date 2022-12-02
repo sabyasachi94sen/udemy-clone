@@ -213,7 +213,7 @@ countries?.map((item,i,countries)=>{
 countries?.unshift({label:"India" ,value: "india"})
 countries?.unshift({label:"OPEN",value: "open"})
 
-console.log(selectedData)
+
 
 
 
@@ -261,7 +261,7 @@ console.log(selectedData)
                 <div className="mt-2 flex items-center justify-around">
                   <span className="text-md font-bold block w-[24%] pl-2">Name</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_name")}
                     // defaultValue={name!=="Add an activity to the database"?individualActivityInfo?.activity_name: null}
                     disabled
@@ -272,7 +272,7 @@ console.log(selectedData)
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Type</span>
                   <select
-                      className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                      className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("activity_type")}
                     
                     disabled
@@ -288,7 +288,7 @@ console.log(selectedData)
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Subject</span>
                   <select
-                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("subject")}
                     disabled
                   >
@@ -320,7 +320,7 @@ console.log(selectedData)
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Location Type</span>
                   <select
-                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("location_type")}
                     disabled
                   >
@@ -333,7 +333,7 @@ console.log(selectedData)
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold block w-[20%]">Country of Activity</span>
                   <select
-                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("country_residence")}
                     disabled
                   >
@@ -346,7 +346,7 @@ console.log(selectedData)
                 <div className="mt-4 flex items-center justify-around">
                   <span className="text-md font-bold w-[23%] block pl-1">City of Activity</span>
                   <input
-               className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+               className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("country_citizenship")}
                     
                     disabled
@@ -358,7 +358,7 @@ console.log(selectedData)
                 <div className="mt-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[23%] pl-1">URL</span>
                   <input
-                  className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                  className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("url")}
                     // defaultValue={individualActivityInfo?.url}
                     disabled
@@ -371,7 +371,7 @@ console.log(selectedData)
                 <div className="mt-2 flex items-center justify-around">
                   <span className="text-md font-bold block w-[24%]">Registration open</span>
                   <input
-                       className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                       className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("registration_open")}
                     // defaultValue={individualActivityInfo?.registration_open}
                     disabled
@@ -386,7 +386,7 @@ console.log(selectedData)
                   <p className="text-[0.8rem] text-gray-700">R/A/S deadline means registration/application/submission deadline, as applicable</p>
                   </div>
                   <input
-                      className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                      className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("application_deadline")}
                 
                     disabled
@@ -398,7 +398,7 @@ console.log(selectedData)
                 <div className="mb-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[25%]">Activity Start</span>
                   <input
-                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                    className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_start_date")}
                    
                     disabled
@@ -410,7 +410,7 @@ console.log(selectedData)
                 <div className="mb-6 flex items-center justify-around">
                   <span className="text-md font-bold block w-[25%]">Activity End</span>
                   <input
-                       className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE]"
+                       className="relative h-[5vh] w-[73%] rounded-md bg-[#EEEE] pl-2"
                     {...register("activity_end_date")}
                    
                     disabled
@@ -427,7 +427,7 @@ console.log(selectedData)
                 <div className="mt-2 flex items-center">
                   <span className="text-md font-bold">Range Type</span>
                   <select
-                     className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none"
+                     className="relative left-16 h-[5vh] w-[40%] rounded-md bg-[#EEEE] outline-none pl-1"
                     {...register("range_type")}
                     disabled
                   >
@@ -517,7 +517,7 @@ console.log(selectedData)
                 </div>
                 <div className="mt-14">
                   <h1 className="text-lg text-[1.45rem] font-bold text-[#6F6F6F]">Remarks</h1>
-                  <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE]" {...register("remarks")} 
+                  <textarea className="mt-5 h-[15vh] w-[70%] bg-[#EEEE] pl-2" {...register("remarks")} 
                   
                     disabled
                   />
@@ -526,8 +526,8 @@ console.log(selectedData)
                 <div className="mt-20 mb-10 flex items-center">
                   <span className="text-md font-bold">Last Update Date</span>
                   <input
-                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
-                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE]"
+                    className="relative ml-10 h-[5vh] w-[83%] rounded-md bg-[#EEEE] pl-2"
+                    
                     value={formatDate(selectedData?.updated_at)}
                     disabled
                     type="text"
