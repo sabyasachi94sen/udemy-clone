@@ -19,7 +19,7 @@ type Config = {
 };
 
 export const OpenAPI: Config = {
-  BASE: "https://pippams-backend.essai.in/api",
+  BASE: "",
   VERSION: "1",
   WITH_CREDENTIALS: false,
   CREDENTIALS: "include",

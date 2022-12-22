@@ -5,25 +5,11 @@
 // prettier-ignore
 declare module "nextjs-routes" {
   export type Route =
-    | { pathname: "/academic-list"; query?: Query | undefined }
-    | { pathname: "/academic-list/[aepId]"; query: Query<{ "aepId": string }> }
-    | { pathname: "/account-manager"; query?: Query | undefined }
-    | { pathname: "/account-manager/[studentId]"; query: Query<{ "studentId": string }> }
-    | { pathname: "/activity-database"; query?: Query | undefined }
-    | { pathname: "/admin"; query?: Query | undefined }
-    | { pathname: "/admin/[adminId]"; query: Query<{ "adminId": string }> }
-    | { pathname: "/aep-tracker"; query?: Query | undefined }
     | { pathname: "/home"; query?: Query | undefined }
     | { pathname: "/"; query?: Query | undefined }
     | { pathname: "/login"; query?: Query | undefined }
-    | { pathname: "/reset-password-otp"; query?: Query | undefined }
-    | { pathname: "/reset-password-req"; query?: Query | undefined }
-    | { pathname: "/reset-password-success"; query?: Query | undefined }
-    | { pathname: "/reset-password"; query?: Query | undefined }
-    | { pathname: "/setting"; query?: Query | undefined }
-    | { pathname: "/student-roster"; query?: Query | undefined }
-    | { pathname: "/style"; query?: Query | undefined }
-    | { pathname: "/super-admin"; query?: Query | undefined };
+    | { pathname: "/signup"; query?: Query | undefined }
+    | { pathname: "/style"; query?: Query | undefined };
 
   type Query<Params = {}> = Params & { [key: string]: string | string[] | undefined };
 

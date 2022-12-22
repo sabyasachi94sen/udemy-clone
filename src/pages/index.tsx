@@ -1,5 +1,7 @@
-import HomePage from "./home";
+import Login from "./login";
 
 export default function Home(): JSX.Element {
-  return <HomePage />;
+  return <Login />;
 }
+
+Home.isPublicRoute = true;

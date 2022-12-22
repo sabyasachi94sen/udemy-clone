@@ -18,7 +18,7 @@
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "generate:route-types": "cd src && npx nextjs-routes",
-    "generate:api": "npx --yes openapi-typescript-codegen --input https://pippams-dev.eoraa.com/apidocs/?format=openapi --output ./src/api --client axios --useOptions --useUnionTypes --exportCore false --exportServices true --exportModels true --exportSchemas false",
+    "generate:api": "npx --yes openapi-typescript-codegen --input --output ./src/api --client axios --useOptions --useUnionTypes --exportCore false --exportServices true --exportModels true --exportSchemas false",
     "⭕⭕ THESE ARE TEMPORARY TILL NEXTJS ALLOWS COMPILE-TIME TYPE CHECK ⭕⭕": "https://github.com/vercel/next.js/issues/14997#issuecomment-771109311",
     "dev:ts": "npm run dev & npm run ts:watch",
     "ts": "tsc --noEmit --incremental",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@fontsource/inter": "^4.5.12",
     "@fontsource/noto-sans-jp": "^4.5.11",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.0.11",
     "@lukemorales/query-key-factory": "^0.6.1",

@@ -1,18 +1,14 @@
 import { LoginForm } from "@/features/auth";
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <>
-      <img
-        src="/images/home-page.png"
-        className="z-0 w-[100%] h-[105vh]"
-        alt="home_page"
-      />
-      <div className="z-2 relative h-[100vh] -mt-[100vh] flex justify-between items-center ml-[60%]">
-        <LoginForm />
+   
+      <div className="flex items-center justify-center bg-gradient-to-tr from-pink-500 to-white h-[100vh]">
+        <LoginForm/>
       </div>
     </>
   );
 }
 
-LoginPage.isPublicRoute = true;
+Login.isPublicRoute = true;

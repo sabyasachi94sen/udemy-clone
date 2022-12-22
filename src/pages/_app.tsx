@@ -32,7 +32,7 @@ export default function MyApp(props: AppProps): JSX.Element {
 
   return (
     <>
-      <Head title="Pippams" />
+      <Head title="Test" />
       <QueryClientProvider client={queryClient.current}>
         <Hydrate state={pageProps.dehydrateState}>
           <NextNprogress

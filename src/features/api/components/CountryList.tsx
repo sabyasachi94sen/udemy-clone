@@ -3,7 +3,7 @@ import axios from "axios"
 
 const CountryList=()=>{
     const config={
-        url: "https://restcountries.com/v3.1/all",
+        url: "https://restcountries.com/v2/all",
         method: "get",
     }
 
