@@ -1,5 +1,10 @@
 export const GetLoginCreds=()=>{
 
-    if(typeof window!=="undefined")
-    return JSON.parse(window.localStorage.getItem("loginCreds"))
+    if(typeof window!=="undefined"){
+        const val=window.localStorage.getItem("loginCreds")
+
+        if(val!=null)
+        return JSON.parse(val)
+    }
+    
 }
