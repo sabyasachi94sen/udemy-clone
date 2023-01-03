@@ -50,6 +50,7 @@ module.exports = {
   ],
   rules: {
     /*---- Eslint base ---- */
+    "jsx-a11y/accessible-emoji":"off",
     "space-before-function-paren": [
       "error",
       {
