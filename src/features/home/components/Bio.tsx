@@ -19,16 +19,13 @@ interface HeaderListType {
     last_update: string
   };
   courseList: {
-    popular_courses: {
-      img_url: string,
-      course_name: string,
-      course_length: string,
-      time: string,
-      rating: number,
-      active_users: string,
-      actual_price:string,
-      discounted_price:string
-    }[];
+   course:{
+      discounted_price: string;
+    actual_price: string;
+    discount: string;
+    days_left: number;
+   }
+    
   };
 }
 
