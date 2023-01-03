@@ -7,6 +7,9 @@ import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import NextNprogress from "nextjs-progressbar";
 import { useRef } from "react";
+import { Provider } from "react-redux";
+
+import store from "../store";
 
 import "@fontsource/inter/variable.css";
 import "@/shared/styles/globals.css";
@@ -33,6 +36,7 @@ export default function MyApp(props: AppProps): JSX.Element {
   return (
     <>
       <Head title="Test" />
+      <Provider store={store}>
       <QueryClientProvider client={queryClient.current}>
         <Hydrate state={pageProps.dehydrateState}>
           <NextNprogress
@@ -62,6 +66,7 @@ export default function MyApp(props: AppProps): JSX.Element {
           </AppProviders>
         </Hydrate>
       </QueryClientProvider>
+      </Provider>
     </>
   );
 }

@@ -16,9 +16,13 @@ const WIDTH_MAPS = {
   "64": "w-64",
   "80": "w-80",
   "96": "w-96",
-  "4/5": "w-4/5", // 80%
-  "2/5": "w-2/5", // 40%
+  "4/5": "w-4/5",
+  "2/4": "w-2/4", // 80%
+  "2/5": "w-2/5",
+  "2/6":  "w-2/6", // 33.33%
   "3/4": "w-3/4", // 75%
+  "3/5": "w-3/5",
+  "5/12": "w-5/12",
   max: "w-max",
 };
 
@@ -27,6 +31,7 @@ export type InputProps = {
   width?: keyof typeof WIDTH_MAPS;
   type?: string;
   label?: string;
+  rounded?:boolean;
   placeholder?: string;
   name?: string;
   cornerText?: string;
@@ -50,6 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       type = "text",
       label,
       placeholder,
+      rounded,
       name,
       cornerText,
       optionalText,
@@ -68,6 +74,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => (
     // TODO: Write docs
     // Don't need to pass name seperately, react-hook-form takes care of it
+    
 
     <div className={cx(WIDTH_MAPS[width])}>
       {label && (
@@ -105,11 +112,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={cx(
-            "form-input block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary",
+            "form-input block w-full 3xl:h-[7vh] md:h-[4vh] lg:h-[8vh] rounded-md md:rounded-[4vw] border-[#000000] border-solid border-[1px] border-gray-300 shadow-sm focus:border-primary focus:ring-primary",
             {
               "pl-10": leftAddOn,
               "opacity-30": isDisabled,
               "pr-10": isInvalid && showErrorIcon,
+               "rounded-[25px]": rounded,
               "border-red-500 focus:border-red-500 focus:ring-red-500":
                 isInvalid,
             },

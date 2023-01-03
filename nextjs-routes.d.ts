@@ -5,11 +5,9 @@
 // prettier-ignore
 declare module "nextjs-routes" {
   export type Route =
-    | { pathname: "/home"; query?: Query | undefined }
     | { pathname: "/"; query?: Query | undefined }
-    | { pathname: "/login"; query?: Query | undefined }
-    | { pathname: "/signup"; query?: Query | undefined }
-    | { pathname: "/style"; query?: Query | undefined };
+    | { pathname: "/style"; query?: Query | undefined }
+    | { pathname: "/udemy"; query?: Query | undefined };
 
   type Query<Params = {}> = Params & { [key: string]: string | string[] | undefined };
 

@@ -38,3 +38,10 @@ const nextConfig = {
 
 module.exports = () =>
   withRoutes(plugins.reduce((acc, next) => next(acc), nextConfig));
+
+  module.exports={
+    reactStrictMode:true,
+    images:{
+      domains: ['drive.google.com'],
+    },
+  }
