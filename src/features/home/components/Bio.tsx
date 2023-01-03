@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 
 import { PreviewModal } from "./PreviewModal";
 
-interface HeadListType {
+interface HeaderListType {
   headingList: {
     title: string,
     rating_reviews: object[],
@@ -12,17 +12,27 @@ interface HeadListType {
     headline: string,
     language: string,
     keyboard_language: string,
+   
     created_by: {
       name: string,
     }[],
     last_update: string
   };
   courseList: {
-    course: object
+    popular_courses: {
+      img_url: string,
+      course_name: string,
+      course_length: string,
+      time: string,
+      rating: number,
+      active_users: string,
+      actual_price:string,
+      discounted_price:string
+    }[];
   };
 }
 
-export function Bio({ headingList, courseList }: HeadListType): JSX.Element {
+export function Bio({ headingList, courseList }: HeaderListType): JSX.Element {
   return (
     <div className="w-full bg-[#1c1d1f] py-10 px-60 xsm:px-4 lg:px-28 xl:px-14 2xl:px-28 2xl:py-20 3xl:px-60">
       <PreviewModal
