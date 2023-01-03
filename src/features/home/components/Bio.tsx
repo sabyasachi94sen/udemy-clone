@@ -5,28 +5,31 @@ import { PreviewModal } from "./PreviewModal";
 
 interface HeaderListType {
   headingList: {
-    title: string,
-    rating_reviews: object[],
-    rating: string,
-    rating_count: string,
-    headline: string,
-    language: string,
-    keyboard_language: string,
-   
+    title: string;
+    rating_reviews: object[];
+    rating: string;
+    rating_count: string;
+    headline: string;
+    language: string;
+    keyboard_language: string;
+
     created_by: {
-      name: string,
-    }[],
-    last_update: string
+      name: string;
+    }[];
+    last_update: string;
   };
+  wrapperClass: string;
+  isCartAdded: boolean;
   courseList: {
-   course:{
-      discounted_price: string;
+    discounted_price: string;
     actual_price: string;
     discount: string;
     days_left: number;
-   }
-    
+    course: object
   };
+    
+
+  
 }
 
 export function Bio({ headingList, courseList }: HeaderListType): JSX.Element {

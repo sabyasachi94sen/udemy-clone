@@ -60,7 +60,7 @@ export function PreviewModal({
           </span>
         </div>
       </div>
-      <div className="flex items-center justify-around px-5 text-sm xsm:mt-2 xsm:w-[90%] xsm:text-[1rem] sm:mx-auto sm:w-[45%] md:mx-auto md:w-[50%] md:text-[1.2rem] lg:w-full lg:text-[0.95rem] 2xl:w-[80%]">
+      <div className="flex items-center justify-around px-5 text-sm xsm:mt-2 xsm:w-[90%] xsm:text-[1rem] sm:mx-auto sm:w-[45%] md:mx-auto md:w-[50%] md:text-[1.2rem] lg:w-full lg:text-[0.95rem] 2xl:w-[80%] 3xl:w-[65%]">
         <BiAlarm className="text-[1.2rem] text-orange-800" />
         <p>
           <span className="font-bold text-orange-700">
