@@ -2,37 +2,88 @@ import moment from "moment";
 import { FaStar } from "react-icons/fa";
 
 import { PreviewModal } from "./PreviewModal";
-
 interface HeaderListType {
-  headingList: {
-    title: string;
-    rating_reviews: object[];
-    rating: string;
-    rating_count: string;
-    headline: string;
-    language: string;
-    keyboard_language: string;
+ headingList:{
+   title:             string;
+  headline:          string;
+  rating:            number;
+  rating_count:      number;
+  students:          string;
+  last_update:       Date;
+  language:          string;
+  keyboard_language: string;
+  created_by:        CreatedBy[];
+  rating_reviews:    RatingReview[];
+ };
+ courseList: CourseListType
+}
 
-    created_by: {
-      name: string;
-    }[];
-    last_update: string;
-  };
-  wrapperClass: string;
-  isCartAdded: boolean;
-  courseList: {
-    discounted_price: string;
-    actual_price: string;
-    discount: string;
-    days_left: number;
-    course: object
-  };
-    
+interface CreatedBy {
+  id:   number;
+  name: string;
+}
 
+interface RatingReview {
+  star: number;
+  id:   number;
+}
+interface CourseListType {
+
+  course:          Course;
+  popular_courses: PopularCourse[];
+  course_index:    CourseIndex[];
+  sections:        number;
+  lectures:        number;
+  course_length:   string;
+  content_list:    ContentList[];
   
 }
 
+interface ContentList {
+  id:           number;
+  title:        string;
+  lectures:     number;
+  time:         string;
+  lecture_list: LectureList[];
+}
+
+interface LectureList {
+  id:      number;
+  lecture: string;
+  preview: boolean;
+  time:    string;
+}
+
+interface Course {
+  name:             string;
+  actual_price:     string;
+  discounted_price: string;
+  discount:         number;
+  days_left:        number;
+}
+
+interface CourseIndex {
+  id:    number;
+  title: string;
+}
+
+interface PopularCourse {
+  course_name:      string;
+  rating:           number;
+  course_length:    string;
+  time:             Date;
+  active_users:     string;
+  discounted_price: string;
+  actual_price:     string;
+  img_url:          string;
+}
+
+
+
+
 export function Bio({ headingList, courseList }: HeaderListType): JSX.Element {
+  
+
   return (
     <div className="w-full bg-[#1c1d1f] py-10 px-60 xsm:px-4 lg:px-28 xl:px-14 2xl:px-28 2xl:py-20 3xl:px-60">
       <PreviewModal
