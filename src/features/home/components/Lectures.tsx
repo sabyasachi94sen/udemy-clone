@@ -1,9 +1,19 @@
-export function Lectures({ lectureList, showDiv }) {
+interface LectureListTypeObj{
+  lectureList:{
+    preview:string,
+    lecture:string,
+    time:string
+  }[];
+  showDiv:boolean
+}
+
+export function Lectures({ lectureList, showDiv }: LectureListTypeObj):JSX.Element {
   return (
-    showDiv && (
-      <div className="px-5 py-8 border-[1px] border-gray-200">
+    <div>
+      {showDiv && (
+      <div className="border-[1px] border-gray-200 px-5 py-8">
         {lectureList?.map((item, i) => (
-          <div className="mt-3" key={i}>
+          <div key={i} className="mt-3">
             <div className="flex w-[70%] items-center whitespace-pre-wrap text-[0.9rem]">
               <img
                 alt="play-btn-icon"
@@ -19,10 +29,12 @@ export function Lectures({ lectureList, showDiv }) {
               </span>
             </div>
             <div
-              className={`3xl:float-right -mt-5 flex justify-around text-[0.9rem] xsm:hidden md:block md:float-right sm:block sm:float-right`}
+              className="-mt-5 flex justify-around text-[0.9rem] xsm:hidden sm:float-right sm:block md:float-right md:block 3xl:float-right"
             >
               {item?.preview && (
-                <a className="text-[#5624d0] underline mr-10" href="">Preview</a>
+                <a className="mr-10 text-[#5624d0] underline" href="">
+                  Preview
+                </a>
               )}
               <span className="text-gray-500">{item?.time}</span>
             </div>
@@ -30,6 +42,8 @@ export function Lectures({ lectureList, showDiv }) {
         ))}
         <div />
       </div>
-    )
+      
+    )}
+    </div>
   );
 }

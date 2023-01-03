@@ -1,4 +1,12 @@
-export function CourseIndex({ courseList }) {
+interface CourseListPropsType{
+  courseList: {
+    course_index:{
+      title:string
+    }[]
+  }
+}
+
+export function CourseIndex({ courseList }:CourseListPropsType):JSX.Element {
   return (
     <div className="mt-3 border-2 py-5 px-5 xsm:mx-auto xsm:w-[95%] lg:mx-0 lg:w-[95%] xl:w-[68%] 2xl:w-[65%] 3xl:mx-0 3xl:w-[68%]">
       <h2 className="font-sans text-[1.8rem] font-bold xsm:text-[1.4rem]">

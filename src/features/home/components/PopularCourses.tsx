@@ -3,9 +3,24 @@ import Link from "next/link";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 
-export function PopularCourses({ courseList }) {
+interface CourseListPropsType {
+  courseList: {
+    popular_courses: {
+      img_url: string,
+      course_name: string,
+      course_length: string,
+      time: string,
+      rating: number,
+      active_users: string,
+      actual_price:string,
+      discounted_price:string
+    }[];
+  };
+}
+
+export function PopularCourses({ courseList }: CourseListPropsType) {
   return (
-    <div className="px-2 xsm:px-6 mb-20">
+    <div className="mb-20 px-2 xsm:px-6">
       <h2 className="font-sans font-bold xsm:text-[1.5rem] md:text-[1.5rem] 3xl:text-[1.6rem]">
         Students also bought
       </h2>
@@ -54,9 +69,8 @@ export function PopularCourses({ courseList }) {
                   </div>
                 </div>
               </div>
-              {i < courseList?.length - 1 && (
-                <hr className="mt-2 h-[1.5px] bg-gray-300" />
-              )}
+              {i < courseList?.length ||
+                (0 - 1 && <hr className="mt-2 h-[1.5px] bg-gray-300" />)}
             </div>
           </Link>
         ))}

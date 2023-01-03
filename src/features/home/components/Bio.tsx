@@ -3,7 +3,26 @@ import { FaStar } from "react-icons/fa";
 
 import { PreviewModal } from "./PreviewModal";
 
-export function Bio({ headingList, courseList }: Array<[]>) {
+interface HeadListType {
+  headingList: {
+    title: string;
+    rating_reviews: object[];
+    rating: string;
+    rating_count: string;
+    headline: string;
+    language: string;
+    keyboard_language: string;
+    created_by: {
+      name: string;
+    }[];
+    last_update: string;
+  };
+  courseList: {
+    course: object;
+  };
+}
+
+export function Bio({ headingList, courseList }: HeadListType): JSX.Element {
   return (
     <div className="w-full bg-[#1c1d1f] py-10 px-60 xsm:px-4 lg:px-28 xl:px-14 2xl:px-28 2xl:py-20 3xl:px-60">
       <PreviewModal

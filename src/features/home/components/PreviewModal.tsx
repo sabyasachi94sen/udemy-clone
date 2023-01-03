@@ -6,9 +6,32 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addToCartAction } from "@/action";
 
-export function PreviewModal({ courseList, wrapperClass, isCartAdded }) {
+interface CourseListPropsType {
+  wrapperClass: string;
+  isCartAdded: boolean;
+  courseList: {
+    discounted_price: string;
+    actual_price: string;
+    discount: string;
+    days_left: number;
+  };
+}
+
+interface ReduxPropsType {
+  productList?: [];
+}
+
+export function PreviewModal({
+  courseList,
+  wrapperClass,
+  isCartAdded,
+}: CourseListPropsType) {
   const dispatch = useDispatch();
-  const { productList } = useSelector((state) => state.productList);
+  const { productList }  = useSelector(
+    (state: ReduxPropsType) => state.productList,
+  );
+
+  
 
   return (
     <div className={wrapperClass} id="preview-modal">

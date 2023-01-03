@@ -2,16 +2,29 @@ import { useState } from "react";
 
 import { Lectures } from "./Lectures";
 
-export function CourseContent({ courseList }) {
+interface CourseListPropsType{
+    courseList:{
+      sections:string,
+      lectures:string,
+      course_length:string,
+      content_list:{
+        lecture_list:[],
+        lectures:string,
+        time:string,
+        title:string
+      }[]
+
+    }
+}
+
+export function CourseContent({ courseList }:CourseListPropsType):JSX.Element {
   const [storeCourseIndex, setStoreCourseIndex] = useState({
     index: null,
     isCurrentDivOpen: false,
-   
   });
 
   const [allDivOpen, setAllDivOpen] = useState(false);
   const [showAllResult, setShowAllResult] = useState(false);
-
 
   return (
     <div className="mt-5 py-5 xsm:px-3 md:px-6 xl:w-[70%] 2xl:w-[65%] 3xl:w-[68%]">
@@ -37,27 +50,23 @@ export function CourseContent({ courseList }) {
             setStoreCourseIndex({
               index: null,
               isCurrentDivOpen: !storeCourseIndex.isCurrentDivOpen,
-        
             });
-        
           }}
         >
           {!allDivOpen ? "Expand all sections" : "Collapse all section"}
         </div>
       </div>
-      {courseList?.content_list?.map((item, i, courseList) => (
+      {courseList?.content_list?.map((item, i) => (
         <div key={i}>
           {(!showAllResult && !allDivOpen
             ? i < 11
-            : i < courseList?.length) && (
+            : i < courseList?.content_list?.length) && (
             <div
               onClick={() => {
                 setStoreCourseIndex({
                   index: i,
                   isCurrentDivOpen: !storeCourseIndex.isCurrentDivOpen,
-                  
                 });
-               
               }}
             >
               <div className="w-full cursor-pointer border-[1px] bg-gray-100 px-3 py-3 pl-6 font-sans font-bold">
@@ -77,9 +86,7 @@ export function CourseContent({ courseList }) {
                 showDiv={
                   (storeCourseIndex?.index === i &&
                     storeCourseIndex?.isCurrentDivOpen) ||
-                  (allDivOpen && storeCourseIndex?.index != i) 
-                  
-                  
+                  (allDivOpen && storeCourseIndex?.index !== i)
                 }
               />
             </div>
@@ -93,7 +100,7 @@ export function CourseContent({ courseList }) {
           type="button"
           onClick={() => setShowAllResult(true)}
         >
-          {courseList?.content_list?.length-11} more sections
+          {(courseList?.content_list?.length || 0) - 11} more sections
         </button>
       )}
     </div>

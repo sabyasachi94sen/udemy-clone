@@ -1,10 +1,10 @@
 export { Bio } from "./Bio";
 export { CourseIndex } from "./CourseIndex";
 export { CourseContent } from "./CourseContent";
-export  { Lectures } from "./Lectures";
+export { Lectures } from "./Lectures";
 export { CourseDescription } from "./CourseDescription";
 export { Navbar } from "./Navbar";
 export { PreviewModal } from "./PreviewModal";
 export { MenuToggleIcon } from "./MenuToggleIcon";
 export { PopularCourses } from "./PopularCourses";
-export { Footer } from "./Footer"
+export { Footer } from "./Footer";

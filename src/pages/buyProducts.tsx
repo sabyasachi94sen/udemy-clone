@@ -3,13 +3,16 @@ import { useSelector } from "react-redux";
 
 import { Navbar, Footer, PreviewModal } from "@/features/home";
 
+
 function BuyProducts() {
   const { productList } = useSelector((state) => state.productList);
 
   return (
     <>
       <Navbar />
-      <h2 className="mb-4 lg:text-[2rem] 2xl:mx-40 lg:mx-20 lg:text-left xl:mx-16 my-10 xsm:text-[1.5rem] xsm:text-center font-bold">Shopping cart</h2>
+      <h2 className="my-10 mb-4 font-bold xsm:text-center xsm:text-[1.5rem] lg:mx-20 lg:text-left lg:text-[2rem] xl:mx-16 2xl:mx-40">
+        Shopping cart
+      </h2>
       <div className="flex w-full flex-wrap items-start">
         {productList?.map((item, i) => (
           <PreviewModal
