@@ -1,7 +1,8 @@
 import { CourseListObj } from "@/features/api";
+import {Dispatch} from "redux"
 
 export const courseListAction = () =>
-  function (dispatch) {
+  function (dispatch:Dispatch) {
     dispatch({ type: "PRODUCT_LIST_REQUEST" });
     const courseList = CourseListObj.course_list();
 
