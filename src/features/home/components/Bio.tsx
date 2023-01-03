@@ -5,20 +5,20 @@ import { PreviewModal } from "./PreviewModal";
 
 interface HeadListType {
   headingList: {
-    title: string;
-    rating_reviews: object[];
-    rating: string;
-    rating_count: string;
-    headline: string;
-    language: string;
-    keyboard_language: string;
+    title: string,
+    rating_reviews: object[],
+    rating: string,
+    rating_count: string,
+    headline: string,
+    language: string,
+    keyboard_language: string,
     created_by: {
-      name: string;
-    }[];
-    last_update: string;
+      name: string,
+    }[],
+    last_update: string
   };
   courseList: {
-    course: object;
+    course: object
   };
 }
 
